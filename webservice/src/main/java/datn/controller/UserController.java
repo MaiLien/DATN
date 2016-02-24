@@ -17,11 +17,16 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginPageS(HttpServletRequest request){
+        return "home";
+    }
+
+    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
+    public String loginPages(HttpServletRequest request){
         return "login";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String loginPages(HttpServletRequest request){
+    public String loginPageas(HttpServletRequest request){
         return "login";
     }
 

@@ -38,5 +38,4 @@
     <!--lien quan den DB: cac truong CreateBy, CreateDate ..., ghi lai lich su lam viec voi DB-->
     <jpa:auditing auditor-aware-ref="auditorAwareImpl" />
 
-
 </beans>
