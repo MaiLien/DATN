@@ -31,7 +31,7 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
-    <import resource="spring-data.xml" />
-    <import resource="spring-security.xml" />
+    <import resource="spring/spring-data.xml" />
+    <import resource="spring/spring-security.xml" />
 
 </beans>
