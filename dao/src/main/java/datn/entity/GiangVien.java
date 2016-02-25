@@ -3,13 +3,9 @@ package datn.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
-/**
- * The persistent class for the GiangVien database table.
- * 
- */
 @Entity
-@NamedQuery(name="GiangVien.findAll", query="SELECT g FROM GiangVien g")
+@Table(name="GiangVien.findAll")
+@DiscriminatorValue("1")
 public class GiangVien implements Serializable {
 	private static final long serialVersionUID = 1L;
 

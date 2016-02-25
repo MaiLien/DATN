@@ -11,5 +11,19 @@
     <packaging>jar</packaging>
     <artifactId>business</artifactId>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>DATN</groupId>
+            <artifactId>interface</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+    </dependencies>
 
 </project>

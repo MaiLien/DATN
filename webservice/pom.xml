@@ -41,6 +41,12 @@
             <artifactId>spring-aspects</artifactId>
         </dependency>
 
+        <!-- Validator-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
         <!-- Web -->
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
@@ -49,19 +55,6 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-        </dependency>
-
-        <!-- business-->
-        <dependency>
-            <groupId>DATN</groupId>
-            <artifactId>business</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <!-- dao -->
-        <dependency>
-            <groupId>DATN-dao</groupId>
-            <artifactId>dao</artifactId>
         </dependency>
 
         <!-- Hibernate va MySQL lien quan den entityManagerFactory o file spring-data.xml-->
@@ -79,6 +72,13 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!-- DATN business-->
+        <dependency>
+            <groupId>DATN</groupId>
+            <artifactId>business</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
     </dependencies>

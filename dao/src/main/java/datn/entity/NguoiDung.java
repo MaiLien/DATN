@@ -1,17 +1,15 @@
 package datn.entity;
 
+import datn.constant.TypeOfUser;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-
-/**
- * The persistent class for the NguoiDung database table.
- * 
- */
 @Entity
-@NamedQuery(name="NguoiDung.findAll", query="SELECT n FROM NguoiDung n")
+@Table(name="NguoiDung.findAll")
+@DiscriminatorColumn(name="loaiNguoiDung", discriminatorType=DiscriminatorType.INTEGER)
 public class NguoiDung implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +20,7 @@ public class NguoiDung implements Serializable {
 
 	private String ghiChu;
 
-	private int loaiNguoiDung;
+	private TypeOfUser loaiNguoiDung;
 
 	private String matKhau;
 
@@ -66,11 +64,11 @@ public class NguoiDung implements Serializable {
 		this.ghiChu = ghiChu;
 	}
 
-	public int getLoaiNguoiDung() {
+	public TypeOfUser getLoaiNguoiDung() {
 		return this.loaiNguoiDung;
 	}
 
-	public void setLoaiNguoiDung(int loaiNguoiDung) {
+	public void setLoaiNguoiDung(TypeOfUser loaiNguoiDung) {
 		this.loaiNguoiDung = loaiNguoiDung;
 	}
 
