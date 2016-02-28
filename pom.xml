@@ -17,7 +17,7 @@
     <properties>
         <spring.version>4.1.9.RELEASE</spring.version>
         <dao.version>1.0.0-SNAPSHOT</dao.version>
-        <hibernate-validator.version>4.2.0.Final</hibernate-validator.version>
+        <hibernate-validator.version>5.1.0.Final</hibernate-validator.version>
         <jackson-databind.version>2.4.1</jackson-databind.version>
         <mockito-all.version>1.9.5</mockito-all.version>
         <junit.version>4.11</junit.version>

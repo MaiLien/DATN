@@ -1,5 +1,7 @@
 package datn.constant;
 
 public enum TypeOfUser {
-    STUDENT, TEACHER, OFFICER
+
+    TEACHER, STUDENT, OFFICER
+
 }
