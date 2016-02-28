@@ -4,11 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
-
-/**
- * The persistent class for the teacher database table.
- * 
- */
 @Entity
 @Table(name="teacher")
 @DiscriminatorValue("0")
@@ -20,6 +15,9 @@ public class Teacher extends User{
 
 	@Column(name="research_direction")
 	private String researchDirection;
+
+	@OneToMany(mappedBy="teacher")
+	private List<ListOfTeachersForEachWave> listOfTeachersForEachWaves;
 
 	public Teacher() {
 	}
@@ -48,4 +46,11 @@ public class Teacher extends User{
 		this.researchDirection = researchDirection;
 	}
 
+	public List<ListOfTeachersForEachWave> getListOfTeachersForEachWaves() {
+		return listOfTeachersForEachWaves;
+	}
+
+	public void setListOfTeachersForEachWaves(List<ListOfTeachersForEachWave> listOfTeachersForEachWaves) {
+		this.listOfTeachersForEachWaves = listOfTeachersForEachWaves;
+	}
 }

@@ -63,9 +63,11 @@ public class WaveOfMakingProject implements Serializable {
 	@Column(name="start_time_for_teacher_propose_student")
 	private Date startTimeForTeacherProposeStudent;
 
-	//bi-directional many-to-one association to ListOfStudentsForEachWave
 	@OneToMany(mappedBy="waveOfMakingProject")
 	private List<ListOfStudentsForEachWave> listOfStudentsForEachWaves;
+
+	@OneToMany(mappedBy="waveOfMakingProject")
+	private List<ListOfTeachersForEachWave> listOfTeachersForEachWaves;
 
 	public WaveOfMakingProject() {
 	}
@@ -198,18 +200,39 @@ public class WaveOfMakingProject implements Serializable {
 		this.listOfStudentsForEachWaves = listOfStudentsForEachWaves;
 	}
 
-	public ListOfStudentsForEachWave addListOfStudentsForEachWave(ListOfStudentsForEachWave listOfStudentsForEachWave) {
-		getListOfStudentsForEachWaves().add(listOfStudentsForEachWave);
-		listOfStudentsForEachWave.setWaveOfMakingProject(this);
+//	public ListOfStudentsForEachWave addListOfStudentsForEachWave(ListOfStudentsForEachWave listOfStudentsForEachWave) {
+//		getListOfStudentsForEachWaves().add(listOfStudentsForEachWave);
+//		listOfStudentsForEachWave.setWaveOfMakingProject(this);
+//
+//		return listOfStudentsForEachWave;
+//	}
+//
+//	public ListOfStudentsForEachWave removeListOfStudentsForEachWave(ListOfStudentsForEachWave listOfStudentsForEachWave) {
+//		getListOfStudentsForEachWaves().remove(listOfStudentsForEachWave);
+//		listOfStudentsForEachWave.setWaveOfMakingProject(null);
+//
+//		return listOfStudentsForEachWave;
+//	}
 
-		return listOfStudentsForEachWave;
+	public List<ListOfTeachersForEachWave> getListOfTeachersForEachWaves() {
+		return listOfTeachersForEachWaves;
 	}
 
-	public ListOfStudentsForEachWave removeListOfStudentsForEachWave(ListOfStudentsForEachWave listOfStudentsForEachWave) {
-		getListOfStudentsForEachWaves().remove(listOfStudentsForEachWave);
-		listOfStudentsForEachWave.setWaveOfMakingProject(null);
-
-		return listOfStudentsForEachWave;
+	public void setListOfTeachersForEachWaves(List<ListOfTeachersForEachWave> listOfTeachersForEachWaves) {
+		this.listOfTeachersForEachWaves = listOfTeachersForEachWaves;
 	}
 
+//	public ListOfTeachersForEachWave addListOfTeachersForEachWave(ListOfTeachersForEachWave listOfTeachersForEachWave) {
+//		getListOfTeachersForEachWaves().add(listOfTeachersForEachWave);
+//		listOfTeachersForEachWave.setWaveOfMakingProject(this);
+//
+//		return listOfTeachersForEachWave;
+//	}
+//
+//	public ListOfTeachersForEachWave removeListOfTeachersForEachWave(ListOfTeachersForEachWave listOfTeachersForEachWave) {
+//		getListOfTeachersForEachWaves().remove(listOfTeachersForEachWave);
+//		listOfTeachersForEachWave.setWaveOfMakingProject(null);
+//
+//		return listOfTeachersForEachWave;
+//	}
 }
