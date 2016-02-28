@@ -4,14 +4,15 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
-@Table(name="wave_of_making_project")
-public class WaveOfMakingProject implements Serializable {
+@Table(name="project_wave")
+public class ProjectWave implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String id;
+	private String id= UUID.randomUUID().toString();
 
 	private String description;
 
@@ -63,13 +64,13 @@ public class WaveOfMakingProject implements Serializable {
 	@Column(name="start_time_for_teacher_propose_student")
 	private Date startTimeForTeacherProposeStudent;
 
-	@OneToMany(mappedBy="waveOfMakingProject")
-	private List<ListOfStudentsForEachWave> listOfStudentsForEachWaves;
+	@OneToMany(mappedBy="projectWave")
+	private List<TeacherWave> teacherWaves;
 
-	@OneToMany(mappedBy="waveOfMakingProject")
-	private List<ListOfTeachersForEachWave> listOfTeachersForEachWaves;
+	@OneToMany(mappedBy="projectWave")
+	private List<StudentWave> studentWaves;
 
-	public WaveOfMakingProject() {
+	public ProjectWave() {
 	}
 
 	public String getId() {
@@ -192,47 +193,48 @@ public class WaveOfMakingProject implements Serializable {
 		this.startTimeForTeacherProposeStudent = startTimeForTeacherProposeStudent;
 	}
 
-	public List<ListOfStudentsForEachWave> getListOfStudentsForEachWaves() {
-		return this.listOfStudentsForEachWaves;
+	public List<TeacherWave> getTeacherWaves() {
+		return this.teacherWaves;
 	}
 
-	public void setListOfStudentsForEachWaves(List<ListOfStudentsForEachWave> listOfStudentsForEachWaves) {
-		this.listOfStudentsForEachWaves = listOfStudentsForEachWaves;
+	public void setTeacherWaves(List<TeacherWave> teacherWaves) {
+		this.teacherWaves = teacherWaves;
 	}
 
-//	public ListOfStudentsForEachWave addListOfStudentsForEachWave(ListOfStudentsForEachWave listOfStudentsForEachWave) {
-//		getListOfStudentsForEachWaves().add(listOfStudentsForEachWave);
-//		listOfStudentsForEachWave.setWaveOfMakingProject(this);
-//
-//		return listOfStudentsForEachWave;
-//	}
-//
-//	public ListOfStudentsForEachWave removeListOfStudentsForEachWave(ListOfStudentsForEachWave listOfStudentsForEachWave) {
-//		getListOfStudentsForEachWaves().remove(listOfStudentsForEachWave);
-//		listOfStudentsForEachWave.setWaveOfMakingProject(null);
-//
-//		return listOfStudentsForEachWave;
-//	}
+	public TeacherWave addTeacherWave(TeacherWave teacherWave) {
+		getTeacherWaves().add(teacherWave);
+		teacherWave.setProjectWave(this);
 
-	public List<ListOfTeachersForEachWave> getListOfTeachersForEachWaves() {
-		return listOfTeachersForEachWaves;
+		return teacherWave;
 	}
 
-	public void setListOfTeachersForEachWaves(List<ListOfTeachersForEachWave> listOfTeachersForEachWaves) {
-		this.listOfTeachersForEachWaves = listOfTeachersForEachWaves;
+	public TeacherWave removeTeacherWave(TeacherWave teacherWave) {
+		getTeacherWaves().remove(teacherWave);
+		teacherWave.setProjectWave(null);
+
+		return teacherWave;
 	}
 
-//	public ListOfTeachersForEachWave addListOfTeachersForEachWave(ListOfTeachersForEachWave listOfTeachersForEachWave) {
-//		getListOfTeachersForEachWaves().add(listOfTeachersForEachWave);
-//		listOfTeachersForEachWave.setWaveOfMakingProject(this);
-//
-//		return listOfTeachersForEachWave;
-//	}
-//
-//	public ListOfTeachersForEachWave removeListOfTeachersForEachWave(ListOfTeachersForEachWave listOfTeachersForEachWave) {
-//		getListOfTeachersForEachWaves().remove(listOfTeachersForEachWave);
-//		listOfTeachersForEachWave.setWaveOfMakingProject(null);
-//
-//		return listOfTeachersForEachWave;
-//	}
+	public List<StudentWave> getStudentWaves() {
+		return this.studentWaves;
+	}
+
+	public void setStudentWaves(List<StudentWave> studentWaves) {
+		this.studentWaves = studentWaves;
+	}
+
+	public StudentWave addStudentWave(StudentWave studentWave) {
+		getStudentWaves().add(studentWave);
+		studentWave.setProjectWave(this);
+
+		return studentWave;
+	}
+
+	public StudentWave removeStudentWave(StudentWave studentWave) {
+		getStudentWaves().remove(studentWave);
+		studentWave.setProjectWave(null);
+
+		return studentWave;
+	}
+
 }

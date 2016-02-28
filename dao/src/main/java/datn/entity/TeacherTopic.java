@@ -5,12 +5,12 @@ import java.util.UUID;
 import javax.persistence.*;
 
 @Entity
-@Table(name="list_of_topic_from_teacher")
-public class ListOfTopicFromTeacher implements Serializable {
+@Table(name="teacher_topic")
+public class TeacherTopic implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String id= UUID.randomUUID().toString();
+	private String id = UUID.randomUUID().toString();
 
 	private String description;
 
@@ -19,7 +19,7 @@ public class ListOfTopicFromTeacher implements Serializable {
 	@ManyToOne
 	private Teacher teacher;
 
-	public ListOfTopicFromTeacher() {
+	public TeacherTopic() {
 	}
 
 	public String getId() {

@@ -5,12 +5,12 @@ import java.util.UUID;
 import javax.persistence.*;
 
 @Entity
-@Table(name="list_of_teachers_for_each_wave")
-public class ListOfTeachersForEachWave implements Serializable {
+@Table(name="teacher_wave")
+public class TeacherWave implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String id= UUID.randomUUID().toString();
+	private String id = UUID.randomUUID().toString();
 
 	@Column(name="max_number_of_student")
 	private int maxNumberOfStudent;
@@ -19,13 +19,13 @@ public class ListOfTeachersForEachWave implements Serializable {
 	private int minNumberOfStudent;
 
 	@ManyToOne
-	private Teacher teacher;
+	@JoinColumn(name="wave_id")
+	private ProjectWave projectWave;
 
 	@ManyToOne
-	@JoinColumn(name="wave_id")
-	private WaveOfMakingProject waveOfMakingProject;
+	private Teacher teacher;
 
-	public ListOfTeachersForEachWave() {
+	public TeacherWave() {
 	}
 
 	public String getId() {
@@ -52,20 +52,20 @@ public class ListOfTeachersForEachWave implements Serializable {
 		this.minNumberOfStudent = minNumberOfStudent;
 	}
 
+	public ProjectWave getProjectWave() {
+		return this.projectWave;
+	}
+
+	public void setProjectWave(ProjectWave projectWave) {
+		this.projectWave = projectWave;
+	}
+
 	public Teacher getTeacher() {
 		return this.teacher;
 	}
 
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
-	}
-
-	public WaveOfMakingProject getWaveOfMakingProject() {
-		return this.waveOfMakingProject;
-	}
-
-	public void setWaveOfMakingProject(WaveOfMakingProject waveOfMakingProject) {
-		this.waveOfMakingProject = waveOfMakingProject;
 	}
 
 }

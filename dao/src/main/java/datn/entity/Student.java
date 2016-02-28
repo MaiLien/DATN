@@ -13,7 +13,7 @@ public class Student extends User {
 	private String class_;
 
 	@OneToMany(mappedBy="student")
-	private List<ListOfStudentsForEachWave> listOfStudentsForEachWaves;
+	private List<StudentWave> studentWaves;
 
 	public Student() {
 	}
@@ -26,4 +26,25 @@ public class Student extends User {
 		this.class_ = class_;
 	}
 
+	public List<StudentWave> getStudentWaves() {
+		return studentWaves;
+	}
+
+	public void setStudentWaves(List<StudentWave> studentWaves) {
+		this.studentWaves = studentWaves;
+	}
+
+	public StudentWave addStudentWave(StudentWave studentWave) {
+		getStudentWaves().add(studentWave);
+		studentWave.setStudent(this);
+
+		return studentWave;
+	}
+
+	public StudentWave removeStudentWave(StudentWave studentWave) {
+		getStudentWaves().remove(studentWave);
+		studentWave.setStudent(null);
+
+		return studentWave;
+	}
 }

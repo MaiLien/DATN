@@ -1,6 +1,5 @@
 package datn.entity;
 
-import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
@@ -17,10 +16,10 @@ public class Teacher extends User{
 	private String researchDirection;
 
 	@OneToMany(mappedBy="teacher")
-	private List<ListOfTeachersForEachWave> listOfTeachersForEachWaves;
+	private List<TeacherWave> teacherWaves;
 
 	@OneToMany(mappedBy="teacher")
-	private List<ListOfTopicFromTeacher> listOfTopicFromTeachers;
+	private List<TeacherTopic> teacherTopics;
 
 	public Teacher() {
 	}
@@ -49,11 +48,47 @@ public class Teacher extends User{
 		this.researchDirection = researchDirection;
 	}
 
-	public List<ListOfTeachersForEachWave> getListOfTeachersForEachWaves() {
-		return listOfTeachersForEachWaves;
+	public List<TeacherWave> getTeacherWaves() {
+		return this.teacherWaves;
 	}
 
-	public void setListOfTeachersForEachWaves(List<ListOfTeachersForEachWave> listOfTeachersForEachWaves) {
-		this.listOfTeachersForEachWaves = listOfTeachersForEachWaves;
+	public void setTeacherWaves(List<TeacherWave> teacherWaves) {
+		this.teacherWaves = teacherWaves;
+	}
+
+	public TeacherWave addTeacherWave(TeacherWave teacherWave) {
+		getTeacherWaves().add(teacherWave);
+		teacherWave.setTeacher(this);
+
+		return teacherWave;
+	}
+
+	public TeacherWave removeTeacherWave(TeacherWave teacherWave) {
+		getTeacherWaves().remove(teacherWave);
+		teacherWave.setTeacher(null);
+
+		return teacherWave;
+	}
+
+	public List<TeacherTopic> getTeacherTopics() {
+		return this.teacherTopics;
+	}
+
+	public void setTeacherTopics(List<TeacherTopic> teacherTopics) {
+		this.teacherTopics = teacherTopics;
+	}
+
+	public TeacherTopic addTeacherTopic(TeacherTopic teacherTopic) {
+		getTeacherTopics().add(teacherTopic);
+		teacherTopic.setTeacher(this);
+
+		return teacherTopic;
+	}
+
+	public TeacherTopic removeTeacherTopic(TeacherTopic teacherTopic) {
+		getTeacherTopics().remove(teacherTopic);
+		teacherTopic.setTeacher(null);
+
+		return teacherTopic;
 	}
 }

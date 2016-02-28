@@ -2,7 +2,6 @@ package datn.controller;
 
 import datn.entity.*;
 import datn.repository.*;
-import datn.response.TeacherResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,16 +20,16 @@ public class UserController {
     private TeacherRepository teacherRepository;
 
     @Autowired
-    private WaveOfMakingProjectRepository waveOfMakingProjectRepository;
+    private ProjectWaveRepository projectWaveRepository;
 
     @Autowired
-    private ListOfStudentsForEachWaveRepository listOfStudentsForEachWaveRepository;
+    private StudentWaveRepository studentWaveRepository;
 
     @Autowired
-    private ListOfTeachersForEachWaveRepository listOfTeachersForEachWaveRepository;
+    private TeacherWaveRepository teacherWaveRepository;
 
     @Autowired
-    private ListOfTopicFromTeacherRepository listOfTopicFromTeacherRepository;
+    private TeacherTopicRepository teacherTopicRepository;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(HttpServletRequest request){
@@ -57,23 +56,23 @@ public class UserController {
         teacher.setId(UUID.randomUUID().toString());
         teacherRepository.save(teacher);
 
-        WaveOfMakingProject waveOfMakingProject = new WaveOfMakingProject();
-        waveOfMakingProject.setId(UUID.randomUUID().toString());
-        waveOfMakingProjectRepository.save(waveOfMakingProject);
+        ProjectWave projectWave = new ProjectWave();
+        projectWave.setId(UUID.randomUUID().toString());
+        projectWaveRepository.save(projectWave);
 
-        ListOfStudentsForEachWave listOfStudentsForEachWave = new ListOfStudentsForEachWave();
-        listOfStudentsForEachWave.setStudent(student);
-        listOfStudentsForEachWave.setWaveOfMakingProject(waveOfMakingProject);
-        listOfStudentsForEachWaveRepository.save(listOfStudentsForEachWave);
+        StudentWave studentWave = new StudentWave();
+        studentWave.setStudent(student);
+        studentWave.setProjectWave(projectWave);
+        studentWaveRepository.save(studentWave);
 
-        ListOfTeachersForEachWave listOfTeachersForEachWave = new ListOfTeachersForEachWave();
-        listOfTeachersForEachWave.setTeacher(teacher);
-        listOfTeachersForEachWave.setWaveOfMakingProject(waveOfMakingProject);
-        listOfTeachersForEachWaveRepository.save(listOfTeachersForEachWave);
+        TeacherWave teacherWave = new TeacherWave();
+        teacherWave.setTeacher(teacher);
+        teacherWave.setProjectWave(projectWave);
+        teacherWaveRepository.save(teacherWave);
 
-        ListOfTopicFromTeacher listOfTopicFromTeacher = new ListOfTopicFromTeacher();
-        listOfTopicFromTeacher.setTeacher(teacher);
-        listOfTopicFromTeacherRepository.save(listOfTopicFromTeacher);
+        TeacherTopic teacherTopic = new TeacherTopic();
+        teacherTopic.setTeacher(teacher);
+        teacherTopicRepository.save(teacherTopic);
 
         return "index";
     }

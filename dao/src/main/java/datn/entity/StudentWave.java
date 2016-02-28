@@ -5,8 +5,8 @@ import java.util.UUID;
 import javax.persistence.*;
 
 @Entity
-@Table(name="list_of_students_for_each_wave")
-public class ListOfStudentsForEachWave implements Serializable {
+@Table(name="student_wave")
+public class StudentWave implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,9 +23,9 @@ public class ListOfStudentsForEachWave implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name="wave_id")
-	private WaveOfMakingProject waveOfMakingProject;
+	private ProjectWave projectWave;
 
-	public ListOfStudentsForEachWave() {
+	public StudentWave() {
 	}
 
 	public String getId() {
@@ -68,12 +68,12 @@ public class ListOfStudentsForEachWave implements Serializable {
 		this.student = student;
 	}
 
-	public WaveOfMakingProject getWaveOfMakingProject() {
-		return this.waveOfMakingProject;
+	public ProjectWave getProjectWave() {
+		return this.projectWave;
 	}
 
-	public void setWaveOfMakingProject(WaveOfMakingProject waveOfMakingProject) {
-		this.waveOfMakingProject = waveOfMakingProject;
+	public void setProjectWave(ProjectWave projectWave) {
+		this.projectWave = projectWave;
 	}
 
 }
