@@ -1,13 +1,9 @@
 package datn.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 
-
-/**
- * The persistent class for the student database table.
- * 
- */
 @Entity
 @Table(name="student")
 @DiscriminatorValue("1")
@@ -15,6 +11,9 @@ public class Student extends User {
 
 	@Column(name="class")
 	private String class_;
+
+	@OneToMany(mappedBy="student")
+	private List<ListOfStudentsForEachWave> listOfStudentsForEachWaves;
 
 	public Student() {
 	}
