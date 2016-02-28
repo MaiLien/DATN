@@ -31,6 +31,9 @@ public class UserController {
     @Autowired
     private TeacherTopicRepository teacherTopicRepository;
 
+    @Autowired
+    private ReportRepository reportRepository;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(HttpServletRequest request){
         return "login";
@@ -73,6 +76,10 @@ public class UserController {
         TeacherTopic teacherTopic = new TeacherTopic();
         teacherTopic.setTeacher(teacher);
         teacherTopicRepository.save(teacherTopic);
+
+        Report report = new Report();
+        report.setProjectWave(projectWave);
+        reportRepository.save(report);
 
         return "index";
     }
