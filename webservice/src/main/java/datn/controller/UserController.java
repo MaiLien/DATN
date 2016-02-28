@@ -37,6 +37,9 @@ public class UserController {
     @Autowired
     private StudentReportRepository studentReportRepository;
 
+    @Autowired
+    private StudentReportDetailRepository studentReportDetailRepository;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(HttpServletRequest request){
         return "login";
@@ -88,6 +91,10 @@ public class UserController {
         studentReport.setStudent(student);
         studentReport.setReport(report);
         studentReportRepository.save(studentReport);
+
+        StudentReportDetail studentReportDetail = new StudentReportDetail();
+        studentReportDetail.setStudentReport(studentReport);
+        studentReportDetailRepository.save(studentReportDetail);
 
         return "index";
     }

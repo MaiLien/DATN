@@ -1,10 +1,12 @@
 package datn.entity;
 
+import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,6 +18,7 @@ public class StudentReport implements Serializable {
 	private String id = UUID.randomUUID().toString();
 
 	@CreatedDate
+	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	@Column(name="created_date")
 	private Timestamp createdDate;
 
@@ -32,6 +35,9 @@ public class StudentReport implements Serializable {
 
 	@ManyToOne
 	private Student student;
+
+	@OneToMany(mappedBy="studentReport")
+	private List<StudentReportDetail> studentReportDetails;
 
 	public StudentReport() {
 	}
@@ -90,6 +96,28 @@ public class StudentReport implements Serializable {
 
 	public void setStudent(Student student) {
 		this.student = student;
+	}
+
+	public List<StudentReportDetail> getStudentReportDetails() {
+		return this.studentReportDetails;
+	}
+
+	public void setStudentReportDetails(List<StudentReportDetail> studentReportDetails) {
+		this.studentReportDetails = studentReportDetails;
+	}
+
+	public StudentReportDetail addStudentReportDetail(StudentReportDetail studentReportDetail) {
+		getStudentReportDetails().add(studentReportDetail);
+		studentReportDetail.setStudentReport(this);
+
+		return studentReportDetail;
+	}
+
+	public StudentReportDetail removeStudentReportDetail(StudentReportDetail studentReportDetail) {
+		getStudentReportDetails().remove(studentReportDetail);
+		studentReportDetail.setStudentReport(null);
+
+		return studentReportDetail;
 	}
 
 }
