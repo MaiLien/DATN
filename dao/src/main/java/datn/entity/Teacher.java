@@ -21,6 +21,9 @@ public class Teacher extends User{
 	@OneToMany(mappedBy="teacher")
 	private List<TeacherTopic> teacherTopics;
 
+	@OneToMany(mappedBy="teacher")
+	private List<Assignment> assignments;
+
 	public Teacher() {
 	}
 
@@ -91,4 +94,27 @@ public class Teacher extends User{
 
 		return teacherTopic;
 	}
+
+	public List<Assignment> getAssignments() {
+		return this.assignments;
+	}
+
+	public void setAssignments(List<Assignment> assignments) {
+		this.assignments = assignments;
+	}
+
+	public Assignment addAssignment(Assignment assignment) {
+		getAssignments().add(assignment);
+		assignment.setTeacher(this);
+
+		return assignment;
+	}
+
+	public Assignment removeAssignment(Assignment assignment) {
+		getAssignments().remove(assignment);
+		assignment.setTeacher(null);
+
+		return assignment;
+	}
+
 }

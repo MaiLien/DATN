@@ -70,6 +70,12 @@ public class ProjectWave implements Serializable {
 	@OneToMany(mappedBy="projectWave")
 	private List<StudentWave> studentWaves;
 
+	@OneToMany(mappedBy="projectWave")
+	private List<Report> reports;
+
+	@OneToMany(mappedBy="projectWave")
+	private List<Assignment> assignments;
+
 	public ProjectWave() {
 	}
 
@@ -136,9 +142,6 @@ public class ProjectWave implements Serializable {
 	public void setHowManyTimeProgressReport(int howManyTimeProgressReport) {
 		this.howManyTimeProgressReport = howManyTimeProgressReport;
 	}
-
-	@OneToMany(mappedBy="projectWave")
-	private List<Report> reports;
 
 	public String getSchoolYear() {
 		return this.schoolYear;
@@ -260,6 +263,28 @@ public class ProjectWave implements Serializable {
 		report.setProjectWave(null);
 
 		return report;
+	}
+
+	public List<Assignment> getAssignments() {
+		return this.assignments;
+	}
+
+	public void setAssignments(List<Assignment> assignments) {
+		this.assignments = assignments;
+	}
+
+	public Assignment addAssignment(Assignment assignment) {
+		getAssignments().add(assignment);
+		assignment.setProjectWave(this);
+
+		return assignment;
+	}
+
+	public Assignment removeAssignment(Assignment assignment) {
+		getAssignments().remove(assignment);
+		assignment.setProjectWave(null);
+
+		return assignment;
 	}
 
 }
