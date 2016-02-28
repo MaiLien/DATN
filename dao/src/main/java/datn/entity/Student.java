@@ -15,6 +15,9 @@ public class Student extends User {
 	@OneToMany(mappedBy="student")
 	private List<StudentWave> studentWaves;
 
+	@OneToMany(mappedBy="student")
+	private List<StudentReport> studentReports;
+
 	public Student() {
 	}
 
@@ -46,5 +49,27 @@ public class Student extends User {
 		studentWave.setStudent(null);
 
 		return studentWave;
+	}
+
+	public List<StudentReport> getStudentReports() {
+		return this.studentReports;
+	}
+
+	public void setStudentReports(List<StudentReport> studentReports) {
+		this.studentReports = studentReports;
+	}
+
+	public StudentReport addStudentReport(StudentReport studentReport) {
+		getStudentReports().add(studentReport);
+		studentReport.setStudent(this);
+
+		return studentReport;
+	}
+
+	public StudentReport removeStudentReport(StudentReport studentReport) {
+		getStudentReports().remove(studentReport);
+		studentReport.setStudent(null);
+
+		return studentReport;
 	}
 }

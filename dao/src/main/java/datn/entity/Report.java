@@ -3,6 +3,7 @@ package datn.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -26,6 +27,9 @@ public class Report implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="wave_id")
 	private ProjectWave projectWave;
+
+	@OneToMany(mappedBy="report")
+	private List<StudentReport> studentReports;
 
 	public Report() {
 	}
@@ -68,6 +72,28 @@ public class Report implements Serializable {
 
 	public void setProjectWave(ProjectWave projectWave) {
 		this.projectWave = projectWave;
+	}
+
+	public List<StudentReport> getStudentReports() {
+		return this.studentReports;
+	}
+
+	public void setStudentReports(List<StudentReport> studentReports) {
+		this.studentReports = studentReports;
+	}
+
+	public StudentReport addStudentReport(StudentReport studentReport) {
+		getStudentReports().add(studentReport);
+		studentReport.setReport(this);
+
+		return studentReport;
+	}
+
+	public StudentReport removeStudentReport(StudentReport studentReport) {
+		getStudentReports().remove(studentReport);
+		studentReport.setReport(null);
+
+		return studentReport;
 	}
 
 }
