@@ -29,6 +29,9 @@ public class UserController {
     @Autowired
     private ListOfTeachersForEachWaveRepository listOfTeachersForEachWaveRepository;
 
+    @Autowired
+    private ListOfTopicFromTeacherRepository listOfTopicFromTeacherRepository;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(HttpServletRequest request){
         return "login";
@@ -67,6 +70,10 @@ public class UserController {
         listOfTeachersForEachWave.setTeacher(teacher);
         listOfTeachersForEachWave.setWaveOfMakingProject(waveOfMakingProject);
         listOfTeachersForEachWaveRepository.save(listOfTeachersForEachWave);
+
+        ListOfTopicFromTeacher listOfTopicFromTeacher = new ListOfTopicFromTeacher();
+        listOfTopicFromTeacher.setTeacher(teacher);
+        listOfTopicFromTeacherRepository.save(listOfTopicFromTeacher);
 
         return "index";
     }

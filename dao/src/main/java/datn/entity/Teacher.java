@@ -19,6 +19,9 @@ public class Teacher extends User{
 	@OneToMany(mappedBy="teacher")
 	private List<ListOfTeachersForEachWave> listOfTeachersForEachWaves;
 
+	@OneToMany(mappedBy="teacher")
+	private List<ListOfTopicFromTeacher> listOfTopicFromTeachers;
+
 	public Teacher() {
 	}
 
