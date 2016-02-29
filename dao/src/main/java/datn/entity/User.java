@@ -1,5 +1,6 @@
 package datn.entity;
 
+import datn.constant.Gender;
 import datn.constant.TypeOfUser;
 
 import java.io.Serializable;
@@ -32,7 +33,7 @@ public class User implements Serializable {
 
 	private String email;
 
-	private int gender;
+	private Gender gender;
 
 	@Column(name="last_modified_by")
 	private String lastModifiedBy;
@@ -114,11 +115,11 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public int getGender() {
+	public Gender getGender() {
 		return this.gender;
 	}
 
-	public void setGender(int gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 
