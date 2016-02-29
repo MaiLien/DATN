@@ -23,6 +23,4 @@ public enum Gender {
         return gender;
     }
 
-
-
 }

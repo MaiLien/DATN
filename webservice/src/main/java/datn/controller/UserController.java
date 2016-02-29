@@ -43,6 +43,12 @@ public class UserController {
     @Autowired
     private AssignmentRepository assignmentRepository;
 
+    @Autowired
+    private GroupRepository groupRepository;
+
+//    @Autowired
+//    private MemberGroupRepository memberGroupRepository;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(HttpServletRequest request){
         return "login";
@@ -104,6 +110,15 @@ public class UserController {
         assignment.setStudent(student);
         assignment.setTeacher(teacher);
         assignmentRepository.save(assignment);
+
+        Group group = new Group();
+        group.setCreator(teacher);
+        groupRepository.save(group);
+
+//        MemberGroup memberGroup = new MemberGroup();
+//        memberGroup.setGroup(group);
+//        memberGroup.setUser(student);
+//        memberGroupRepository.save(memberGroup);
 
         return "index";
     }

@@ -7,6 +7,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name="user")
@@ -55,6 +56,10 @@ public class User implements Serializable {
 
 	@Column(name="version_no")
 	private String versionNo;
+
+	//bi-directional many-to-one association to Group
+	@OneToMany(mappedBy="creator")
+	private List<Group> createdGroups;
 
 	public User() {
 	}
@@ -185,6 +190,28 @@ public class User implements Serializable {
 
 	public void setVersionNo(String versionNo) {
 		this.versionNo = versionNo;
+	}
+
+	public List<Group> getCreatedGroups() {
+		return this.createdGroups;
+	}
+
+	public void setGroups(List<Group> createdGroups) {
+		this.createdGroups = createdGroups;
+	}
+
+	public Group addCreatedGroup(Group CreatedGroup) {
+		getCreatedGroups().add(CreatedGroup);
+		CreatedGroup.setCreator(this);
+
+		return CreatedGroup;
+	}
+
+	public Group removeGroup(Group createdGroup) {
+		getCreatedGroups().remove(createdGroup);
+		createdGroup.setCreator(null);
+
+		return createdGroup;
 	}
 
 }
