@@ -61,6 +61,10 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="creator")
 	private List<Group> createdGroups;
 
+	//bi-directional many-to-one association to MemberGroup
+	@OneToMany(mappedBy="user")
+	private List<MemberGroup> memberGroups;
+
 	public User() {
 	}
 
@@ -212,6 +216,28 @@ public class User implements Serializable {
 		createdGroup.setCreator(null);
 
 		return createdGroup;
+	}
+
+	public List<MemberGroup> getMemberGroups() {
+		return this.memberGroups;
+	}
+
+	public void setMemberGroups(List<MemberGroup> memberGroups) {
+		this.memberGroups = memberGroups;
+	}
+
+	public MemberGroup addMemberGroup(MemberGroup memberGroup) {
+		getMemberGroups().add(memberGroup);
+		memberGroup.setUser(this);
+
+		return memberGroup;
+	}
+
+	public MemberGroup removeMemberGroup(MemberGroup memberGroup) {
+		getMemberGroups().remove(memberGroup);
+		memberGroup.setUser(null);
+
+		return memberGroup;
 	}
 
 }

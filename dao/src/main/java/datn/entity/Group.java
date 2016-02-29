@@ -2,14 +2,10 @@ package datn.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="group_")
@@ -31,6 +27,10 @@ public class Group implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="creator")
 	private User creator;
+
+	//bi-directional many-to-one association to MemberGroup
+	@OneToMany(mappedBy="group")
+	private List<MemberGroup> memberGroups;
 
 	public Group() {
 	}
@@ -73,6 +73,28 @@ public class Group implements Serializable {
 
 	public void setCreator(User creator) {
 		this.creator = creator;
+	}
+
+	public List<MemberGroup> getMemberGroups() {
+		return this.memberGroups;
+	}
+
+	public void setMemberGroups(List<MemberGroup> memberGroups) {
+		this.memberGroups = memberGroups;
+	}
+
+	public MemberGroup addMemberGroup(MemberGroup memberGroup) {
+		getMemberGroups().add(memberGroup);
+		memberGroup.setGroup(this);
+
+		return memberGroup;
+	}
+
+	public MemberGroup removeMemberGroup(MemberGroup memberGroup) {
+		getMemberGroups().remove(memberGroup);
+		memberGroup.setGroup(null);
+
+		return memberGroup;
 	}
 
 }

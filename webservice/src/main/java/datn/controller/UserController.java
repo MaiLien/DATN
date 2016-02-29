@@ -1,6 +1,7 @@
 package datn.controller;
 
 import datn.entity.*;
+import datn.entity.MemberGroup;
 import datn.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,8 +47,8 @@ public class UserController {
     @Autowired
     private GroupRepository groupRepository;
 
-//    @Autowired
-//    private MemberGroupRepository memberGroupRepository;
+    @Autowired
+    private MemberGroupRepository memberGroupRepository;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(HttpServletRequest request){
@@ -115,10 +116,10 @@ public class UserController {
         group.setCreator(teacher);
         groupRepository.save(group);
 
-//        MemberGroup memberGroup = new MemberGroup();
-//        memberGroup.setGroup(group);
-//        memberGroup.setUser(student);
-//        memberGroupRepository.save(memberGroup);
+        MemberGroup memberGroup = new MemberGroup();
+        memberGroup.setGroup(group);
+        memberGroup.setUser(student);
+        memberGroupRepository.save(memberGroup);
 
         return "index";
     }
