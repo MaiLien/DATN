@@ -50,6 +50,9 @@ public class UserController {
     @Autowired
     private MemberGroupRepository memberGroupRepository;
 
+    @Autowired
+    private MessageRepository messageRepository;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(HttpServletRequest request){
         return "login";
@@ -120,6 +123,10 @@ public class UserController {
         memberGroup.setGroup(group);
         memberGroup.setUser(student);
         memberGroupRepository.save(memberGroup);
+
+        Message message = new Message();
+        message.setCreator(student);
+        messageRepository.save(message);
 
         return "index";
     }
