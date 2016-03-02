@@ -2,121 +2,120 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd"
                    logicalFilePath="db.changelog-1.0.xml">
-    <changeSet author="lienhtm (generated)" id="1456584567555-1">
-        <createTable tableName="group">
+    <changeSet author="lienhtm (generated)" id="1456905020428-1">
+        <createTable tableName="assignment">
+            <column name="id" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wave_id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="teacher_id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="student_id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-2">
+        <createTable tableName="group_">
             <column name="id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
             <column name="group_name" type="VARCHAR(255)"/>
-            <column name="created_by" type="VARCHAR(36)">
+            <column name="creator" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
             <column name="created_date" type="TIMESTAMP"/>
             <column name="deleted" type="BIT(1)"/>
         </createTable>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-2">
-        <createTable tableName="list_of_assignment_instruction_for_each_wave">
-            <column name="wave_id" type="VARCHAR(36)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="teacher_id" type="VARCHAR(36)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="student_id" type="VARCHAR(36)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-3">
-        <createTable tableName="list_of_group_recieve_message">
-            <column name="message_id" type="VARCHAR(36)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="group_id" type="VARCHAR(36)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-4">
-        <createTable tableName="list_of_person_recieve_message">
-            <column name="message_id" type="VARCHAR(36)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="user_id" type="VARCHAR(36)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-5">
-        <createTable tableName="list_of_students_for_each_wave">
-            <column name="wave_id" type="VARCHAR(36)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="student_id" type="VARCHAR(36)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="topic" type="VARCHAR(255)"/>
-            <column name="status" type="INT"/>
-            <column name="description" type="VARCHAR(255)"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-6">
-        <createTable tableName="list_of_teachers_for_each_wave">
-            <column name="wave_id" type="VARCHAR(36)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="teacher_id" type="VARCHAR(36)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="min_number_of_student" type="INT"/>
-            <column name="max_number_of_student" type="INT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-7">
-        <createTable tableName="list_of_topic_from_teacher">
+    <changeSet author="lienhtm (generated)" id="1456905020428-3">
+        <createTable tableName="group_recieve_message">
             <column name="id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
-            <column name="teacher_id" type="VARCHAR(36)">
+            <column name="message_id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
-            <column name="title" type="VARCHAR(45)"/>
-            <column name="description" type="VARCHAR(45)"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-8">
-        <createTable tableName="member_of_group">
             <column name="group_id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
-            <column name="user_id" type="VARCHAR(36)">
+        </createTable>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-4">
+        <createTable tableName="member_group">
+            <column name="id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="group_id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="member_id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-9">
+    <changeSet author="lienhtm (generated)" id="1456905020428-5">
         <createTable tableName="message">
             <column name="id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
-            <column name="created_by" type="VARCHAR(36)">
+            <column name="creator" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
             <column name="created_date" type="TIMESTAMP"/>
+            <column name="subject" type="VARCHAR(255)"/>
             <column name="content" type="VARCHAR(255)"/>
-            <column name="deleted" type="BIT(1)"/>
+            <column defaultValueNumeric="0" name="deleted" type="BIT(1)"/>
         </createTable>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-10">
+    <changeSet author="lienhtm (generated)" id="1456905020428-6">
         <createTable tableName="officer">
             <column name="id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-11">
-        <createTable tableName="progress_report_for_each_wave">
+    <changeSet author="lienhtm (generated)" id="1456905020428-7">
+        <createTable tableName="person_recieve_message">
+            <column name="id" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="message_id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deleted" type="BIT(1)"/>
+            <column name="read_" type="BIT(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-8">
+        <createTable tableName="project_wave">
+            <column name="id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="school_year" type="VARCHAR(45)"/>
+            <column name="semester" type="INT"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="start_day" type="date"/>
+            <column name="end_day" type="date"/>
+            <column name="start_time_for_teacher_propose_student" type="datetime"/>
+            <column name="end_time_for_teacher_propose_student" type="datetime"/>
+            <column name="start_time_for_student_register_teacher" type="datetime"/>
+            <column name="end_time_for_student_register_teacher" type="datetime"/>
+            <column name="start_time_for_student_submit_project" type="datetime"/>
+            <column name="end_time_for_student_submit_project" type="datetime"/>
+            <column name="start_time_for_defending_project" type="datetime"/>
+            <column name="end_time_for_defending_project" type="datetime"/>
+            <column name="how_many_time_progress_report" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-9">
+        <createTable tableName="report">
             <column name="id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
@@ -128,29 +127,37 @@
             <column name="end_time" type="datetime"/>
         </createTable>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-12">
-        <createTable tableName="progress_report_of_student">
+    <changeSet author="lienhtm (generated)" id="1456905020428-10">
+        <createTable tableName="student">
+            <column name="id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="class" type="VARCHAR(45)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-11">
+        <createTable tableName="student_report">
             <column name="id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
             <column name="student_id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
-            <column name="progress_report_for_each_wave_id" type="VARCHAR(36)">
+            <column name="report_id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
             <column name="created_date" type="TIMESTAMP"/>
-            <column name="opinion_of_student" type="VARCHAR(36)"/>
-            <column name="opinion_of_teacher" type="VARCHAR(36)"/>
+            <column name="student_opinion" type="VARCHAR(36)"/>
+            <column name="teacher_opinion" type="VARCHAR(36)"/>
             <column name="status" type="VARCHAR(45)"/>
         </createTable>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-13">
-        <createTable tableName="progress_report_of_student_work_detail">
+    <changeSet author="lienhtm (generated)" id="1456905020428-12">
+        <createTable tableName="student_report_detail">
             <column name="id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
-            <column name="progress_report_of_student_id" type="VARCHAR(36)">
+            <column name="student_report_id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
             <column name="start_time" type="date"/>
@@ -159,15 +166,23 @@
             <column name="note" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-14">
-        <createTable tableName="student">
+    <changeSet author="lienhtm (generated)" id="1456905020428-13">
+        <createTable tableName="student_wave">
+            <column name="wave_id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="student_id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="topic" type="VARCHAR(255)"/>
+            <column name="status" type="INT"/>
+            <column name="description" type="VARCHAR(255)"/>
             <column name="id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
-            <column name="class" type="VARCHAR(45)"/>
         </createTable>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-15">
+    <changeSet author="lienhtm (generated)" id="1456905020428-14">
         <createTable tableName="teacher">
             <column name="id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
@@ -177,7 +192,34 @@
             <column name="research_direction" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-16">
+    <changeSet author="lienhtm (generated)" id="1456905020428-15">
+        <createTable tableName="teacher_topic">
+            <column name="id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="teacher_id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(45)"/>
+            <column name="description" type="VARCHAR(45)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-16">
+        <createTable tableName="teacher_wave">
+            <column name="id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wave_id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="teacher_id" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="min_number_of_student" type="INT"/>
+            <column name="max_number_of_student" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-17">
         <createTable tableName="user">
             <column name="id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
@@ -199,145 +241,124 @@
             <column name="deleted" type="BIT(1)"/>
         </createTable>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-17">
-        <createTable tableName="wave_of_making_project">
-            <column name="id" type="VARCHAR(36)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="school_year" type="VARCHAR(45)"/>
-            <column name="semester" type="INT"/>
-            <column name="description" type="VARCHAR(255)"/>
-            <column name="start_day" type="date"/>
-            <column name="end_day" type="date"/>
-            <column name="start_time_for_teacher_propose_student" type="datetime"/>
-            <column name="end_time_for_teacher_propose_student" type="datetime"/>
-            <column name="start_time_for_student_register_teacher" type="datetime"/>
-            <column name="end_time_for_student_register_teacher" type="datetime"/>
-            <column name="start_time_for_student_submit_project" type="datetime"/>
-            <column name="end_time_for_student_submit_project" type="datetime"/>
-            <column name="start_time_for_defending_project" type="datetime"/>
-            <column name="end_time_for_defending_project" type="datetime"/>
-            <column name="how_many_time_progress_report" type="INT"/>
-        </createTable>
+    <changeSet author="lienhtm (generated)" id="1456905020428-18">
+        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="assignment"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-18">
-        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="group"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-19">
+        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="group_"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-19">
-        <addPrimaryKey columnNames="wave_id, teacher_id, student_id" constraintName="PRIMARY" tableName="list_of_assignment_instruction_for_each_wave"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-20">
+        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="group_recieve_message"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-20">
-        <addPrimaryKey columnNames="message_id, group_id" constraintName="PRIMARY" tableName="list_of_group_recieve_message"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-21">
+        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="member_group"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-21">
-        <addPrimaryKey columnNames="message_id, user_id" constraintName="PRIMARY" tableName="list_of_person_recieve_message"/>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-22">
-        <addPrimaryKey columnNames="wave_id, student_id" constraintName="PRIMARY" tableName="list_of_students_for_each_wave"/>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-23">
-        <addPrimaryKey columnNames="wave_id, teacher_id" constraintName="PRIMARY" tableName="list_of_teachers_for_each_wave"/>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-24">
-        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="list_of_topic_from_teacher"/>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-25">
-        <addPrimaryKey columnNames="group_id, user_id" constraintName="PRIMARY" tableName="member_of_group"/>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-26">
+    <changeSet author="lienhtm (generated)" id="1456905020428-22">
         <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="message"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-27">
+    <changeSet author="lienhtm (generated)" id="1456905020428-23">
         <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="officer"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-28">
-        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="progress_report_for_each_wave"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-24">
+        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="person_recieve_message"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-29">
-        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="progress_report_of_student"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-25">
+        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="project_wave"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-30">
-        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="progress_report_of_student_work_detail"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-26">
+        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="report"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-31">
+    <changeSet author="lienhtm (generated)" id="1456905020428-27">
         <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="student"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-32">
+    <changeSet author="lienhtm (generated)" id="1456905020428-28">
+        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="student_report"/>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-29">
+        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="student_report_detail"/>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-30">
+        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="student_wave"/>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-31">
         <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="teacher"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-33">
+    <changeSet author="lienhtm (generated)" id="1456905020428-32">
+        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="teacher_topic"/>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-33">
+        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="teacher_wave"/>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-34">
         <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="user"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-34">
-        <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="wave_of_making_project"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-35">
+        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="assignment" constraintName="fk_assignment_vs_student" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="student"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-35">
-        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="group" constraintName="fk_group_vs_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-36">
+        <addForeignKeyConstraint baseColumnNames="teacher_id" baseTableName="assignment" constraintName="fk_assignment_vs_teacher" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="teacher"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-36">
-        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="list_of_assignment_instruction_for_each_wave" constraintName="fk_list_of_assignment_instruction_for_each_wave_vs_student" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="student"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-37">
+        <addForeignKeyConstraint baseColumnNames="wave_id" baseTableName="assignment" constraintName="fk_assignment_vs_wave" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="project_wave"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-37">
-        <addForeignKeyConstraint baseColumnNames="teacher_id" baseTableName="list_of_assignment_instruction_for_each_wave" constraintName="fk_list_of_assignment_instruction_for_each_wave_vs_teacher" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="teacher"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-38">
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="group_recieve_message" constraintName="fk_group_recieve_message_vs_group" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="group_"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-38">
-        <addForeignKeyConstraint baseColumnNames="wave_id" baseTableName="list_of_assignment_instruction_for_each_wave" constraintName="fk_list_of_assignment_instruction_for_each_wave_vs_wave" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="wave_of_making_project"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-39">
+        <addForeignKeyConstraint baseColumnNames="message_id" baseTableName="group_recieve_message" constraintName="fk_group_recieve_message_vs_message" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="message"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-39">
-        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="list_of_group_recieve_message" constraintName="fk_list_of_group_recieve_message_vs_group" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="group"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-40">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="group_" constraintName="fk_group_vs_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-40">
-        <addForeignKeyConstraint baseColumnNames="message_id" baseTableName="list_of_group_recieve_message" constraintName="fk_list_of_group_recieve_message_vs_message" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="message"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-41">
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="member_group" constraintName="fk_member_group_vs_group" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="group_"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-41">
-        <addForeignKeyConstraint baseColumnNames="message_id" baseTableName="list_of_person_recieve_message" constraintName="fk_list_of_person_recieve_message_vs_message" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="message"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-42">
+        <addForeignKeyConstraint baseColumnNames="member_id" baseTableName="member_group" constraintName="fk_member_group_vs_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-42">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="list_of_person_recieve_message" constraintName="fk_list_of_person_recieve_message_vs_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-43">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="message" constraintName="fk_message_vs_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-43">
-        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="list_of_students_for_each_wave" constraintName="fk_list_of_students_for_each_wave_vs_student" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="student"/>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-44">
-        <addForeignKeyConstraint baseColumnNames="wave_id" baseTableName="list_of_students_for_each_wave" constraintName="fk_list_of_students_for_each_wave_vs_wave" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="wave_of_making_project"/>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-45">
-        <addForeignKeyConstraint baseColumnNames="teacher_id" baseTableName="list_of_teachers_for_each_wave" constraintName="fk_list_of_teachers_for_each_wave_vs_teacher" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="teacher"/>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-46">
-        <addForeignKeyConstraint baseColumnNames="wave_id" baseTableName="list_of_teachers_for_each_wave" constraintName="fk_list_of_teachers_for_each_wave_vs_wave" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="wave_of_making_project"/>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-47">
-        <addForeignKeyConstraint baseColumnNames="teacher_id" baseTableName="list_of_topic_from_teacher" constraintName="fk_list_of_topic_vs_teacher" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="teacher"/>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-48">
-        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="member_of_group" constraintName="fk_member_of_group_vs_group" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="group"/>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-49">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="member_of_group" constraintName="fk_member_of_group_vs_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-50">
-        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="message" constraintName="fk_message_vs_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
-    </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-51">
+    <changeSet author="lienhtm (generated)" id="1456905020428-44">
         <addForeignKeyConstraint baseColumnNames="id" baseTableName="officer" constraintName="fk_officer_vs_officer" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-52">
-        <addForeignKeyConstraint baseColumnNames="wave_id" baseTableName="progress_report_for_each_wave" constraintName="fk_progress_report_for_each_wave_vs_wave" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="wave_of_making_project"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-45">
+        <addForeignKeyConstraint baseColumnNames="message_id" baseTableName="person_recieve_message" constraintName="fk_person_recieve_message_vs_message" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="message"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-53">
-        <addForeignKeyConstraint baseColumnNames="progress_report_for_each_wave_id" baseTableName="progress_report_of_student" constraintName="fk_progress_report_of_student_vs_progress_report_for_each_wave" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="progress_report_for_each_wave"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-46">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="person_recieve_message" constraintName="fk_person_recieve_message_vs_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-54">
-        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="progress_report_of_student" constraintName="fk_progress_report_of_student_vs_student" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="student"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-47">
+        <addForeignKeyConstraint baseColumnNames="wave_id" baseTableName="report" constraintName="fk_report_vs_wave" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="project_wave"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-55">
-        <addForeignKeyConstraint baseColumnNames="progress_report_of_student_id" baseTableName="progress_report_of_student_work_detail" constraintName="fk_report_work_detail_vs_progress_report_of_student" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="progress_report_of_student"/>
+    <changeSet author="lienhtm (generated)" id="1456905020428-48">
+        <addForeignKeyConstraint baseColumnNames="student_report_id" baseTableName="student_report_detail" constraintName="fk_student_report_detail_vs_student_report" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="student_report"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-56">
+    <changeSet author="lienhtm (generated)" id="1456905020428-49">
+        <addForeignKeyConstraint baseColumnNames="report_id" baseTableName="student_report" constraintName="fk_student_report_vs_report" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="report"/>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-50">
+        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="student_report" constraintName="fk_student_report_vs_student" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="student"/>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-51">
         <addForeignKeyConstraint baseColumnNames="id" baseTableName="student" constraintName="fk_student_vs_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
     </changeSet>
-    <changeSet author="lienhtm (generated)" id="1456584567555-57">
+    <changeSet author="lienhtm (generated)" id="1456905020428-52">
+        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="student_wave" constraintName="fk_student_wave_vs_student" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="student"/>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-53">
+        <addForeignKeyConstraint baseColumnNames="wave_id" baseTableName="student_wave" constraintName="fk_student_wave_vs_wave" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="project_wave"/>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-54">
         <addForeignKeyConstraint baseColumnNames="id" baseTableName="teacher" constraintName="fk_teacher_vs_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-55">
+        <addForeignKeyConstraint baseColumnNames="teacher_id" baseTableName="teacher_wave" constraintName="fk_teacher_wave_vs_teacher" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="teacher"/>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-56">
+        <addForeignKeyConstraint baseColumnNames="wave_id" baseTableName="teacher_wave" constraintName="fk_teacher_wave_vs_wave" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="project_wave"/>
+    </changeSet>
+    <changeSet author="lienhtm (generated)" id="1456905020428-57">
+        <addForeignKeyConstraint baseColumnNames="teacher_id" baseTableName="teacher_topic" constraintName="teacher_topic_vs_teacher" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="teacher"/>
     </changeSet>
 </databaseChangeLog>
