@@ -56,6 +56,8 @@ public class UserController {
     @Autowired
     private PersonMessageRepository personMessageRepository;
 
+    @Autowired GroupMessageRepository groupMessageRepository;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(HttpServletRequest request){
         return "login";
@@ -135,6 +137,11 @@ public class UserController {
         personMessage.setMessage(message);
         personMessage.setUser(teacher);
         personMessageRepository.save(personMessage);
+
+        GroupMessage groupMessage = new GroupMessage();
+        groupMessage.setGroup(group);
+        groupMessage.setMessage(message);
+        groupMessageRepository.save(groupMessage);
 
         return "index";
     }

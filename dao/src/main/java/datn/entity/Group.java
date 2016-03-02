@@ -32,6 +32,10 @@ public class Group implements Serializable {
 	@OneToMany(mappedBy="group")
 	private List<MemberGroup> memberGroups;
 
+	//bi-directional many-to-one association to GroupRecieveMessage
+	@OneToMany(mappedBy="group")
+	private List<GroupMessage> groupMessages;
+
 	public Group() {
 	}
 
@@ -95,6 +99,28 @@ public class Group implements Serializable {
 		memberGroup.setGroup(null);
 
 		return memberGroup;
+	}
+
+	public List<GroupMessage> getGroupRecieveMessages() {
+		return this.groupMessages;
+	}
+
+	public void setGroupRecieveMessages(List<GroupMessage> groupMessages) {
+		this.groupMessages = groupMessages;
+	}
+
+	public GroupMessage addGroupRecieveMessage(GroupMessage groupMessage) {
+		getGroupRecieveMessages().add(groupMessage);
+		groupMessage.setGroup(this);
+
+		return groupMessage;
+	}
+
+	public GroupMessage removeGroupRecieveMessage(GroupMessage groupMessage) {
+		getGroupRecieveMessages().remove(groupMessage);
+		groupMessage.setGroup(null);
+
+		return groupMessage;
 	}
 
 }
