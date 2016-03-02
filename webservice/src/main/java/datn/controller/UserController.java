@@ -53,6 +53,9 @@ public class UserController {
     @Autowired
     private MessageRepository messageRepository;
 
+    @Autowired
+    private PersonMessageRepository personMessageRepository;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(HttpServletRequest request){
         return "login";
@@ -127,6 +130,11 @@ public class UserController {
         Message message = new Message();
         message.setCreator(student);
         messageRepository.save(message);
+
+        PersonMessage personMessage = new PersonMessage();
+        personMessage.setMessage(message);
+        personMessage.setUser(teacher);
+        personMessageRepository.save(personMessage);
 
         return "index";
     }

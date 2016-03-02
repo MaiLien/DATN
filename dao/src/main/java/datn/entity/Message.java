@@ -3,6 +3,7 @@ package datn.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -18,7 +19,7 @@ public class Message implements Serializable {
 	@Column(name="created_date")
 	private Timestamp createdDate;
 
-	private byte deleted;
+	private boolean deleted;
 
 	private String subject;
 
@@ -26,6 +27,10 @@ public class Message implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="creator")
 	private User creator;
+
+	//bi-directional many-to-one association to PersonMessage
+	@OneToMany(mappedBy="message")
+	private List<PersonMessage> personMessages;
 
 	public Message() {
 	}
@@ -54,11 +59,11 @@ public class Message implements Serializable {
 		this.createdDate = createdDate;
 	}
 
-	public byte getDeleted() {
+	public boolean getDeleted() {
 		return this.deleted;
 	}
 
-	public void setDeleted(byte deleted) {
+	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
 
@@ -76,6 +81,28 @@ public class Message implements Serializable {
 
 	public void setCreator(User creator) {
 		this.creator = creator;
+	}
+
+	public List<PersonMessage> getPersonMessages() {
+		return this.personMessages;
+	}
+
+	public void setPersonMessages(List<PersonMessage> personMessages) {
+		this.personMessages = personMessages;
+	}
+
+	public PersonMessage addPersonMessage(PersonMessage personMessage) {
+		getPersonMessages().add(personMessage);
+		personMessage.setMessage(this);
+
+		return personMessage;
+	}
+
+	public PersonMessage removePersonMessage(PersonMessage personMessage) {
+		getPersonMessages().remove(personMessage);
+		personMessage.setMessage(null);
+
+		return personMessage;
 	}
 
 }
