@@ -57,6 +57,14 @@
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
+        <!-- Json-->
+        <!-- Error: Content type 'application/json' not supported-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+
         <!-- Hibernate va MySQL lien quan den entityManagerFactory o file spring-data.xml-->
         <!-- Hibernate -->
         <dependency>
