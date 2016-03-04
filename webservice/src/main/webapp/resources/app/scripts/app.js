@@ -13,9 +13,14 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: '/resources/app/views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        templateUrl: '/resources/app/views/login.html',
+        controller: 'AuthCtrl',
+        controllerAs: 'auth'
+      })
+      .when('/login', {
+        templateUrl: '/resources/app/views/login.html',
+        controller: 'AuthCtrl',
+        controllerAs: 'auth'
       })
       .when('/about', {
         templateUrl: '/resources/app/views/about.html',

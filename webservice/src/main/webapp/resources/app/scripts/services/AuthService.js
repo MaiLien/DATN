@@ -6,6 +6,13 @@ angular.module('appDATN.service')
             },
             isStudent: function () {
                 return true;
+            },
+            isTeacher: function () {
+                return true;
+            },
+            isOfficer: function () {
+                return true;
             }
+
         }
     });

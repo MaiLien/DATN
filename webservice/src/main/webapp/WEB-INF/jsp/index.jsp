@@ -5,6 +5,7 @@
 
     <!-- Import css -->
     <link href="resources/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="resources/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <!-- Import js -->
     <script src="resources/bower_components/jquery/dist/jquery.js"></script>
@@ -16,7 +17,7 @@
     <script src="/resources/app/scripts/app.js"></script>
     <script src="/resources/app/scripts/controllers/about.js"></script>
     <script src="/resources/app/scripts/controllers/main.js"></script>
-    <script src="/resources/app/scripts/controllers/HeaderController.js"></script>
+    <script src="/resources/app/scripts/controllers/HeaderCtrl.js"></script>
     <script src="/resources/app/scripts/services/AuthService.js"></script>
 
 </head>
