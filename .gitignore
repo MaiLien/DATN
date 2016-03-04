@@ -16,6 +16,7 @@
 ### Java ###
 *.class
 
+/webservice/src/main/webapp/resources/bower_components
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
