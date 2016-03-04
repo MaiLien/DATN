@@ -34,4 +34,4 @@ angular
 
 angular.module('appDATN.controller', ['appDATN.service']);
 
-angular.module('appDATN.service', []);
+angular.module('appDATN.service', ['appDATN.service']);

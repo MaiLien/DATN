@@ -1,3 +1,6 @@
 <div>
-    <input type="text" ng-module="a">
+    Login page
+    <li ng-if="!authenticated"><a href="#/login">Login</a></li>
+    <li ng-if="authenticated"><a href="#/login">Profile</a></li>
+    <li ng-if="authenticated"><a href="#/login">Logout</a></li>
 </div>
