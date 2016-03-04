@@ -1,0 +1,23 @@
+{
+  "name": "resources",
+  "homepage": "https://github.com/PhoPhaoHoa/DATN",
+  "authors": [
+    "PhoPhaoHoa <mailien.bk@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.0",
+    "bootstrap": "^3.3.6",
+    "angular-route": "^1.5.0"
+  }
+}
