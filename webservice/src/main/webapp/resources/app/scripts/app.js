@@ -22,10 +22,10 @@ angular
         controller: 'AuthCtrl',
         controllerAs: 'auth'
       })
-      .when('/about', {
-        templateUrl: '/resources/app/views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+      .when('/listStudent', {
+        templateUrl: '/resources/app/views/list_student.html',
+        controller: 'StudentCtrl',
+        controllerAs: 'student'
       })
       .otherwise({
         redirectTo: '/'

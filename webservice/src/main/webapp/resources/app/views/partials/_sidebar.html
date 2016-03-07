@@ -1,8 +1,37 @@
-<div class="well" ng-controller="HeaderCtrl">
-    <ul class="nav nav-stacked" id="sidebar">
-        <li ng-if="isStudent"><a href="#sec1">Section 1</a></li>
-        <li><a href="#sec2">Section 2</a></li>
-        <li><a href="#sec3">Section 3</a></li>
-        <li><a href="#sec4">Section 4</a></li>
-    </ul>
-</div>
+<!-- Left side column. contains sidebar -->
+<aside class="main-sidebar" ng-controller="HeaderCtrl">
+    <section class="sidebar">
+
+        <!-- search form (Optional) -->
+        <!--<%&#45;&#45;<form action="#" method="get" class="sidebar-form">&#45;&#45;%>-->
+        <!--<%&#45;&#45;<div class="input-group">&#45;&#45;%>-->
+            <!--<%&#45;&#45;<input type="text" name="q" class="form-control" placeholder="Search...">&#45;&#45;%>-->
+            <!--<%&#45;&#45;<span class="input-group-btn">&#45;&#45;%>-->
+                <!--<%&#45;&#45;<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>&#45;&#45;%>-->
+              <!--<%&#45;&#45;</span>&#45;&#45;%>-->
+            <!--<%&#45;&#45;</div>&#45;&#45;%>-->
+        <!--<%&#45;&#45;</form>&#45;&#45;%>-->
+        <!-- /.search form -->
+
+        <ul class="sidebar-menu">
+            <li class="treeview">
+                <a href="#"><i class="fa fa-link"></i> <span>Hộp thư</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="#">Soạn thư mới</a></li>
+                    <li><a href="#">Hộp thư đến</a></li>
+                    <li><a href="#">Hộp thư đi</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><i class="fa fa-link"></i> <span>Đợt ĐATN</span></a></li>
+            <li><a href="#"><i class="fa fa-link"></i> <span>Sinh viên</span></a></li>
+            <li><a href="#"><i class="fa fa-link"></i> <span>Giảng viên</span></a></li>
+            <li class="treeview">
+                <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="#">Link in level 2</a></li>
+                    <li><a href="#">Link in level 2</a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+</aside>
