@@ -1,8 +1,17 @@
 <div ng-controller="StudentCtrl">
+
+    <div ng-init="getStudents()"></div>
     <h5>Chưa có sinh viên nào!</h5>
     <h5>Danh sách sinh viên</h5>
-    {{ssstudents.length}}
-    <button class="btn btn-primary">Thêm sinh viên</button>
+
+    <p>So SV: {{students.length}} </p>
+
+
+    <div ng-repeat="obj in students">
+        {{obj.id}}
+    </div>
+
+    <button ng-click="getStudents()" class="btn btn-primary">Thêm sinh viên</button>
     <div>
         <table class="table table-striped">
             <thead>
