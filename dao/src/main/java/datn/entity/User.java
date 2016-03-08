@@ -2,6 +2,7 @@ package datn.entity;
 
 import datn.constant.Gender;
 import datn.constant.TypeOfUser;
+import datn.constant.UserStatusConstant;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -74,6 +75,8 @@ public class User implements Serializable {
 	private List<PersonMessage> personMessages;
 
 	public User() {
+		deleted = false;
+		status = UserStatusConstant.ACTIVE;
 	}
 
 	public String getId() {

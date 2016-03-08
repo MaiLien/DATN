@@ -23,7 +23,7 @@ public class UserRequest {
     private boolean deleted;
     private String description;
     private String email;
-    private String gender;
+    private int gender;
     private String name;
     private String password;
     private String phoneNumber;
@@ -69,11 +69,11 @@ public class UserRequest {
         this.email = email;
     }
 
-    public String getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 

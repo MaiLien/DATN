@@ -2,7 +2,16 @@ package datn.constant;
 
 public enum Gender {
 
-    MALE, FEMALE;
+    MALE(0), FEMALE(1);
+
+    private final int value;
+    private Gender(int value){
+        this.value = value;
+    }
+
+    public int getValue() {
+        return this.value;
+    }
 
     public static Gender valueOfKey(String key) {
         Gender gender = null;
