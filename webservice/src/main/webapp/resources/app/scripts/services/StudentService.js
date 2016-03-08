@@ -1,25 +1,22 @@
-//angular.module('appDATN.service')
-//    .factory("StudentService", function ($http) {
-//        return {
-//            getStudents: function () {
-//                $http.get('API/students').success(function(students){
-//                    return students;
-//                });
-//            }
-//
-//        }
-//    });
-
 angular.module('appDATN.service')
     .factory("StudentService", function ($http) {
 
-        getStudents = function () {
-            console.log("service called")
+        getStudents = function(){
             return $http.get('API/students');
         }
 
+        getStudent = function(studentId){
+            return $http.get('API/student', {params : {id: studentId}})
+        }
+
+        addStudent = function(student){
+            return $http.post('API/student', {params : {id: student.id}})
+        }
+
         return {
-            getStudents: getStudents
+            getStudents: getStudents,
+            getStudent: getStudent,
+            addStudent: addStudent
         };
 
     });
