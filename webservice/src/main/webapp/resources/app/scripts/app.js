@@ -27,6 +27,11 @@ angular
         controller: 'StudentCtrl',
         controllerAs: 'student'
       })
+      .when('/addStudent', {
+        templateUrl: '/resources/app/views/add_student.html',
+        controller: 'StudentCtrl',
+        controllerAs: 'student'
+      })
       .otherwise({
         redirectTo: '/'
       });
