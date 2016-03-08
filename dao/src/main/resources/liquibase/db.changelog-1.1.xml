@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd"
+                   logicalFilePath="db.changelog-1.1.xml">
+    <changeSet author="lien (generated)" id="1457420502622-1">
+        <dropForeignKeyConstraint baseTableName="assignment" constraintName="fk_assignment_vs_student"/>
+        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="assignment" constraintName="fk_assignment_vs_student" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="student"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-2">
+        <dropForeignKeyConstraint baseTableName="assignment" constraintName="fk_assignment_vs_teacher"/>
+        <addForeignKeyConstraint baseColumnNames="teacher_id" baseTableName="assignment" constraintName="fk_assignment_vs_teacher" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="teacher"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-3">
+        <dropForeignKeyConstraint baseTableName="assignment" constraintName="fk_assignment_vs_wave"/>
+        <addForeignKeyConstraint baseColumnNames="wave_id" baseTableName="assignment" constraintName="fk_assignment_vs_wave" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="project_wave"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-4">
+        <dropForeignKeyConstraint baseTableName="group_recieve_message" constraintName="fk_group_recieve_message_vs_group"/>
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="group_recieve_message" constraintName="fk_group_recieve_message_vs_group" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="group_"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-5">
+        <dropForeignKeyConstraint baseTableName="group_recieve_message" constraintName="fk_group_recieve_message_vs_message"/>
+        <addForeignKeyConstraint baseColumnNames="message_id" baseTableName="group_recieve_message" constraintName="fk_group_recieve_message_vs_message" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="message"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-6">
+        <dropForeignKeyConstraint baseTableName="group_" constraintName="fk_group_vs_user"/>
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="group_" constraintName="fk_group_vs_user" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-7">
+        <dropForeignKeyConstraint baseTableName="member_group" constraintName="fk_member_group_vs_group"/>
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="member_group" constraintName="fk_member_group_vs_group" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="group_"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-8">
+        <dropForeignKeyConstraint baseTableName="member_group" constraintName="fk_member_group_vs_user"/>
+        <addForeignKeyConstraint baseColumnNames="member_id" baseTableName="member_group" constraintName="fk_member_group_vs_user" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-9">
+        <dropForeignKeyConstraint baseTableName="message" constraintName="fk_message_vs_user"/>
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="message" constraintName="fk_message_vs_user" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-10">
+        <dropForeignKeyConstraint baseTableName="officer" constraintName="fk_officer_vs_officer"/>
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="officer" constraintName="fk_officer_vs_officer" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-11">
+        <dropForeignKeyConstraint baseTableName="person_recieve_message" constraintName="fk_person_recieve_message_vs_message"/>
+        <addForeignKeyConstraint baseColumnNames="message_id" baseTableName="person_recieve_message" constraintName="fk_person_recieve_message_vs_message" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="message"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-12">
+        <dropForeignKeyConstraint baseTableName="person_recieve_message" constraintName="fk_person_recieve_message_vs_user"/>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="person_recieve_message" constraintName="fk_person_recieve_message_vs_user" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-13">
+        <dropForeignKeyConstraint baseTableName="report" constraintName="fk_report_vs_wave"/>
+        <addForeignKeyConstraint baseColumnNames="wave_id" baseTableName="report" constraintName="fk_report_vs_wave" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="project_wave"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-14">
+        <dropForeignKeyConstraint baseTableName="student_report_detail" constraintName="fk_student_report_detail_vs_student_report"/>
+        <addForeignKeyConstraint baseColumnNames="student_report_id" baseTableName="student_report_detail" constraintName="fk_student_report_detail_vs_student_report" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="student_report"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-15">
+        <dropForeignKeyConstraint baseTableName="student_report" constraintName="fk_student_report_vs_report"/>
+        <addForeignKeyConstraint baseColumnNames="report_id" baseTableName="student_report" constraintName="fk_student_report_vs_report" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="report"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-16">
+        <dropForeignKeyConstraint baseTableName="student_report" constraintName="fk_student_report_vs_student"/>
+        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="student_report" constraintName="fk_student_report_vs_student" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="student"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-17">
+        <dropForeignKeyConstraint baseTableName="student" constraintName="fk_student_vs_user"/>
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="student" constraintName="fk_student_vs_user" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-18">
+        <dropForeignKeyConstraint baseTableName="student_wave" constraintName="fk_student_wave_vs_student"/>
+        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="student_wave" constraintName="fk_student_wave_vs_student" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="student"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-19">
+        <dropForeignKeyConstraint baseTableName="student_wave" constraintName="fk_student_wave_vs_wave"/>
+        <addForeignKeyConstraint baseColumnNames="wave_id" baseTableName="student_wave" constraintName="fk_student_wave_vs_wave" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="project_wave"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-20">
+        <dropForeignKeyConstraint baseTableName="teacher" constraintName="fk_teacher_vs_user"/>
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="teacher" constraintName="fk_teacher_vs_user" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-21">
+        <dropForeignKeyConstraint baseTableName="teacher_wave" constraintName="fk_teacher_wave_vs_teacher"/>
+        <addForeignKeyConstraint baseColumnNames="teacher_id" baseTableName="teacher_wave" constraintName="fk_teacher_wave_vs_teacher"  deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"  referencedColumnNames="id" referencedTableName="teacher"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-22">
+        <dropForeignKeyConstraint baseTableName="teacher_wave" constraintName="fk_teacher_wave_vs_wave"/>
+        <addForeignKeyConstraint baseColumnNames="wave_id" baseTableName="teacher_wave" constraintName="fk_teacher_wave_vs_wave" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="project_wave"/>
+    </changeSet>
+    <changeSet author="lien (generated)" id="1457420502622-23">
+        <dropForeignKeyConstraint baseTableName="teacher_topic" constraintName="teacher_topic_vs_teacher"/>
+        <addForeignKeyConstraint baseColumnNames="teacher_id" baseTableName="teacher_topic" constraintName="teacher_topic_vs_teacher" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"   referencedColumnNames="id" referencedTableName="teacher"/>
+    </changeSet>
+</databaseChangeLog>
