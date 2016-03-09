@@ -27,13 +27,23 @@ angular
         controller: 'StudentCtrl',
         controllerAs: 'student'
       })
+      .when('/getStudent', {
+        templateUrl: '/resources/app/views/get_student.html',
+        controller: 'StudentCtrl',
+        controllerAs: 'student'
+      })
       .when('/addStudent', {
         templateUrl: '/resources/app/views/add_student.html',
         controller: 'StudentCtrl',
         controllerAs: 'student'
       })
-      .when('/getStudent', {
-        templateUrl: '/resources/app/views/get_student.html',
+      .when('/updateStudent', {
+        templateUrl: '/resources/app/views/update_student.html',
+        controller: 'StudentCtrl',
+        controllerAs: 'student'
+      })
+      .when('/deleteStudent', {
+        templateUrl: '/resources/app/views/delete_student.html',
         controller: 'StudentCtrl',
         controllerAs: 'student'
       })

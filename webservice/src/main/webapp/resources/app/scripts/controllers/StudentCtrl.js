@@ -26,11 +26,29 @@ angular.module('appDATN.controller')
         }
 
         $scope.addStudent = function(){
-            console.log('controller 0');
-            $scope.student.id = '1234567';
             StudentService.addStudent($scope.student)
                 .success(function(data){
-                    console.log('controller 1');
+                    $scope.student = data.body;
+                })
+                .error(function(error){
+                    $scope.status = 'Unable to load customer data: ' + error.message;
+                })
+        }
+
+        $scope.updateStudent = function(){
+            StudentService.updateStudent($scope.student)
+                .success(function(data){
+                    $scope.student = data.body;
+                })
+                .error(function(error){
+                    $scope.status = 'Unable to load customer data: ' + error.message;
+                })
+        }
+
+        $scope.deleteStudent = function(){
+            $scope.student.id = '09a70730-6067-4c09-afa4-08db8a68d537';
+            StudentService.deleteStudent($scope.student)
+                .success(function(data){
                     $scope.student = data.body;
                 })
                 .error(function(error){

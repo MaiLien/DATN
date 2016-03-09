@@ -10,13 +10,23 @@ angular.module('appDATN.service')
         }
 
         addStudent = function(student){
-            return $http.post('API/student', {params : {id: student.id}})
+            return $http.post('API/student', student)
+        }
+
+        updateStudent = function(student){
+            return $http.put('API/student', student)
+        }
+
+        deleteStudent = function(student){
+            return $http.delete('API/student', {params : student})
         }
 
         return {
             getStudents: getStudents,
             getStudent: getStudent,
-            addStudent: addStudent
+            addStudent: addStudent,
+            updateStudent: updateStudent,
+            deleteStudent: deleteStudent
         };
 
     });

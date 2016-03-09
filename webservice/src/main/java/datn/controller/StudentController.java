@@ -42,7 +42,7 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/student", method = RequestMethod.DELETE)
-    public RestApiResponse<StudentResponse> deleteStudent(@RequestBody StudentRequest studentRequest){
+    public RestApiResponse<StudentResponse> deleteStudent(StudentRequest studentRequest){
         return studentService.deleteStudent(studentRequest);
     }
 
