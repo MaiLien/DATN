@@ -25,8 +25,8 @@ angular.module('appDATN.controller')
                 })
         }
 
-        $scope.addStudent = function(){
-            StudentService.addStudent($scope.student)
+        $scope.addStudent = function(student){
+            StudentService.addStudent(student)
                 .success(function(data){
                     $scope.student = data.body;
                 })
@@ -35,8 +35,8 @@ angular.module('appDATN.controller')
                 })
         }
 
-        $scope.updateStudent = function(){
-            StudentService.updateStudent($scope.student)
+        $scope.updateStudent = function(student){
+            StudentService.updateStudent(student)
                 .success(function(data){
                     $scope.student = data.body;
                 })
@@ -45,9 +45,9 @@ angular.module('appDATN.controller')
                 })
         }
 
-        $scope.deleteStudent = function(){
-            $scope.student.id = '09a70730-6067-4c09-afa4-08db8a68d537';
-            StudentService.deleteStudent($scope.student)
+        $scope.deleteStudent = function(student){
+            //student.id = '09a70730-6067-4c09-afa4-08db8a68d537';
+            StudentService.deleteStudent(student)
                 .success(function(data){
                     $scope.student = data.body;
                 })

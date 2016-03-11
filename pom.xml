@@ -31,6 +31,7 @@
         <spring-test-dbunit.version>1.2.1</spring-test-dbunit.version>
         <dbunit.version>2.5.0</dbunit.version>
         <powermock.version>1.6.0</powermock.version>
+        <gson>2.6.2</gson>
     </properties>
 
     <dependencies>
@@ -81,6 +82,13 @@
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>${jackson-databind.version}</version>
+            </dependency>
+
+            <!-- Gson -->
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson}</version>
             </dependency>
 
             <!--dao-->

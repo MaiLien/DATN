@@ -82,6 +82,12 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <!-- Gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+
         <!-- DATN business-->
         <dependency>
             <groupId>DATN</groupId>

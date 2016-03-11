@@ -1,13 +1,12 @@
 package datn.service.impl;
 
-import datn.constant.Gender;
-import datn.entity.Student;
-import datn.repository.StudentRepository;
-import datn.request.StudentRequest;
-import datn.response.RestApiResponse;
-import datn.response.StudentResponse;
+import datn.dao.constant.Gender;
+import datn.dao.entity.Student;
+import datn.dao.repository.StudentRepository;
+import datn.interfaces.request.StudentRequest;
+import datn.interfaces.response.RestApiResponse;
+import datn.interfaces.response.StudentResponse;
 import datn.service.IStudentService;
-import org.jboss.logging.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -32,6 +31,11 @@ public class StudentServiceImpl implements IStudentService{
         RestApiResponse<StudentResponse> student = new RestApiResponse<StudentResponse>(studentResponse);
 
         return student;
+    }
+
+    public Student getStudentEntity(String id){
+        Student student = studentRepository.findOne(id);
+        return  student;
     }
 
     public RestApiResponse<StudentResponse> addStudent(StudentRequest studentRequest) {

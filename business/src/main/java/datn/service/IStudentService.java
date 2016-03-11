@@ -1,10 +1,10 @@
 package datn.service;
 
 
-import datn.entity.Student;
-import datn.request.StudentRequest;
-import datn.response.RestApiResponse;
-import datn.response.StudentResponse;
+import datn.dao.entity.Student;
+import datn.interfaces.request.StudentRequest;
+import datn.interfaces.response.RestApiResponse;
+import datn.interfaces.response.StudentResponse;
 
 import java.util.ArrayList;
 
@@ -19,5 +19,7 @@ public interface IStudentService {
     public RestApiResponse<StudentResponse> deleteStudent(StudentRequest studentRequest);
 
     public RestApiResponse<StudentResponse> updateStudent(StudentRequest studentRequest);
+
+    public Student getStudentEntity(String id);
 
 }

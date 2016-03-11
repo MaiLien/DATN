@@ -1,5 +1,7 @@
 <div ng-controller="StudentCtrl">
-    {{student.id}}
+    {{student.id.id}}
     {{student.name}}
-    <button ng-click="updateStudent()">Lưu</button>
+    <input type="text" ng-model="student.id">
+    <input type="text" ng-model="student.name">
+    <button ng-click="updateStudent(student)">Lưu</button>
 </div>

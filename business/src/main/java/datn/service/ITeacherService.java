@@ -1,11 +1,21 @@
 package datn.service;
 
-import datn.request.TeacherRequest;
-import datn.response.RestApiResponse;
-import datn.response.TeacherResponse;
+import datn.interfaces.request.TeacherRequest;
+import datn.interfaces.response.RestApiResponse;
+import datn.interfaces.response.TeacherResponse;
+
+import java.util.ArrayList;
 
 public interface ITeacherService {
 
-    RestApiResponse<TeacherResponse> addTeacher(TeacherRequest teacherRequest);
+    public ArrayList<RestApiResponse<TeacherResponse>> getTeachers();
+
+    public RestApiResponse<TeacherResponse> getTeacher(String id);
+
+    public RestApiResponse<TeacherResponse> addTeacher(TeacherRequest teacherRequest);
+
+    public RestApiResponse<TeacherResponse> deleteTeacher(TeacherRequest studentRequest);
+
+    public RestApiResponse<TeacherResponse> updateTeacher(TeacherRequest studentRequest);
 
 }

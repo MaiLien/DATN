@@ -1,6 +1,7 @@
-<div>
+<div ng-controller="AuthCtrl">
     Login page
-    <li ng-if="!authenticated"><a href="#/login">Login</a></li>
-    <li ng-if="authenticated"><a href="#/login">Profile</a></li>
-    <li ng-if="authenticated"><a href="#/login">Logout</a></li>
+    Username <input type="text" ng-model="user.username"> <br>
+    Password <input type="text" ng-model="user.password"> <br>
+    <button ng-click="login(user)">Login</button>
+    {{isAuthenticated}}
 </div>

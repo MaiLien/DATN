@@ -6,28 +6,32 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <http auto-config="true">
-        <intercept-url pattern="/login" access="permitAll()"/>
-        <!--<intercept-url pattern="/**" access="isAuthenticated()"/>-->
+    <http auto-config="true" entry-point-ref="authenticationEntryPoint">
+        <intercept-url pattern="/resources/**" access="permitAll()"/>
         <intercept-url pattern="/" access="permitAll()"/>
+        <intercept-url pattern="/**" access="isAuthenticated()"/>
         <form-login
                 login-page="/login"
-                default-target-url="/welcome"
-                authentication-failure-url="/login?error"
                 username-parameter="username"
-                password-parameter="password" />
+                password-parameter="password"
+                authentication-failure-handler-ref="authenticationFailHandler"
+                authentication-success-handler-ref="authenticationSuccessHandler"/>
         <logout
                 invalidate-session="true"
-                logout-success-url="/login"
                 logout-url="/logout"/>
         <csrf disabled="true"/>
+        <access-denied-handler ref="accessDeniedHandler" />
     </http>
 
-    <!--authentication-manager-->
     <authentication-manager>
         <authentication-provider ref="authenticationProviderImpl">
         </authentication-provider>
     </authentication-manager>
 
-    <beans:bean id="authenticationProviderImpl" class="datn.config.AuthenticationProviderImpl"/>
+    <beans:bean id="authenticationProviderImpl" class="datn.webservice.config.AuthenticationProviderImpl"/>
+    <beans:bean id="authenticationFailHandler" class="datn.webservice.config.AuthenticationFailHandlerImpl"/>
+    <beans:bean id="authenticationSuccessHandler" class="datn.webservice.config.AuthenticationSuccessHandlerImpl"/>
+    <beans:bean id="authenticationEntryPoint"  class="datn.webservice.config.AuthenticaEntryPointImpl"/>
+    <beans:bean id="accessDeniedHandler" class="datn.webservice.config.AccessDeniedHandlerImpl"/>
+
 </beans:beans>

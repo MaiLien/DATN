@@ -88,20 +88,20 @@
                             <goal>update</goal>
                         </goals>
                     </execution>
-                    <!--<execution>-->
-                        <!--<id>liquibase-update-test</id>-->
-                        <!--<configuration>-->
-                            <!--<propertyFile>src/main/resources/liquibase/liquibase_test.properties-->
-                            <!--</propertyFile>-->
-                            <!--<changeLogFile>src/main/resources/liquibase/db.changelog-master.xml-->
-                            <!--</changeLogFile>-->
-                            <!--<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>-->
-                        <!--</configuration>-->
-                        <!--<phase>process-resources</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>update</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
+                    <execution>
+                        <id>liquibase-update-test</id>
+                        <configuration>
+                            <propertyFile>src/main/resources/liquibase/liquibase_test.properties
+                            </propertyFile>
+                            <changeLogFile>src/main/resources/liquibase/db.changelog-master.xml
+                            </changeLogFile>
+                            <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                        </configuration>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
