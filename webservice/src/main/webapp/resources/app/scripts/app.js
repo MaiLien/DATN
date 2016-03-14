@@ -12,12 +12,17 @@ angular
   .module('appDATN', ['appDATN.controller', 'ngRoute'])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
+      //.when('/', {
+      //  templateUrl: '/resources/app/views/login.html',
+      //  controller: 'AuthCtrl',
+      //  controllerAs: 'auth'
+      //})
+      .when('/login', {
         templateUrl: '/resources/app/views/login.html',
         controller: 'AuthCtrl',
         controllerAs: 'auth'
       })
-      .when('/login', {
+      .when('/logout', {
         templateUrl: '/resources/app/views/login.html',
         controller: 'AuthCtrl',
         controllerAs: 'auth'
@@ -48,7 +53,7 @@ angular
         controllerAs: 'student'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/login'
       });
   });
 

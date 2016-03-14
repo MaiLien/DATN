@@ -1,4 +1,4 @@
-<header class="main-header" ng-controller="HeaderCtrl">
+<header class="main-header" ng-controller="AuthCtrl">
     <a href="#" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>I</b>TF</span>
@@ -12,16 +12,21 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 <!-- User Account Menu -->
-                <li class="user user-menu">
+                <li class="user user-menu" ng-if="getAuth().isAuthenticated">
                     <a href="#">
                         <img src="/resources/app/images/avatar.png" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <span class="hidden-xs" ng-cloak>{{getAuth().user.name}}</span>
                     </a>
                 </li>
                 <!-- Log out buton-->
-                <li class="user user-menu">
-                    <a href="#">
+                <li class="user user-menu" ng-if="getAuth().isAuthenticated">
+                    <a href="#" ng-click="logout()">
                         <span class="hidden-xs">Log out</span>
+                    </a>
+                </li>
+                <li class="user user-menu" ng-if="!getAuth().isAuthenticated">
+                    <a href="#/login">
+                        <span class="hidden-xs">Log in</span>
                     </a>
                 </li>
             </ul>

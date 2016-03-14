@@ -23,8 +23,6 @@
 
 
     <script src="/resources/app/scripts/app.js"></script>
-    <script src="/resources/app/scripts/controllers/about.js"></script>
-    <script src="/resources/app/scripts/controllers/HeaderCtrl.js"></script>
     <script src="/resources/app/scripts/controllers/AuthCtrl.js"></script>
     <script src="/resources/app/scripts/controllers/StudentCtrl.js"></script>
     <script src="/resources/app/scripts/services/AuthService.js"></script>

@@ -8,9 +8,10 @@
 
     <http auto-config="true" entry-point-ref="authenticationEntryPoint">
         <intercept-url pattern="/resources/**" access="permitAll()"/>
-        <intercept-url pattern="/" access="permitAll()"/>
-        <intercept-url pattern="/API/session" access="permitAll()"/>
+        <intercept-url pattern="/session" access="permitAll()"/>
         <intercept-url pattern="/logoutSuccess" access="permitAll()"/>
+        <intercept-url pattern="/favicon.ico" access="permitAll()"/>
+        <intercept-url pattern="/" access="permitAll()"/>
         <intercept-url pattern="/**" access="isAuthenticated()"/>
         <form-login
                 login-page="/login"

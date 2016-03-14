@@ -2,6 +2,7 @@ package datn.webservice.controller;
 
 import datn.interfaces.response.RestApiResponse;
 import datn.interfaces.response.RestApiResponseHeaders;
+import datn.interfaces.response.UserResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +14,14 @@ public class AuthController {
 
     @RequestMapping(value = "/session", method = RequestMethod.GET)
     public RestApiResponse<Object> getSession(){
+        RestApiResponse<Object> userResponseRestApiResponse = new RestApiResponse<Object>();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        auth.getDetails();
+        if(auth.getDetails() instanceof UserResponse){
+            userResponseRestApiResponse.setBody(auth.getDetails());
+        }else{
+            userResponseRestApiResponse.setBody(null);
+        }
 
-        RestApiResponse<Object> userResponseRestApiResponse = new RestApiResponse<Object>(auth.getDetails());
         return userResponseRestApiResponse;
     }
 

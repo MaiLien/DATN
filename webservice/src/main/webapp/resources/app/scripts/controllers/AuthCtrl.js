@@ -1,25 +1,34 @@
 angular.module('appDATN.controller')
-    .controller('AuthCtrl', function ($scope,AuthService) {
+    .controller('AuthCtrl', function ($scope,$route ,AuthService) {
 
-        $scope.isAuthenticated = false;
+        $scope.status = true;
 
         $scope.login = function(user){
             AuthService.login(user)
                 .success(function(data){
-                    if(data.headers.resultCode == 0)
-                        $scope.isAuthenticated = true;
+                    if(data.headers.resultCode == 0){
+                        AuthService.setAuth();
+                    }
                 })
                 .error(function(error){
-                    console.log(error);
+                    $scope.status = false;
+                    console.log("Login error")
                 })
         }
 
-        //$scope.isAuthenticated = function(username, password){
-        //    AuthService.isAuthenticated();
-        //}
-        //
-        //
-        //$scope.isStudent = AuthService.isStudent();
-        //$scope.isTeacher = false;
-        //$scope.isOfficer = false;
+        $scope.logout = function () {
+            AuthService.logout()
+                .success(function(){
+                    AuthService.initAuth();
+                })
+                .error(function () {
+                    $scope.status = false;
+                    console.log("Logout error")
+                })
+        }
+
+        $scope.getAuth = function () {
+            return AuthService.getAuth();
+        }
+
     });
