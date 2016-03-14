@@ -15,12 +15,4 @@ public class IndexController {
         return "index";
     }
 
-//    @RequestMapping(value = "/API/login", method = RequestMethod.GET)
-//    public ModelAndView loginPage(HttpServletRequest request){
-//        ModelAndView model = new ModelAndView();
-//        model.addObject("title", "LOGIN PAGE");
-//        model.setViewName("login");
-//        return model;
-//    }
-
 }

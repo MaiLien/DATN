@@ -11,6 +11,5 @@ public class MessageCodeConstant {
     public static final String ERROR_HTTP_MESSAGE_NOT_READABLE = "1502";
     public static final String ERROR_LOGIN = "1053";
     public static final String ERROR_ENTRY_POINT = "1054";
-    public static final String ERROR_ACCESSDENIED = "1055";
 
 }

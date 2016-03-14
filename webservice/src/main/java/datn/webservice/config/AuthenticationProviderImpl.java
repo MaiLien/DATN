@@ -81,7 +81,6 @@ public class AuthenticationProviderImpl implements AuthenticationProvider, Seria
         }
     }
 
-    @Override
     public boolean supports(Class<?> authentication) {
         return (UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication));
     }

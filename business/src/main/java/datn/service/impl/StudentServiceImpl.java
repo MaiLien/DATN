@@ -87,6 +87,7 @@ public class StudentServiceImpl implements IStudentService{
         studentResponse.setEmail(studentEntity.getEmail());
         studentResponse.setDeleted(studentEntity.getDeleted());
         studentResponse.setGender(studentEntity.getGender().getValue());
+        studentResponse.setTypeOfUser(studentEntity.getTypeOfUser().getValue());
         studentResponse.setPhoneNumber(studentEntity.getPhoneNumber());
         studentResponse.setStatus(studentEntity.getStatus());
         studentResponse.setClass(studentEntity.getClass_());
