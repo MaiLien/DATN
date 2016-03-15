@@ -1,5 +1,5 @@
-angular.module('appDATN.controller')
-    .controller('AuthCtrl', function ($scope,$route ,AuthService) {
+angular.module('appDATN.auth')
+    .controller('AuthCtrl', function ($scope, $state, AuthService) {
 
         $scope.status = true;
 
@@ -8,6 +8,7 @@ angular.module('appDATN.controller')
                 .success(function(data){
                     if(data.headers.resultCode == 0){
                         AuthService.setAuth();
+                        $state.go('student.list');
                     }
                 })
                 .error(function(error){
@@ -20,6 +21,7 @@ angular.module('appDATN.controller')
             AuthService.logout()
                 .success(function(){
                     AuthService.initAuth();
+                    $state.go('login')
                 })
                 .error(function () {
                     $scope.status = false;

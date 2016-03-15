@@ -1,62 +1,27 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name appApp
- * @description
- * # appApp
- *
- * Main module of the application.
- */
-angular
-  .module('appDATN', ['appDATN.controller', 'ngRoute'])
-  .config(function ($routeProvider) {
-    $routeProvider
-      //.when('/', {
-      //  templateUrl: '/resources/app/views/login.html',
-      //  controller: 'AuthCtrl',
-      //  controllerAs: 'auth'
-      //})
-      .when('/login', {
-        templateUrl: '/resources/app/views/login.html',
-        controller: 'AuthCtrl',
-        controllerAs: 'auth'
-      })
-      .when('/logout', {
-        templateUrl: '/resources/app/views/login.html',
-        controller: 'AuthCtrl',
-        controllerAs: 'auth'
-      })
-      .when('/listStudent', {
-        templateUrl: '/resources/app/views/list_student.html',
-        controller: 'StudentCtrl',
-        controllerAs: 'student'
-      })
-      .when('/getStudent', {
-        templateUrl: '/resources/app/views/get_student.html',
-        controller: 'StudentCtrl',
-        controllerAs: 'student'
-      })
-      .when('/addStudent', {
-        templateUrl: '/resources/app/views/add_student.html',
-        controller: 'StudentCtrl',
-        controllerAs: 'student'
-      })
-      .when('/updateStudent', {
-        templateUrl: '/resources/app/views/update_student.html',
-        controller: 'StudentCtrl',
-        controllerAs: 'student'
-      })
-      .when('/deleteStudent', {
-        templateUrl: '/resources/app/views/delete_student.html',
-        controller: 'StudentCtrl',
-        controllerAs: 'student'
-      })
-      .otherwise({
-        redirectTo: '/login'
-      });
+angular.module('appDATN.common', ['ui.router'])
+angular.module('appDATN.auth', ['ui.router'])
+angular.module('appDATN.student', ['appDATN.auth', 'ui.router'])
+
+var app = angular.module('appDATN', [
+  'appDATN.common',
+  'appDATN.auth',
+  'appDATN.student',
+  'ui.router'
+]);
+
+/* Go to login if not authenticated */
+app.run(function ($rootScope, $state) {
+  $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
+    if (error === 'Have_to_login') {
+      $state.go('login');
+    }
   });
+});
 
-angular.module('appDATN.controller', ['appDATN.service']);
+/* Set a default state */
+app.config(function ($urlRouterProvider) {
+  $urlRouterProvider.when('', '/login');
+});
 
-angular.module('appDATN.service', ['appDATN.service']);

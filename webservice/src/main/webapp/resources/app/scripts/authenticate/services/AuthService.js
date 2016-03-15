@@ -1,4 +1,4 @@
-angular.module('appDATN.service')
+angular.module('appDATN.auth')
     .factory("AuthService", function ($http) {
 
         var auth = {

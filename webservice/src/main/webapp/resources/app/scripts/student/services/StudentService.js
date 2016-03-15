@@ -1,4 +1,4 @@
-angular.module('appDATN.service')
+angular.module('appDATN.student')
     .factory("StudentService", function ($http) {
 
         getStudents = function(){

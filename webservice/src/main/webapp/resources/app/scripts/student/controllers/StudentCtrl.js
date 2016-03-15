@@ -1,5 +1,5 @@
-angular.module('appDATN.controller')
-    .controller('StudentCtrl', function ($scope, StudentService) {
+angular.module('appDATN.student')
+    .controller('StudentCtrl', function ($scope, StudentService, AuthService) {
 
         $scope.status;
         $scope.students;
