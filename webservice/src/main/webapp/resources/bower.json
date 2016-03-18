@@ -24,6 +24,7 @@
     "Ionicons": "ionicons#^2.0.1",
     "fastclick": "^1.0.6",
     "jquery": "^2.2.1",
-    "jquery.sparkline": "^2.1.2"
+    "jquery.sparkline": "^2.1.2",
+    "angular-ui-router": "^0.2.18"
   }
 }
