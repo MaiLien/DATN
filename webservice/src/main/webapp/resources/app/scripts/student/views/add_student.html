@@ -1,5 +1,40 @@
 <div>
-    {{student.id}}
-    <input type="text" ng-model="student.id">
-    <button ng-click="addStudent(student)">Thêm</button>
+
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Mã sinh viên</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="Mã sinh viên" ng-model="student.username">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Tên sinh viên</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="Tên sinh viên" ng-model="student.name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Lớp</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="Lớp" ng-model="student.class">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Ngày sinh</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="Ngày sinh" ng-model="student.birthday">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Giới tính</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="Giới tính" ng-model="student.gender">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-default" ng-click="addStudent(student)">Lưu</button>
+            </div>
+        </div>
+    </form>
 </div>

@@ -18,10 +18,24 @@ app.run(function ($rootScope, $state) {
       $state.go('login');
     }
   });
+
+  $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
+    if (error === 'Logged') {
+      $state.go('home');
+    }
+  });
+
+  $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
+    if (error === 'Error') {
+      $state.go('error');
+    }
+  });
 });
 
 /* Set a default state */
 app.config(function ($urlRouterProvider) {
   $urlRouterProvider.when('', '/login');
+  $urlRouterProvider.otherwise('/login');
 });
+
 

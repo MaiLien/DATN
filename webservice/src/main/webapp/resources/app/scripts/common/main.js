@@ -10,7 +10,7 @@ angular.module('appDATN.common')
                         template: '<div ui-view="menu_view"></div>'
                     },
                     content_view: {
-                        template: '<div class="container" ui-view="content_view"></div>'
+                        template: '<div ui-view="content_view"></div>'
                     },
                     footer_view: {
                         templateUrl: '/resources/app/scripts/common/views/_footer.html'
@@ -46,7 +46,7 @@ angular.module('appDATN.common')
                                 }
                             })
                             .error(function(error){
-                                deferred.reject('Have_to_login')
+                                deferred.reject('Error')
                             })
                         return deferred.promise;
                     }
@@ -61,9 +61,27 @@ angular.module('appDATN.common')
                         templateUrl: '/resources/app/scripts/common/views/_sidebar.html'
                     },
                     content_view: {
-                        template: '<div class="container" ui-view="content_view"></div>'
+                        template: '<div id="wrapper"><div class="container-fluid"><div ui-view="content_view"></div></div></div>'
+                    }
+                }
+            })
+            .state('home',{
+                parent: 'logged',
+                views: {
+                    content_view: {
+                        templateUrl: 'home.html'
+                    }
+                }
+            })
+            .state('error', {
+                parent: 'anonymous',
+                views: {
+                    content_view: {
+                        templateUrl: 'error.html'
+                    },
+                    footer_view: {
+                        templateUrl: '/resources/app/scripts/common/views/_footer.html'
                     }
                 }
             });
-
     });

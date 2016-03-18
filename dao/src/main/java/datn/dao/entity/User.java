@@ -3,9 +3,11 @@ package datn.dao.entity;
 import datn.dao.constant.Gender;
 import datn.dao.constant.TypeOfUser;
 import datn.dao.constant.UserStatusConstant;
+import org.springframework.data.annotation.*;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.persistence.Id;
 import java.util.Date;
 import java.sql.Timestamp;
 import java.util.List;
@@ -27,12 +29,14 @@ public class User implements Serializable {
 	private Date birthday;
 
 	@Column(name="created_by")
+	@CreatedBy
 	private String createdBy;
 
 	@Column(name="created_date")
+	@CreatedDate
 	private Timestamp createdDate;
 
-	private boolean deleted;
+	private boolean deleted = false;
 
 	private String description;
 
@@ -40,10 +44,13 @@ public class User implements Serializable {
 
 	private Gender gender;
 
+	@LastModifiedBy
 	@Column(name="last_modified_by")
 	private String lastModifiedBy;
 
+
 	@Column(name="last_modified_date")
+	@LastModifiedDate
 	private Timestamp lastModifiedDate;
 
 	private String name;
@@ -53,12 +60,13 @@ public class User implements Serializable {
 	@Column(name="phone_number")
 	private String phoneNumber;
 
-	private int status;
+	private int status = UserStatusConstant.ACTIVE;
 
 	@Column(name="type_of_user", insertable = false, updatable = false)
 	private TypeOfUser typeOfUser;
 
 	@Column(name="version_no")
+	@org.springframework.data.annotation.Version
 	private String versionNo;
 
 	//bi-directional many-to-one association to Group

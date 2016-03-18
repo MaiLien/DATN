@@ -1,48 +1,46 @@
-<div ng-controller="StudentCtrl">
-
-    <div ng-init="getStudents()"></div>
-    <h5>Chưa có sinh viên nào!</h5>
-    <h5>Danh sách sinh viên</h5>
-
-    <p>So SV: {{students.length}} </p>
+<div class="row" ng-controller="StudentCtrl" ng-init="getStudents()">
+    <div class="col-xs-12">
 
 
-    <div ng-repeat="obj in students">
-        {{obj.id}}
-    </div>
+        <div ng-repeat="obj in students">
+            {{obj.id}}
+        </div>
 
-    <!--<button ng-click="getStudents()" class="btn btn-primary">Thêm sinh viên</button>-->
-    <a href="#/student/add" class="btn btn-primary" >Thêm sinh viên</a>
+        <!--<button ng-click="getStudents()" class="btn btn-primary">Thêm sinh viên</button>-->
+        <div class="row">
+            <a href="#/student/add" class="btn btn-primary">Thêm sinh viên</a>
+        </div>
 
-    <div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Mã sinh viên</th>
-                <th>Họ tên</th>
-                <th>Lớp</th>
-                <th>Ngày sinh</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>john@example.com</td>
-            </tr>
-            <tr>
-                <td>Mary</td>
-                <td>Moe</td>
-                <td>mary@example.com</td>
-            </tr>
-            <tr>
-                <td>July</td>
-                <td>Dooley</td>
-                <td>july@example.com</td>
-            </tr>
-            </tbody>
-        </table>
-        <button>Xóa</button>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Mã sinh viên</th>
+                    <th>Họ tên</th>
+                    <th>Lớp</th>
+                    <th>Ngày sinh</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td>john@example.com</td>
+                </tr>
+                <tr>
+                    <td>Mary</td>
+                    <td>Moe</td>
+                    <td>mary@example.com</td>
+                </tr>
+                <tr>
+                    <td>July</td>
+                    <td>Dooley</td>
+                    <td>july@example.com</td>
+                </tr>
+                </tbody>
+            </table>
+            <button>Xóa</button>
+        </div>
     </div>
 </div>

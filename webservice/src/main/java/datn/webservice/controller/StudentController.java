@@ -1,5 +1,7 @@
 package datn.webservice.controller;
 
+import datn.dao.entity.Student;
+import datn.dao.repository.StudentRepository;
 import datn.interfaces.request.StudentRequest;
 import datn.interfaces.response.RestApiResponse;
 import datn.interfaces.response.StudentResponse;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/API")
@@ -18,6 +21,9 @@ public class StudentController {
 
     @Autowired
     private IStudentService studentService;
+
+    @Autowired
+    private StudentRepository studentRepository;
 
     @RequestMapping(value = "/students", method = RequestMethod.GET)
     public RestApiResponse<ArrayList<StudentResponse>> getStudents(){
@@ -31,6 +37,10 @@ public class StudentController {
 
     @RequestMapping(value = "/student", method = RequestMethod.POST)
     public RestApiResponse<StudentResponse> addStudent(@RequestBody StudentRequest studentRequest){
+        Student student = new Student();
+        student.setId(UUID.randomUUID().toString());
+        student.setUsername("tesst");
+        studentRepository.save(student);
         return studentService.addStudent(studentRequest);
     }
 

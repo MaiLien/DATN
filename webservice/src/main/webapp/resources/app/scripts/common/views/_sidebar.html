@@ -1,37 +1,93 @@
-<!-- Left side column. contains sidebar -->
-<aside class="main-sidebar" ng-controller="AuthCtrl">
-    <section class="sidebar">
+<!--&lt;!&ndash; Left side column. contains sidebar &ndash;&gt;-->
+<!--<aside class="main-sidebar" ng-controller="AuthCtrl">-->
+    <!--<section class="sidebar">-->
 
-        <!-- search form (Optional) -->
-        <!--<%--<form action="#" method="get" class="sidebar-form">--%>-->
-        <!--<%--<div class="input-group">--%>-->
-            <!--<%--<input type="text" name="q" class="form-control" placeholder="Search...">--%>-->
-            <!--<%--<span class="input-group-btn">--%>-->
-                <!--<%--<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>--%>-->
-              <!--<%--</span>--%>-->
-            <!--<%--</div>--%>-->
-        <!--<%--</form>--%>-->
-        <!-- /.search form -->
+        <!--&lt;!&ndash; search form (Optional) &ndash;&gt;-->
+        <!--&lt;!&ndash;<%&#45;&#45;<form action="#" method="get" class="sidebar-form">&#45;&#45;%>&ndash;&gt;-->
+        <!--&lt;!&ndash;<%&#45;&#45;<div class="input-group">&#45;&#45;%>&ndash;&gt;-->
+            <!--&lt;!&ndash;<%&#45;&#45;<input type="text" name="q" class="form-control" placeholder="Search...">&#45;&#45;%>&ndash;&gt;-->
+            <!--&lt;!&ndash;<%&#45;&#45;<span class="input-group-btn">&#45;&#45;%>&ndash;&gt;-->
+                <!--&lt;!&ndash;<%&#45;&#45;<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>&#45;&#45;%>&ndash;&gt;-->
+              <!--&lt;!&ndash;<%&#45;&#45;</span>&#45;&#45;%>&ndash;&gt;-->
+            <!--&lt;!&ndash;<%&#45;&#45;</div>&#45;&#45;%>&ndash;&gt;-->
+        <!--&lt;!&ndash;<%&#45;&#45;</form>&#45;&#45;%>&ndash;&gt;-->
+        <!--&lt;!&ndash; /.search form &ndash;&gt;-->
 
-        <ul class="sidebar-menu">
-            <li class="treeview">
-                <a><i class="fa fa-link"></i> <span>Hộp thư</span> <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a href="#">Soạn thư mới</a></li>
-                    <li><a href="#">Hộp thư đến</a></li>
-                    <li><a href="#">Hộp thư đi</a></li>
-                </ul>
-            </li>
-            <li><a href="#"><i class="fa fa-link"></i> <span>Đợt ĐATN</span></a></li>
-            <li><a href="#/student/list"><i class="fa fa-link"></i> <span>Sinh viên</span></a></li>
-            <li><a href="#"><i class="fa fa-link"></i> <span>Giảng viên</span></a></li>
-            <li class="treeview">
-                <a><i class="fa fa-link"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a href="#">Link in level 2</a></li>
-                    <li><a href="#">Link in level 2</a></li>
-                </ul>
-            </li>
-        </ul>
-    </section>
-</aside>
+        <!--<ul class="sidebar-menu">-->
+            <!--<li class="treeview">-->
+                <!--<a><i class="fa fa-link"></i> <span>Hộp thư</span> <i class="fa fa-angle-left pull-right"></i></a>-->
+                <!--<ul class="treeview-menu">-->
+                    <!--<li><a href="#">Soạn thư mới</a></li>-->
+                    <!--<li><a href="#">Hộp thư đến</a></li>-->
+                    <!--<li><a href="#">Hộp thư đi</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
+            <!--<li><a href="#"><i class="fa fa-link"></i> <span>Đợt ĐATN</span></a></li>-->
+            <!--<li><a href="#/student/list"><i class="fa fa-link"></i> <span>Sinh viên</span></a></li>-->
+            <!--<li><a href="#"><i class="fa fa-link"></i> <span>Giảng viên</span></a></li>-->
+            <!--<li class="treeview">-->
+                <!--<a><i class="fa fa-link"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>-->
+                <!--<ul class="treeview-menu">-->
+                    <!--<li><a href="#">Link in level 2</a></li>-->
+                    <!--<li><a href="#">Link in level 2</a></li>-->
+                <!--</ul>-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</section>-->
+<!--</aside>-->
+
+
+<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#message"><i class="fa fa-fw fa-envelope"></i> Hộp thư <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="message" class="collapse">
+                <li>
+                    <a href=""><i class="fa fa-fw fa-edit"></i>Soạn thư mới</a>
+                </li>
+                <li>
+                    <a href="">Hộp thư đến</a>
+                </li>
+                <li>
+                    <a href="">Hộp thư đi</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#wave">Đợt ĐATN<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="wave" class="collapse">
+                <li>
+                    <a href="">Khởi tạo đợt ĐATN</a>
+                </li>
+                <li>
+                    <a href="">Danh sách đợt ĐATN</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#student">Sinh viên <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="student" class="collapse">
+                <li>
+                    <a ui-sref="student.add">Thêm sinh viên</a>
+                    <!--<a href="/#/student/add">Thêm sinh viên</a>-->
+                </li>
+                <li>
+                    <a href="">Danh sách sinh viên</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#teacher">Giảng viên <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="teacher" class="collapse">
+                <li>
+                    <a href="">Thêm giảng viên</a>
+                </li>
+                <li>
+                    <a href="">Danh sách giảng viên</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<!-- /.navbar-collapse -->
