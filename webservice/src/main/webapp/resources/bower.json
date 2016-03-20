@@ -25,6 +25,7 @@
     "fastclick": "^1.0.6",
     "jquery": "^2.2.1",
     "jquery.sparkline": "^2.1.2",
-    "angular-ui-router": "^0.2.18"
+    "angular-ui-router": "^0.2.18",
+    "bootstrap-datepicker": "^1.6.0"
   }
 }

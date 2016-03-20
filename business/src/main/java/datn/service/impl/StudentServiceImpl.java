@@ -6,6 +6,7 @@ import datn.dao.repository.StudentRepository;
 import datn.interfaces.request.StudentRequest;
 import datn.interfaces.response.RestApiResponse;
 import datn.interfaces.response.StudentResponse;
+import datn.interfaces.util.DateFormatUtil;
 import datn.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,7 +88,8 @@ public class StudentServiceImpl implements IStudentService{
         studentResponse.setEmail(studentEntity.getEmail());
         studentResponse.setDeleted(studentEntity.getDeleted());
         studentResponse.setGender(studentEntity.getGender().getValue());
-        studentResponse.setTypeOfUser(studentEntity.getTypeOfUser().getValue());
+        if(studentEntity.getTypeOfUser() != null)
+            studentResponse.setTypeOfUser(studentEntity.getTypeOfUser().getValue());
         studentResponse.setPhoneNumber(studentEntity.getPhoneNumber());
         studentResponse.setStatus(studentEntity.getStatus());
         studentResponse.setClass(studentEntity.getClass_());
@@ -98,7 +100,7 @@ public class StudentServiceImpl implements IStudentService{
     private Student convertStudentRequestToStudentEntity(StudentRequest studentRequest){
         Student studentEntity = new Student();
         studentEntity.setUsername(studentRequest.getUsername());
-        studentEntity.setBirthday(studentRequest.getBirthday());
+        studentEntity.setBirthday(DateFormatUtil.convertStringToDate(studentRequest.getBirthday()));
         studentEntity.setDescription(studentRequest.getDescription());
         studentEntity.setEmail(studentRequest.getEmail());
         studentEntity.setGender(Gender.valueOfKey(studentRequest.getGender()));

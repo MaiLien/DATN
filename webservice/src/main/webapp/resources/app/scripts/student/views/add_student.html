@@ -1,40 +1,75 @@
-<div>
+<div class="row">
 
-    <form class="form-horizontal">
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Mã sinh viên</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="Mã sinh viên" ng-model="student.username">
+    <div class="col-xs-6 col-xs-offset-3">
+        <form class="form-horizontal ">
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label">Mã sinh viên</label>
+                </div>
+                <div class="row">
+                    <input type="text" class="form-control" placeholder="Mã sinh viên" ng-model="student.username">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Tên sinh viên</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="Tên sinh viên" ng-model="student.name">
+            <div class="form-group">
+                <div class="row">
+                    <label class=" control-label">Tên sinh viên</label>
+                </div>
+                <div class="row">
+                    <input type="text" class="form-control" placeholder="Tên sinh viên" ng-model="student.name">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Lớp</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="Lớp" ng-model="student.class">
+            <div class="form-group">
+                <div class="row">
+                    <label class=" control-label">Lớp</label>
+                </div>
+                <div class="row">
+                    <input type="text" class="form-control" placeholder="Lớp" ng-model="student.class_">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Ngày sinh</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="Ngày sinh" ng-model="student.birthday">
+            <div class="form-group">
+                <div class="row">
+                    <label class=" control-label">Ngày sinh</label>
+                </div>
+                <div class="row">
+
+                    <div class="date datepicker" data-provide="datepicker">
+                        <input type="text" class="form-control" ng-model="student.birthday">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $('.datepicker').datepicker({
+                            format: "dd/mm/yyyy",
+                            startDate: "23/1/1900",
+                            orientation: "bottom auto",
+                            language: "vi",
+                            autoclose: true,
+                            defaultViewDate: { year: 1990, month: 01, day: 01 }
+                        });
+                    </script>
+                </div>
+                <!--<input type="date" class="form-control" placeholder="Ngày sinh" ng-model="student.birthday">-->
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Giới tính</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="Giới tính" ng-model="student.gender">
+            <div class="form-group">
+                <div class="row">
+                    <label class=" control-label">Giới tính</label>
+                </div>
+                <div class="row">
+                    <select class="form-control" ng-model="student.gender">
+                        <option value="0">Nam</option>
+                        <option value="1">Nữ</option>
+                        <option value="2">Khác</option>
+                    </select>
+                    <!--<input type="text" class="form-control" placeholder="Giới tính" ng-model="student.gender">-->
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-default" ng-click="addStudent(student)">Lưu</button>
+            <div class="form-group">
+                <div class="row">
+                    <button type="submit" class="btn btn-primary" ng-click="addStudent(student)">Lưu</button>
+                    <button type="reset" class="btn btn-default">Hủy</button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>

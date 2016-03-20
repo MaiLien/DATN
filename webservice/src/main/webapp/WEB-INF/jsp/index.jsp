@@ -10,6 +10,9 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="/resources/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <%--<link href="/resources/bower_components/angular-bootstrap-datepicker/dist/angular-bootstrap-datepicker.css" rel="stylesheet">--%>
+    <link href="/resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" rel="stylesheet">
+    <%--<link href="/resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.css" rel="stylesheet">--%>
 
     <!-- Custom CSS -->
     <link href="/resources/template/css/sb-admin.css" rel="stylesheet">
@@ -63,6 +66,9 @@
 <script src="/resources/bower_components/angular/angular.js"></script>
 <script src="/resources/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 
+<script src="/resources/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+<%--<script src="/resources/bower_components/angular-bootstrap-datepicker/dist/angular-bootstrap-datepicker.js"></script>--%>
+<script src="/resources/app/js/datepicker.js"></script>
 
 <script src="/resources/app/scripts/app.js"></script>
 

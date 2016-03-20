@@ -1,29 +1,36 @@
-<div class="container-fluid" ng-controller="AuthCtrl">
-    <div class="row">
-        <div class="col-xs-3 col-xs-offset-4">
-            <div class="">
-                <form class="form-horizontal" style="background: lightgoldenrodyellow;">
-                    <div class="form-group">
-                        <label for="inputEmail3" class="col-xs-3 control-label">Tên đăng nhập</label>
+<!--<div class="container-fluid" ng-controller="AuthCtrl">-->
+    <!--<div class="row">-->
+        <!--<div class="col-xs-3 col-xs-offset-4">-->
+            <!--<div class="">-->
+                <!--<form class="form-horizontal" style="background: lightgoldenrodyellow;">-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="inputEmail3" class="col-xs-3 control-label">Tên đăng nhập</label>-->
 
-                        <div class="col-xs-9">
-                            <input type="text" class="form-control col" id="inputEmail3" placeholder="Tên đăng nhập"  ng-model="user.username">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword3" class="col-xs-3 control-label">Mật khẩu</label>
+                        <!--<div class="col-xs-9">-->
+                            <!--<input type="text" class="form-control col" id="inputEmail3" placeholder="Tên đăng nhập"  ng-model="user.username">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="inputPassword3" class="col-xs-3 control-label">Mật khẩu</label>-->
 
-                        <div class="col-xs-9">
-                            <input type="password" class="form-control" id="inputPassword3" placeholder="Mật khẩu" ng-model="user.password">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-offset-4 col-xs-8">
-                            <button type="submit" class="btn btn-default" ng-click="login(user)">Sign in</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+                        <!--<div class="col-xs-9">-->
+                            <!--<input type="password" class="form-control" id="inputPassword3" placeholder="Mật khẩu" ng-model="user.password">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<div class="col-xs-offset-4 col-xs-8">-->
+                            <!--<button type="submit" class="btn btn-default" ng-click="login(user)">Sign in</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</form>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<form class="form-signin col-xs-3 col-xs-offset-5" ng-controller="AuthCtrl">
+    <h2 class="form-signin-heading">IT Faculty</h2>
+    <input ng-model="user.username" type="text" class="form-control" name="username" placeholder="Tên đăng nhập" required="" autofocus="" />
+    <input ng-model="user.password" type="password" class="form-control" name="password" placeholder="Mật khẩu" required=""/>
+    <button ng-click="login(user)" class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+</form>

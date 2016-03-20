@@ -6,7 +6,7 @@ public class UserResponse {
 
     private String id;
     private String username;
-    private Date birthday;
+    private String birthday;
     private boolean deleted;
     private String description;
     private String email;
@@ -40,11 +40,11 @@ public class UserResponse {
         this.id = id;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

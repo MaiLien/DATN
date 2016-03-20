@@ -37,11 +37,8 @@ public class StudentController {
 
     @RequestMapping(value = "/student", method = RequestMethod.POST)
     public RestApiResponse<StudentResponse> addStudent(@RequestBody StudentRequest studentRequest){
-        Student student = new Student();
-        student.setId(UUID.randomUUID().toString());
-        student.setUsername("tesst");
-        studentRepository.save(student);
-        return studentService.addStudent(studentRequest);
+        studentService.addStudent(studentRequest);
+        return null;
     }
 
     @RequestMapping(value = "/student", method = RequestMethod.PUT)
