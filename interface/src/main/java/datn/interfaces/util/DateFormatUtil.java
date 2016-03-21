@@ -1,7 +1,5 @@
 package datn.interfaces.util;
 
-import ch.smartlinksa.intern.interfaces.constant.FormatConstant;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,7 +7,9 @@ import java.util.Date;
 
 public class DateFormatUtil {
 
-    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/mm/yyyy");
+    private static String format = "dd/MM/yyyy";
+
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
 
     public static boolean isFormatDate(String dateInputString) {
         simpleDateFormat.setLenient(false);
@@ -43,7 +43,7 @@ public class DateFormatUtil {
         return true;
     }
 
-    public static Date convertStringToDate(String dateString, String format) {
+    public static Date convertStringToDate(String dateString) {
         DateFormat df = new SimpleDateFormat(format);
         Date date = null;
         try {
@@ -52,6 +52,10 @@ public class DateFormatUtil {
             e.printStackTrace();
         }
         return date;
+    }
+
+    public static String convertDateToString(Date date){
+        return  simpleDateFormat.format(date);
     }
 
 }

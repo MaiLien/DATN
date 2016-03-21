@@ -11,6 +11,7 @@ import datn.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class StudentServiceImpl implements IStudentService{
@@ -82,7 +83,7 @@ public class StudentServiceImpl implements IStudentService{
         StudentResponse studentResponse = new StudentResponse();
         studentResponse.setId(studentEntity.getId());
         studentResponse.setName(studentEntity.getName());
-        studentResponse.setBirthday(studentEntity.getBirthday());
+        studentResponse.setBirthday(DateFormatUtil.convertDateToString(studentEntity.getBirthday()));
         studentResponse.setDeleted(studentEntity.getDeleted());
         studentResponse.setDescription(studentEntity.getDescription());
         studentResponse.setEmail(studentEntity.getEmail());

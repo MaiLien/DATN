@@ -6,6 +6,7 @@ import datn.dao.repository.TeacherRepository;
 import datn.interfaces.request.TeacherRequest;
 import datn.interfaces.response.RestApiResponse;
 import datn.interfaces.response.TeacherResponse;
+import datn.interfaces.util.DateFormatUtil;
 import datn.service.ITeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,7 +51,7 @@ public class TeacherServiceImpl implements ITeacherService {
     private Teacher convertTeacherRequestToTeacherEntity(TeacherRequest teacherRequest){
         Teacher teacherEntity =new Teacher();
         teacherEntity.setId(teacherRequest.getId());
-        teacherEntity.setBirthday(teacherRequest.getBirthday());
+        teacherEntity.setBirthday(DateFormatUtil.convertStringToDate(teacherRequest.getBirthday()));
         teacherEntity.setDescription(teacherRequest.getDescription());
         teacherEntity.setEmail(teacherRequest.getEmail());
         teacherEntity.setGender(Gender.valueOfKey(teacherRequest.getGender()));
@@ -68,7 +69,7 @@ public class TeacherServiceImpl implements ITeacherService {
         TeacherResponse teacherResponse = new TeacherResponse();
         teacherResponse.setId(teacherEntity.getId());
         teacherResponse.setTypeOfUser(teacherEntity.getTypeOfUser().getValue());
-        teacherResponse.setBirthday(teacherEntity.getBirthday());
+        teacherResponse.setBirthday(DateFormatUtil.convertDateToString(teacherEntity.getBirthday()));
         teacherResponse.setDeleted(teacherEntity.getDeleted());
         teacherResponse.setDescription(teacherEntity.getDescription());
         teacherResponse.setEmail(teacherEntity.getEmail());

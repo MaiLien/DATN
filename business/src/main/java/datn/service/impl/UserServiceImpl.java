@@ -3,6 +3,7 @@ package datn.service.impl;
 import datn.dao.entity.User;
 import datn.dao.repository.UserRepository;
 import datn.interfaces.response.UserResponse;
+import datn.interfaces.util.DateFormatUtil;
 import datn.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class UserServiceImpl implements IUserService{
         UserResponse userResponse = new UserResponse();
         userResponse.setId(user.getId());
         userResponse.setUsername(user.getUsername());
-        userResponse.setBirthday(user.getBirthday());
+        userResponse.setBirthday(DateFormatUtil.convertDateToString(user.getBirthday()));
         userResponse.setDeleted(user.getDeleted());
         userResponse.setDescription(user.getDescription());
         userResponse.setEmail(user.getEmail());
