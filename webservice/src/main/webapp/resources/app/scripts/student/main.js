@@ -34,5 +34,22 @@ angular.module('appDATN.student')
                         templateUrl: '/resources/app/scripts/student/views/add_student.html'
                     }
                 }
+            })
+            .state('student.detail', {
+                url: '/detail/:studentObj',
+                views: {
+                    content_view: {
+                        controller: 'StudentCtrl',
+                        templateUrl: '/resources/app/scripts/student/views/detail_student.html',
+                        //resolve:{
+                        //    studentCurrent: function($q, $stateParams){
+                        //        var deffer = $q.defer();
+                        //        deffer.resolve(JSON.parse($stateParams.studentCurrent));
+                        //        console.log($stateParams.studentCurrent)
+                        //        return deffer.promise;
+                        //    }
+                        //}
+                    }
+                }
             });
     });

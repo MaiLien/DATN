@@ -69,7 +69,7 @@ angular.module('appDATN.common')
                 parent: 'logged',
                 views: {
                     content_view: {
-                        templateUrl: 'home.html'
+                        templateUrl: '/resources/app/scripts/common/views/home.html'
                     }
                 }
             })
@@ -77,10 +77,7 @@ angular.module('appDATN.common')
                 parent: 'anonymous',
                 views: {
                     content_view: {
-                        templateUrl: 'error.html'
-                    },
-                    footer_view: {
-                        templateUrl: '/resources/app/scripts/common/views/_footer.html'
+                        templateUrl: '/resources/app/scripts/common/views/error.html'
                     }
                 }
             });

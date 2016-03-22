@@ -1,0 +1,22 @@
+<div class="row" ng-controller="StudentCtrl" ng-init="detailStudent()">
+    {{student}}}
+    <div>
+        <dl class="dl-horizontal">
+            <dt>Mã sinh viên: {{student.username}}<a>Sửa thông tin sinh viên?</a></dt>
+            <dt>Họ tên: {{student.name}}</dt>
+            <dt>Lớp: {{student.class_}}</dt>
+            <dt>Ngày sinh: {{student.birthday}}</dt>
+            <dt>Giới tính:
+                <span ng-if="student.gender == 0">Nam</span>
+                <span ng-if="student.gender == 1">Nữ</span>
+                <span ng-if="student.gender == 2">Khác</span>
+            </dt>
+            <dt>Tình trạng:
+                <span ng-if="student.status == 0">Bình thường. <a>Khóa tài khoản người dùng?</a></span>
+                <span ng-if="student.status != 0">Đã bị khóa. <a>Mở khóa tài khoản người dùng?</a></span>
+            </dt>
+        </dl>
+    </div>
+    <a>Xem lịch sử làm đồ án</a>
+
+</div>

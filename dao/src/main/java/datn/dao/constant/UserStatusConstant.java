@@ -6,6 +6,6 @@ public class UserStatusConstant {
 
     public static final int ACTIVE = 0;
 
-    public static final int BLOCK = 0;
+    public static final int BLOCK = 1;
 
 }

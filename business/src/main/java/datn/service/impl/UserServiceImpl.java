@@ -6,6 +6,7 @@ import datn.interfaces.response.UserResponse;
 import datn.interfaces.util.DateFormatUtil;
 import datn.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,13 +16,19 @@ public class UserServiceImpl implements IUserService{
     private UserRepository userRepository;
 
     public UserResponse getUserByUsernameAndPassword(String username, String password) {
-        User userEntity = userRepository.findUserByUsernameAndPassword(username, password);
+        User userEntity = userRepository.findUserByUsername(username);
         UserResponse userResponse = null;
         if(userEntity != null) {
-            userResponse = converUserEntityToUserResponse(userEntity);
+            if(matchPassword(password, userEntity.getPassword())){
+                userResponse = converUserEntityToUserResponse(userEntity);
+            }
         }
 
         return userResponse;
+    }
+
+    private boolean matchPassword(String plainPass, String hashPass){
+        return BCrypt.checkpw(plainPass,hashPass);
     }
 
     private UserResponse converUserEntityToUserResponse(User user){

@@ -9,6 +9,7 @@ import datn.interfaces.response.StudentResponse;
 import datn.interfaces.util.DateFormatUtil;
 import datn.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
@@ -82,6 +83,7 @@ public class StudentServiceImpl implements IStudentService{
     private StudentResponse convertStudentEntityToStudentResponse(Student studentEntity){
         StudentResponse studentResponse = new StudentResponse();
         studentResponse.setId(studentEntity.getId());
+        studentResponse.setUsername(studentEntity.getUsername());
         studentResponse.setName(studentEntity.getName());
         studentResponse.setBirthday(DateFormatUtil.convertDateToString(studentEntity.getBirthday()));
         studentResponse.setDeleted(studentEntity.getDeleted());
@@ -106,11 +108,13 @@ public class StudentServiceImpl implements IStudentService{
         studentEntity.setEmail(studentRequest.getEmail());
         studentEntity.setGender(Gender.valueOfKey(studentRequest.getGender()));
         studentEntity.setName(studentRequest.getName());
-        studentEntity.setPassword(studentRequest.getPassword());
         studentEntity.setPhoneNumber(studentRequest.getPhoneNumber());
         studentEntity.setStatus(studentRequest.getStatus());
-        studentEntity.setClass_(studentRequest.getClass_());
+        studentEntity.setClass_(studentRequest.getClass_().toUpperCase());
 
+//        Default password is username.
+        String password = BCrypt.hashpw(studentRequest.getUsername(), BCrypt.gensalt(12));
+        studentEntity.setPassword(password);
 
         return studentEntity;
     }

@@ -1,18 +1,10 @@
 angular.module('appDATN.student')
-    .controller('StudentCtrl', function ($scope, StudentService, AuthService) {
+    .controller('StudentCtrl', function ($scope, $state, StudentService, AuthService, $stateParams) {
 
         $scope.status;
         $scope.students;
         $scope.student;
-        //
-        //$scope.datepickerOptions = {
-        //    format: 'yyyy-mm-dd',
-        //    language: 'fr',
-        //    startDate: "2012-10-01",
-        //    endDate: "2012-10-31",
-        //    autoclose: true,
-        //    weekStart: 0
-        //}
+        $scope.studentCurrent;
 
         $scope.getStudents = function (){
             StudentService.getStudents()
@@ -55,7 +47,6 @@ angular.module('appDATN.student')
         }
 
         $scope.deleteStudent = function(student){
-            //student.id = '09a70730-6067-4c09-afa4-08db8a68d537';
             StudentService.deleteStudent(student)
                 .success(function(data){
                     $scope.student = data.body;
@@ -63,6 +54,19 @@ angular.module('appDATN.student')
                 .error(function(error){
                     $scope.status = 'Unable to load customer data: ' + error.message;
                 })
+        }
+
+        $scope.setStudentCurrent = function (student) {
+            $scope.studentCurrent = student;
+        }
+
+        $scope.detailStudent = function () {
+            //$scope.getStudent($stateParams.id);
+            //getStudent($stateParams.id);
+            console.log('$stateParams.id detail : ', $stateParams.studentObj);
+            $scope.student = JSON.parse($stateParams.studentObj);
+            console.log($scope.student);
+            console.log("asdasdsadas");
         }
 
     });
