@@ -226,3 +226,38 @@ ul.alert-dropdown {
 .panel-yellow > a:hover {
     color: #df8a13;
 }
+
+/*Nav custom*/
+.navbar-custom {
+    /*background-color: #1E1E2A;*/
+    background-color: #2980b9;
+    color: #FFFFFF;
+    border-radius: 0; }
+
+.navbar-custom .navbar-nav > li > a {
+    color: #FFFFFF; }
+
+.navbar-default .navbar-nav > .active {
+    color: #000;
+    /*background: #d65c14; */
+    background: #2980b9;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: transparent; }
+
+.navbar-custom .navbar-nav > .active > a,
+.navbar-custom .navbar-nav > .active > a:hover,
+.navbar-custom .navbar-nav > .active > a:focus {
+    color: #FFFFFF;
+    background: #1E1E2A;
+    border-bottom: 5px solid #7575EF; }
+
+.navbar-custom .navbar-brand {
+    color: #FFFFFF; }
+
+.navbar-custom .navbar-form .form-control {
+    border-radius: 30px;
+    background-color: #302E43;
+    color: #525374;
+    border: none; }
