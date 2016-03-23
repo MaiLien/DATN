@@ -14,8 +14,8 @@
                     <p>Mở khóa tài khoản người dùng <a ui-sref="student.detail">{{studentCurrent.name}}</a>?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
-                    <button ng-click="unlock(studentCurrent.id)" type="button" class="btn btn-default" data-dismiss="modal">Mở khóa</button>
+                    <button ng-click="unlock(studentCurrent.id)" type="button" class="btn btn-primary" data-dismiss="modal">Mở khóa</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
                 </div>
             </div>
 
@@ -64,7 +64,6 @@
                 <tbody>
                     <tr ng-repeat="student in students">
                         <td><a  ui-sref="student.detail({studentObj:'{{student}}'})">{{student.username}}</a></td>
-                        <!--<td><a ng-click="detailStudent(student)">{{student.username}}</a></td>-->
                         <td>{{student.name}}</td>
                         <td>{{student.class_}}</td>
                         <td>{{student.birthday}}</td>

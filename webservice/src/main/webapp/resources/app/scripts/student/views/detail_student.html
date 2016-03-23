@@ -1,22 +1,104 @@
 <div class="row" ng-controller="StudentCtrl" ng-init="detailStudent()">
-    {{student}}}
-    <div>
-        <dl class="dl-horizontal">
-            <dt>Mã sinh viên: {{student.username}}<a>Sửa thông tin sinh viên?</a></dt>
-            <dt>Họ tên: {{student.name}}</dt>
-            <dt>Lớp: {{student.class_}}</dt>
-            <dt>Ngày sinh: {{student.birthday}}</dt>
-            <dt>Giới tính:
-                <span ng-if="student.gender == 0">Nam</span>
-                <span ng-if="student.gender == 1">Nữ</span>
-                <span ng-if="student.gender == 2">Khác</span>
-            </dt>
-            <dt>Tình trạng:
-                <span ng-if="student.status == 0">Bình thường. <a>Khóa tài khoản người dùng?</a></span>
-                <span ng-if="student.status != 0">Đã bị khóa. <a>Mở khóa tài khoản người dùng?</a></span>
-            </dt>
-        </dl>
-    </div>
-    <a>Xem lịch sử làm đồ án</a>
 
+    <!-- Modal Delete-->
+    <div id="delete" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Xóa tài khoản</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Xóa tài khoản sinh viên <a ui-sref="student.detail">{{student.name}}</a>?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#/student/list" ng-click="deleteStudent(student)" type="button" class="btn btn-primary" data-dismiss="modal">Xóa</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal Unlock-->
+    <div id="unlock" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Mở khóa tài khoản</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Mở khóa tài khoản người dùng <a ui-sref="student.detail">{{student.name}}</a>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button ng-click="unlock(student.id)" type="button" class="btn btn-primary" data-dismiss="modal">Mở khóa</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--Modal Lock-->
+    <div id="lock" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Khóa tài khoản</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Khóa tài khoản người dùng <a ui-sref="student.detail">{{student.name}}</a>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button ng-click="lock(student.id)" type="button" class="btn btn-primary" data-dismiss="modal">Khóa</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--Detail-->
+    <div class="col-md-6 col-md-offset-3">
+        <div>
+            <dl class="dl-horizontal">
+                <dt class="form-control-static"><h3>Mã sinh viên: </h3></dt>
+                <dd class="form-control-static">
+                    <h3>{{student.username}}
+                        <a><i class="fa fa-edit"></i></a>
+                        <a data-toggle="modal" data-target="#delete"> <i class="fa fa-trash"></i> </a>
+                    </h3>
+                </dd>
+                <dt></dt>
+                <dd><hr></dd>
+                <dt class="form-control-static">Họ tên: </dt>
+                <dd class="form-control-static">{{student.name}}</dd>
+                <dt class="form-control-static">Lớp: </dt>
+                <dd class="form-control-static">{{student.class_}}</dd>
+                <dt class="form-control-static">Ngày sinh: </dt>
+                <dd class="form-control-static">{{student.birthday}}</dd>
+                <dt class="form-control-static">Giới tính: </dt>
+                <dd class="form-control-static">
+                    <span ng-if="student.gender == 0">Nam</span>
+                    <span ng-if="student.gender == 1">Nữ</span>
+                    <span ng-if="student.gender == 2">Khác</span>
+                </dd>
+                <dt class="form-control-static">Tình trạng: </dt>
+                <dd class="form-control-static">
+                    <span ng-if="student.status == 0">Bình thường. <a data-toggle="modal" data-target="#lock"> <i class="fa fa-lock"></i></a></span>
+                    <span ng-if="student.status != 0">Đã bị khóa. <a data-toggle="modal" data-target="#unlock"> <i class="fa fa-unlock"></i></a></span>
+                </dd>
+            </dl>
+        </div>
+        <a class="btn btn-default">Xem lịch sử làm đồ án</a>
+    </div>
+<hr>
 </div>

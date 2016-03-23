@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements IUserService{
+public class UserServiceImpl implements IUserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -18,8 +18,8 @@ public class UserServiceImpl implements IUserService{
     public UserResponse getUserByUsernameAndPassword(String username, String password) {
         User userEntity = userRepository.findUserByUsername(username);
         UserResponse userResponse = null;
-        if(userEntity != null) {
-            if(matchPassword(password, userEntity.getPassword())){
+        if (userEntity != null) {
+            if (matchPassword(password, userEntity.getPassword())) {
                 userResponse = converUserEntityToUserResponse(userEntity);
             }
         }
@@ -27,11 +27,19 @@ public class UserServiceImpl implements IUserService{
         return userResponse;
     }
 
-    private boolean matchPassword(String plainPass, String hashPass){
-        return BCrypt.checkpw(plainPass,hashPass);
+    private boolean matchPassword(String plainPass, String hashPass) {
+        if (plainPass == null || hashPass == null) {
+            return false;
+        } else {
+            return BCrypt.checkpw(plainPass, hashPass);
+        }
     }
 
-    private UserResponse converUserEntityToUserResponse(User user){
+    public  static void main(String[] args){
+        System.out.println(BCrypt.hashpw("102110134", BCrypt.gensalt(12)));
+    }
+
+    private UserResponse converUserEntityToUserResponse(User user) {
         UserResponse userResponse = new UserResponse();
         userResponse.setId(user.getId());
         userResponse.setUsername(user.getUsername());
@@ -47,18 +55,5 @@ public class UserServiceImpl implements IUserService{
 
         return userResponse;
     }
-
-//    public UserSecurity getUserDetails(String username) {
-//        User user = userRepository.findByUsername(username);
-//        UserAuth userAuth = converUserEntityToUserAuth(user);
-//        return new UserSecurity(userAuth);
-//    }
-
-//    private UserAuth converUserEntityToUserAuth(User user) {
-//        UserAuth userAuth = new UserAuth();
-//        BeanUtils.copyProperties(user, userAuth);
-//
-//        return userAuth;
-//    }
 
 }

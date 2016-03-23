@@ -61,12 +61,7 @@ angular.module('appDATN.student')
         }
 
         $scope.detailStudent = function () {
-            //$scope.getStudent($stateParams.id);
-            //getStudent($stateParams.id);
-            console.log('$stateParams.id detail : ', $stateParams.studentObj);
             $scope.student = JSON.parse($stateParams.studentObj);
-            console.log($scope.student);
-            console.log("asdasdsadas");
         }
 
     });

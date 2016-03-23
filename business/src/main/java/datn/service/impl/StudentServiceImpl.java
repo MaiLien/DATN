@@ -102,6 +102,7 @@ public class StudentServiceImpl implements IStudentService{
 
     private Student convertStudentRequestToStudentEntity(StudentRequest studentRequest){
         Student studentEntity = new Student();
+        studentEntity.setId(studentRequest.getId());
         studentEntity.setUsername(studentRequest.getUsername());
         studentEntity.setBirthday(DateFormatUtil.convertStringToDate(studentRequest.getBirthday()));
         studentEntity.setDescription(studentRequest.getDescription());

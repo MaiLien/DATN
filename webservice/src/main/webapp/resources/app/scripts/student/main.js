@@ -40,15 +40,7 @@ angular.module('appDATN.student')
                 views: {
                     content_view: {
                         controller: 'StudentCtrl',
-                        templateUrl: '/resources/app/scripts/student/views/detail_student.html',
-                        //resolve:{
-                        //    studentCurrent: function($q, $stateParams){
-                        //        var deffer = $q.defer();
-                        //        deffer.resolve(JSON.parse($stateParams.studentCurrent));
-                        //        console.log($stateParams.studentCurrent)
-                        //        return deffer.promise;
-                        //    }
-                        //}
+                        templateUrl: '/resources/app/scripts/student/views/detail_student.html'
                     }
                 }
             });
