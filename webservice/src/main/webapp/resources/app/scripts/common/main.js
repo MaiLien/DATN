@@ -6,14 +6,22 @@ angular.module('appDATN.common')
             .state('anonymous', {
                 abstract: true,
                 views: {
-                    menu_view: {
-                        template: '<div ui-view="menu_view"></div>'
-                    },
+                    //menu_view: {
+                    //    template: '<div ui-view="menu_view"></div>'
+                    //},
                     content_view: {
                         template: '<div ui-view="content_view"></div>'
                     },
-                    footer_view: {
-                        templateUrl: '/resources/app/scripts/common/views/_footer.html'
+                    //footer_view: {
+                    //    templateUrl: '/resources/app/scripts/common/views/_footer.html'
+                    //},
+                    css_imported: {
+                        //templateUrl: '/resources/app/scripts/common/views/logged.html'
+                        templateUrl: '/resources/app/scripts/authenticate/views/_css_imported.html'
+                    },
+                    js_imported: {
+                        //templateUrl: '/resources/app/scripts/common/views/logged.html'
+                        templateUrl: '/resources/app/scripts/authenticate/views/_js_imported.html'
                     }
                 }
             })
@@ -21,13 +29,23 @@ angular.module('appDATN.common')
                 abstract: true,
                 views: {
                     menu_view: {
-                        templateUrl: '/resources/app/scripts/common/views/logged.html'
+                        templateUrl: '/resources/app/scripts/common/views/_header.html'
                     },
                     content_view: {
                         template: '<div ui-view="content_view"></div>'
                     },
                     footer_view: {
                         templateUrl: '/resources/app/scripts/common/views/_footer.html'
+                    },
+                    css_imported: {
+                        templateUrl: '/resources/app/scripts/common/views/_css_imported.html'
+                    },
+                    js_imported: {
+                        templateUrl: '/resources/app/scripts/common/views/_js_imported.html'
+                    },
+                    sidebar_view: {
+                        //controller: 'AuthCtrl',
+                        templateUrl: '/resources/app/scripts/common/views/_sidebar.html'
                     }
                 }
             })
@@ -52,16 +70,16 @@ angular.module('appDATN.common')
                     }
                 },
                 views: {
-                    menu_view: {
-                        controller: 'AuthCtrl',
-                        templateUrl: '/resources/app/scripts/common/views/_header.html'
-                    },
-                    sidebar_view: {
-                        controller: 'AuthCtrl',
-                        templateUrl: '/resources/app/scripts/common/views/_sidebar.html'
-                    },
+                    //menu_view: {
+                    //    controller: 'AuthCtrl',
+                    //    templateUrl: '/resources/app/scripts/common/views/_header.html'
+                    //},
+                    //sidebar_view: {
+                    //    controller: 'AuthCtrl',
+                    //    templateUrl: '/resources/app/scripts/common/views/_sidebar.html'
+                    //},
                     content_view: {
-                        template: '<div id="wrapper"><div class="container-fluid"><div ui-view="content_view"></div></div></div>'
+                        template: '<div ui-view="content_view"></div>'
                     }
                 }
             })

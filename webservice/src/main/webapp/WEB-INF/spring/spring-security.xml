@@ -13,6 +13,7 @@
         <intercept-url pattern="/favicon.ico" access="permitAll()"/>
         <intercept-url pattern="/" access="permitAll()"/>
         <intercept-url pattern="/**" access="isAuthenticated()"/>
+        <!--<intercept-url pattern="/**" access="permitAll()"/>-->
         <form-login
                 login-page="/login"
                 username-parameter="username"

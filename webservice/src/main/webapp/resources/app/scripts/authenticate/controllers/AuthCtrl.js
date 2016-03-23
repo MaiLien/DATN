@@ -9,7 +9,7 @@ angular.module('appDATN.auth')
                 .success(function(data){
                     if(data.headers.resultCode == 0){
                         AuthService.setAuth();
-                        $state.go('home');
+                        $state.go('student.list');
                     }
                     else{
                         $scope.error = true;

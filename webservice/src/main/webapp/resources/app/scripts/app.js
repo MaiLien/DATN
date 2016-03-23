@@ -35,7 +35,7 @@ app.run(function ($rootScope, $state) {
 /* Set a default state */
 app.config(function ($urlRouterProvider) {
   $urlRouterProvider.when('', '/login');
-  $urlRouterProvider.otherwise('/login');
+  //$urlRouterProvider.otherwise('/login');
 });
 
 
