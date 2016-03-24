@@ -83,9 +83,10 @@
 <script src="/resources/app/scripts/authenticate/services/AuthService.js"></script>
 
 <script src="/resources/app/scripts/student/main.js"></script>
+<script src="/resources/app/scripts/student/services/StudentService.js"></script>
 <script src="/resources/app/scripts/student/controllers/StudentCtrl.js"></script>
 <script src="/resources/app/scripts/student/controllers/AddStudentCtrl.js"></script>
-<script src="/resources/app/scripts/student/services/StudentService.js"></script>
+<script src="/resources/app/scripts/student/controllers/ListStudentCtrl.js"></script>
 
 </body>
 </html>

@@ -6,11 +6,13 @@ angular.module('appDATN.student')
                 StudentService.addStudent(student)
                     .success(function(data){
                         $scope.student = data.body;
+                        $scope.addStudentForm.$setPristine();
+                        $state.go('student.list');
                     })
                     .error(function(error){
-                        $scope.status = 'Unable to load customer data: ' + error.message;
+                        $state.go('error');
                     });
-                $scope.addStudentForm.$setPristine();
+
             }else{
                 $scope.setDirty();
             }

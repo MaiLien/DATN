@@ -1,4 +1,4 @@
-<div class="row" ng-controller="StudentCtrl" ng-init="getStudents()">
+<div class="row">
 
     <!-- Modal Unlock-->
     <div id="unlock" class="modal fade" role="dialog">
@@ -63,7 +63,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="student in students">
-                        <td><a  ui-sref="student.detail({studentObj:'{{student}}'})">{{student.username}}</a></td>
+                        <td><a  ui-sref="student.detail({studentObj:'student'})">{{student.username}}</a></td>
                         <td>{{student.name}}</td>
                         <td>{{student.class_}}</td>
                         <td>{{student.birthday}}</td>

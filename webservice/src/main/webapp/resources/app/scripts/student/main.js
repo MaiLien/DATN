@@ -19,9 +19,26 @@ angular.module('appDATN.student')
             })
             .state('student.list', {
                 url: '/list',
+                resolve:{
+                    students: function ($q, $state, StudentService) {
+                        var deferred = $q.defer();
+                        StudentService.getStudents()
+                            .success(function (data) {
+                                if(data.headers.resultCode == 0) {
+                                    deferred.resolve(data.body);
+                                }else{
+                                    deferred.reject('Error');
+                                }
+                            })
+                            .error(function (error) {
+                                deferred.reject('Error');
+                            });
+                        return deferred.promise;
+                    }
+                },
                 views: {
                     content_view: {
-                        controller: 'StudentCtrl',
+                        controller: 'ListStudentCtrl',
                         templateUrl: '/resources/app/scripts/student/views/list_student.html'
                     }
                 }
