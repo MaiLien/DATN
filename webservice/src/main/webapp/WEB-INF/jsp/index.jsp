@@ -7,17 +7,19 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="/resources/template2/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/bower_components/bootstrap/dist/css/bootstrap.css">
     <!-- Font Awesome -->
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">--%>
+<%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">--%>
     <link rel="stylesheet" href="/resources/bower_components/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <%--<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">--%>
+<%--<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">--%>
     <link rel="stylesheet" href="/resources/bower_components/Ionicons/css/ionicons.min.css">
 
     <div ui-view="css_imported"></div>
-
-    <link rel="stylesheet" href="/resources/app/styles/mystyle.css">
+    <%--<link rel="stylesheet" href="/resources/bower_components/angular-bootstrap-datepicker/dist/angular-bootstrap-datepicker.css" />--%>
+    <link href="/resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" rel="stylesheet">
+    <link href="/resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.css" rel="stylesheet">
+    <%--<link rel="stylesheet" href="/resources/app/styles/mystyle.css">--%>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -56,10 +58,10 @@
 <!-- jQuery Knob Chart -->
 <script src="/resources/template2/plugins/knob/jquery.knob.js"></script>
 <!-- daterangepicker -->
-<script src="/resources/bower_components/moment/min/moment.min.js"></script>
+<script src="/resources/bower_components/moment/moment.js"></script>
 <script src="/resources/template2/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
-<script src="/resources/template2/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="/resources/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/resources/template2/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
@@ -67,13 +69,14 @@
 <!-- FastClick -->
 <script src="/resources/template2/plugins/fastclick/fastclick.min.js"></script>
 
-<script src="/resources/app/js/datepicker.js"></script>
+<%--<script src="/resources/app/js/datepicker.js"></script>--%>
 
 <script src="/resources/template_login/js/jquery.backstretch.min.js"></script>
 
 <div ui-view="js_imported"></div>
 
 <script src="/resources/bower_components/angular/angular.js"></script>
+<%--<script src="/resources/bower_components/angular-bootstrap-datepicker/dist/angular-bootstrap-datepicker.js" charset="utf-8"></script>--%>
 <script src="/resources/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 
 <script src="/resources/app/scripts/app.js"></script>
@@ -92,3 +95,5 @@
 
 </body>
 </html>
+
+

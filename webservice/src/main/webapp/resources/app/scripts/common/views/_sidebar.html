@@ -1,63 +1,6 @@
-<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-<!--<div class="collapse navbar-collapse navbar-ex1-collapse">-->
-    <!--<ul class="nav navbar-nav side-nav">-->
-        <!--<li>-->
-            <!--<a href="javascript:;" data-toggle="collapse" data-target="#message"><i class="fa fa-fw fa-envelope"></i> Hộp thư <i class="fa fa-fw fa-caret-down"></i></a>-->
-            <!--<ul id="message" class="collapse">-->
-                <!--<li>-->
-                    <!--<a href=""><i class="fa fa-fw fa-edit"></i>Soạn thư mới</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a href="">Hộp thư đến</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a href="">Hộp thư đi</a>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</li>-->
-        <!--<li>-->
-            <!--<a href="javascript:;" data-toggle="collapse" data-target="#wave">Đợt ĐATN<i class="fa fa-fw fa-caret-down"></i></a>-->
-            <!--<ul id="wave" class="collapse">-->
-                <!--<li>-->
-                    <!--<a href="">Khởi tạo đợt ĐATN</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a href="">Danh sách đợt ĐATN</a>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</li>-->
-        <!--<li>-->
-            <!--<a href="javascript:;" data-toggle="collapse" data-target="#student">Sinh viên <i class="fa fa-fw fa-caret-down"></i></a>-->
-            <!--<ul id="student" class="collapse">-->
-                <!--<li>-->
-                    <!--<a ui-sref="student.add">Thêm sinh viên</a>-->
-                    <!--&lt;!&ndash;<a href="/#/student/add">Thêm sinh viên</a>&ndash;&gt;-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a ui-sref="student.list">Danh sách sinh viên</a>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</li>-->
-        <!--<li>-->
-            <!--<a href="javascript:;" data-toggle="collapse" data-target="#teacher">Giảng viên <i class="fa fa-fw fa-caret-down"></i></a>-->
-            <!--<ul id="teacher" class="collapse">-->
-                <!--<li>-->
-                    <!--<a href="">Thêm giảng viên</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a href="">Danh sách giảng viên</a>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</li>-->
-    <!--</ul>-->
-<!--</div>-->
-<!-- /.navbar-collapse -->
-
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-        <!-- Sidebar user panel -->
-
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="treeview">
@@ -66,10 +9,8 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href=""><i class="fa fa-circle-o"></i> General Elements</a></li>
-                    <li><a href=""><i class="fa fa-circle-o"></i> Advanced Elements</a>
-                    </li>
-                    <li><a href=""><i class="fa fa-circle-o"></i> Editors</a></li>
+                    <li><a ui-sref="student.add"><i class="fa fa-circle-o"></i> Thêm sinh viên</a></li>
+                    <li><a ui-sref="student.list"><i class="fa fa-circle-o"></i> Danh sách sinh viên</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -78,8 +19,8 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href=""><i class="fa fa-circle-o"></i> Simple tables</a></li>
-                    <li><a href=""><i class="fa fa-circle-o"></i> Data tables</a></li>
+                    <li><a href=""><i class="fa fa-circle-o"></i> Thêm giảng viên</a></li>
+                    <li><a href=""><i class="fa fa-circle-o"></i> Danh sách giảng viên</a></li>
                 </ul>
             </li>
             <li><a href=""><i class="fa fa-book"></i> <span>Đợt ĐATN</span></a></li>
@@ -95,5 +36,4 @@
             <li><a href=""><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
         </ul>
     </section>
-    <!-- /.sidebar -->
 </aside>

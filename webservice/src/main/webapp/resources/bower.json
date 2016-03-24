@@ -31,6 +31,7 @@
     "moment": "^2.12.0",
     "raphael": "^2.1.4",
     "html5shiv": "^3.7.3",
-    "respond": "^1.4.2"
+    "respond": "^1.4.2",
+    "angular-bootstrap-datepicker": "^0.3.1"
   }
 }

@@ -29,4 +29,13 @@ angular.module('appDATN.student')
             }
         }
 
+        $scope.datepickerOptions = {
+            format: 'yyyy-mm-dd',
+            language: 'fr',
+            startDate: "2012-10-01",
+            endDate: "2012-10-31",
+            autoclose: true,
+            weekStart: 0
+        }
+
     });
