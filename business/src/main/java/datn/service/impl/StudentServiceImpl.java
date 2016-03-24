@@ -102,7 +102,12 @@ public class StudentServiceImpl implements IStudentService{
 
     private Student convertStudentRequestToStudentEntity(StudentRequest studentRequest){
         Student studentEntity = new Student();
-        studentEntity.setId(studentRequest.getId());
+
+        if(studentRequest.getId() != null){
+            if(!"".equals(studentRequest.getId())){
+                studentEntity.setId(studentRequest.getId());
+            }
+        }
         studentEntity.setUsername(studentRequest.getUsername());
         studentEntity.setBirthday(DateFormatUtil.convertStringToDate(studentRequest.getBirthday()));
         studentEntity.setDescription(studentRequest.getDescription());
@@ -114,7 +119,13 @@ public class StudentServiceImpl implements IStudentService{
         studentEntity.setClass_(studentRequest.getClass_().toUpperCase());
 
 //        Default password is username.
-        String password = BCrypt.hashpw(studentRequest.getUsername(), BCrypt.gensalt(12));
+        Student obj = studentRepository.findOne(studentEntity.getId());
+        String password;
+        if(obj == null){
+            password = BCrypt.hashpw(studentRequest.getUsername(), BCrypt.gensalt(12));
+        }else {
+            password = obj.getPassword();
+        }
         studentEntity.setPassword(password);
 
         return studentEntity;

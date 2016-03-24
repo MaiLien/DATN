@@ -2,7 +2,7 @@
 
 angular.module('appDATN.common', ['ui.router'])
 angular.module('appDATN.auth', ['ui.router'])
-angular.module('appDATN.student', ['appDATN.auth', 'ui.router'])
+angular.module('appDATN.student', ['appDATN.auth', 'appDATN.common', 'ui.router'])
 
 var app = angular.module('appDATN', [
   'appDATN.common',

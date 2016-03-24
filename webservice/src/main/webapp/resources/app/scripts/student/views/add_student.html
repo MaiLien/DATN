@@ -1,4 +1,4 @@
-<div>
+<div ng-controller="AddStudentCtrl">
     <!-- Content Header (Page header) -->
     <section class="content-header">
 
@@ -13,45 +13,58 @@
                 <!-- Horizontal Form -->
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Điền thông tin sinh viên hoặc <a class="btn btn-primary"> Thêm từ file</a> </h3>
+                        <h3 class="box-title">Nhập thông tin sinh viên hoặc <a class="btn btn-primary"> Thêm từ file</a> </h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
-                    <form class="form-horizontal">
+                    <form name="addStudentForm" novalidate class="form-horizontal">
                         <div class="box-body">
+                            <!-- Username-->
                             <div class="form-group">
                                 <label for="username" class="col-sm-2 control-label">Mã sinh viên</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="username" placeholder="Mã sinh viên">
+                                <div class="col-sm-10" ng-class="{'has-error' : addStudentForm.username.$invalid && !addStudentForm.username.$pristine}">
+                                    <input ng-model="student.username" name="username" required type="text" class="form-control" id="username" placeholder="Mã sinh viên">
+                                    <label ng-if="addStudentForm.username.$invalid && !addStudentForm.username.$pristine" class="control-label" for="username"><i class="fa fa-times-circle-o"></i> Mã sinh viên không được trống</label>
+                                    <label ng-if="false" class="control-label" for="username"><i class="fa fa-times-circle-o"></i> Mã sinh viên đã tồn tại</label>
                                 </div>
                             </div>
+
+                            <!-- Name-->
                             <div class="form-group">
-                                <label for="inputPassword3" class="col-sm-2 control-label">Họ tên</label>
-                                <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="inputPassword3" placeholder="Họ tên">
+                                <label for="name" class="col-sm-2 control-label">Họ tên</label>
+                                <div class="col-sm-10" ng-class="{'has-error' : addStudentForm.name.$invalid && !addStudentForm.name.$pristine}">
+                                    <input ng-model="student.name" name="name" required type="text" class="form-control" id="name" placeholder="Họ tên">
+                                    <label ng-if="addStudentForm.name.$invalid && !addStudentForm.name.$pristine" class="control-label" for="name"><i class="fa fa-times-circle-o"></i> Họ tên không được trống</label>
                                 </div>
                             </div>
+
+                            <!-- Class-->
                             <div class="form-group">
-                                <label for="inputPassword3" class="col-sm-2 control-label">Lớp</label>
-                                <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="inputPassword3" placeholder="Họ tên">
+                                <label for="class" class="col-sm-2 control-label">Lớp</label>
+                                <div class="col-sm-10" ng-class="{'has-error' : addStudentForm.class.$invalid && !addStudentForm.class.$pristine}">
+                                    <input ng-model="student.class_" name="class" required type="text" class="form-control" id="class" placeholder="Lớp">
+                                    <label ng-if="addStudentForm.class.$invalid && !addStudentForm.class.$pristine" class="control-label" for="class"><i class="fa fa-times-circle-o"></i> Lớp không được trống</label>
                                 </div>
                             </div>
+
+                            <!-- Birthday-->
                             <div class="form-group">
-                                <label for="inputPassword3" class="col-sm-2 control-label">Ngày sinh</label>
-                                <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="inputPassword3" placeholder="Họ tên">
+                                <label for="birthday" class="col-sm-2 control-label">Ngày sinh</label>
+                                <div class="col-sm-10" ng-class="{'has-error' : addStudentForm.birthday.$invalid && !addStudentForm.birthday.$pristine}">
+                                    <input ng-model="student.birthday" name="birthday" required type="text" class="form-control" id="birthday" placeholder="Ngày sinh">
+                                    <label ng-if="addStudentForm.birthday.$invalid && !addStudentForm.birthday.$pristine" class="control-label" for="birthday"><i class="fa fa-times-circle-o"></i> Ngày sinh không được trống</label>
+                                    <label ng-if="false" class="control-label" for="birthday"><i class="fa fa-times-circle-o"></i> Ngày sinh không đúng định dạng dd/MM/yyyy</label>
                                 </div>
                             </div>
-                        </div><!-- /.box-body -->
+                        </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary ">Sign in</button>
-                            <button type="submit" class="btn btn-default pull-right">Cancel</button>
-                        </div><!-- /.box-footer -->
+                            <button type="submit" class="btn btn-primary pull-right" ng-click="addStudent(student)">Thêm</button>
+                            <button type="reset" class="btn btn-default" ng-click="addStudentForm.$setPristine()">Hủy</button>
+                        </div>
                     </form>
-                </div><!-- /.box -->
+                </div>
 
-            </div><!--/.col (right) -->
+            </div>
 
-        </div>   <!-- /.row -->
-    </section><!-- /.content -->
-</div><!-- /.content-wrapper -->
+        </div>
+    </section>
+</div>
