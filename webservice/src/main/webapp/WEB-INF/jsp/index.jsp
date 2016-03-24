@@ -64,6 +64,11 @@
 <script src="/resources/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/resources/template2/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+
+<!-- DataTables -->
+<script src="/resources/template2/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/resources/template2/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
 <!-- Slimscroll -->
 <script src="/resources/template2/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -92,6 +97,8 @@
 <script src="/resources/app/scripts/student/controllers/StudentCtrl.js"></script>
 <script src="/resources/app/scripts/student/controllers/AddStudentCtrl.js"></script>
 <script src="/resources/app/scripts/student/controllers/ListStudentCtrl.js"></script>
+
+
 
 </body>
 </html>
