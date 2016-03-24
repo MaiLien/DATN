@@ -17,6 +17,8 @@
 
     <div ui-view="css_imported"></div>
 
+    <link rel="stylesheet" href="/resources/app/styles/mystyle.css">
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
