@@ -16,8 +16,8 @@ angular.module('appDATN.student')
         //$scope.showFirstLast = true;
 
         $scope.students;
-        $scope.currentPage = 1;
-        $scope.pageSize = 5;
+        $scope.currentPage = 0;
+        $scope.pageSize = 10;
         $scope.total = 0;
         $scope.adjacent = 2;
         $scope.dots = '...';
