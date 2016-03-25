@@ -1,9 +1,5 @@
 'use strict';
 
-var app = angular.module('appDATN.student', [
-    'ui.router'
-]);
-
 angular.module('appDATN.student')
     .config(function ($stateProvider) {
         $stateProvider
@@ -18,11 +14,11 @@ angular.module('appDATN.student')
                 }
             })
             .state('student.list', {
-                url: '/list',
+                url: '/list/:page/:size',
                 resolve:{
-                    students: function ($q, $state, StudentService) {
+                    students: function ($q, $state, $stateParams, StudentService) {
                         var deferred = $q.defer();
-                        StudentService.getStudents()
+                        StudentService.getStudents($stateParams.page, $stateParams.size)
                             .success(function (data) {
                                 if(data.headers.resultCode == 0) {
                                     deferred.resolve(data.body);

@@ -83,6 +83,7 @@
 <script src="/resources/bower_components/angular/angular.js"></script>
 <%--<script src="/resources/bower_components/angular-bootstrap-datepicker/dist/angular-bootstrap-datepicker.js" charset="utf-8"></script>--%>
 <script src="/resources/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="/resources/template_paging/paging.js"></script>
 
 <script src="/resources/app/scripts/app.js"></script>
 

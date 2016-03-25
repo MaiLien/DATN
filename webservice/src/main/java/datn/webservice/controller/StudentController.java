@@ -26,25 +26,24 @@ public class StudentController {
     @Autowired
     private StudentRepository studentRepository;
 
-    @RequestMapping(value = "/students", method = RequestMethod.GET)
-    public RestApiResponse<ArrayList<StudentResponse>> getStudents(){
-        return studentService.getStudents();
-    }
-
 //    @RequestMapping(value = "/students", method = RequestMethod.GET)
-//    public RestApiResponse<Page<StudentResponse>> getStudents(int pageIndex, int sizeOfPage) {
-//        return studentService.getPageStudents(pageIndex, sizeOfPage);
+//    public RestApiResponse<ArrayList<StudentResponse>> getStudents(){
+//        return studentService.getStudents();
 //    }
 
-        @RequestMapping(value = "/student", method = RequestMethod.GET)
+    @RequestMapping(value = "/students", method = RequestMethod.GET)
+    public RestApiResponse<Page<StudentResponse>> getStudents(int pageIndex, int sizeOfPage) {
+        return studentService.getPageStudents(pageIndex, sizeOfPage);
+    }
+
+    @RequestMapping(value = "/student", method = RequestMethod.GET)
     public RestApiResponse<StudentResponse> getStudent(String id){
         return studentService.getStudent(id);
     }
 
     @RequestMapping(value = "/student", method = RequestMethod.POST)
     public RestApiResponse<StudentResponse> addStudent(@RequestBody StudentRequest studentRequest){
-        studentService.addStudent(studentRequest);
-        return null;
+        return studentService.addStudent(studentRequest);
     }
 
     @RequestMapping(value = "/student", method = RequestMethod.PUT)

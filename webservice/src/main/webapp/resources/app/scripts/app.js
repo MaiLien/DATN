@@ -1,14 +1,15 @@
 'use strict';
 
 angular.module('appDATN.common', ['ui.router'])
-angular.module('appDATN.auth', ['ui.router'])
-angular.module('appDATN.student', ['appDATN.auth', 'appDATN.common', 'ui.router', 'ng-bootstrap-datepicker'])
+angular.module('appDATN.auth', [])
+angular.module('appDATN.student', ['appDATN.auth', 'appDATN.common'])
 
 var app = angular.module('appDATN', [
   'appDATN.common',
   'appDATN.auth',
   'appDATN.student',
-  'ui.router'
+  'ui.router',
+  'bw.paging'
 ]);
 
 /* Go to login if not authenticated */
