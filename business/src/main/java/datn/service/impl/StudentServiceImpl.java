@@ -9,10 +9,13 @@ import datn.interfaces.response.StudentResponse;
 import datn.interfaces.util.DateFormatUtil;
 import datn.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.data.domain.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 @Service
 public class StudentServiceImpl implements IStudentService{
@@ -26,6 +29,28 @@ public class StudentServiceImpl implements IStudentService{
         RestApiResponse<ArrayList<StudentResponse>> students = new RestApiResponse<ArrayList<StudentResponse>>(studentResponses);
 
         return students;
+    }
+
+//    public BaseResponse<Page<UserProfileResponse>> getUsers(int pageIndex, int sizeOfPage) {
+//        PageRequest pageable = new PageRequest(pageIndex, sizeOfPage);
+//        Page<User> users = userRepository.findAll(pageable);
+//        Page<UserProfileResponse> usersResponses = getUsersResponse(users, pageable, users.getTotalElements());
+//        return baseResponseProvider.createSuccessResponse(usersResponses);
+//    }
+
+    public RestApiResponse<Page<StudentResponse>> getPageStudents(int pageIndex, int sizeOfPage){
+        PageRequest pageable = new PageRequest(pageIndex, sizeOfPage);
+        Page<Student> studentPage = studentRepository.findAll(pageable);
+        Page<StudentResponse> studentResponsePage = convertStudentEntityPageToStudentResponsePage(studentPage, pageable);
+
+        RestApiResponse<Page<StudentResponse>> studentResponseRestApiResponse = new RestApiResponse<Page<StudentResponse>>(studentResponsePage);
+        return  studentResponseRestApiResponse;
+    }
+
+    private Page<StudentResponse> convertStudentEntityPageToStudentResponsePage(Page<Student> studentPage, PageRequest pageable){
+        ArrayList<StudentResponse> studentResponses = convertStudentEntitiesToStudentResponses(new ArrayList<Student>(studentPage.getContent()));
+        Page<StudentResponse> studentResponsePage = new PageImpl<StudentResponse>(studentResponses, pageable, studentPage.getTotalElements());
+        return studentResponsePage;
     }
 
     public RestApiResponse<StudentResponse> getStudent(String id) {

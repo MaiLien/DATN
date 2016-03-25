@@ -5,6 +5,7 @@ import datn.dao.entity.Student;
 import datn.interfaces.request.StudentRequest;
 import datn.interfaces.response.RestApiResponse;
 import datn.interfaces.response.StudentResponse;
+import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
 
@@ -21,5 +22,7 @@ public interface IStudentService {
     public RestApiResponse<StudentResponse> updateStudent(StudentRequest studentRequest);
 
     public Student getStudentEntity(String id);
+
+    public RestApiResponse<Page<StudentResponse>> getPageStudents(int pageIndex, int sizeOfPage);
 
 }

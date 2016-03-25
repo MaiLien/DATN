@@ -7,6 +7,7 @@ import datn.interfaces.response.RestApiResponse;
 import datn.interfaces.response.StudentResponse;
 import datn.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,12 +26,17 @@ public class StudentController {
     @Autowired
     private StudentRepository studentRepository;
 
+//    @RequestMapping(value = "/students", method = RequestMethod.GET)
+//    public RestApiResponse<ArrayList<StudentResponse>> getStudents(){
+//        return studentService.getStudents();
+//    }
+
     @RequestMapping(value = "/students", method = RequestMethod.GET)
-    public RestApiResponse<ArrayList<StudentResponse>> getStudents(){
-        return studentService.getStudents();
+    public RestApiResponse<Page<StudentResponse>> getStudents(int pageIndex, int sizeOfPage) {
+        return studentService.getPageStudents(pageIndex, sizeOfPage);
     }
 
-    @RequestMapping(value = "/student", method = RequestMethod.GET)
+        @RequestMapping(value = "/student", method = RequestMethod.GET)
     public RestApiResponse<StudentResponse> getStudent(String id){
         return studentService.getStudent(id);
     }
