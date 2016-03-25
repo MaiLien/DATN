@@ -31,13 +31,6 @@ public class StudentServiceImpl implements IStudentService{
         return students;
     }
 
-//    public BaseResponse<Page<UserProfileResponse>> getUsers(int pageIndex, int sizeOfPage) {
-//        PageRequest pageable = new PageRequest(pageIndex, sizeOfPage);
-//        Page<User> users = userRepository.findAll(pageable);
-//        Page<UserProfileResponse> usersResponses = getUsersResponse(users, pageable, users.getTotalElements());
-//        return baseResponseProvider.createSuccessResponse(usersResponses);
-//    }
-
     public RestApiResponse<Page<StudentResponse>> getPageStudents(int pageIndex, int sizeOfPage){
         PageRequest pageable = new PageRequest(pageIndex, sizeOfPage);
         Page<Student> studentPage = studentRepository.findAll(pageable);
