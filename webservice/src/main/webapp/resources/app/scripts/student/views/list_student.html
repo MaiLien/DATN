@@ -1,89 +1,51 @@
-<!--<div class="row">-->
+<div class="row">
 
-    <!--&lt;!&ndash; Modal Unlock&ndash;&gt;-->
-    <!--<div id="unlock" class="modal fade" role="dialog">-->
-        <!--<div class="modal-dialog">-->
+    <!-- Modal Unlock-->
+    <div id="unlock" class="modal fade" role="dialog">
+        <div class="modal-dialog">
 
-            <!--&lt;!&ndash; Modal content&ndash;&gt;-->
-            <!--<div class="modal-content">-->
-                <!--<div class="modal-header">-->
-                    <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                    <!--<h4 class="modal-title">Mở khóa tài khoản</h4>-->
-                <!--</div>-->
-                <!--<div class="modal-body">-->
-                    <!--<p>Mở khóa tài khoản người dùng <a ui-sref="student.detail">{{studentCurrent.name}}</a>?</p>-->
-                <!--</div>-->
-                <!--<div class="modal-footer">-->
-                    <!--<button ng-click="unlock(studentCurrent.id)" type="button" class="btn btn-primary" data-dismiss="modal">Mở khóa</button>-->
-                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>-->
-                <!--</div>-->
-            <!--</div>-->
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Mở khóa tài khoản</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Mở khóa tài khoản người dùng <a ui-sref="student.detail">{{studentCurrent.name}}</a>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button ng-click="unlock(studentCurrent.id)" type="button" class="btn btn-primary" data-dismiss="modal">Mở khóa</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </div>
+            </div>
 
-        <!--</div>-->
-    <!--</div>-->
+        </div>
+    </div>
 
-    <!--&lt;!&ndash;Modal lock&ndash;&gt;-->
-    <!--<div id="lock" class="modal fade" role="dialog">-->
-        <!--<div class="modal-dialog">-->
+    <!--Modal lock-->
+    <div id="lock" class="modal fade" role="dialog">
+        <div class="modal-dialog">
 
-            <!--&lt;!&ndash; Modal content&ndash;&gt;-->
-            <!--<div class="modal-content">-->
-                <!--<div class="modal-header">-->
-                    <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                    <!--<h4 class="modal-title">Khóa tài khoản</h4>-->
-                <!--</div>-->
-                <!--<div class="modal-body">-->
-                    <!--<p>Khóa tài khoản người dùng <a ui-sref="student.detail">{{studentCurrent.name}}</a>?</p>-->
-                <!--</div>-->
-                <!--<div class="modal-footer">-->
-                    <!--<button ng-click="lock(studentCurrent.id)" type="button" class="btn btn-primary" data-dismiss="modal">Khóa</button>-->
-                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>-->
-                <!--</div>-->
-            <!--</div>-->
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Khóa tài khoản</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Khóa tài khoản người dùng <a ui-sref="student.detail">{{studentCurrent.name}}</a>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button ng-click="lock(studentCurrent.id)" type="button" class="btn btn-primary" data-dismiss="modal">Khóa</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </div>
+            </div>
 
-        <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="col-xs-12">-->
-
-        <!--<div class="row">-->
-            <!--<a href="#/student/add" class="btn btn-primary">Thêm sinh viên</a>-->
-        <!--</div>-->
-
-        <!--<div>-->
-            <!--<table class="table table-striped">-->
-                <!--<thead>-->
-                    <!--<tr>-->
-                        <!--<th>Mã sinh viên</th>-->
-                        <!--<th>Họ tên</th>-->
-                        <!--<th>Lớp</th>-->
-                        <!--<th>Ngày sinh</th>-->
-                        <!--<th></th>-->
-                    <!--</tr>-->
-                <!--</thead>-->
-                <!--<tbody>-->
-                    <!--<tr ng-repeat="student in students">-->
-                        <!--<td><a  ui-sref="student.detail({studentObj:'student'})">{{student.username}}</a></td>-->
-                        <!--<td>{{student.name}}</td>-->
-                        <!--<td>{{student.class_}}</td>-->
-                        <!--<td>{{student.birthday}}</td>-->
-                        <!--<td>-->
-                            <!--<btn ng-click="setStudentCurrent(student)" ng-if="student.status == 0" data-toggle="modal" data-target="#lock">-->
-                                <!--<span><i class="fa fa-unlock"></i></span>-->
-                            <!--</btn>-->
-                            <!--<btn ng-click="setStudentCurrent(student)" ng-if="student.status != 0" data-toggle="modal" data-target="#unlock">-->
-                                <!--<span><i class="fa fa-lock"></i></span>-->
-                            <!--</btn>-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                <!--</tbody>-->
-            <!--</table>-->
-        <!--</div>-->
+        </div>
+    </div>
 
 
-    <!--</div>-->
-
-<!--</div>-->
+</div>
 
 
 <div>
@@ -123,6 +85,9 @@
                                         </btn>
                                         <btn ng-click="setStudentCurrent(student)" ng-if="student.status != 0" data-toggle="modal" data-target="#unlock">
                                             <span><i class="fa fa-lock"></i></span>
+                                        </btn>
+                                        <btn class="" ng-click="showConfirm($event)" >
+                                            <span><i class="fa fa-remove"></i></span>
                                         </btn>
                                     </td>
                                 </tr>

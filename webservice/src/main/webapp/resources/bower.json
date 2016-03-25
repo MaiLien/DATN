@@ -32,6 +32,10 @@
     "raphael": "^2.1.4",
     "html5shiv": "^3.7.3",
     "respond": "^1.4.2",
-    "angular-bootstrap-datepicker": "^0.3.1"
+    "angular-bootstrap-datepicker": "^0.3.1",
+    "angular-material": "~1.0.6",
+    "ng-material": "~0.0.4",
+    "angular-aria": "~1.5.0",
+    "angular-messages": "~1.5.0"
   }
 }

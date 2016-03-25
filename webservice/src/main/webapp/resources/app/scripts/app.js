@@ -9,7 +9,8 @@ var app = angular.module('appDATN', [
   'appDATN.auth',
   'appDATN.student',
   'ui.router',
-  'bw.paging'
+  'bw.paging',
+  'ngMaterial'
 ]);
 
 /* Go to login if not authenticated */
