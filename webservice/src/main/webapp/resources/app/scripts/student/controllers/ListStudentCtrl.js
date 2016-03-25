@@ -1,26 +1,40 @@
 angular.module('appDATN.student')
-    .controller('ListStudentCtrl', function ($scope, $state, $log, StudentService, students) {
+    .controller('ListStudentCtrl', function ($scope, $state, $log, StudentService) {
 
-        $scope.students = students.content;
+        //$scope.students = students.content;
+        //
+        ////page index
+        //$scope.currentPage = students.number + 1;
+        ////size of page
+        //$scope.pageSize = students.size;
+        ////total elements
+        //$scope.total = students.totalElements;
+        //$scope.adjacent = 2;
+        //$scope.dots = '...';
+        //$scope.hideIfEmpty = true;
+        //$scope.showPrevNext = true;
+        //$scope.showFirstLast = true;
 
-        //page index
-        $scope.currentPage = students.number + 1;
-        //size of page
-        $scope.pageSize = students.size;
-        //total elements
-        $scope.total = students.totalElements;
+        $scope.students;
+        $scope.currentPage = 1;
+        $scope.pageSize = 5;
+        $scope.total = 0;
         $scope.adjacent = 2;
         $scope.dots = '...';
         $scope.hideIfEmpty = true;
         $scope.showPrevNext = true;
         $scope.showFirstLast = true;
 
-
-        $scope.getStudents = function () {
-            StudentService.getStudents(currentPage-1, pageSize)
+        $scope.getStudents = function (currentPage, pageSize) {
+            StudentService.getStudents(currentPage, pageSize)
                 .success(function (data) {
                     if (data.headers.resultCode == 0) {
-                        $scope.students = data.body;
+                        $scope.students = data.body.content;
+                        $scope.currentPage = data.body.number + 1;
+                        $scope.pageSize = data.body.size;
+                        $scope.total = data.body.totalElements;
+                    }else{
+                        $state.go('error');
                     }
                 })
                 .error(function (error) {
@@ -29,13 +43,14 @@ angular.module('appDATN.student')
         }
 
         $scope.DoPagingAct = function(text, page, pageSize, total) {
-            $state.go('student.list', {page: page - 1, size: pageSize});
+            $scope.getStudents(page-1, pageSize);
+            //$state.go('student.list', {page: page - 1, size: pageSize});
         };
 
-        //
-        //function load() {
-        //    $scope.getStudents();
-        //}
-        //
-        //load();
+
+        function load() {
+            $scope.getStudents($scope.currentPage, $scope.pageSize);
+        }
+
+        load();
     });

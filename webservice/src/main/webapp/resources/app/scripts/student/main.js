@@ -14,24 +14,25 @@ angular.module('appDATN.student')
                 }
             })
             .state('student.list', {
-                url: '/list/:page/:size',
-                resolve:{
-                    students: function ($q, $state, $stateParams, StudentService) {
-                        var deferred = $q.defer();
-                        StudentService.getStudents($stateParams.page, $stateParams.size)
-                            .success(function (data) {
-                                if(data.headers.resultCode == 0) {
-                                    deferred.resolve(data.body);
-                                }else{
-                                    deferred.reject('Error');
-                                }
-                            })
-                            .error(function (error) {
-                                deferred.reject('Error');
-                            });
-                        return deferred.promise;
-                    }
-                },
+                url: '/list',
+                //url: '/list/:page/:size',
+                //resolve:{
+                //    students: function ($q, $state, $stateParams, StudentService) {
+                //        var deferred = $q.defer();
+                //        StudentService.getStudents($stateParams.page, $stateParams.size)
+                //            .success(function (data) {
+                //                if(data.headers.resultCode == 0) {
+                //                    deferred.resolve(data.body);
+                //                }else{
+                //                    deferred.reject('Error');
+                //                }
+                //            })
+                //            .error(function (error) {
+                //                deferred.reject('Error');
+                //            });
+                //        return deferred.promise;
+                //    }
+                //},
                 views: {
                     content_view: {
                         controller: 'ListStudentCtrl',
