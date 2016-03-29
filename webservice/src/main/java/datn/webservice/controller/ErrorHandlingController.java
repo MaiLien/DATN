@@ -4,6 +4,7 @@ package datn.webservice.controller;
 import datn.interfaces.constant.MessageCodeConstant;
 import datn.interfaces.response.RestApiResponse;
 import datn.interfaces.response.RestApiResponseHeaders;
+import datn.service.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @ControllerAdvice
 public class ErrorHandlingController {
@@ -29,30 +31,64 @@ public class ErrorHandlingController {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
-    public RestApiResponse<?> handleMethodArgumentNotValidExceptionS(HttpServletRequest request, HttpServletResponse response,
-                                                     Object handler, MethodArgumentNotValidException ex) {
+    public RestApiResponse<?> handleMethodArgumentNotValidExceptionS(HttpServletRequest request, MethodArgumentNotValidException ex) {
         BindingResult result = ex.getBindingResult();
         if (isObjectValidateError(result)) {
             ObjectError error = result.getGlobalError();
-            return createBeagleFairResponseError(request, error.getDefaultMessage(), null);
+            return createResponseError(request, error.getDefaultMessage(), null);
         } else {
             FieldError fieldError = result.getFieldErrors().get(0);
-            return createBeagleFairResponseError(request, fieldError.getDefaultMessage(), fieldError.getArguments());
+            return createResponseError(request, fieldError.getDefaultMessage(), fieldError.getArguments());
         }
     }
 
     @ExceptionHandler(UsernameNotFoundException.class)
     @ResponseBody
-    public RestApiResponse<?> handleBadCredentialsException(HttpServletRequest request, HttpServletResponse response,
-                                                            Object handler, BadCredentialsException exception){
-        return createBeagleFairResponseError(request, exception.getMessage(), null);
+    public RestApiResponse<?> handleBadCredentialsException(HttpServletRequest request, BadCredentialsException exception){
+        return createResponseError(request, exception.getMessage(), null);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseBody
-    public RestApiResponse<?> handleHttpMessageNotReadableException(HttpServletRequest request, HttpServletResponse response,
-                                                                    Object handler, HttpMessageNotReadableException exception){
-        return createBeagleFairResponseError(request, MessageCodeConstant.ERROR_HTTP_MESSAGE_NOT_READABLE, null);
+    public RestApiResponse<?> handleHttpMessageNotReadableException(HttpServletRequest request, HttpMessageNotReadableException exception){
+        return createResponseError(request, MessageCodeConstant.ERROR_HTTP_MESSAGE_NOT_READABLE, null);
+    }
+
+    @ExceptionHandler(ExcelFileNotFoundException.class)
+    @ResponseBody
+    public RestApiResponse<?> handleExcelFileNotFoundException(HttpServletRequest request, ExcelFileNotFoundException exception){
+        return createResponseError(request, MessageCodeConstant.ERROR_EXCEL_FILE_NOT_FOUND, null);
+    }
+
+    @ExceptionHandler(ExtensionExcelFileException.class)
+    @ResponseBody
+    public RestApiResponse<?> handleExtensionExcelFileException(HttpServletRequest request, ExtensionExcelFileException exception){
+        return createResponseError(request, MessageCodeConstant.ERROR_EXTENSION_EXCEL_FILE, null);
+    }
+
+    @ExceptionHandler(NotFullInputAtRowException.class)
+    @ResponseBody
+    public RestApiResponse<?> handleNotFullInputAtRowException(HttpServletRequest request, NotFullInputAtRowException exception){
+        return createResponseError(request, MessageCodeConstant.ERROR_NOT_FULL_INPUT_AT_ROW, null);
+    }
+
+    @ExceptionHandler(SheetNotFoundException.class)
+    @ResponseBody
+    public RestApiResponse<?> handleSheetNotFoundException(HttpServletRequest request, SheetNotFoundException exception){
+        return createResponseError(request, MessageCodeConstant.ERROR_SHEET_NOT_FOUND, null);
+    }
+
+    @ExceptionHandler(UserExistedException.class)
+    @ResponseBody
+    public RestApiResponse<?> handleUserExistedException(HttpServletRequest request, UserExistedException exception){
+        return createResponseError(request, MessageCodeConstant.ERROR_USER_EXISTED, null);
+    }
+
+    @ExceptionHandler(IOException.class)
+    @ResponseBody
+    public RestApiResponse<?> handleIOException(HttpServletRequest request, HttpServletResponse response,
+                                                         Object handler, HttpMessageNotReadableException exception){
+        return createResponseError(request, MessageCodeConstant.ERROR_INTERNAL_SERVER, null);
     }
 
     @ExceptionHandler(Exception.class)
@@ -60,10 +96,10 @@ public class ErrorHandlingController {
     public RestApiResponse<?> handleException(HttpServletRequest request, HttpServletResponse response,
                                                            Object handler, Exception ex) {
         ex.printStackTrace();
-        return createBeagleFairResponseError(request, MessageCodeConstant.ERROR_INTERNAL_SERVER, null);
+        return createResponseError(request, MessageCodeConstant.ERROR_INTERNAL_SERVER, null);
     }
 
-    private RestApiResponse<?> createBeagleFairResponseError(HttpServletRequest request, String resultCode, Object[] messageArguments) {
+    private RestApiResponse<?> createResponseError(HttpServletRequest request, String resultCode, Object[] messageArguments) {
         RestApiResponse<String> RestApiResponse = new RestApiResponse<String>();
         RestApiResponseHeaders responseHeaders = RestApiResponse.getHeaders();
         responseHeaders.setResultCode(resultCode);
