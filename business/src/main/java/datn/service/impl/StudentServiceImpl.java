@@ -35,7 +35,6 @@ public class StudentServiceImpl implements IStudentService{
     public RestApiResponse<Page<StudentResponse>> getPageStudents(int pageIndex, int sizeOfPage){
         PageRequest pageable = new PageRequest(pageIndex, sizeOfPage);
         Page<Student> studentPage = studentRepository.findAll(pageable);
-//        Page<Student> studentPage = studentRepository.findByDeleted(0, pageable);
         Page<StudentResponse> studentResponsePage = convertStudentEntityPageToStudentResponsePage(studentPage, pageable);
 
         RestApiResponse<Page<StudentResponse>> studentResponseRestApiResponse = new RestApiResponse<Page<StudentResponse>>(studentResponsePage);

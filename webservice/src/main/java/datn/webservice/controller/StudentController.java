@@ -26,11 +26,6 @@ public class StudentController {
     @Autowired
     private StudentRepository studentRepository;
 
-//    @RequestMapping(value = "/students", method = RequestMethod.GET)
-//    public RestApiResponse<ArrayList<StudentResponse>> getStudents(){
-//        return studentService.getStudents();
-//    }
-
     @RequestMapping(value = "/students", method = RequestMethod.GET)
     public RestApiResponse<Page<StudentResponse>> getStudents(int pageIndex, int sizeOfPage) {
         return studentService.getPageStudents(pageIndex, sizeOfPage);
