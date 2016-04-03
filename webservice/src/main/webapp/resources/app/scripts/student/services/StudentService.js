@@ -21,12 +21,22 @@ angular.module('appDATN.student')
             return $http.delete('API/student', {params : student})
         }
 
+        lockStudent = function(student){
+            return $http.put('API/lockStudent', student)
+        }
+
+        unlockStudent = function(student){
+            return $http.put('API/unlockStudent', student)
+        }
+
         return {
             getStudents: getStudents,
             getStudent: getStudent,
             addStudent: addStudent,
             updateStudent: updateStudent,
-            deleteStudent: deleteStudent
+            deleteStudent: deleteStudent,
+            lockStudent: lockStudent,
+            unlockStudent: unlockStudent
         };
 
     });

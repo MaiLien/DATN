@@ -42,9 +42,8 @@ angular.module('appDATN.student')
                 });
         }
 
-        $scope.DoPagingAct = function(text, page, pageSize, total) {
+        $scope.DoPagingAct = function(text, page, pageSize) {
             $scope.getStudents(page-1, pageSize);
-            //$state.go('student.list', {page: page - 1, size: pageSize});
         };
 
         $scope.showConfirm = function(ev) {
@@ -60,6 +59,57 @@ angular.module('appDATN.student')
                 $scope.status = 'You decided to get rid of your debt.';
             }, function() {
                 $scope.status = 'You decided to keep your debt.';
+            });
+        };
+
+        $scope.deleteStudent = function(ev, student) {
+            var confirm = $mdDialog.confirm()
+                .title('Xóa sinh viên ' + student.name + '?')
+                .ariaLabel('Lucky day')
+                .targetEvent(ev)
+                .ok('Xóa')
+                .cancel('Hủy');
+            $mdDialog.show(confirm).then(function() {
+                StudentService.deleteStudent(student)
+                    .success(function(data){
+                        $scope.getStudents($scope.currentPage-1, $scope.pageSize);
+                    })
+            }, function() {
+
+            });
+        };
+
+        $scope.lockStudent = function(ev, student) {
+            var confirm = $mdDialog.confirm()
+                .title('Khóa tài khoản sinh viên ' + student.name + '?')
+                .ariaLabel('Lucky day')
+                .targetEvent(ev)
+                .ok('Khóa')
+                .cancel('Hủy');
+            $mdDialog.show(confirm).then(function() {
+                StudentService.lockStudent(student)
+                    .success(function(data){
+                        $scope.getStudents($scope.currentPage-1, $scope.pageSize);
+                    })
+            }, function() {
+
+            });
+        };
+
+        $scope.unlockStudent = function(ev, student) {
+            var confirm = $mdDialog.confirm()
+                .title('Mở khóa tài khoản sinh viên ' + student.name + '?')
+                .ariaLabel('Lucky day')
+                .targetEvent(ev)
+                .ok('Mở khóa')
+                .cancel('Hủy');
+            $mdDialog.show(confirm).then(function() {
+                StudentService.unlockStudent(student)
+                    .success(function(data){
+                        $scope.getStudents($scope.currentPage-1, $scope.pageSize);
+                    })
+            }, function() {
+
             });
         };
 

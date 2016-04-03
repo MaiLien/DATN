@@ -56,4 +56,14 @@ public class StudentController {
         return studentService.deleteStudent(studentRequest);
     }
 
+    @RequestMapping(value = "/lockStudent", method = RequestMethod.PUT)
+    public RestApiResponse<StudentResponse> lockStudent(@RequestBody StudentRequest studentRequest){
+        return studentService.lockStudent(studentRequest);
+    }
+
+    @RequestMapping(value = "/unlockStudent", method = RequestMethod.PUT)
+    public RestApiResponse<StudentResponse> unlockStudent(@RequestBody StudentRequest studentRequest){
+        return studentService.unlockStudent(studentRequest);
+    }
+
 }

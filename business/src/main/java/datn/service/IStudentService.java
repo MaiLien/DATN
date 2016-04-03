@@ -21,6 +21,10 @@ public interface IStudentService {
 
     public RestApiResponse<StudentResponse> updateStudent(StudentRequest studentRequest);
 
+    public RestApiResponse<StudentResponse> lockStudent(StudentRequest studentRequest);
+
+    public RestApiResponse<StudentResponse> unlockStudent(StudentRequest studentRequest);
+
     public Student getStudentEntity(String id);
 
     public RestApiResponse<Page<StudentResponse>> getPageStudents(int pageIndex, int sizeOfPage);

@@ -1,6 +1,7 @@
 package datn.service.impl;
 
 import datn.dao.constant.Gender;
+import datn.dao.constant.UserStatusConstant;
 import datn.dao.entity.Student;
 import datn.dao.repository.StudentRepository;
 import datn.interfaces.request.StudentRequest;
@@ -34,6 +35,7 @@ public class StudentServiceImpl implements IStudentService{
     public RestApiResponse<Page<StudentResponse>> getPageStudents(int pageIndex, int sizeOfPage){
         PageRequest pageable = new PageRequest(pageIndex, sizeOfPage);
         Page<Student> studentPage = studentRepository.findAll(pageable);
+//        Page<Student> studentPage = studentRepository.findByDeleted(0, pageable);
         Page<StudentResponse> studentResponsePage = convertStudentEntityPageToStudentResponsePage(studentPage, pageable);
 
         RestApiResponse<Page<StudentResponse>> studentResponseRestApiResponse = new RestApiResponse<Page<StudentResponse>>(studentResponsePage);
@@ -80,6 +82,26 @@ public class StudentServiceImpl implements IStudentService{
 
     public RestApiResponse<StudentResponse> updateStudent(StudentRequest studentRequest) {
         Student studentEntity = convertStudentRequestToStudentEntity(studentRequest);
+        studentEntity = studentRepository.save(studentEntity);
+        StudentResponse studentResponse = convertStudentEntityToStudentResponse(studentEntity);
+        RestApiResponse<StudentResponse> student = new RestApiResponse<StudentResponse>(studentResponse);
+
+        return student;
+    }
+
+    public RestApiResponse<StudentResponse> lockStudent(StudentRequest studentRequest) {
+        Student studentEntity = convertStudentRequestToStudentEntity(studentRequest);
+        studentEntity.setStatus(UserStatusConstant.BLOCK);
+        studentEntity = studentRepository.save(studentEntity);
+        StudentResponse studentResponse = convertStudentEntityToStudentResponse(studentEntity);
+        RestApiResponse<StudentResponse> student = new RestApiResponse<StudentResponse>(studentResponse);
+
+        return student;
+    }
+
+    public RestApiResponse<StudentResponse> unlockStudent(StudentRequest studentRequest) {
+        Student studentEntity = convertStudentRequestToStudentEntity(studentRequest);
+        studentEntity.setStatus(UserStatusConstant.ACTIVE);
         studentEntity = studentRepository.save(studentEntity);
         StudentResponse studentResponse = convertStudentEntityToStudentResponse(studentEntity);
         RestApiResponse<StudentResponse> student = new RestApiResponse<StudentResponse>(studentResponse);
