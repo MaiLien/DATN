@@ -32,13 +32,31 @@ public class StudentServiceImpl implements IStudentService{
         return students;
     }
 
-    public RestApiResponse<Page<StudentResponse>> getPageStudents(int pageIndex, int sizeOfPage){
+    public RestApiResponse<Page<StudentResponse>> getPageStudents(int pageIndex, int sizeOfPage, String searchInput){
         PageRequest pageable = new PageRequest(pageIndex, sizeOfPage);
-        Page<Student> studentPage = studentRepository.findAll(pageable);
+        Page<Student> studentPage = null;
+        if(searchInput == null || "".equals(searchInput)){
+            studentPage = studentRepository.findAll(pageable);
+        }else{
+            searchInput = formatSearchInput(searchInput);
+            studentPage = studentRepository.findBySearchInput(pageable, searchInput);
+        }
         Page<StudentResponse> studentResponsePage = convertStudentEntityPageToStudentResponsePage(studentPage, pageable);
 
         RestApiResponse<Page<StudentResponse>> studentResponseRestApiResponse = new RestApiResponse<Page<StudentResponse>>(studentResponsePage);
         return  studentResponseRestApiResponse;
+    }
+
+    private String formatSearchInput(String searchInput){
+        StringBuffer formatSearchInput = new StringBuffer();
+        String[] arrText = searchInput.split(" ");
+        formatSearchInput.append("%");
+        for (int i = 0; i < arrText.length; i++){
+            formatSearchInput.append(arrText[i].toLowerCase());
+            formatSearchInput.append("%");
+        }
+
+        return  formatSearchInput.toString();
     }
 
     private Page<StudentResponse> convertStudentEntityPageToStudentResponsePage(Page<Student> studentPage, PageRequest pageable){

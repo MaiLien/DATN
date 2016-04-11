@@ -1,5 +1,5 @@
 angular.module('appDATN.student')
-    .controller('ListStudentCtrl', function ($scope, $state, $log, $mdDialog, StudentService) {
+    .controller('ListStudentCtrl', function ($scope, $state, $log, $mdDialog, $mdMedia, StudentService) {
 
         //$scope.students = students.content;
         //
@@ -25,8 +25,8 @@ angular.module('appDATN.student')
         $scope.showPrevNext = true;
         $scope.showFirstLast = true;
 
-        $scope.getStudents = function (currentPage, pageSize) {
-            StudentService.getStudents(currentPage, pageSize)
+        $scope.getStudents = function (currentPage, pageSize, searchInput) {
+            StudentService.getStudents(currentPage, pageSize, searchInput)
                 .success(function (data) {
                     if (data.headers.resultCode == 0) {
                         $scope.students = data.body.content;
@@ -46,21 +46,20 @@ angular.module('appDATN.student')
             $scope.getStudents(page-1, pageSize);
         };
 
-        $scope.showConfirm = function(ev) {
-            // Appending dialog to document.body to cover sidenav in docs app
-            var confirm = $mdDialog.confirm()
-                .title('Would you like to delete your debt?')
-                .textContent('All of the banks have agreed to forgive you your debts.')
-                .ariaLabel('Lucky day')
-                .targetEvent(ev)
-                .ok('Please do it!')
-                .cancel('Sounds like a scam');
-            $mdDialog.show(confirm).then(function() {
-                $scope.status = 'You decided to get rid of your debt.';
-            }, function() {
-                $scope.status = 'You decided to keep your debt.';
-            });
-        };
+        //$scope.showConfirm = function(ev) {
+        //    var confirm = $mdDialog.confirm()
+        //        .title('Would you like to delete your debt?')
+        //        .textContent('All of the banks have agreed to forgive you your debts.')
+        //        .ariaLabel('Lucky day')
+        //        .targetEvent(ev)
+        //        .ok('Please do it!')
+        //        .cancel('Sounds like a scam');
+        //    $mdDialog.show(confirm).then(function() {
+        //        $scope.status = 'You decided to get rid of your debt.';
+        //    }, function() {
+        //        $scope.status = 'You decided to keep your debt.';
+        //    });
+        //};
 
         $scope.deleteStudent = function(ev, student) {
             var confirm = $mdDialog.confirm()
@@ -72,7 +71,7 @@ angular.module('appDATN.student')
             $mdDialog.show(confirm).then(function() {
                 StudentService.deleteStudent(student)
                     .success(function(data){
-                        $scope.getStudents($scope.currentPage-1, $scope.pageSize);
+                        $scope.getStudents($scope.currentPage-1, $scope.pageSize, $scope.searchInput);
                     })
             }, function() {
 
@@ -89,7 +88,7 @@ angular.module('appDATN.student')
             $mdDialog.show(confirm).then(function() {
                 StudentService.lockStudent(student)
                     .success(function(data){
-                        $scope.getStudents($scope.currentPage-1, $scope.pageSize);
+                        $scope.getStudents($scope.currentPage-1, $scope.pageSize, $scope.searchInput);
                     })
             }, function() {
 
@@ -106,11 +105,38 @@ angular.module('appDATN.student')
             $mdDialog.show(confirm).then(function() {
                 StudentService.unlockStudent(student)
                     .success(function(data){
-                        $scope.getStudents($scope.currentPage-1, $scope.pageSize);
+                        $scope.getStudents($scope.currentPage-1, $scope.pageSize, $scope.searchInput);
                     })
             }, function() {
 
             });
+        };
+
+        $scope.editStudent = function (ev, student) {
+            var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+            $mdDialog.show({
+                controller: ListStudentCtrl,
+                templateUrl: 'edit_student.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                fullscreen: useFullScreen
+            })
+                .then(function(answer) {
+                    $scope.status = 'You said the information was "';
+                }, function() {
+                    $scope.status = 'You cancelled the dialog.';
+                });
+            $scope.$watch(function() {
+                return $mdMedia('xs') || $mdMedia('sm');
+            }, function(wantsFullScreen) {
+                $scope.customFullscreen = (wantsFullScreen === true);
+            });
+        };
+
+        $scope.searchStudent = function (searchInput) {
+            $scope.currentPage = 0;
+            $scope.getStudents($scope.currentPage, $scope.pageSize, searchInput);
         };
 
         function load() {
@@ -118,4 +144,5 @@ angular.module('appDATN.student')
         }
 
         load();
+
     });

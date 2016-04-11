@@ -27,8 +27,8 @@ public class StudentController {
     private StudentRepository studentRepository;
 
     @RequestMapping(value = "/students", method = RequestMethod.GET)
-    public RestApiResponse<Page<StudentResponse>> getStudents(int pageIndex, int sizeOfPage) {
-        return studentService.getPageStudents(pageIndex, sizeOfPage);
+    public RestApiResponse<Page<StudentResponse>> getStudents(int pageIndex, int sizeOfPage, String searchInput) {
+        return studentService.getPageStudents(pageIndex, sizeOfPage, searchInput);
     }
 
     @RequestMapping(value = "/student", method = RequestMethod.GET)

@@ -1,7 +1,7 @@
 <div>
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <a class="btn btn-primary">Thêm sinh viên</a>
+        <a ui-sref="student.add" class="btn btn-primary">Thêm sinh viên</a>
     </section>
 
     <!-- Main content -->
@@ -10,7 +10,18 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Hover Data Table</h3>
+                        <!-- button search-->
+                        <div class="row">
+                            <div class="col-sm-4 col-sm-offset-8">
+                                <div class="input-group">
+                                    <input ng-model="searchInput" type="text" name="q" class="form-control" placeholder="Nhập mã sinh viên hoặc tên">
+                                    <span class="input-group-btn">
+                                        <button ng-click="searchStudent(searchInput)" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <div style="min-height:450px; overflow:auto">
@@ -28,12 +39,12 @@
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="student in students">
-                                    <td><a  ui-sref="student.detail({studentObj:'student'})">{{student.username}}</a></td>
+                                    <td><a>{{student.username}}</a></td>
                                     <td>{{student.name}}</td>
                                     <td>{{student.class_}}</td>
                                     <td>{{student.birthday}}</td>
                                     <td>
-                                        <a class="" ng-click="showConfirm($event)" >
+                                        <a class="" ng-click="editStudent($event, student)" >
                                             <span><i class="fa fa-edit"></i></span>
                                         </a>
                                     </td>

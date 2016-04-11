@@ -27,6 +27,6 @@ public interface IStudentService {
 
     public Student getStudentEntity(String id);
 
-    public RestApiResponse<Page<StudentResponse>> getPageStudents(int pageIndex, int sizeOfPage);
+    public RestApiResponse<Page<StudentResponse>> getPageStudents(int pageIndex, int sizeOfPage, String searchInput);
 
 }

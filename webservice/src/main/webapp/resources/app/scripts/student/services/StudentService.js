@@ -1,8 +1,8 @@
 angular.module('appDATN.student')
     .factory("StudentService", function ($http) {
 
-        getStudents = function(pageIndex, sizeOfPage){
-            return $http.get('API/students', {params : {pageIndex: pageIndex, sizeOfPage:sizeOfPage}});
+        getStudents = function(pageIndex, sizeOfPage, searchInput){
+            return $http.get('API/students', {params : {pageIndex: pageIndex, sizeOfPage:sizeOfPage, searchInput:searchInput}});
         }
 
         getStudent = function(studentId){
