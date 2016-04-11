@@ -1,26 +1,24 @@
 angular.module('appDATN.student')
-    .controller('AddStudentFromFileCtrl', function ($scope, $state, $timeout, Upload, StudentService) {
+    .controller('AddStudentFromFileCtrl', function ($scope, $timeout, StudentService) {
 
         $scope.addStudentFromFile = function (student) {
 
         }
 
         $scope.uploadPic = function (file) {
-            file.upload = Upload.upload({
-                url: '/importStudentFromFile',
-                data: {excelFile: file}
-            });
-
-            file.upload.then(function (response) {
-                $timeout(function () {
-                    file.result = response.data;
+            StudentService.addStudentFromFile(file)
+                .then(function (response) {
+                    $timeout(function () {
+                        file.result = response.data;
+                        $scope.smsResult = "ok";
+                    });
+                }, function (response) {
+                    if (response.status > 0)
+                        $scope.smsResult = "fail";
+                        $scope.errorMsg = response.status + ': ' + response.data;
+                }, function (evt) {
+                    //progress
                 });
-            }, function (response) {
-                if (response.status > 0)
-                    $scope.errorMsg = response.status + ': ' + response.data;
-            }, function (evt) {
-                //progress
-            });
         }
 
     });

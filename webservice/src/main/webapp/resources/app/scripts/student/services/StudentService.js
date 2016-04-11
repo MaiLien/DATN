@@ -1,5 +1,5 @@
 angular.module('appDATN.student')
-    .factory("StudentService", function ($http) {
+    .factory("StudentService", function ($http, Upload) {
 
         getStudents = function(pageIndex, sizeOfPage, searchInput){
             return $http.get('API/students', {params : {pageIndex: pageIndex, sizeOfPage:sizeOfPage, searchInput:searchInput}});
@@ -13,8 +13,11 @@ angular.module('appDATN.student')
             return $http.post('API/student', student)
         }
 
-        addStudentFromFile = function(excelFile){
-            return $http.post('importStudentFromFile', excelFile)
+        addStudentFromFile = function(file){
+            return file.upload = Upload.upload({
+                url: '/importStudentFromFile',
+                data: {excelFile: file}
+            });
         }
 
         updateStudent = function(student){
