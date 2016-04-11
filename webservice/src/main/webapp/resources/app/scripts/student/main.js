@@ -49,6 +49,15 @@ angular.module('appDATN.student')
                     }
                 }
             })
+            .state('student.addFromFile', {
+                url: '/addFromFile',
+                views: {
+                    content_view: {
+                        controller: 'AddStudentFromFileCtrl',
+                        templateUrl: '/resources/app/scripts/student/views/add_student_from_file.html'
+                    }
+                }
+            })
             .state('student.detail', {
                 url: '/detail/:studentObj',
                 views: {

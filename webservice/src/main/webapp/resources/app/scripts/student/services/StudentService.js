@@ -13,6 +13,10 @@ angular.module('appDATN.student')
             return $http.post('API/student', student)
         }
 
+        addStudentFromFile = function(excelFile){
+            return $http.post('importStudentFromFile', excelFile)
+        }
+
         updateStudent = function(student){
             return $http.put('API/student', student)
         }

@@ -10,7 +10,8 @@ var app = angular.module('appDATN', [
   'appDATN.student',
   'ui.router',
   'bw.paging',
-  'ngMaterial'
+  'ngMaterial',
+  'ngFileUpload'
 ]);
 
 /* Go to login if not authenticated */
@@ -35,8 +36,10 @@ app.run(function ($rootScope, $state) {
 });
 
 /* Set a default state */
-app.config(function ($urlRouterProvider) {
+app.config(function ($urlRouterProvider, $httpProvider) {
   $urlRouterProvider.when('', '/login');
+  $httpProvider.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
+  $httpProvider.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
   //$urlRouterProvider.otherwise('/login');
 });
 

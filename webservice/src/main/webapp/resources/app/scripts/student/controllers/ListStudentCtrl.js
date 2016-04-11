@@ -79,6 +79,7 @@ angular.module('appDATN.student')
         };
 
         $scope.lockStudent = function(ev, student) {
+            console.log("Khóa tài khoản sinh viên ");
             var confirm = $mdDialog.confirm()
                 .title('Khóa tài khoản sinh viên ' + student.name + '?')
                 .ariaLabel('Lucky day')

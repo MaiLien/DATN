@@ -23,86 +23,88 @@
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-    <div class="wrapper">
-        <div ui-view="menu_view"></div>
-        <!-- Content Wrapper. Contains page content -->
-        <div ui-view="sidebar_view"></div>
-        <div class="content-wrapper">
-            <div ui-view="content_view"></div>
-        </div>
-        <!-- /.content-wrapper -->
-        <div ui-view="footer_view"></div>
-
-        <div class="control-sidebar-bg"></div>
+<div class="wrapper">
+    <div ui-view="menu_view"></div>
+    <!-- Content Wrapper. Contains page content -->
+    <div ui-view="sidebar_view"></div>
+    <div class="content-wrapper">
+        <div ui-view="content_view"></div>
     </div>
-    <!-- ./wrapper -->
+    <!-- /.content-wrapper -->
+    <div ui-view="footer_view"></div>
 
-    <!-- jQuery 2.1.4 -->
-    <script src="/resources/bower_components/jquery/dist/jquery.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="/resources/bower_components/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button);
-    </script>
-    <!-- Bootstrap 3.3.5 -->
-    <script src="/resources/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
 
-    <script src="/resources/bower_components/raphael/raphael-min.js"></script>
-    <script src="/resources/template2/plugins/morris/morris.min.js"></script>
-    <!-- Sparkline -->
-    <script src="/resources/template2/plugins/sparkline/jquery.sparkline.min.js"></script>
-    <!-- jvectormap -->
-    <script src="/resources/template2/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="/resources/template2/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="/resources/template2/plugins/knob/jquery.knob.js"></script>
-    <!-- daterangepicker -->
-    <script src="/resources/bower_components/moment/moment.js"></script>
-    <script src="/resources/template2/plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- datepicker -->
-    <script src="/resources/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <!-- Bootstrap WYSIHTML5 -->
-    <script src="/resources/template2/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<!-- jQuery 2.1.4 -->
+<script src="/resources/bower_components/jquery/dist/jquery.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="/resources/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+    $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- Bootstrap 3.3.5 -->
+<script src="/resources/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 
-    <!-- DataTables -->
-    <script src="/resources/template2/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="/resources/template2/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="/resources/bower_components/raphael/raphael-min.js"></script>
+<script src="/resources/template2/plugins/morris/morris.min.js"></script>
+<!-- Sparkline -->
+<script src="/resources/template2/plugins/sparkline/jquery.sparkline.min.js"></script>
+<!-- jvectormap -->
+<script src="/resources/template2/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="/resources/template2/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="/resources/template2/plugins/knob/jquery.knob.js"></script>
+<!-- daterangepicker -->
+<script src="/resources/bower_components/moment/moment.js"></script>
+<script src="/resources/template2/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- datepicker -->
+<script src="/resources/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="/resources/template2/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 
-    <!-- Slimscroll -->
-    <script src="/resources/template2/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-    <!-- FastClick -->
-    <script src="/resources/template2/plugins/fastclick/fastclick.min.js"></script>
+<!-- DataTables -->
+<script src="/resources/template2/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/resources/template2/plugins/datatables/dataTables.bootstrap.min.js"></script>
 
-    <%--<script src="/resources/app/js/datepicker.js"></script>--%>
+<!-- Slimscroll -->
+<script src="/resources/template2/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="/resources/template2/plugins/fastclick/fastclick.min.js"></script>
 
-    <script src="/resources/template_login/js/jquery.backstretch.min.js"></script>
+<%--<script src="/resources/app/js/datepicker.js"></script>--%>
 
-    <div ui-view="js_imported"></div>
+<script src="/resources/template_login/js/jquery.backstretch.min.js"></script>
 
-    <script src="/resources/bower_components/angular/angular.js"></script>
-    <%--<script src="/resources/bower_components/angular-bootstrap-datepicker/dist/angular-bootstrap-datepicker.js" charset="utf-8"></script>--%>
-    <script src="/resources/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="/resources/template_paging/paging.js"></script>
-    <script src="/resources/bower_components/angular-animate/angular-animate.js"></script>
-    <script src="/resources/bower_components/angular-material/angular-material.js"></script>
-    <script src="/resources/bower_components/angular-aria/angular-aria.js"></script>
-    <script src="/resources/bower_components/angular-messages/angular-messages.js"></script>
+<div ui-view="js_imported"></div>
 
+<script src="/resources/bower_components/angular/angular.js"></script>
+<%--<script src="/resources/bower_components/angular-bootstrap-datepicker/dist/angular-bootstrap-datepicker.js" charset="utf-8"></script>--%>
+<script src="/resources/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="/resources/template_paging/paging.js"></script>
+<script src="/resources/bower_components/angular-animate/angular-animate.js"></script>
+<script src="/resources/bower_components/angular-material/angular-material.js"></script>
+<script src="/resources/bower_components/angular-aria/angular-aria.js"></script>
+<script src="/resources/bower_components/angular-messages/angular-messages.js"></script>
+<script src="/resources/bower_components/ng-file-upload/ng-file-upload.js"></script>
     <script src="/resources/app/scripts/app.js" URIEncoding="UTF-8"></script>
 
-    <script src="/resources/app/scripts/common/main.js" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/app.js"  charset="utf-8"></script>
 
-    <script src="/resources/app/scripts/authenticate/main.js" URIEncoding="UTF-8"></script>
-    <script src="/resources/app/scripts/authenticate/controllers/AuthCtrl.js" URIEncoding="UTF-8"></script>
-    <script src="/resources/app/scripts/authenticate/services/AuthService.js" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/common/main.js"  charset="utf-8"></script>
 
-    <script src="/resources/app/scripts/student/main.js" URIEncoding="UTF-8"></script>
-    <script src="/resources/app/scripts/student/services/StudentService.js" URIEncoding="UTF-8"></script>
-    <script src="/resources/app/scripts/student/controllers/StudentCtrl.js"  URIEncoding="UTF-8"></script>
-    <script src="/resources/app/scripts/student/controllers/AddStudentCtrl.js" URIEncoding="UTF-8"></script>
-    <script src="/resources/app/scripts/student/controllers/ListStudentCtrl.js" URIEncoding="UTF-8"></script>
-    <script src="/resources/app/scripts/student/controllers/EditStudentCtrl.js" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/authenticate/main.js"  charset="utf-8"></script>
+<script src="/resources/app/scripts/authenticate/controllers/AuthCtrl.js"  charset="utf-8"></script>
+<script src="/resources/app/scripts/authenticate/services/AuthService.js"  charset="utf-8"></script>
+
+<script src="/resources/app/scripts/student/main.js"  charset="utf-8"></script>
+<script src="/resources/app/scripts/student/services/StudentService.js" charset="utf-8"></script>
+<script src="/resources/app/scripts/student/controllers/StudentCtrl.js" charset="utf-8"></script>
+<script src="/resources/app/scripts/student/controllers/AddStudentCtrl.js" charset="utf-8"></script>
+<script src="/resources/app/scripts/student/controllers/ListStudentCtrl.js" charset="utf-8"></script>
+<script src="/resources/app/scripts/student/controllers/EditStudentCtrl.js" URIEncoding="UTF-8"></script>
 
 </body>
 </html>
