@@ -105,6 +105,7 @@
 <script src="/resources/app/scripts/student/controllers/AddStudentCtrl.js" charset="utf-8"></script>
 <script src="/resources/app/scripts/student/controllers/ListStudentCtrl.js" charset="utf-8"></script>
 <script src="/resources/app/scripts/student/controllers/EditStudentCtrl.js" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/student/controllers/AddStudentFromFileExcelCtrl.js" URIEncoding="UTF-8"></script>
 
 </body>
 </html>

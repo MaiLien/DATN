@@ -37,6 +37,7 @@ angular.module('appDATN.student')
             getStudents: getStudents,
             getStudent: getStudent,
             addStudent: addStudent,
+            addStudentFromFile: addStudentFromFile,
             updateStudent: updateStudent,
             deleteStudent: deleteStudent,
             lockStudent: lockStudent,

@@ -1,14 +1,14 @@
 angular.module('appDATN.student')
-    .controller('AddStudentFromFileCtrl', function ($scope, $state, $timeout, StudentService) {
+    .controller('AddStudentFromFileCtrl', function ($scope, $state, $timeout, Upload, StudentService) {
 
-        $scope.addStudentFromFile = function(student){
+        $scope.addStudentFromFile = function (student) {
 
         }
 
-        $scope.uploadPic = function(file) {
+        $scope.uploadPic = function (file) {
             file.upload = Upload.upload({
-                url: 'importStudentFromFile',
-                data: {file: file},
+                url: '/importStudentFromFile',
+                data: {excelFile: file}
             });
 
             file.upload.then(function (response) {
@@ -19,7 +19,8 @@ angular.module('appDATN.student')
                 if (response.status > 0)
                     $scope.errorMsg = response.status + ': ' + response.data;
             }, function (evt) {
+                //progress
             });
         }
 
-});
+    });

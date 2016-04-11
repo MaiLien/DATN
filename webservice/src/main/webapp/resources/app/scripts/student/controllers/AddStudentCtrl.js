@@ -16,7 +16,7 @@ angular.module('appDATN.student')
             }else{
                 $scope.setDirty();
             }
-        }
+        };
 
         $scope.setDirty = function(){
             if($scope.addStudentForm.$invalid){
@@ -25,7 +25,6 @@ angular.module('appDATN.student')
                         control.$setDirty();
                     });
                 });
-                return;
             }
         }
 

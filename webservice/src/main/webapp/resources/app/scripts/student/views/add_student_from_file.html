@@ -5,14 +5,13 @@
 
         <input type="file"
                ngf-select
+               ng-model="picFile"
+               name="file"
                required
                ngf-model-invalid="errorFile">
-        <i ng-show="myForm.file.$error.required">*required</i><br>
 
         <button ng-disabled="!myForm.$valid"
                 ng-click="uploadPic(picFile)">Submit</button>
-
-        <span ng-show="picFile.result">Upload Successful</span>
 
     </fieldset>
     <br>
