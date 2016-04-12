@@ -136,8 +136,10 @@ angular.module('appDATN.student')
         };
 
         $scope.searchStudent = function (searchInput) {
-            $scope.currentPage = 0;
-            $scope.getStudents($scope.currentPage, $scope.pageSize, searchInput);
+            if(!(searchInput == null || searchInput == "")){
+                $scope.currentPage = 0;
+                $scope.getStudents($scope.currentPage, $scope.pageSize, searchInput);
+            }
         };
 
         function load() {

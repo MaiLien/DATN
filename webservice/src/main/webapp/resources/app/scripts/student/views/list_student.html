@@ -13,13 +13,17 @@
                         <!-- button search-->
                         <div class="row">
                             <div class="col-sm-4 col-sm-offset-8">
-                                <div class="input-group">
-                                    <input ng-model="searchInput" type="text" name="q" class="form-control" placeholder="Nhập mã sinh viên hoặc tên">
-                                    <span class="input-group-btn">
-                                        <button ng-click="searchStudent(searchInput)" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
+                                <div class="form-group input-group">
+                                    <input ng-model="searchInput" type="text" class="form-control" placeholder="Nhập mã sinh viên hoặc tên">
+                                    <span class="input-group-btn"><button class="btn btn-default" ng-click="searchStudent(searchInput)" type="button"><i class="fa fa-search"></i></button></span>
                                 </div>
+                                <!--<div class="input-group">-->
+                                    <!--<input ng-model="searchInput" type="text" name="q" class="form-control" placeholder="Nhập mã sinh viên hoặc tên">-->
+                                    <!--<span class="input-group-btn">-->
+                                        <!--<button ng-click="searchStudent(searchInput)" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>-->
+                                        <!--</button>-->
+                                    <!--</span>-->
+                                <!--</div>-->
                             </div>
                         </div>
                     </div><!-- /.box-header -->

@@ -1,13 +1,15 @@
 'use strict';
 
-angular.module('appDATN.common', ['ui.router'])
-angular.module('appDATN.auth', [])
-angular.module('appDATN.student', ['appDATN.auth', 'appDATN.common'])
+angular.module('appDATN.common', ['ui.router']);
+angular.module('appDATN.auth', []);
+angular.module('appDATN.student', ['appDATN.auth', 'appDATN.common']);
+angular.module('appDATN.wave', []);
 
 var app = angular.module('appDATN', [
   'appDATN.common',
   'appDATN.auth',
   'appDATN.student',
+  'appDATN.wave',
   'ui.router',
   'bw.paging',
   'ngMaterial',

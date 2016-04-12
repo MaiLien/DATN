@@ -107,6 +107,11 @@
 <script src="/resources/app/scripts/student/controllers/EditStudentCtrl.js" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/student/controllers/AddStudentFromFileExcelCtrl.js" URIEncoding="UTF-8"></script>
 
+
+<script src="/resources/app/scripts/wave/main.js" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/wave/services/ProjectWaveService.js" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/wave/controllers/AddProjectWaveCtrl.js" URIEncoding="UTF-8"></script>
+
 </body>
 </html>
 
