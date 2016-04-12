@@ -19,6 +19,8 @@
     <%--<link rel="stylesheet" href="/resources/bower_components/angular-bootstrap-datepicker/dist/angular-bootstrap-datepicker.css" />--%>
     <link href="/resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" rel="stylesheet">
     <link href="/resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/resources/template2/plugins/daterangepicker/daterangepicker-bs3.css">
     <%--<link rel="stylesheet" href="/resources/app/styles/mystyle.css">--%>
 
 </head>
@@ -62,6 +64,10 @@
 <script src="/resources/template2/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
 <script src="/resources/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+<%--date range picker--%>
+<script src="/resources/template2/plugins/daterangepicker/daterangepicker.js"></script>
+
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/resources/template2/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 
