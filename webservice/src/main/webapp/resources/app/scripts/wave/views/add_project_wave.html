@@ -1,36 +1,78 @@
-<div>
-    <!-- Date range -->
-    <div class="form-group">
-        <label>Date range:</label>
-        <div class="input-group">
-            <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
-            </div>
-            <input type="text" class="form-control pull-right" id="reservation">
-        </div><!-- /.input group -->
-    </div><!-- /.form group -->
+<div ng-controller="AddProjectWaveCtrl">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h3 class="box-title">Nhập thông tin đợt ĐATN</h3>
+    </section>
 
-    <!-- Date and time range -->
-    <div class="form-group">
-        <label>Date and time range:</label>
-        <div class="input-group">
-            <div class="input-group-addon">
-                <i class="fa fa-clock-o"></i>
-            </div>
-            <input type="text" class="form-control pull-right" id="reservationtime">
-        </div><!-- /.input group -->
-    </div><!-- /.form group -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <!--<h3 class="box-title">Hover Data Table</h3>-->
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
 
-    <!-- Date and time range -->
-    <div class="form-group">
-        <label>Date range button:</label>
-        <div class="input-group">
-            <button class="btn btn-default pull-right" id="daterange-btn">
-                <i class="fa fa-calendar"></i> Date range picker
-                <i class="fa fa-caret-down"></i>
-            </button>
-        </div>
-    </div><!-- /.form group -->
+                        <form name="addWaveForm" novalidate class="form-horizontal">
+                            <div class="box-body">
+
+                                <!-- SchoolYear-->
+                                <div class="form-group">
+                                    <label for="schoolYear" class="col-sm-2 control-label">Năm học</label>
+                                    <div class="col-sm-10" ng-class="{'has-error' : addWaveForm.schoolYear.$invalid && !addWaveForm.schoolYear.$pristine}">
+                                        <input ng-model="wave.schoolYear" name="schoolYear" required type="text" class="form-control" id="schoolYear" placeholder="Năm học">
+                                        <label ng-if="addWaveForm.schoolYear.$invalid && !addWaveForm.schoolYear.$pristine" class="control-label" for="schoolYear"><i class="fa fa-times-circle-o"></i> Năm học không được trống</label>
+                                    </div>
+                                </div>
+
+                                <!-- Semester-->
+                                <div class="form-group">
+                                    <label for="semester" class="col-sm-2 control-label">Họ tên</label>
+                                    <div class="col-sm-10" ng-class="{'has-error' : addWaveForm.semester.$invalid && !addWaveForm.semester.$pristine}">
+                                        <input ng-model="wave.semester" name="semester" required type="text" class="form-control" id="semester" placeholder="Học kỳ">
+                                        <label ng-if="addWaveForm.semester.$invalid && !addWaveForm.semester.$pristine" class="control-label" for="semester"><i class="fa fa-times-circle-o"></i> Học kỳ không được trống</label>
+                                    </div>
+                                </div>
+
+                                <!-- Time-->
+                                <div class="form-group">
+                                    <label for="time" class="col-sm-2 control-label">Thời gian bắt đầu và kết thúc</label>
+                                    <div class="col-sm-10" ng-class="{'has-error' : addWaveForm.time.$invalid && !addWaveForm.time.$pristine}">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" class="form-control pull-right" id="reservation">
+                                        </div>
+                                        <label ng-if="addWaveForm.time.$invalid && !addWaveForm.time.$pristine" class="control-label" for="time"><i class="fa fa-times-circle-o"></i> Thời gian không được trống</label>
+                                    </div>
+                                </div>
+
+                                <!-- number of progress reports-->
+                                <div class="form-group">
+                                    <label for="numberOfProgressReport" class="col-sm-2 control-label">Số lần báo cáo tiền độ</label>
+                                    <div class="col-sm-10" ng-class="{'has-error' : addWaveForm.numberOfProgressReport.$invalid && !addWaveForm.numberOfProgressReport.$pristine}">
+                                        <input ng-model="wave.numberOfProgressReport" name="numberOfProgressReport" required type="text" class="form-control" id="numberOfProgressReport" placeholder="Số lần báo cáo tiền độ">
+                                        <label ng-if="addWaveForm.numberOfProgressReport.$invalid && !addWaveForm.numberOfProgressReport.$pristine" class="control-label" for="numberOfProgressReport"><i class="fa fa-times-circle-o"></i> Số lần báo cáo tiền độ không được trống</label>
+                                    </div>
+                                </div>
+
+                                <div class="box-footer">
+                                    <button type="submit" class="btn btn-primary pull-right" ng-click="addWave(wave)">Thêm</button>
+                                    <button type="reset" class="btn btn-default" ng-click="addWaveForm.$setPristine()">Hủy</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+
+            </div><!-- /.col -->
+
+        </div><!-- /.row -->
+
+    </section><!-- /.content -->
 </div>
 <script>
     //Date range picker
