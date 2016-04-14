@@ -110,10 +110,18 @@
                                     <label for="numberOfProgressReport" class="col-sm-3 control-label">Số lần báo cáo tiền độ</label>
                                     <div class="col-sm-8" ng-class="{'has-error' : addWaveForm.numberOfProgressReport.$invalid && !addWaveForm.numberOfProgressReport.$pristine}">
                                         <div>
-                                            <table class="table table-hover">
+                                            <table class="table table-hover" style=" border: 1px solid #ccc !important; border-top: 1px solid #ccc !important;">
                                                 <body>
                                                     <tr>
-                                                        <td style="position: relative; border: 1px solid #ccc;">
+                                                        <td style="position: relative;">
+                                                            14/04/2016 00:00:00 - 14/04/2016 23:59:59
+                                                            <button class="btn-delete" class="ng-scope" ng-if="!readonly">
+                                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="position: relative;">
                                                             14/04/2016 00:00:00 - 14/04/2016 23:59:59
                                                             <button class="btn-delete" class="ng-scope" ng-if="!readonly">
                                                                 <i class="fa fa-times" aria-hidden="true"></i>
