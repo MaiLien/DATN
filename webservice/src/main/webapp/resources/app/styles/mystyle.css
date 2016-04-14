@@ -1,17 +1,24 @@
-html, body{height:100%; margin:0;padding:0}
-
-.container-fluid{
-    height:100%;
-    display:table;
-    width: 100%;
-    padding: 0;
-}
-
-.row-fluid {height: 100%; display:table-cell; vertical-align: middle;}
-
-
-
-.centering {
-    float:none;
-    margin:0 auto;
+.btn-delete{
+    right: 0px;
+    background: none;
+    height: 18px;
+    width: 18px;
+    position: absolute;
+    display: inline-block;
+    vertical-align: middle;
+    fill: currentColor;
+    color: rgb(97,97,97);
+    min-height: 24px;
+    min-width: 24px;
+    text-align: center;
+    font-size: 100%;
+    cursor: pointer;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    border: none;
+    font: 13.3333px Arial;
+    font-family: Roboto,'Helvetica Neue',sans-serif;
 }

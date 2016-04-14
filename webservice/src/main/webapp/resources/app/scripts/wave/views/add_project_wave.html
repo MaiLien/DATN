@@ -109,9 +109,22 @@
                                 <div class="form-group">
                                     <label for="numberOfProgressReport" class="col-sm-3 control-label">Số lần báo cáo tiền độ</label>
                                     <div class="col-sm-8" ng-class="{'has-error' : addWaveForm.numberOfProgressReport.$invalid && !addWaveForm.numberOfProgressReport.$pristine}">
-
+                                        <div>
+                                            <table class="table table-hover">
+                                                <body>
+                                                    <tr>
+                                                        <td style="position: relative; border: 1px solid #ccc;">
+                                                            14/04/2016 00:00:00 - 14/04/2016 23:59:59
+                                                            <button class="btn-delete" class="ng-scope" ng-if="!readonly">
+                                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </body>
+                                            </table>
+                                        </div>
                                         <input ng-model="wave.numberOfProgressReport" name="numberOfProgressReport" required type="text" class="form-control" id="numberOfProgressReport" placeholder="Số lần báo cáo tiền độ">
-                                        <label ng-if="addWaveForm.numberOfProgressReport.$invalid && !addWaveForm.numberOfProgressReport.$pristine" class="control-label" for="numberOfProgressReport"><i class="fa fa-times-circle-o"></i> Số lần báo cáo tiền độ không được trống</label>
+                                        <label ng-if="addWaveForm.numberOfProgressReport.$invalid && !addWaveForm.numberOfProgressReport.$pristine"  class="form-control" for="numberOfProgressReport"><i class="fa fa-times-circle-o"></i> Số lần báo cáo tiền độ không được trống</label>
                                     </div>
                                 </div>
 

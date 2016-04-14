@@ -21,7 +21,7 @@
     <link href="/resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.css" rel="stylesheet">
 
     <link rel="stylesheet" href="/resources/template2/plugins/daterangepicker/daterangepicker-bs3.css">
-    <%--<link rel="stylesheet" href="/resources/app/styles/mystyle.css">--%>
+    <link rel="stylesheet" href="/resources/app/styles/mystyle.css">
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
