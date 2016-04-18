@@ -20,7 +20,7 @@
                                 <!-- SchoolYear-->
                                 <div class="form-group">
                                     <label for="schoolYear" class="col-sm-3 control-label">Năm học</label>
-                                    <div class="col-sm-8" ng-class="{'has-error' : addWaveForm.schoolYear.$invalid && !addWaveForm.schoolYear.$pristine}">
+                                    <div class="col-sm-9" ng-class="{'has-error' : addWaveForm.schoolYear.$invalid && !addWaveForm.schoolYear.$pristine}">
                                         <input ng-model="wave.schoolYear" name="schoolYear" required type="text" class="form-control" id="schoolYear" placeholder="Năm học">
                                         <label ng-if="addWaveForm.schoolYear.$invalid && !addWaveForm.schoolYear.$pristine" class="control-label" for="schoolYear"><i class="fa fa-times-circle-o"></i> Năm học không được trống</label>
                                     </div>
@@ -28,8 +28,8 @@
 
                                 <!-- Semester-->
                                 <div class="form-group">
-                                    <label for="semester" class="col-sm-3 control-label">Họ tên</label>
-                                    <div class="col-sm-8" ng-class="{'has-error' : addWaveForm.semester.$invalid && !addWaveForm.semester.$pristine}">
+                                    <label for="semester" class="col-sm-3 control-label">Học kỳ</label>
+                                    <div class="col-sm-9" ng-class="{'has-error' : addWaveForm.semester.$invalid && !addWaveForm.semester.$pristine}">
                                         <input ng-model="wave.semester" name="semester" required type="text" class="form-control" id="semester" placeholder="Học kỳ">
                                         <label ng-if="addWaveForm.semester.$invalid && !addWaveForm.semester.$pristine" class="control-label" for="semester"><i class="fa fa-times-circle-o"></i> Học kỳ không được trống</label>
                                     </div>
@@ -38,12 +38,12 @@
                                 <!-- Start time and end time-->
                                 <div class="form-group">
                                     <label for="startTimeAndEndTime" class="col-sm-3 control-label">Thời gian bắt đầu và kết thúc đợt ĐATN</label>
-                                    <div class="col-sm-8" ng-class="{'has-error' : addWaveForm.startTimeAndEndTime.$invalid && !addWaveForm.startTimeAndEndTime.$pristine}">
+                                    <div class="col-sm-9" ng-class="{'has-error' : addWaveForm.startTimeAndEndTime.$invalid && !addWaveForm.startTimeAndEndTime.$pristine}">
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input ng-model="wave.startTimeAndEndTime" type="text" class="form-control pull-right reservation" id="startTimeAndEndTime" name="startTimeAndEndTime">
+                                            <input ng-model="wave.startTimeAndEndTime" type="text" class="form-control pull-right reservation" id="startTimeAndEndTime" name="startTimeAndEndTime" required>
                                         </div>
                                         <label ng-if="addWaveForm.startTimeAndEndTime.$invalid && !addWaveForm.startTimeAndEndTime.$pristine" class="control-label" for="startTimeAndEndTime"><i class="fa fa-times-circle-o"></i> Thời gian bắt đầu và kết thúc không được trống</label>
                                     </div>
@@ -51,13 +51,13 @@
 
                                 <!-- time for teacher proposes students-->
                                 <div class="form-group">
-                                    <label for="timeForTeacherProposesStudent" class="col-sm-3 control-label">Thời gian giảng viên đề xuất sinh viên để hướng dẫn</label>
-                                    <div class="col-sm-8" ng-class="{'has-error' : addWaveForm.timeForTeacherProposesStudent.$invalid && !addWaveForm.timeForTeacherProposesStudent.$pristine}">
+                                    <label for="timeForTeacherProposesStudent" class="col-sm-3 control-label">Thời gian giảng viên đề xuất sinh viên</label>
+                                    <div class="col-sm-9" ng-class="{'has-error' : addWaveForm.timeForTeacherProposesStudent.$invalid && !addWaveForm.timeForTeacherProposesStudent.$pristine}">
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input ng-model="wave.timeForTeacherProposesStudent" type="text" class="form-control pull-right reservationtime" name="timeForTeacherProposesStudent" id="timeForTeacherProposesStudent">
+                                            <input ng-model="wave.timeForTeacherProposesStudent" type="text" class="form-control pull-right reservationtime" name="timeForTeacherProposesStudent" id="timeForTeacherProposesStudent" required>
                                         </div>
                                         <label ng-if="addWaveForm.timeForTeacherProposesStudent.$invalid && !addWaveForm.timeForTeacherProposesStudent.$pristine" class="control-label" for="timeForTeacherProposesStudent"><i class="fa fa-times-circle-o"></i> Thời gian giảng viên đề xuất sinh viên không được trống</label>
                                     </div>
@@ -65,27 +65,68 @@
 
                                 <!-- time for students register teacher-->
                                 <div class="form-group">
-                                    <label for="timeForStudentRegisterTeacher" class="col-sm-3 control-label">Thời gian sinh viên đăng kí giảng viên hướng dẫn</label>
-                                    <div class="col-sm-8" ng-class="{'has-error' : addWaveForm.timeForStudentRegisterTeacher.$invalid && !addWaveForm.timeForStudentRegisterTeacher.$pristine}">
+                                    <label for="timeForStudentRegisterTeacher" class="col-sm-3 control-label">Thời gian sinh viên đăng kí giảng viên</label>
+                                    <div class="col-sm-9" ng-class="{'has-error' : addWaveForm.timeForStudentRegisterTeacher.$invalid && !addWaveForm.timeForStudentRegisterTeacher.$pristine}">
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input ng-model="wave.timeForStudentRegisterTeacher" type="text" class="form-control pull-right reservationtime" name="timeForStudentRegisterTeacher" id="timeForStudentRegisterTeacher">
+                                            <input ng-model="wave.timeForStudentRegisterTeacher" type="text" class="form-control pull-right reservationtime" name="timeForStudentRegisterTeacher" id="timeForStudentRegisterTeacher" required>
                                         </div>
                                         <label ng-if="addWaveForm.timeForStudentRegisterTeacher.$invalid && !addWaveForm.timeForStudentRegisterTeacher.$pristine" class="control-label" for="timeForStudentRegisterTeacher"><i class="fa fa-times-circle-o"></i> Thời gian sinh viên đăng kí giảng viên không được trống</label>
+                                    </div>
+                                </div>
+
+                                <!-- progress reports-->
+                                <div class="form-group">
+                                    <label for="progressReport" class="col-sm-3 control-label">Lịch báo cáo tiền độ</label>
+                                    <div class="col-sm-9" ng-class="{'has-error' : wave.progressReports.length == 0}">
+                                        <div>
+                                            <table class="table table-hover" style=" border: 1px solid #ccc; border-collapse: inherit;">
+                                                <body>
+                                                <tr ng-repeat="item in reportTimes track by $index">
+                                                    <td style="position: relative;">
+                                                        {{item}}
+                                                        <button ng-click="deleteItemOfProgressRepor(item)" class="btn-in-row-table" class="ng-scope" ng-if="!readonly">
+                                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input ng-enter="addItemOfProgressReport()"
+                                                                   ng-model="reportTime"
+                                                                   type="text"
+                                                                   style="border: none; padding: 0px"
+                                                                   class="form-control pull-right reservationtime"
+                                                                   name="progressReport"
+                                                                   id="progressReport">
+                                                            <div class="input-group-addon" style="padding: 0; border: none; margin: 0;">
+                                                                <button ng-click="addItemOfProgressReport()" style="border: none; background: inherit;">
+                                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </body>
+                                            </table>
+                                        </div>
+
+                                        <!--<label ng-if="addWaveForm.numberOfProgressReport.$invalid && !addWaveForm.numberOfProgressReport.$pristine"  class="form-control" for="numberOfProgressReport"><i class="fa fa-times-circle-o"></i> Số lần báo cáo tiền độ không được trống</label>-->
                                     </div>
                                 </div>
 
                                 <!-- time for students submit project-->
                                 <div class="form-group">
                                     <label for="timeForStudentSubmitProject" class="col-sm-3 control-label">Thời gian bảo vệ demo</label>
-                                    <div class="col-sm-8" ng-class="{'has-error' : addWaveForm.timeForStudentSubmitProject.$invalid && !addWaveForm.timeForStudentSubmitProject.$pristine}">
+                                    <div class="col-sm-9" ng-class="{'has-error' : addWaveForm.timeForStudentSubmitProject.$invalid && !addWaveForm.timeForStudentSubmitProject.$pristine}">
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input ng-model="wave.timeForStudentSubmitProject" type="text" class="form-control pull-right reservationtime" name="timeForStudentSubmitProject" id="timeForStudentSubmitProject">
+                                            <input required ng-model="wave.timeForStudentSubmitProject" type="text" class="form-control pull-right reservationtime" name="timeForStudentSubmitProject" id="timeForStudentSubmitProject">
                                         </div>
                                         <label ng-if="addWaveForm.timeForStudentSubmitProject.$invalid && !addWaveForm.timeForStudentSubmitProject.$pristine" class="control-label" for="timeForStudentSubmitProject"><i class="fa fa-times-circle-o"></i> Thời gian bảo vệ demo không được trống</label>
                                     </div>
@@ -94,45 +135,14 @@
                                 <!-- time for students defend-->
                                 <div class="form-group">
                                     <label for="timeForStudentDefend" class="col-sm-3 control-label">Thời gian bảo vệ chính thức</label>
-                                    <div class="col-sm-8" ng-class="{'has-error' : addWaveForm.timeForStudentDefend.$invalid && !addWaveForm.timeForStudentDefend.$pristine}">
+                                    <div class="col-sm-9" ng-class="{'has-error' : addWaveForm.timeForStudentDefend.$invalid && !addWaveForm.timeForStudentDefend.$pristine}">
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input ng-model="wave.timeForStudentDefend" type="text" class="form-control pull-right reservation" name="timeForStudentDefend" id="timeForStudentDefend">
+                                            <input required ng-model="wave.timeForStudentDefend" type="text" class="form-control pull-right reservation" name="timeForStudentDefend" id="timeForStudentDefend">
                                         </div>
                                         <label ng-if="addWaveForm.timeForStudentDefend.$invalid && !addWaveForm.timeForStudentDefend.$pristine" class="control-label" for="timeForStudentDefend"><i class="fa fa-times-circle-o"></i> Thời gian bảo vệ chính thức không được trống</label>
-                                    </div>
-                                </div>
-
-                                <!-- number of progress reports-->
-                                <div class="form-group">
-                                    <label for="numberOfProgressReport" class="col-sm-3 control-label">Số lần báo cáo tiền độ</label>
-                                    <div class="col-sm-8" ng-class="{'has-error' : addWaveForm.numberOfProgressReport.$invalid && !addWaveForm.numberOfProgressReport.$pristine}">
-                                        <div>
-                                            <table class="table table-hover" style=" border: 1px solid #ccc !important; border-top: 1px solid #ccc !important;">
-                                                <body>
-                                                    <tr>
-                                                        <td style="position: relative;">
-                                                            14/04/2016 00:00:00 - 14/04/2016 23:59:59
-                                                            <button class="btn-delete" class="ng-scope" ng-if="!readonly">
-                                                                <i class="fa fa-times" aria-hidden="true"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="position: relative;">
-                                                            14/04/2016 00:00:00 - 14/04/2016 23:59:59
-                                                            <button class="btn-delete" class="ng-scope" ng-if="!readonly">
-                                                                <i class="fa fa-times" aria-hidden="true"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                </body>
-                                            </table>
-                                        </div>
-                                        <input ng-model="wave.numberOfProgressReport" name="numberOfProgressReport" required type="text" class="form-control" id="numberOfProgressReport" placeholder="Số lần báo cáo tiền độ">
-                                        <label ng-if="addWaveForm.numberOfProgressReport.$invalid && !addWaveForm.numberOfProgressReport.$pristine"  class="form-control" for="numberOfProgressReport"><i class="fa fa-times-circle-o"></i> Số lần báo cáo tiền độ không được trống</label>
                                     </div>
                                 </div>
 

@@ -100,6 +100,7 @@
 <script src="/resources/app/scripts/app.js"  charset="utf-8"></script>
 
 <script src="/resources/app/scripts/common/main.js"  charset="utf-8"></script>
+<script src="/resources/app/scripts/common/directives/NgEnter.js"  charset="utf-8"></script>
 
 <script src="/resources/app/scripts/authenticate/main.js"  charset="utf-8"></script>
 <script src="/resources/app/scripts/authenticate/controllers/AuthCtrl.js"  charset="utf-8"></script>

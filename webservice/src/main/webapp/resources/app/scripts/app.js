@@ -3,7 +3,7 @@
 angular.module('appDATN.common', ['ui.router']);
 angular.module('appDATN.auth', []);
 angular.module('appDATN.student', ['appDATN.auth', 'appDATN.common']);
-angular.module('appDATN.wave', ['ngMaterial']);
+angular.module('appDATN.wave', ['appDATN.common', 'ngMaterial']);
 
 var app = angular.module('appDATN', [
   'appDATN.common',
