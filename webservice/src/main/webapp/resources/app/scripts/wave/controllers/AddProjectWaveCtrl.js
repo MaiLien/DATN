@@ -2,23 +2,25 @@ angular.module('appDATN.wave')
     .controller('AddProjectWaveCtrl', function ($scope, ProjectWaveService) {
 
         $scope.reportTime = null;
-        $scope.reportTimes = ['14/04/2016 00:00:00 - 14/04/2016 23:59:59', '14/04/2016 00:00:00 - 14/04/2016 23:59:59'];
+        $scope.wave = {
+            reportTimes : ['14/05/2016 00:00:00 - 14/04/2016 23:59:59', '14/04/2016 00:00:00 - 14/04/2016 23:59:59']
+        };
 
         $scope.addItemOfProgressReport = function(){
             if($scope.reportTime != null){
-                $scope.reportTimes.push($scope.reportTime);
+                $scope.wave.reportTimes.push($scope.reportTime);
                 $scope.reportTime = null;
             }
         };
 
-        $scope.deleteItemOfProgressRepor = function(item){
+        $scope.deleteItemOfProgressReport = function(item){
             if(item != null){
-                var index = $scope.reportTimes.indexOf(item);
-                $scope.reportTimes.splice(index, 1);
+                var index = $scope.wave.reportTimes.indexOf(item);
+                $scope.wave.reportTimes.splice(index, 1);
             }
         };
 
-        $scope.addWave = function(student){
+        $scope.addWave = function(){
             if($scope.addWaveForm.$valid){
 
             }else{

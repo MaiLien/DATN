@@ -22,3 +22,15 @@
     font: 13.3333px Arial;
     font-family: Roboto,'Helvetica Neue',sans-serif;
 }
+
+.border-table{
+    border: 1px solid #d2d6de;
+    border-collapse: inherit;
+}
+
+.error{
+    border: 1px solid #a94442;
+    border-collapse: inherit;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    /*border: 1px solid #a94442 !important;*/
+}
