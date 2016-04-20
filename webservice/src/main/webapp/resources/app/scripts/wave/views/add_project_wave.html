@@ -22,7 +22,6 @@
                                     <label for="schoolYear" class="col-sm-3 control-label">Năm học</label>
                                     <div class="col-sm-9" ng-class="{'has-error' : addWaveForm.schoolYear.$invalid && !addWaveForm.schoolYear.$pristine}">
                                         <input ng-model="wave.schoolYear" name="schoolYear" required type="text" class="form-control" id="schoolYear" placeholder="Năm học">
-                                        <!--<label ng-if="addWaveForm.schoolYear.$invalid && !addWaveForm.schoolYear.$pristine" class="control-label" for="schoolYear"><i class="fa fa-times-circle-o"></i> Năm học không được trống</label>-->
                                     </div>
                                 </div>
 
@@ -31,7 +30,6 @@
                                     <label for="semester" class="col-sm-3 control-label">Học kỳ</label>
                                     <div class="col-sm-9" ng-class="{'has-error' : addWaveForm.semester.$invalid && !addWaveForm.semester.$pristine}">
                                         <input ng-model="wave.semester" name="semester" required type="text" class="form-control" id="semester" placeholder="Học kỳ">
-                                        <!--<label ng-if="addWaveForm.semester.$invalid && !addWaveForm.semester.$pristine" class="control-label" for="semester"><i class="fa fa-times-circle-o"></i> Học kỳ không được trống</label>-->
                                     </div>
                                 </div>
 
@@ -45,7 +43,6 @@
                                             </div>
                                             <input ng-model="wave.startTimeAndEndTime" type="text" class="form-control pull-right reservation" id="startTimeAndEndTime" name="startTimeAndEndTime" required>
                                         </div>
-                                        <!--<label ng-if="addWaveForm.startTimeAndEndTime.$invalid && !addWaveForm.startTimeAndEndTime.$pristine" class="control-label" for="startTimeAndEndTime"><i class="fa fa-times-circle-o"></i> Thời gian bắt đầu và kết thúc không được trống</label>-->
                                     </div>
                                 </div>
 
@@ -125,7 +122,6 @@
                                             </div>
                                             <input required ng-model="wave.timeForStudentSubmitProject" type="text" class="form-control pull-right reservationtime" name="timeForStudentSubmitProject" id="timeForStudentSubmitProject">
                                         </div>
-                                        <!--<label ng-if="addWaveForm.timeForStudentSubmitProject.$invalid && !addWaveForm.timeForStudentSubmitProject.$pristine" class="control-label" for="timeForStudentSubmitProject"><i class="fa fa-times-circle-o"></i> Thời gian bảo vệ demo không được trống</label>-->
                                     </div>
                                 </div>
 
@@ -139,7 +135,6 @@
                                             </div>
                                             <input required ng-model="wave.timeForStudentDefend" type="text" class="form-control pull-right reservation" name="timeForStudentDefend" id="timeForStudentDefend">
                                         </div>
-                                        <!--<label ng-if="addWaveForm.timeForStudentDefend.$invalid && !addWaveForm.timeForStudentDefend.$pristine" class="control-label" for="timeForStudentDefend"><i class="fa fa-times-circle-o"></i> Thời gian bảo vệ chính thức không được trống</label>-->
                                     </div>
                                 </div>
 
