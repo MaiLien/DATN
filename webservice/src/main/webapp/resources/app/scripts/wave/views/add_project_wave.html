@@ -59,7 +59,6 @@
                                             </div>
                                             <input ng-model="wave.timeForTeacherProposesStudent" type="text" class="form-control pull-right reservationtime" name="timeForTeacherProposesStudent" id="timeForTeacherProposesStudent" required>
                                         </div>
-                                        <!--<label ng-if="addWaveForm.timeForTeacherProposesStudent.$invalid && !addWaveForm.timeForTeacherProposesStudent.$pristine" class="control-label" for="timeForTeacherProposesStudent"><i class="fa fa-times-circle-o"></i> Thời gian giảng viên đề xuất sinh viên không được trống</label>-->
                                     </div>
                                 </div>
 
@@ -73,7 +72,6 @@
                                             </div>
                                             <input ng-model="wave.timeForStudentRegisterTeacher" type="text" class="form-control pull-right reservationtime" name="timeForStudentRegisterTeacher" id="timeForStudentRegisterTeacher" required>
                                         </div>
-                                        <!--<label ng-if="addWaveForm.timeForStudentRegisterTeacher.$invalid && !addWaveForm.timeForStudentRegisterTeacher.$pristine" class="control-label" for="timeForStudentRegisterTeacher"><i class="fa fa-times-circle-o"></i> Thời gian sinh viên đăng kí giảng viên không được trống</label>-->
                                     </div>
                                 </div>
 
@@ -83,7 +81,7 @@
                                     <!--<div class="col-sm-9" ng-class="{'has-error' : wave.progressReports.length == 0}">-->
                                     <div class="col-sm-9">
                                         <div>
-                                            <table class="table table-hover border-table" ng-class="{'error' : wave.reportTimes.length == 0 && !addWaveForm.reportTime.$pristine}">
+                                            <table class="table table-hover border-table" ng-class="{'error' : wave.reportTimes.length == 0 && reportTimeDirty == true}">
                                                 <body>
                                                     <tr ng-repeat="item in wave.reportTimes | sortDateRange track by $index">
                                                         <td style="position: relative;">
@@ -102,8 +100,7 @@
                                                                        style="border: none; padding: 0px"
                                                                        class="form-control pull-right reservationtime"
                                                                        name="reportTime"
-                                                                       id="progressReport"
-                                                                        required>
+                                                                       id="progressReport">
                                                                 <div class="input-group-addon" style="padding: 0; border: none; margin: 0;">
                                                                     <button ng-click="addItemOfProgressReport()" style="border: none; background: inherit;">
                                                                         <i class="fa fa-plus" aria-hidden="true"></i>
