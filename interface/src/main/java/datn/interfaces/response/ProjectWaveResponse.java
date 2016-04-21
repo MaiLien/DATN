@@ -1,15 +1,16 @@
 package datn.interfaces.response;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProjectWaveResponse {
 
     private String schoolYear;
-    private String semester;
+    private int semester;
     private String startTimeAndEndTime;
     private String timeForTeacherProposesStudent;
     private String timeForStudentRegisterTeacher;
-    private ArrayList<String> reportTimes;
+    private List<String> reportTimes;
     private String timeForStudentSubmitProject;
     private String timeForStudentDefend;
     private String description;
@@ -22,11 +23,11 @@ public class ProjectWaveResponse {
         this.schoolYear = schoolYear;
     }
 
-    public String getSemester() {
+    public int getSemester() {
         return semester;
     }
 
-    public void setSemester(String semester) {
+    public void setSemester(int semester) {
         this.semester = semester;
     }
 
@@ -54,11 +55,11 @@ public class ProjectWaveResponse {
         this.timeForStudentRegisterTeacher = timeForStudentRegisterTeacher;
     }
 
-    public ArrayList<String> getReportTimes() {
+    public List<String> getReportTimes() {
         return reportTimes;
     }
 
-    public void setReportTimes(ArrayList<String> reportTimes) {
+    public void setReportTimes(List<String> reportTimes) {
         this.reportTimes = reportTimes;
     }
 

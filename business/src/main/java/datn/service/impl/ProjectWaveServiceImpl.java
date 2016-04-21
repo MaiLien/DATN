@@ -8,7 +8,6 @@ import datn.interfaces.request.ProjectWaveRequest;
 import datn.interfaces.response.ProjectWaveResponse;
 import datn.interfaces.response.RestApiResponse;
 import datn.service.IProjectWaveService;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ProjectWaveServiceImpl implements IProjectWaveService{
@@ -28,19 +28,33 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     ReportRepository reportRepository;
 
     public RestApiResponse<ProjectWaveResponse> addProjectWave(ProjectWaveRequest request) {
-
         ProjectWave projectWave = convertProjectWaveRequestToProjectWaveEntity(request);
         projectWaveRepository.save(projectWave);
-//        setProgressReportTimes(projectWave, request.getReportTimes());
-//        projectWaveRepository.save(projectWave);
+        addProgressReportsToProjectWave(projectWave, request.getReportTimes());
+        ProjectWaveResponse response = convertProjectWaveRequestToProjectWaveResponse(request);
 
-        return null;
+        return new RestApiResponse<>(response);
+    }
+
+    private ProjectWaveResponse convertProjectWaveRequestToProjectWaveResponse(ProjectWaveRequest request){
+        ProjectWaveResponse response = new ProjectWaveResponse();
+        response.setSchoolYear(request.getSchoolYear());
+        response.setSemester(request.getSemester());
+        response.setStartTimeAndEndTime(request.getStartTimeAndEndTime());
+        response.setTimeForTeacherProposesStudent(request.getTimeForTeacherProposesStudent());
+        response.setTimeForStudentRegisterTeacher(request.getTimeForStudentRegisterTeacher());
+        response.setTimeForStudentSubmitProject(request.getTimeForStudentSubmitProject());
+        response.setTimeForStudentDefend(request.getTimeForStudentDefend());
+        response.setReportTimes(request.getReportTimes());
+        response.setDescription(request.getDescription());
+
+        return response;
     }
 
     private ProjectWave convertProjectWaveRequestToProjectWaveEntity(ProjectWaveRequest request){
         ProjectWave projectWave = new ProjectWave();
         projectWave.setSchoolYear(request.getSchoolYear());
-        projectWave.setSemester(Integer.parseInt(request.getSemester()));
+        projectWave.setSemester(request.getSemester());
         setStartTimeAndEndTime(projectWave, request.getStartTimeAndEndTime());
         setTimeForTeacherProposesStudent(projectWave, request.getTimeForTeacherProposesStudent());
         setTimeForStudentRegisterTeacher(projectWave, request.getTimeForStudentRegisterTeacher());
@@ -51,8 +65,8 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         return projectWave;
     }
 
-    private void setProgressReportTimes(ProjectWave projectWave, ArrayList<String> reportTimes) {
-        ArrayList<Report> reports = new ArrayList<>();
+    private void addProgressReportsToProjectWave(ProjectWave projectWave, List<String> reportTimes) {
+        List<Report> reports = new ArrayList<>();
         ArrayList<Date> dates;
         Report report;
 
@@ -62,6 +76,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
             report.setStartTime(dates.get(0));
             report.setEndTime(dates.get(1));
             report.setProjectWave(projectWave);
+            report = reportRepository.save(report);
 
             reports.add(report);
         }
