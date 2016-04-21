@@ -1,9 +1,8 @@
 package datn.service.impl;
 
+import datn.dao.entity.Student;
 import datn.interfaces.request.StudentRequest;
-import datn.interfaces.response.RestApiResponse;
-import datn.interfaces.response.RestApiResponseHeaders;
-import datn.interfaces.response.StudentResponse;
+import datn.interfaces.response.*;
 import datn.service.IImportDataService;
 import datn.service.IStudentService;
 import datn.service.exceptions.*;
@@ -32,10 +31,13 @@ public class ImportDataServiceImpl implements IImportDataService{
 
     private Map<String, StudentResponse> studentMap = new HashMap<String, StudentResponse>();
 
+    private List<StudentResponse> successItems = new ArrayList<>();
+    private List<FailItemResponse<StudentRequest>> failItems = new ArrayList<>();
+
     @Autowired
     IStudentService studentService;
 
-    public synchronized RestApiResponse<?> importData(MultipartFile excelFile){
+    public synchronized RestApiResponse<ImportFromFileResponse<StudentResponse, StudentRequest>> importData(MultipartFile excelFile){
         RestApiResponse<ArrayList<StudentResponse>> response = new RestApiResponse<ArrayList<StudentResponse>>(null);
         if (!excelFile.isEmpty()) {
             try {
@@ -63,7 +65,7 @@ public class ImportDataServiceImpl implements IImportDataService{
         } else {
             throw new ExcelFileNotFoundException("excelFile not found");
         }
-        return response;
+        return new RestApiResponse<>(new ImportFromFileResponse<>(successItems, failItems));
     }
 
     private void readExcelWithXls(InputStream is) throws IOException {
@@ -98,23 +100,48 @@ public class ImportDataServiceImpl implements IImportDataService{
     }
 
     private void saveStudents(Sheet studentSheet) {
+
         Iterator<Row> rowIterator = studentSheet.iterator();
         ignoreFistRow(rowIterator);
+        int index = 2;
         while (rowIterator.hasNext()) {
             Row row = rowIterator.next();
             StudentRequest student = getStudent(row);
-            if (student != null) {
-//                MultiKey key = new MultiKey(StringUtils.lowerCase(student.getUsername()), StringUtils.lowerCase(student.getName()));
-                String key = student.getUsername();
-                StudentResponse studentInMap = studentMap.get(key);
-                if (studentInMap == null) {
-                    saveNewStudent(student);
-                }
-                else {
-                    throw new UserExistedException("User existed");
-                }
+
+            if(studentIsExist(student)){
+                FailItemResponse<StudentRequest> failItem = new FailItemResponse<>();
+                failItem.setRow(index);
+                failItem.setReason("Mã sinh viên đã tồn tại");
+                failItem.setErrorItem(student);
+
+                failItems.add(failItem);
             }
+            else if(isNotValidRow(student.getId(), student.getName(), student.getClass_(), student.getBirthday())){
+                FailItemResponse<StudentRequest> failItem = new FailItemResponse<>();
+                failItem.setRow(index);
+                failItem.setReason("Không đủ dữ liệu");
+                failItem.setErrorItem(student);
+
+                failItems.add(failItem);
+            }
+            else{
+                StudentResponse studentResponse = saveNewStudent(student);
+                successItems.add(studentResponse);
+            }
+
+            index++;
         }
+
+    }
+
+    private boolean studentIsExist(StudentRequest student){
+        String key = student.getUsername();
+        StudentResponse studentInMap = studentMap.get(key);
+        if (studentInMap != null) {
+            return true;
+        }
+
+        return false;
     }
 
     private StudentResponse saveNewStudent(StudentRequest studentRequest){
@@ -122,21 +149,17 @@ public class ImportDataServiceImpl implements IImportDataService{
     }
 
     private StudentRequest getStudent(Row row) {
-        StudentRequest student = null;
-        String studentId = getValueOfRowAt(row, 1);
+        StudentRequest student = new StudentRequest();;
+        String studentUserName = getValueOfRowAt(row, 1);
         String studentName = getValueOfRowAt(row, 2);
         String studentClass = getValueOfRowAt(row, 3);
         String studentBirthday = getValueOfRowAt(row, 4);
-        if (!isNotValidRow(studentId, studentName, studentClass, studentBirthday)) {
-            if (!fullInput(studentId, studentName, studentClass, studentBirthday)) {
-                throw new NotFullInputAtRowException("Not full input at row : " + row.getRowNum());
-            }
-            student = new StudentRequest();
-            student.setUsername(studentId);
-            student.setName(studentName);
-            student.setClass_(studentClass);
-            student.setBirthday(studentBirthday);
-        }
+
+        student.setUsername(studentUserName);
+        student.setName(studentName);
+        student.setClass_(studentClass);
+        student.setBirthday(studentBirthday);
+
         return student;
     }
 
@@ -185,17 +208,6 @@ public class ImportDataServiceImpl implements IImportDataService{
             }
         }
         return invalidRow;
-    }
-
-    private boolean fullInput(String... inputStr) {
-        boolean full = true;
-        if (inputStr != null) {
-            for (String s : inputStr) {
-                full &= StringUtils.isNotBlank(s);
-            }
-
-        }
-        return full;
     }
 
     private void ignoreFistRow(Iterator iterator) {

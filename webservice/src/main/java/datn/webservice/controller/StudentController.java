@@ -1,7 +1,5 @@
 package datn.webservice.controller;
 
-import datn.dao.entity.Student;
-import datn.dao.repository.StudentRepository;
 import datn.interfaces.request.StudentRequest;
 import datn.interfaces.response.RestApiResponse;
 import datn.interfaces.response.StudentResponse;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/API")
@@ -23,11 +20,13 @@ public class StudentController {
     @Autowired
     private IStudentService studentService;
 
-    @Autowired
-    private StudentRepository studentRepository;
+    @RequestMapping(value = "/getStudents", method = RequestMethod.GET)
+    public RestApiResponse<ArrayList<StudentResponse>> getStudents() {
+        return studentService.getStudents();
+    }
 
     @RequestMapping(value = "/students", method = RequestMethod.GET)
-    public RestApiResponse<Page<StudentResponse>> getStudents(int pageIndex, int sizeOfPage, String searchInput) {
+    public RestApiResponse<Page<StudentResponse>> getStudentsByPage(int pageIndex, int sizeOfPage, String searchInput) {
         return studentService.getPageStudents(pageIndex, sizeOfPage, searchInput);
     }
 
