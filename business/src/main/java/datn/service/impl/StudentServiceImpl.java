@@ -14,6 +14,8 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.domain.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -67,15 +69,12 @@ public class StudentServiceImpl implements IStudentService{
 
     public RestApiResponse<StudentResponse> getStudent(String id) {
         Student studentEntities = studentRepository.findOne(id);
-        StudentResponse studentResponse = convertStudentEntityToStudentResponse(studentEntities);
-        RestApiResponse<StudentResponse> student = new RestApiResponse<StudentResponse>(studentResponse);
+        StudentResponse studentResponse = null;
+        if(studentEntities != null)
+            studentResponse = convertStudentEntityToStudentResponse(studentEntities);
+        RestApiResponse<StudentResponse> student = new RestApiResponse<>(studentResponse);
 
         return student;
-    }
-
-    public Student getStudentEntity(String id){
-        Student student = studentRepository.findOne(id);
-        return  student;
     }
 
     public RestApiResponse<StudentResponse> addStudent(StudentRequest studentRequest) {
@@ -88,13 +87,18 @@ public class StudentServiceImpl implements IStudentService{
     }
 
     public RestApiResponse<StudentResponse> deleteStudent(StudentRequest studentRequest) {
-        Student studentEntity = convertStudentRequestToStudentEntity(studentRequest);
-        studentEntity.setDeleted(true);
-        studentEntity = studentRepository.save(studentEntity);
-        StudentResponse studentResponse = convertStudentEntityToStudentResponse(studentEntity);
-        RestApiResponse<StudentResponse> student = new RestApiResponse<StudentResponse>(studentResponse);
+        if(studentIsExist(studentRequest.getId()))
+            studentRepository.delete(studentRequest.getId());
 
-        return student;
+        return new RestApiResponse<>();
+    }
+
+    private boolean studentIsExist(String id){
+        Student student = studentRepository.findOne(id);
+        if(student != null)
+            return true;
+
+        return false;
     }
 
     public RestApiResponse<StudentResponse> updateStudent(StudentRequest studentRequest) {

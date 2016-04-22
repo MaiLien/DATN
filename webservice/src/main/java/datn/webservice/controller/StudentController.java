@@ -20,33 +20,33 @@ public class StudentController {
     @Autowired
     private IStudentService studentService;
 
-    @RequestMapping(value = "/getStudents", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAllStudents", method = RequestMethod.GET)
     public RestApiResponse<ArrayList<StudentResponse>> getStudents() {
         return studentService.getStudents();
     }
 
-    @RequestMapping(value = "/students", method = RequestMethod.GET)
+    @RequestMapping(value = "/getStudentsByPage", method = RequestMethod.GET)
     public RestApiResponse<Page<StudentResponse>> getStudentsByPage(int pageIndex, int sizeOfPage, String searchInput) {
         return studentService.getPageStudents(pageIndex, sizeOfPage, searchInput);
     }
 
-    @RequestMapping(value = "/student", method = RequestMethod.GET)
+    @RequestMapping(value = "/getStudent", method = RequestMethod.GET)
     public RestApiResponse<StudentResponse> getStudent(String id){
         return studentService.getStudent(id);
     }
 
-    @RequestMapping(value = "/student", method = RequestMethod.POST)
+    @RequestMapping(value = "/addStudent", method = RequestMethod.POST)
     public RestApiResponse<StudentResponse> addStudent(@RequestBody StudentRequest studentRequest){
         return studentService.addStudent(studentRequest);
     }
 
-    @RequestMapping(value = "/student", method = RequestMethod.PUT)
+    @RequestMapping(value = "/updateStudent", method = RequestMethod.PUT)
     public RestApiResponse<StudentResponse> updateStudent(@RequestBody StudentRequest studentRequest){
         return studentService.updateStudent(studentRequest);
     }
 
-    @RequestMapping(value = "/student", method = RequestMethod.DELETE)
-    public RestApiResponse<StudentResponse> deleteStudent(StudentRequest studentRequest){
+    @RequestMapping(value = "/deleteStudent", method = RequestMethod.DELETE)
+    public RestApiResponse<StudentResponse> deleteStudent(@RequestBody StudentRequest studentRequest){
         return studentService.deleteStudent(studentRequest);
     }
 

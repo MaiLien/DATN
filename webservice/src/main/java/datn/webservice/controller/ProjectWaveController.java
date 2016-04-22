@@ -17,7 +17,7 @@ public class ProjectWaveController {
     @Autowired
     IProjectWaveService projectWaveService;
 
-    @RequestMapping(value = "/project-wave", method = RequestMethod.POST)
+    @RequestMapping(value = "/addProjectWave", method = RequestMethod.POST)
     public RestApiResponse<ProjectWaveResponse> addProjectWave(@RequestBody ProjectWaveRequest projectWaveRequest){
         return projectWaveService.addProjectWave(projectWaveRequest);
     }

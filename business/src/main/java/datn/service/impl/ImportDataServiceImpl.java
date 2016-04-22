@@ -1,11 +1,12 @@
 package datn.service.impl;
 
-import datn.dao.entity.Student;
 import datn.interfaces.request.StudentRequest;
 import datn.interfaces.response.*;
 import datn.service.IImportDataService;
 import datn.service.IStudentService;
-import datn.service.exceptions.*;
+import datn.service.exceptions.ExcelFileNotFoundException;
+import datn.service.exceptions.ExtensionExcelFileException;
+import datn.service.exceptions.SheetNotFoundException;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -88,7 +89,7 @@ public class ImportDataServiceImpl implements IImportDataService{
     }
 
     private void resetAllMap() {
-        studentMap = new HashMap<String, StudentResponse>();
+        studentMap = new HashMap<>();
     }
 
     private void validateAndSaveStudentSheet(Workbook workbook) {

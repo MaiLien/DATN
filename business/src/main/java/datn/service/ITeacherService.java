@@ -2,20 +2,24 @@ package datn.service;
 
 import datn.interfaces.request.TeacherRequest;
 import datn.interfaces.response.RestApiResponse;
+import datn.interfaces.response.StudentResponse;
 import datn.interfaces.response.TeacherResponse;
+import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
 
 public interface ITeacherService {
 
-    public ArrayList<RestApiResponse<TeacherResponse>> getTeachers();
+    RestApiResponse<ArrayList<TeacherResponse>> getTeachers();
 
-    public RestApiResponse<TeacherResponse> getTeacher(String id);
+    RestApiResponse<Page<TeacherResponse>> getPageTeachers(int pageIndex, int sizeOfPage, String searchInput);
 
-    public RestApiResponse<TeacherResponse> addTeacher(TeacherRequest teacherRequest);
+    RestApiResponse<TeacherResponse> getTeacher(String id);
 
-    public RestApiResponse<TeacherResponse> deleteTeacher(TeacherRequest studentRequest);
+    RestApiResponse<TeacherResponse> addTeacher(TeacherRequest teacherRequest);
 
-    public RestApiResponse<TeacherResponse> updateTeacher(TeacherRequest studentRequest);
+    RestApiResponse<TeacherResponse> deleteTeacher(TeacherRequest studentRequest);
+
+    RestApiResponse<TeacherResponse> updateTeacher(TeacherRequest studentRequest);
 
 }
