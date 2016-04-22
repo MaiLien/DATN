@@ -7,6 +7,7 @@ import datn.dao.repository.ReportRepository;
 import datn.interfaces.request.ProjectWaveRequest;
 import datn.interfaces.response.ProjectWaveResponse;
 import datn.interfaces.response.RestApiResponse;
+import datn.interfaces.util.JsonUtil;
 import datn.service.IProjectWaveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,23 +28,36 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     @Autowired
     ReportRepository reportRepository;
 
+    static ProjectWaveResponse virtualProjectWaveResponse;
+
     public RestApiResponse<ProjectWaveResponse> addProjectWave(ProjectWaveRequest request) {
         ProjectWave projectWave = convertProjectWaveRequestToProjectWaveEntity(request);
         ProjectWave entity = projectWaveRepository.save(projectWave);
         addProgressReportsToProjectWave(projectWave, request.getReportTimes());
         ProjectWaveResponse response = convertProjectWaveRequestToProjectWaveResponse(entity, request);
 
+        virtualProjectWaveResponse = response;
+        System.out.println("virtualProjectWaveResponse"+JsonUtil.convertObjectToJson(virtualProjectWaveResponse));
+
         return new RestApiResponse<>(response);
     }
 
     @Override
     public RestApiResponse<ProjectWaveResponse> getProjectWave(String id) {
+        RestApiResponse<ProjectWaveResponse> out = new RestApiResponse<>();
+
         ProjectWaveResponse response = new ProjectWaveResponse();
         response.setId(id);
+        out.setBody(response);
 
-        return new RestApiResponse<>(response);
+        System.out.println("virtualProjectWaveResponse"+JsonUtil.convertObjectToJson(virtualProjectWaveResponse));
+
+
+        if(virtualProjectWaveResponse != null)
+            out.setBody(virtualProjectWaveResponse);
+
+        return out;
     }
-
 
     private ProjectWaveResponse convertProjectWaveRequestToProjectWaveResponse(ProjectWave entity, ProjectWaveRequest request){
         ProjectWaveResponse response = new ProjectWaveResponse();
