@@ -29,15 +29,25 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
 
     public RestApiResponse<ProjectWaveResponse> addProjectWave(ProjectWaveRequest request) {
         ProjectWave projectWave = convertProjectWaveRequestToProjectWaveEntity(request);
-        projectWaveRepository.save(projectWave);
+        ProjectWave entity = projectWaveRepository.save(projectWave);
         addProgressReportsToProjectWave(projectWave, request.getReportTimes());
-        ProjectWaveResponse response = convertProjectWaveRequestToProjectWaveResponse(request);
+        ProjectWaveResponse response = convertProjectWaveRequestToProjectWaveResponse(entity, request);
 
         return new RestApiResponse<>(response);
     }
 
-    private ProjectWaveResponse convertProjectWaveRequestToProjectWaveResponse(ProjectWaveRequest request){
+    @Override
+    public RestApiResponse<ProjectWaveResponse> getProjectWave(String id) {
         ProjectWaveResponse response = new ProjectWaveResponse();
+        response.setId(id);
+
+        return new RestApiResponse<>(response);
+    }
+
+
+    private ProjectWaveResponse convertProjectWaveRequestToProjectWaveResponse(ProjectWave entity, ProjectWaveRequest request){
+        ProjectWaveResponse response = new ProjectWaveResponse();
+        response.setId(entity.getId());
         response.setSchoolYear(request.getSchoolYear());
         response.setSemester(request.getSemester());
         response.setStartTimeAndEndTime(request.getStartTimeAndEndTime());

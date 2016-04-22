@@ -19,7 +19,12 @@ public class ProjectWaveController {
 
     @RequestMapping(value = "/addProjectWave", method = RequestMethod.POST)
     public RestApiResponse<ProjectWaveResponse> addProjectWave(@RequestBody ProjectWaveRequest projectWaveRequest){
-        return projectWaveService.addProjectWave(projectWaveRequest);
+    return projectWaveService.addProjectWave(projectWaveRequest);
+    }
+
+    @RequestMapping(value = "/getProjectWave", method = RequestMethod.GET)
+    public RestApiResponse<ProjectWaveResponse> getProjectWave(String id){
+        return projectWaveService.getProjectWave(id);
     }
 
 }

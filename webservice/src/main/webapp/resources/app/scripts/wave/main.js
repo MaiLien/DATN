@@ -20,4 +20,30 @@ angular.module('appDATN.wave')
                     }
                 }
             })
+            .state('wave.detail', {
+                url: '/detail/:projectWaveId',
+                resolve:{
+                    projectWave: function ($q, $state, $stateParams, ProjectWaveService) {
+                        var deferred = $q.defer();
+                        ProjectWaveService.getProjectWave($stateParams.projectWaveId)
+                            .success(function (data) {
+                                if(data.headers.resultCode == 0) {
+                                    deferred.resolve(data.body);
+                                }else{
+                                    deferred.reject('Error');
+                                }
+                            })
+                            .error(function (error) {
+                                deferred.reject('Error');
+                            });
+                        return deferred.promise;
+                    }
+                },
+                views: {
+                    content_view: {
+                        controller: 'DetailProjectWaveCtrl',
+                        templateUrl: '/resources/app/scripts/wave/views/detail_project_wave.html'
+                    }
+                }
+            })
     });

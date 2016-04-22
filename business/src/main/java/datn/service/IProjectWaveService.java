@@ -6,6 +6,8 @@ import datn.interfaces.response.RestApiResponse;
 
 public interface IProjectWaveService{
 
-    public RestApiResponse<ProjectWaveResponse> addProjectWave(ProjectWaveRequest request);
+    RestApiResponse<ProjectWaveResponse> addProjectWave(ProjectWaveRequest request);
+
+    RestApiResponse<ProjectWaveResponse> getProjectWave(String id);
 
 }

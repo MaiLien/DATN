@@ -5,6 +5,7 @@ import java.util.List;
 
 public class ProjectWaveResponse {
 
+    private String id;
     private String schoolYear;
     private int semester;
     private String startTimeAndEndTime;
@@ -14,6 +15,14 @@ public class ProjectWaveResponse {
     private String timeForStudentSubmitProject;
     private String timeForStudentDefend;
     private String description;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getSchoolYear() {
         return schoolYear;

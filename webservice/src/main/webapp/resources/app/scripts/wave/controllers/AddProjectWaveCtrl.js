@@ -1,5 +1,5 @@
 angular.module('appDATN.wave')
-    .controller('AddProjectWaveCtrl', function ($scope, $document, ProjectWaveService) {
+    .controller('AddProjectWaveCtrl', function ($scope, $state, ProjectWaveService) {
 
         $scope.reportTime = null;
         $scope.reportTimeDirty = false;
@@ -27,13 +27,12 @@ angular.module('appDATN.wave')
         $scope.addWave = function(){
             $scope.setDirty();
             if($scope.addWaveForm.$valid && $scope.wave.reportTimes.length != 0){
-                console.log($scope.wave);
                 ProjectWaveService.addWave($scope.wave)
                     .success(function (data) {
-                        console.log(data);
+                        $state.go('wave.detail', {projectWaveId: data.body.id});
                     })
                     .error(function (error) {
-                        console.log(error);
+                        $state.go('error');
                     });
             }
         };
