@@ -45,8 +45,10 @@ public class StudentController {
         return studentService.updateStudent(studentRequest);
     }
 
+
+    /*Can not pass parameter with Postman if it has @RequestBody, otherwise website*/
     @RequestMapping(value = "/deleteStudent", method = RequestMethod.DELETE)
-    public RestApiResponse<StudentResponse> deleteStudent(@RequestBody StudentRequest studentRequest){
+    public RestApiResponse<StudentResponse> deleteStudent(StudentRequest studentRequest){
         return studentService.deleteStudent(studentRequest);
     }
 
