@@ -70,7 +70,6 @@ public class TeacherServiceImpl implements ITeacherService {
         teacherResponse.setId(teacherEntity.getId());
         teacherResponse.setTypeOfUser(teacherEntity.getTypeOfUser().getValue());
         teacherResponse.setBirthday(DateFormatUtil.convertDateToString(teacherEntity.getBirthday()));
-        teacherResponse.setDeleted(teacherEntity.getDeleted());
         teacherResponse.setDescription(teacherEntity.getDescription());
         teacherResponse.setEmail(teacherEntity.getEmail());
         teacherResponse.setGender(teacherEntity.getGender().getValue());

@@ -11,13 +11,13 @@ import java.util.List;
 
 public interface StudentRepository extends JpaRepository<Student, String> {
 
-    @Query("select st from Student st where st.deleted = 0")
+    @Query("select st from Student st")
     List<Student> findAll();
 
-    @Query("select st from Student st where st.deleted = 0")
+    @Query("select st from Student st")
     Page<Student> findAll(Pageable pageable);
 
-    @Query("select st from Student st where st.deleted = 0 and ((LOWER(st.name) like :searchInput) or (LOWER(st.username) like :searchInput))")
+    @Query("select st from Student st where ((LOWER(st.name) like :searchInput) or (LOWER(st.username) like :searchInput))")
     Page<Student> findBySearchInput(Pageable pageable, @Param("searchInput") String searchInput);
 
 }

@@ -44,7 +44,6 @@ public class UserServiceImpl implements IUserService {
         userResponse.setId(user.getId());
         userResponse.setUsername(user.getUsername());
         userResponse.setBirthday(DateFormatUtil.convertDateToString(user.getBirthday()));
-        userResponse.setDeleted(user.getDeleted());
         userResponse.setDescription(user.getDescription());
         userResponse.setEmail(user.getEmail());
         userResponse.setGender(user.getGender().getValue());

@@ -46,7 +46,6 @@ public class OfficerServiceImpl implements IOfficerService{
         OfficerResponse officerResponse = new OfficerResponse();
         officerResponse.setId(officerEntity.getId());
         officerResponse.setBirthday(DateFormatUtil.convertDateToString(officerEntity.getBirthday()));
-        officerResponse.setDeleted(officerEntity.getDeleted());
         officerResponse.setDescription(officerEntity.getDescription());
         officerResponse.setEmail(officerEntity.getEmail());
         officerResponse.setGender(officerEntity.getGender().getValue());

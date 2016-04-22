@@ -143,10 +143,8 @@ public class StudentServiceImpl implements IStudentService{
         studentResponse.setUsername(studentEntity.getUsername());
         studentResponse.setName(studentEntity.getName());
         studentResponse.setBirthday(DateFormatUtil.convertDateToString(studentEntity.getBirthday()));
-        studentResponse.setDeleted(studentEntity.getDeleted());
         studentResponse.setDescription(studentEntity.getDescription());
         studentResponse.setEmail(studentEntity.getEmail());
-        studentResponse.setDeleted(studentEntity.getDeleted());
         studentResponse.setGender(studentEntity.getGender().getValue());
         if(studentEntity.getTypeOfUser() != null)
             studentResponse.setTypeOfUser(studentEntity.getTypeOfUser().getValue());
