@@ -13,10 +13,15 @@ angular.module('appDATN.wave')
             return $http.get('API/getStudentsOfProjectWave', {params : {id: id}});
         };
 
+        getProjectWavesByPage = function(currentPage, pageSize, searchInput){
+            return $http.get('API/getProjectWavesByPage', {params : {pageIndex: currentPage, sizeOfPage:pageSize, searchInput:searchInput}});
+        };
+
         return {
             addWave : addWave,
             getProjectWave : getProjectWave,
-            getStudents : getStudents
+            getStudents : getStudents,
+            getProjectWavesByPage: getProjectWavesByPage
         };
 
     });

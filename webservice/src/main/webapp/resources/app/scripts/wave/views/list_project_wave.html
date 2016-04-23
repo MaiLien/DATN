@@ -1,0 +1,94 @@
+<div>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <a ui-sref="wave.add" class="btn btn-primary">Tạo đợt ĐATN</a>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <!-- button search-->
+                        <div class="row">
+                            <div class="col-sm-4 col-sm-offset-8">
+                                <div class="form-group input-group">
+                                    <input ng-model="searchInput" type="text" class="form-control" placeholder="Nhập năm học">
+                                    <span class="input-group-btn"><button class="btn btn-default" ng-click="searchStudent(searchInput)" type="button"><i class="fa fa-search"></i></button></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <div style="min-height:450px; overflow:auto">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Năm học</th>
+                                    <th>Học kỳ</th>
+                                    <th>Thời gian</th>
+                                    <th>Ngày bảo vệ</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="projectWave in projectWaves">
+                                    <td><a>{{projectWave.schoolYear}}</a></td>
+                                    <td>Học kỳ {{projectWave.semester}}</td>
+                                    <td>{{projectWave.startTimeAndEndTime}}</td>
+                                    <td>{{projectWave.timeForStudentDefend}}</td>
+                                    <td>
+                                        <a class="" ng-click="editStudent($event, student)" >
+                                            <span><i class="fa fa-edit"></i></span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="" ng-click="lockStudent($event, student)" ng-if="student.status == 0">
+                                            <span><i class="fa fa-unlock"></i></span>
+                                        </a>
+                                        <a class="" ng-click="unlockStudent($event, student)" ng-if="student.status != 0">
+                                            <span><i class="fa fa-lock"></i></span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="" ng-click="deleteStudent($event, student)">
+                                            <span><i class="fa fa-trash" style="color: red"></i></span>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-7 col-sm-offset-5">
+                                <div class="pull-right">
+                                    <paging class="small"
+                                            page="currentPage"
+                                            page-size="pageSize"
+                                            total="total"
+                                            adjacent="{{adjacent}}"
+                                            dots="{{dots}}"
+                                            hide-if-empty="{{hideIfEmpty}}"
+                                            show-prev-next="{{showPrevNext}}"
+                                            show-first-last="{{showFirstLast}}"
+                                            paging-action="DoPagingAct('clicked', page, pageSize)">
+                                    </paging>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+
+    </section><!-- /.content -->
+
+</div><!-- /.content-wrapper -->

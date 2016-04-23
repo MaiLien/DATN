@@ -25,8 +25,10 @@ angular.module('appDATN.student')
         $scope.showPrevNext = true;
         $scope.showFirstLast = true;
 
-        $scope.getStudents = function (currentPage, pageSize, searchInput) {
-            StudentService.getStudents(currentPage, pageSize, searchInput)
+        $scope.searchInput = "";
+
+        $scope.getStudents = function (currentPage, pageSize) {
+            StudentService.getStudents(currentPage, pageSize, $scope.searchInput)
                 .success(function (data) {
                     if (data.headers.resultCode == 0) {
                         $scope.students = data.body.content;

@@ -2,6 +2,7 @@ package datn.service.impl;
 
 import datn.dao.entity.ProjectWave;
 import datn.dao.entity.Report;
+import datn.dao.entity.Student;
 import datn.dao.entity.StudentWave;
 import datn.dao.repository.ProjectWaveRepository;
 import datn.dao.repository.ReportRepository;
@@ -12,9 +13,13 @@ import datn.interfaces.response.RestApiResponse;
 import datn.interfaces.response.StudentResponse;
 import datn.interfaces.response.TeacherResponse;
 import datn.interfaces.util.ConvertStudentObject;
+import datn.interfaces.util.FormatSearchInput;
 import datn.interfaces.util.JsonUtil;
 import datn.service.IProjectWaveService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
@@ -26,6 +31,9 @@ import java.util.List;
 
 @Service
 public class ProjectWaveServiceImpl implements IProjectWaveService{
+
+    private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private DateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     @Autowired
     ProjectWaveRepository projectWaveRepository;
@@ -56,6 +64,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
 
         ProjectWaveResponse response = new ProjectWaveResponse();
         response.setId(id);
+        response.setDescription("Đợt đồ án dành cho lớp 11TCLC");
         out.setBody(response);
 
         if(virtualProjectWaveResponse != null)
@@ -82,6 +91,131 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
             out.add(ConvertStudentObject.convertStudentEntityToStudentResponse(studentWaves.get(i).getStudent()));
         }
 
+        return out;
+    }
+
+    @Override
+    public RestApiResponse<ArrayList<ProjectWaveResponse>> getAllProjectWave(){
+        ArrayList<ProjectWave> projectWaves = (ArrayList<ProjectWave>) projectWaveRepository.findAll();
+        ArrayList<ProjectWaveResponse> projectWaveResponses = convertProjectWaveEntitiesToProjectWaveResponses(projectWaves);
+
+        return new RestApiResponse<>(projectWaveResponses);
+    }
+
+    @Override
+    public RestApiResponse<Page<ProjectWaveResponse>> getPageProjectWaves(int pageIndex, int sizeOfPage, String searchInput) {
+        PageRequest pageable = new PageRequest(pageIndex, sizeOfPage);
+        Page<ProjectWave> projectWavePage = null;
+        if(searchInput == null || "".equals(searchInput)){
+            projectWavePage = projectWaveRepository.findAll(pageable);
+        }else{
+            searchInput = FormatSearchInput.formatSearchInput(searchInput);
+            projectWavePage = projectWaveRepository.findBySearchInput(pageable, searchInput);
+        }
+        Page<ProjectWaveResponse> projectWaveResponsePage = convertProjectWaveEntityPageToProjectWaveResponsePage(projectWavePage, pageable);
+
+        RestApiResponse<Page<ProjectWaveResponse>> response = new RestApiResponse<>(projectWaveResponsePage);
+        return  response;
+    }
+
+    private Page<ProjectWaveResponse> convertProjectWaveEntityPageToProjectWaveResponsePage(Page<ProjectWave> projectWavePage, PageRequest pageable){
+        ArrayList<ProjectWaveResponse> projectWaveResponses = convertProjectWaveEntitiesToProjectWaveResponses(new ArrayList<>(projectWavePage.getContent()));
+        Page<ProjectWaveResponse> projectWaveResponsePage = new PageImpl<>(projectWaveResponses, pageable, projectWavePage.getTotalElements());
+        return projectWaveResponsePage;
+    }
+
+    private ArrayList<ProjectWaveResponse> convertProjectWaveEntitiesToProjectWaveResponses(ArrayList<ProjectWave> entities){
+        ArrayList<ProjectWaveResponse> responses = new ArrayList<>();
+        ProjectWaveResponse temp;
+        for (int i = 0; i<entities.size(); i++){
+            temp = convertProjectWaveEntityToProjectWaveResponse(entities.get(i));
+            responses.add(temp);
+        }
+
+        return responses;
+    }
+
+    private ProjectWaveResponse convertProjectWaveEntityToProjectWaveResponse(ProjectWave entity){
+        ProjectWaveResponse response = new ProjectWaveResponse();
+        response.setId(entity.getId());
+        response.setSchoolYear(entity.getSchoolYear());
+        response.setSemester(entity.getSemester());
+        response.setDescription(entity.getDescription());
+        response.setStartTimeAndEndTime(getTimeForStudentDefend(entity));
+        response.setTimeForTeacherProposesStudent(getTimeForTeacherProposesStudent(entity));
+        response.setTimeForStudentRegisterTeacher(getTimeForStudentRegisterTeacher(entity));
+        response.setTimeForStudentSubmitProject(getTimeForStudentSubmitProject(entity));
+        response.setTimeForStudentDefend(getTimeForStudentStudentDefend(entity));
+        response.setReportTimes(getReportTimes(entity));
+        return response;
+    }
+
+    private ArrayList<String> getReportTimes(ProjectWave entity){
+        ArrayList<String> out = new ArrayList<>();
+        ArrayList<Report> reports = reportRepository.findByProjectWave(entity);
+        String start;
+        String end;
+        for (int i =0; i<reports.size(); i++){
+            start = dateTimeFormat.format(reports.get(i).getStartTime());
+            end = dateTimeFormat.format(reports.get(i).getEndTime());
+            out.add(start + " - " + end);
+        }
+
+        return out;
+    }
+
+    private String getTimeForStudentStudentDefend(ProjectWave entity){
+        String start;
+        String end;
+
+        start = dateFormat.format(entity.getStartTimeForStudentSubmitProject());
+        end = dateFormat.format(entity.getEndTimeForStudentSubmitProject());
+
+        String out = start + " - " + end;
+        return out;
+    }
+
+    private String getTimeForStudentSubmitProject (ProjectWave entity){
+        String start;
+        String end;
+
+        start = dateTimeFormat.format(entity.getStartTimeForStudentSubmitProject());
+        end = dateTimeFormat.format(entity.getEndTimeForStudentSubmitProject());
+
+        String out = start + " - " + end;
+        return out;
+    }
+
+    private String getTimeForStudentRegisterTeacher(ProjectWave entity){
+        String start;
+        String end;
+
+        start = dateTimeFormat.format(entity.getStartTimeForStudentRegisterTeacher());
+        end = dateTimeFormat.format(entity.getEndTimeForStudentRegisterTeacher());
+
+        String out = start + " - " + end;
+        return out;
+    }
+
+    private String getTimeForTeacherProposesStudent(ProjectWave entity){
+        String start;
+        String end;
+
+        start = dateTimeFormat.format(entity.getStartTimeForTeacherProposeStudent());
+        end = dateTimeFormat.format(entity.getEndTimeForTeacherProposeStudent());
+
+        String out = start + " - " + end;
+        return out;
+    }
+
+    private String getTimeForStudentDefend(ProjectWave entity){
+        String start;
+        String end;
+
+        start = dateFormat.format(entity.getStartDay());
+        end = dateFormat.format(entity.getEndDay());
+
+        String out = start + " - " + end;
         return out;
     }
 
@@ -174,12 +308,11 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         String start = arrTemp[0];
         String end = arrTemp[1];
 
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         Date startDate = null;
         Date endDate = null;
         try {
-            startDate = df.parse(start);
-            endDate = df.parse(end);
+            startDate = dateFormat.parse(start);
+            endDate = dateFormat.parse(end);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -196,12 +329,11 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         String start = arrTemp[0];
         String end = arrTemp[1];
 
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date startDate = null;
         Date endDate = null;
         try {
-            startDate = df.parse(start);
-            endDate = df.parse(end);
+            startDate = dateTimeFormat.parse(start);
+            endDate = dateTimeFormat.parse(end);
         } catch (ParseException e) {
             e.printStackTrace();
         }

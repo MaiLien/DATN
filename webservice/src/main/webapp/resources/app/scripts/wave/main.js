@@ -20,6 +20,15 @@ angular.module('appDATN.wave')
                     }
                 }
             })
+            .state('wave.list', {
+                url: '/list',
+                views: {
+                    content_view: {
+                        controller: 'ListProjectWaveCtrl',
+                        templateUrl: '/resources/app/scripts/wave/views/list_project_wave.html'
+                    }
+                }
+            })
             .state('wave.detail', {
                 url: '/detail',
                 resolve:{
