@@ -3,6 +3,7 @@ package datn.webservice.controller;
 import datn.interfaces.request.ProjectWaveRequest;
 import datn.interfaces.response.ProjectWaveResponse;
 import datn.interfaces.response.RestApiResponse;
+import datn.interfaces.response.StudentResponse;
 import datn.interfaces.util.JsonUtil;
 import datn.service.IProjectWaveService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/API")
@@ -26,6 +29,11 @@ public class ProjectWaveController {
     @RequestMapping(value = "/getProjectWave", method = RequestMethod.GET)
     public RestApiResponse<ProjectWaveResponse> getProjectWave(String id){
         return projectWaveService.getProjectWave(id);
+    }
+
+    @RequestMapping(value = "/getStudentsOfProjectWave", method = RequestMethod.GET)
+    public RestApiResponse<ArrayList<StudentResponse>> getStudentsOfProjectWave(String id){
+        return projectWaveService.getStudentsOfProjectWave(id);
     }
 
 }

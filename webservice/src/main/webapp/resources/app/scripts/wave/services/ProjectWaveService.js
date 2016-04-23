@@ -9,9 +9,14 @@ angular.module('appDATN.wave')
             return $http.get('API/getProjectWave', {params : {id: projectWaveId}});
         };
 
+        getStudents = function(id){
+            return $http.get('API/getStudentsOfProjectWave', {params : {id: id}});
+        };
+
         return {
-            addWave: addWave,
-            getProjectWave : getProjectWave
+            addWave : addWave,
+            getProjectWave : getProjectWave,
+            getStudents : getStudents
         };
 
     });

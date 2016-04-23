@@ -2,11 +2,16 @@ package datn.service.impl;
 
 import datn.dao.entity.ProjectWave;
 import datn.dao.entity.Report;
+import datn.dao.entity.StudentWave;
 import datn.dao.repository.ProjectWaveRepository;
 import datn.dao.repository.ReportRepository;
+import datn.dao.repository.StudentWaveRepository;
 import datn.interfaces.request.ProjectWaveRequest;
 import datn.interfaces.response.ProjectWaveResponse;
 import datn.interfaces.response.RestApiResponse;
+import datn.interfaces.response.StudentResponse;
+import datn.interfaces.response.TeacherResponse;
+import datn.interfaces.util.ConvertStudentObject;
 import datn.interfaces.util.JsonUtil;
 import datn.service.IProjectWaveService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +32,9 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
 
     @Autowired
     ReportRepository reportRepository;
+
+    @Autowired
+    StudentWaveRepository studentWaveRepository;
 
     static ProjectWaveResponse virtualProjectWaveResponse;
 
@@ -50,11 +58,29 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         response.setId(id);
         out.setBody(response);
 
-        System.out.println("virtualProjectWaveResponse"+JsonUtil.convertObjectToJson(virtualProjectWaveResponse));
-
-
         if(virtualProjectWaveResponse != null)
             out.setBody(virtualProjectWaveResponse);
+
+        return out;
+    }
+
+    @Override
+    public RestApiResponse<ArrayList<StudentResponse>> getStudentsOfProjectWave(String id) {
+        ArrayList<StudentWave> studentWaves = (ArrayList<StudentWave>) studentWaveRepository.findByProjectWave(new ProjectWave(id));
+        ArrayList<StudentResponse> students = getStudentsFromStudentWaves(studentWaves);
+        return new RestApiResponse<>(students);
+    }
+
+    @Override
+    public RestApiResponse<TeacherResponse> getTeachersOfProjectWave(String id) {
+        return null;
+    }
+
+    private ArrayList<StudentResponse> getStudentsFromStudentWaves(ArrayList<StudentWave> studentWaves){
+        ArrayList<StudentResponse> out = new ArrayList<>();
+        for (int i =0; i<studentWaves.size(); i++){
+            out.add(ConvertStudentObject.convertStudentEntityToStudentResponse(studentWaves.get(i).getStudent()));
+        }
 
         return out;
     }

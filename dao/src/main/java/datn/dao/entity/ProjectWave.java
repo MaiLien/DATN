@@ -79,6 +79,10 @@ public class ProjectWave implements Serializable {
 	public ProjectWave() {
 	}
 
+	public ProjectWave(String id) {
+		this.setId(id);
+	}
+
 	public String getId() {
 		return this.id;
 	}
