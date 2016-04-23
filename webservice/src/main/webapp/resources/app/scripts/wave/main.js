@@ -73,5 +73,29 @@ angular.module('appDATN.wave')
                     }
                 }
             })
+            .state('wave.detail.students', {
+                url: '/detail/tabs/students',
+                views: {
+                    detail_project_wave_tab_view: {
+                        templateUrl: '/resources/app/scripts/wave/views/detail_project_wave_tab_students.html'
+                    }
+                }
+            })
+            .state('wave.detail.teachers', {
+                url: '/detail/tabs/teachers',
+                views: {
+                    detail_project_wave_tab_view: {
+                        templateUrl: '/resources/app/scripts/wave/views/detail_project_wave_tab_teachers.html'
+                    }
+                }
+            })
+            .state('wave.detail.assignments', {
+                url: '/detail/tabs/assignments',
+                views: {
+                    detail_project_wave_tab_view: {
+                        templateUrl: '/resources/app/scripts/wave/views/detail_project_wave_tab_assignments.html'
+                    }
+                }
+            })
     });
 

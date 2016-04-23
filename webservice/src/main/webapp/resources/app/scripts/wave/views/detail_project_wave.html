@@ -14,10 +14,10 @@
             <div class="col-md-12">
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a ui-sref="wave.detail.times" data-toggle="tab"> <b class="tag-name">Tiến độ thực hiện</b></a></li>
-                        <li><a ui-sref="wave.detail.tabs.students" data-toggle="tab"> <b class="tag-name">Danh sách sinh viên</b></a></li>
-                        <li><a ui-sref="wave.detail.tabs.teachers" data-toggle="tab"><b class="tag-name">Danh sách giảng viên</b></a></li>
-                        <li><a ui-sref="wave.detail.tabs.assign" data-toggle="tab"><b class="tag-name">Danh sách phân công hướng dẫn</b></a></li>
+                        <li class="active"><a ui-sref="wave.detail.times"> <b class="tag-name">Tiến độ thực hiện</b></a></li>
+                        <li><a ui-sref="wave.detail.students"> <b class="tag-name">Danh sách sinh viên</b></a></li>
+                        <li><a ui-sref="wave.detail.teachers"><b class="tag-name">Danh sách giảng viên</b></a></li>
+                        <li><a ui-sref="wave.detail.assignments"><b class="tag-name">Danh sách phân công hướng dẫn</b></a></li>
                     </ul>
                     <div class="tab-content">
                         <div ui-view="detail_project_wave_tab_view"></div>
@@ -28,3 +28,10 @@
 
     </section><!-- /.content -->
 </div>
+
+<script>
+    $('ul li').click( function(){
+        $('.active').removeClass('active');
+        $(this).addClass('active');
+    });
+</script>
