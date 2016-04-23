@@ -29,7 +29,7 @@ angular.module('appDATN.wave')
             if($scope.addWaveForm.$valid && $scope.wave.reportTimes.length != 0){
                 ProjectWaveService.addWave($scope.wave)
                     .success(function (data) {
-                        $state.go('wave.detail', {projectWaveId: data.body.id});
+                        $state.go('wave.detail.times', {projectWaveId: data.body.id});
                     })
                     .error(function (error) {
                         $state.go('error');
