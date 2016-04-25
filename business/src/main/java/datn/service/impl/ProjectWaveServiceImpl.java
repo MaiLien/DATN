@@ -44,33 +44,21 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     @Autowired
     StudentWaveRepository studentWaveRepository;
 
-    static ProjectWaveResponse virtualProjectWaveResponse;
-
     public RestApiResponse<ProjectWaveResponse> addProjectWave(ProjectWaveRequest request) {
         ProjectWave projectWave = convertProjectWaveRequestToProjectWaveEntity(request);
         ProjectWave entity = projectWaveRepository.save(projectWave);
-        addProgressReportsToProjectWave(projectWave, request.getReportTimes());
-        ProjectWaveResponse response = convertProjectWaveRequestToProjectWaveResponse(entity, request);
-
-        virtualProjectWaveResponse = response;
-        System.out.println("virtualProjectWaveResponse"+JsonUtil.convertObjectToJson(virtualProjectWaveResponse));
+        addProgressReportsToProjectWave(entity, request.getReportTimes());
+        ProjectWaveResponse response = convertProjectWaveEntityToProjectWaveResponse(entity);
 
         return new RestApiResponse<>(response);
     }
 
     @Override
     public RestApiResponse<ProjectWaveResponse> getProjectWave(String id) {
-        RestApiResponse<ProjectWaveResponse> out = new RestApiResponse<>();
+        ProjectWave projectWave = projectWaveRepository.findOne(id);
+        ProjectWaveResponse response = convertProjectWaveEntityToProjectWaveResponse(projectWave);
 
-        ProjectWaveResponse response = new ProjectWaveResponse();
-        response.setId(id);
-        response.setDescription("Đợt đồ án dành cho lớp 11TCLC");
-        out.setBody(response);
-
-        if(virtualProjectWaveResponse != null)
-            out.setBody(virtualProjectWaveResponse);
-
-        return out;
+        return new RestApiResponse<>(response);
     }
 
     @Override
@@ -116,6 +104,22 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
 
         RestApiResponse<Page<ProjectWaveResponse>> response = new RestApiResponse<>(projectWaveResponsePage);
         return  response;
+    }
+
+    @Override
+    public RestApiResponse<ProjectWaveResponse> deleteProjectWave(String projectWaveId) {
+        if(projectWaveIsExist(projectWaveId))
+            projectWaveRepository.delete(projectWaveId);
+
+        return new RestApiResponse<>();
+    }
+
+    private boolean projectWaveIsExist(String id){
+        ProjectWave projectWave = projectWaveRepository.findOne(id);
+        if(projectWave != null)
+            return true;
+
+        return false;
     }
 
     private Page<ProjectWaveResponse> convertProjectWaveEntityPageToProjectWaveResponsePage(Page<ProjectWave> projectWavePage, PageRequest pageable){
@@ -245,6 +249,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         setTimeForStudentSubmitProject(projectWave, request.getTimeForStudentSubmitProject());
         setTimeForStudentDefend(projectWave, request.getTimeForStudentDefend());
         projectWave.setHowManyTimeProgressReport(request.getReportTimes().size());
+        projectWave.setDescription(request.getDescription());
 
         return projectWave;
     }

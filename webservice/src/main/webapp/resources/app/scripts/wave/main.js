@@ -30,10 +30,12 @@ angular.module('appDATN.wave')
                 }
             })
             .state('wave.detail', {
-                url: '/detail',
+                url: '/detail/:projectWaveId',
+                abstract: true,
                 resolve:{
                     projectWave: function ($q, $state, $stateParams, ProjectWaveService) {
                         var deferred = $q.defer();
+                        console.log("called waveDetail: " + $stateParams.projectWaveId);
                         ProjectWaveService.getProjectWave($stateParams.projectWaveId)
                             .success(function (data) {
                                 if(data.headers.resultCode == 0) {
@@ -71,7 +73,7 @@ angular.module('appDATN.wave')
                 }
             })
             .state('wave.detail.times', {
-                url: '/detail/tabs/times/:projectWaveId',
+                url: '/detail/tabs/times',
                 views: {
                     detail_project_wave_tab_view: {
                         templateUrl: '/resources/app/scripts/wave/views/detail_project_wave_tab_times.html'

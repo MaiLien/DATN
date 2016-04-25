@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface ProjectWaveRepository extends JpaRepository<ProjectWave, String> {
 
-    @Query("select st from ProjectWave st where (LOWER(st.schoolYear) like :searchInput)")
+    @Query("select st from ProjectWave st where LOWER(st.schoolYear) like :searchInput")
     Page<ProjectWave> findBySearchInput(Pageable pageable,@Param("searchInput") String searchInput);
 
 }

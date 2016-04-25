@@ -25,7 +25,6 @@ angular.module('appDATN.student')
         };
 
         deleteStudent = function(student){
-            console.log("delete service");
             return $http.delete('API/deleteStudent', {params : student})
         };
 

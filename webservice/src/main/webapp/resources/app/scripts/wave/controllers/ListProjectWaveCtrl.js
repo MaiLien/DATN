@@ -1,5 +1,5 @@
 angular.module('appDATN.wave')
-    .controller('ListProjectWaveCtrl', function ($scope, $state, ProjectWaveService) {
+    .controller('ListProjectWaveCtrl', function ($scope, $state, $log, $mdDialog, $mdMedia, ProjectWaveService) {
 
         $scope.projectWaves = [];
         $scope.currentPage = 0;
@@ -28,6 +28,30 @@ angular.module('appDATN.wave')
                 .error(function (error) {
                     $state.go('error');
                 });
+        };
+
+        $scope.searchProjectWave = function(searchInput){
+            if(!(searchInput == null || searchInput == "")){
+                $scope.currentPage = 0;
+                $scope.getProjectWaves($scope.currentPage, $scope.pageSize, searchInput);
+            }
+        };
+
+        $scope.deleteProjectWave = function(ev, projectWave){
+            var confirm = $mdDialog.confirm()
+                .title('Xóa đợt đồ án tốt nghiệp năm học ' + projectWave.schoolYear + ', học kỳ ' + projectWave.semester)
+                .ariaLabel('Lucky day')
+                .targetEvent(ev)
+                .ok('Xóa')
+                .cancel('Hủy');
+            $mdDialog.show(confirm).then(function() {
+                ProjectWaveService.deleteProjectWave(projectWave.id)
+                    .success(function(data){
+                        $scope.getProjectWaves($scope.currentPage-1, $scope.pageSize, $scope.searchInput);
+                    })
+            }, function() {
+
+            })
         };
 
         $scope.DoPagingAct = function(text, page, pageSize) {

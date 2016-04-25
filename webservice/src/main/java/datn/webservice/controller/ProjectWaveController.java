@@ -1,6 +1,7 @@
 package datn.webservice.controller;
 
 import datn.interfaces.request.ProjectWaveRequest;
+import datn.interfaces.request.StudentRequest;
 import datn.interfaces.response.ProjectWaveResponse;
 import datn.interfaces.response.RestApiResponse;
 import datn.interfaces.response.StudentResponse;
@@ -45,6 +46,12 @@ public class ProjectWaveController {
     @RequestMapping(value = "/getStudentsOfProjectWave", method = RequestMethod.GET)
     public RestApiResponse<ArrayList<StudentResponse>> getStudentsOfProjectWave(String id){
         return projectWaveService.getStudentsOfProjectWave(id);
+    }
+
+    /*Can not pass parameter with Postman if it has @RequestBody, otherwise website*/
+    @RequestMapping(value = "/deleteProjectWave", method = RequestMethod.DELETE)
+    public RestApiResponse<ProjectWaveResponse> deleteProjectWave(String projectWaveId){
+        return projectWaveService.deleteProjectWave(projectWaveId);
     }
 
 }

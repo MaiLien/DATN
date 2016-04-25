@@ -15,7 +15,7 @@
                             <div class="col-sm-4 col-sm-offset-8">
                                 <div class="form-group input-group">
                                     <input ng-model="searchInput" type="text" class="form-control" placeholder="Nhập năm học">
-                                    <span class="input-group-btn"><button class="btn btn-default" ng-click="searchStudent(searchInput)" type="button"><i class="fa fa-search"></i></button></span>
+                                    <span class="input-group-btn"><button class="btn btn-default" ng-click="searchProjectWave(searchInput)" type="button"><i class="fa fa-search"></i></button></span>
                                 </div>
                             </div>
                         </div>
@@ -30,31 +30,16 @@
                                     <th>Thời gian</th>
                                     <th>Ngày bảo vệ</th>
                                     <th></th>
-                                    <th></th>
-                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="projectWave in projectWaves">
-                                    <td><a>{{projectWave.schoolYear}}</a></td>
+                                    <td><a ui-sref="wave.detail.times({projectWaveId: projectWave.id})">{{projectWave.schoolYear}}</a></td>
                                     <td>Học kỳ {{projectWave.semester}}</td>
                                     <td>{{projectWave.startTimeAndEndTime}}</td>
                                     <td>{{projectWave.timeForStudentDefend}}</td>
                                     <td>
-                                        <a class="" ng-click="editStudent($event, student)" >
-                                            <span><i class="fa fa-edit"></i></span>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="" ng-click="lockStudent($event, student)" ng-if="student.status == 0">
-                                            <span><i class="fa fa-unlock"></i></span>
-                                        </a>
-                                        <a class="" ng-click="unlockStudent($event, student)" ng-if="student.status != 0">
-                                            <span><i class="fa fa-lock"></i></span>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="" ng-click="deleteStudent($event, student)">
+                                        <a class="" ng-click="deleteProjectWave($event, projectWave)">
                                             <span><i class="fa fa-trash" style="color: red"></i></span>
                                         </a>
                                     </td>

@@ -23,4 +23,5 @@ public interface IProjectWaveService{
 
     RestApiResponse<Page<ProjectWaveResponse>> getPageProjectWaves(int pageIndex, int sizeOfPage, String searchInput);
 
+    RestApiResponse<ProjectWaveResponse> deleteProjectWave(String projectWaveId);
 }

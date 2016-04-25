@@ -102,6 +102,10 @@ angular.module('appDATN.common')
                             addCurrentPosition(list[i], j, result);
                             break;
                         }
+                        if(j == result.length-1){
+                            addLastPosition(list[i], result);
+                            break;
+                        }
                     }
                 }
             }

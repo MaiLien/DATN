@@ -100,7 +100,7 @@
 <script src="/resources/app/scripts/app.js"  charset="utf-8"></script>
 
 <script src="/resources/app/scripts/common/main.js"  charset="utf-8"></script>
-<script src="/resources/app/scripts/common/directives/NgEnter.js"  charset="utf-8"></script>
+<%--<script src="/resources/app/scripts/common/directives/NgEnter.js"  charset="utf-8"></script>--%>
 <script src="/resources/app/scripts/common/filters/SortDateTime.js"  charset="utf-8"></script>
 
 <script src="/resources/app/scripts/authenticate/main.js"  charset="utf-8"></script>
@@ -117,10 +117,10 @@
 
 
 <script src="/resources/app/scripts/wave/main.js" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/wave/services/ProjectWaveService.js" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/wave/controllers/AddProjectWaveCtrl.js" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/wave/controllers/DetailProjectWaveCtrl.js" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/wave/controllers/ListProjectWaveCtrl.js" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/wave/services/ProjectWaveService.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/wave/controllers/AddProjectWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/wave/controllers/DetailProjectWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/wave/controllers/ListProjectWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
 </body>
 </html>
