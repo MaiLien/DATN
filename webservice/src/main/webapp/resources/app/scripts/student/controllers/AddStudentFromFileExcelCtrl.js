@@ -1,11 +1,7 @@
 angular.module('appDATN.student')
     .controller('AddStudentFromFileCtrl', function ($scope, $timeout, StudentService) {
 
-        $scope.addStudentFromFile = function (student) {
-
-        }
-
-        $scope.uploadPic = function (file) {
+        $scope.addStudentFromFile = function (file) {
             StudentService.addStudentFromFile(file)
                 .then(function (response) {
                     $timeout(function () {

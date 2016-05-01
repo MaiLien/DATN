@@ -21,6 +21,9 @@
     <link href="/resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.standalone.css" rel="stylesheet">
 
     <link rel="stylesheet" href="/resources/template2/plugins/daterangepicker/daterangepicker-bs3.css">
+
+    <link rel="stylesheet" href="/resources/bower_components/bootstrap-fileinput/css/fileinput.css">
+
     <link rel="stylesheet" href="/resources/app/styles/mystyle.css">
 
 </head>
@@ -67,6 +70,8 @@
 
 <%--date range picker--%>
 <script src="/resources/template2/plugins/daterangepicker/daterangepicker.js"></script>
+
+<script src="/resources/app/js/fileinput.js" charset="utf-8"></script>
 
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/resources/template2/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>

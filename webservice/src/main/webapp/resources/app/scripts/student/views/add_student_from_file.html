@@ -1,20 +1,34 @@
-<form name="myForm">
-    <fieldset>
+<!--<form name="myForm">-->
+    <!--<fieldset>-->
 
-        <legend>Upload on form submit</legend>
+        <!--<legend>Upload on form submit</legend>-->
 
-        <input type="file"
-               ngf-select
-               ng-model="picFile"
-               name="file"
-               required
-               ngf-model-invalid="errorFile">
+        <!--<input type="file"-->
+               <!--ngf-select-->
+               <!--ng-model="picFile"-->
+               <!--name="file"-->
+               <!--required-->
+               <!--ngf-model-invalid="errorFile">-->
 
-        <button ng-disabled="!myForm.$valid"
-                ng-click="uploadPic(picFile)">Submit</button>
+        <!--<button ng-disabled="!myForm.$valid"-->
+                <!--ng-click="addStudentFromFile(picFile)">Submit</button>-->
 
-        Ket qua: {{smsResult}}
+        <!--Ket qua: {{smsResult}}-->
 
-    </fieldset>
-    <br>
+    <!--</fieldset>-->
+    <!--<br>-->
+<!--</form>-->
+
+<form ng-submit="addStudentFromFile(fileExcel)" name="fileForm">
+    <input
+            ngf-select
+            id="input-id"
+            ng-model="fileExcel"
+            name="file"
+            type="file"
+            class="file"
+            data-allowed-file-extensions='["xlsx", "xls"]'>
 </form>
+<script>
+    $("#input-id").fileinput();
+</script>
