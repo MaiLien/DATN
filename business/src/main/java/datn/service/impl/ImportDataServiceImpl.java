@@ -1,5 +1,7 @@
 package datn.service.impl;
 
+import datn.dao.entity.Student;
+import datn.dao.repository.StudentRepository;
 import datn.interfaces.request.StudentRequest;
 import datn.interfaces.response.*;
 import datn.service.IImportDataService;
@@ -30,16 +32,21 @@ public class ImportDataServiceImpl implements IImportDataService{
 
     public static final String STUDENT_SHEET = "Student";
 
-    private Map<String, StudentResponse> studentMap = new HashMap<String, StudentResponse>();
+    private Map<String, Student> studentMap = null;
 
-    private List<StudentResponse> successItems = new ArrayList<>();
-    private List<FailItemResponse<StudentRequest>> failItems = new ArrayList<>();
+    private List<StudentResponse> successItems = null;
+    private List<FailItemResponse<StudentRequest>> failItems = null;
 
     @Autowired
     IStudentService studentService;
 
+    @Autowired
+    StudentRepository studentRepository;
+
     public synchronized RestApiResponse<ImportFromFileResponse<StudentResponse, StudentRequest>> importData(MultipartFile excelFile){
-        RestApiResponse<ArrayList<StudentResponse>> response = new RestApiResponse<ArrayList<StudentResponse>>(null);
+        RestApiResponse<ArrayList<StudentResponse>> response = new RestApiResponse<>(null);
+        response.setHeaders(new RestApiResponseHeaders());
+
         if (!excelFile.isEmpty()) {
             try {
                 String fileName = excelFile.getOriginalFilename();
@@ -62,7 +69,6 @@ public class ImportDataServiceImpl implements IImportDataService{
             finally {
                 resetAllMap();
             }
-            response.setHeaders(new RestApiResponseHeaders());
         } else {
             throw new ExcelFileNotFoundException("excelFile not found");
         }
@@ -82,14 +88,17 @@ public class ImportDataServiceImpl implements IImportDataService{
     }
 
     private void initStudentMap() {
-        ArrayList<StudentResponse> students = studentService.getStudents().getBody();
-        for (StudentResponse student: students) {
+        failItems = new ArrayList<>();
+        successItems = new ArrayList<>();
+        studentMap = new HashMap<>();
+        ArrayList<Student> students = (ArrayList<Student>) studentRepository.findAll();
+        for (Student student: students) {
             studentMap.put(StringUtils.lowerCase(student.getUsername()), student);
         }
     }
 
     private void resetAllMap() {
-        studentMap = new HashMap<>();
+        studentMap = null;
     }
 
     private void validateAndSaveStudentSheet(Workbook workbook) {
@@ -104,10 +113,12 @@ public class ImportDataServiceImpl implements IImportDataService{
 
         Iterator<Row> rowIterator = studentSheet.iterator();
         ignoreFistRow(rowIterator);
-        int index = 2;
+        int index = 1;
         while (rowIterator.hasNext()) {
             Row row = rowIterator.next();
             StudentRequest student = getStudent(row);
+
+            if(student == null) break;
 
             if(studentIsExist(student)){
                 FailItemResponse<StudentRequest> failItem = new FailItemResponse<>();
@@ -137,7 +148,7 @@ public class ImportDataServiceImpl implements IImportDataService{
 
     private boolean studentIsExist(StudentRequest student){
         String key = student.getUsername();
-        StudentResponse studentInMap = studentMap.get(key);
+        Student studentInMap = studentMap.get(key);
         if (studentInMap != null) {
             return true;
         }
@@ -150,8 +161,11 @@ public class ImportDataServiceImpl implements IImportDataService{
     }
 
     private StudentRequest getStudent(Row row) {
-        StudentRequest student = new StudentRequest();;
-        String studentUserName = getValueOfRowAt(row, 1);
+        StudentRequest student = new StudentRequest();
+        String index = getValueOfRowAt(row, 0).trim();
+        if(index == null || "".equalsIgnoreCase(index))
+            return null;
+        String studentUserName = getValueOfRowAt(row, 1).trim();
         String studentName = getValueOfRowAt(row, 2);
         String studentClass = getValueOfRowAt(row, 3);
         String studentBirthday = getValueOfRowAt(row, 4);

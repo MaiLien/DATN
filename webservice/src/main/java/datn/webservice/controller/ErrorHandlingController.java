@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
 import java.io.IOException;
 
 @ControllerAdvice
@@ -81,7 +82,7 @@ public class ErrorHandlingController {
     @ExceptionHandler(UserExistedException.class)
     @ResponseBody
     public RestApiResponse<?> handleUserExistedException(HttpServletRequest request, UserExistedException exception){
-        return createResponseError(request, MessageCodeConstant.ERROR_USER_EXISTED, null);
+        return createResponseError(request, MessageCodeConstant.ERROR_USER_EXISTED, exception.getErrMessage());
     }
 
     @ExceptionHandler(IOException.class)
@@ -99,7 +100,7 @@ public class ErrorHandlingController {
         return createResponseError(request, MessageCodeConstant.ERROR_INTERNAL_SERVER, null);
     }
 
-    private RestApiResponse<?> createResponseError(HttpServletRequest request, String resultCode, Object[] messageArguments) {
+    private RestApiResponse<?> createResponseError(HttpServletRequest request, String resultCode, Object... messageArguments) {
         RestApiResponse<String> RestApiResponse = new RestApiResponse<String>();
         RestApiResponseHeaders responseHeaders = RestApiResponse.getHeaders();
         responseHeaders.setResultCode(resultCode);

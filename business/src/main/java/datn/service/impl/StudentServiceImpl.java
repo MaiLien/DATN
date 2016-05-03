@@ -10,16 +10,16 @@ import datn.interfaces.response.StudentResponse;
 import datn.interfaces.util.DateFormatUtil;
 import datn.interfaces.util.FormatSearchInput;
 import datn.service.IStudentService;
+import datn.service.exceptions.UserExistedException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 @Service
 public class StudentServiceImpl implements IStudentService{
@@ -68,11 +68,16 @@ public class StudentServiceImpl implements IStudentService{
 
     public RestApiResponse<StudentResponse> addStudent(StudentRequest studentRequest) {
         Student studentEntity = convertStudentRequestToStudentEntity(studentRequest);
-        studentEntity = studentRepository.save(studentEntity);
-        StudentResponse studentResponse = convertStudentEntityToStudentResponse(studentEntity);
-        RestApiResponse<StudentResponse> student = new RestApiResponse<StudentResponse>(studentResponse);
+        try{
+            studentEntity = studentRepository.save(studentEntity);
+        }catch (Exception e){
+            throw new UserExistedException(studentEntity.getUsername());
+        }
 
-        return student;
+        StudentResponse studentResponse = convertStudentEntityToStudentResponse(studentEntity);
+        RestApiResponse<StudentResponse> response = new RestApiResponse<StudentResponse>(studentResponse);
+
+        return response;
     }
 
     public RestApiResponse<StudentResponse> deleteStudent(StudentRequest studentRequest) {

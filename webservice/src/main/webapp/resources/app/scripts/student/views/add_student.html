@@ -1,4 +1,4 @@
-<div ng-controller="AddStudentCtrl">
+<div>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h3 class="box-title">Nhập thông tin sinh viên hoặc <a ui-sref="student.addFromFile" class="btn btn-primary"> Thêm từ file</a> </h3>
@@ -13,7 +13,10 @@
                         <!--<h3 class="box-title">Hover Data Table</h3>-->
                     </div><!-- /.box-header -->
                     <div class="box-body">
-
+                        <div class="alert alert-danger fade in" ng-if="errMessage != null">
+                            <a class="close" data-dismiss="alert" aria-label="close" ng-click="errMessage = null">&times;</a>
+                            <strong>Lỗi!</strong> {{errMessage}}
+                        </div>
                         <form name="addStudentForm" novalidate class="form-horizontal">
                             <div class="box-body">
                                 <!-- Username-->

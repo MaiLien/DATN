@@ -277,6 +277,7 @@
     DEFAULT_PREVIEW = '<div class="file-preview-other">\n' +
         '   <span class="{previewFileIconClass}">{previewFileIcon}</span>\n' +
         '</div>';
+    //DEFAULT_PREVIEW = '<div> </div>';
     defaultFileActionSettings = {
         removeIcon: '<i class="glyphicon glyphicon-trash text-danger"></i>',
         removeClass: 'btn btn-xs btn-default',

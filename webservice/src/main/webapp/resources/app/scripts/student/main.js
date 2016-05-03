@@ -44,7 +44,7 @@ angular.module('appDATN.student')
                 url: '/add',
                 views: {
                     content_view: {
-                        //controller: 'StudentCtrl',
+                        controller: 'AddStudentCtrl',
                         templateUrl: '/resources/app/scripts/student/views/add_student.html'
                     }
                 }

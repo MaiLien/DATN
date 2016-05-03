@@ -19,16 +19,127 @@
     <!--<br>-->
 <!--</form>-->
 
-<form ng-submit="addStudentFromFile(fileExcel)" name="fileForm">
-    <input
-            ngf-select
-            id="input-id"
-            ng-model="fileExcel"
-            name="file"
-            type="file"
-            class="file"
-            data-allowed-file-extensions='["xlsx", "xls"]'>
-</form>
+<div>
+
+    <div class="alert alert-danger fade in" ng-if="errMessage != null">
+        <a class="close" data-dismiss="alert" aria-label="close" ng-click="errMessage = null">&times;</a>
+        {{errMessage}}
+    </div>
+
+    <section class="content-header">
+        <h3 class="box-title">Thêm sinh viên từ file</h3>
+
+        <form ng-submit="addStudentFromFile(fileExcel)" name="fileForm">
+            <input
+                    ngf-select
+                    id="input-id"
+                    ng-model="fileExcel"
+                    name="file"
+                    type="file"
+                    class="file"
+                    data-allowed-file-extensions='["xlsx", "xls"]'>
+        </form>
+    </section>
+
+    <div ng-if="successItems || failItems">
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <!--<h3 class="box-title">Hover Data Table</h3>-->
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="alert alert-info">
+                                Danh sách sinh viên được thêm thành công
+                            </div>
+                            <div style="overflow:auto">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Mã sinh viên</th>
+                                        <th>Họ tên</th>
+                                        <th>Lớp</th>
+                                        <th>Ngày sinh</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="item in successItems">
+                                        <td><a>{{item.username}}</a></td>
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.class_}}</td>
+                                        <td>{{item.birthday}}</td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
+
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+
+        </section><!-- /.content -->
+
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-danger">
+                        <div class="box-header">
+                            <!--<h3 class="box-title">Hover Data Table</h3>-->
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="alert alert-danger fade in">
+                                Danh sách thêm sinh viên bị lỗi
+                            </div>
+                            <div style="overflow:auto">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Mã sinh viên</th>
+                                        <th>Họ tên</th>
+                                        <th>Lớp</th>
+                                        <th>Ngày sinh</th>
+                                        <th>Lý do</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="item in failItems">
+                                        <td>{{item.row}}</td>
+                                        <td>{{item.errorItem.username}}</td>
+                                        <td>{{item.errorItem.name}}</td>
+                                        <td>{{item.errorItem.class_}}</td>
+                                        <td>{{item.errorItem.birthday}}</td>
+                                        <td>{{item.reason}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
+
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+
+        </section><!-- /.content -->
+    </div>
+
+</div>
+
+<!--<form ng-submit="addStudentFromFile(fileExcel)" name="fileForm">-->
+    <!--<input-->
+            <!--ngf-select-->
+            <!--id="input-id"-->
+            <!--ng-model="fileExcel"-->
+            <!--name="file"-->
+            <!--type="file"-->
+            <!--class="file"-->
+            <!--data-allowed-file-extensions='["xlsx", "xls"]'>-->
+<!--</form>-->
 <script>
     $("#input-id").fileinput();
 </script>

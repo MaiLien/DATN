@@ -44,3 +44,37 @@ body{
 .tag-name{
     color: #245C8C;
 }
+
+.alert-danger {
+    color: #a94442 !important;
+    background-color: #f2dede !important;
+    border-color: #ebccd1;
+    font-family: Roboto,'Helvetica Neue',sans-serif;
+}
+
+.alert-info {
+    color: #31708f !important;
+    background-color: #d9edf7 !important;
+    border-color: #bce8f1;
+}
+
+.alert a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.close:link {
+    text-decoration: none;
+}
+
+.close:visited {
+    text-decoration: none;
+}
+
+.close:hover {
+    text-decoration: none;
+}
+
+.close:active {
+    text-decoration: none;
+}
