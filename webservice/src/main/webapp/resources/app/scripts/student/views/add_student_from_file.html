@@ -41,7 +41,7 @@
         </form>
     </section>
 
-    <div ng-if="successItems || failItems">
+    <div ng-if="successItems.length != 0 || failItems.length != 0">
         <section class="content">
             <div class="row">
                 <div class="col-xs-12">
@@ -53,6 +53,7 @@
                             <div class="alert alert-info">
                                 Danh sách sinh viên được thêm thành công
                             </div>
+
                             <div style="overflow:auto">
                                 <table class="table table-bordered table-hover">
                                     <thead>
@@ -64,7 +65,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr ng-repeat="item in successItems">
+                                    <tr ng-repeat="item in successPageItems">
                                         <td><a>{{item.username}}</a></td>
                                         <td>{{item.name}}</td>
                                         <td>{{item.class_}}</td>
@@ -75,6 +76,23 @@
                                 </table>
                             </div>
 
+                            <div class="row">
+                                <div class="col-sm-7 col-sm-offset-5">
+                                    <div class="pull-right">
+                                        <paging class="small"
+                                                page="successCurrentPage"
+                                                page-size="pageSize"
+                                                total="successTotal"
+                                                adjacent="{{adjacent}}"
+                                                dots="{{dots}}"
+                                                hide-if-empty="{{hideIfEmpty}}"
+                                                show-prev-next="{{showPrevNext}}"
+                                                show-first-last="{{showFirstLast}}"
+                                                paging-action="SuccessDoPagingAct(page, pageSize)">
+                                        </paging>
+                                    </div>
+                                </div>
+                            </div>
                         </div><!-- /.box-body -->
                     </div><!-- /.box -->
 
@@ -94,6 +112,7 @@
                             <div class="alert alert-danger fade in">
                                 Danh sách thêm sinh viên bị lỗi
                             </div>
+
                             <div style="overflow:auto">
                                 <table class="table table-bordered table-hover">
                                     <thead>
@@ -103,11 +122,11 @@
                                         <th>Họ tên</th>
                                         <th>Lớp</th>
                                         <th>Ngày sinh</th>
-                                        <th>Lý do</th>
+                                        <th>Lý do {{errorPageItems.length}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr ng-repeat="item in failItems">
+                                    <tr ng-repeat="item in errorPageItems">
                                         <td>{{item.row}}</td>
                                         <td>{{item.errorItem.username}}</td>
                                         <td>{{item.errorItem.name}}</td>
@@ -117,6 +136,24 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-7 col-sm-offset-5">
+                                    <div class="pull-right">
+                                        <paging class="small"
+                                                page="errorCurrentPage"
+                                                page-size="pageSize"
+                                                total="errorTotal"
+                                                adjacent="{{adjacent}}"
+                                                dots="{{dots}}"
+                                                hide-if-empty="{{hideIfEmpty}}"
+                                                show-prev-next="{{showPrevNext}}"
+                                                show-first-last="{{showFirstLast}}"
+                                                paging-action="ErrorDoPagingAct(page, pageSize)">
+                                        </paging>
+                                    </div>
+                                </div>
                             </div>
 
                         </div><!-- /.box-body -->
