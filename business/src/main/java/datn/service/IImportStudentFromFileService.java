@@ -6,9 +6,7 @@ import datn.interfaces.response.RestApiResponse;
 import datn.interfaces.response.StudentResponse;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-
-public interface IImportDataService {
+public interface IImportStudentFromFileService{
 
     RestApiResponse<ImportFromFileResponse<StudentResponse, StudentRequest>> importData(MultipartFile excelFile);
 

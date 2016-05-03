@@ -15,7 +15,7 @@ angular.module('appDATN.student')
 
         addStudentFromFile = function(file){
             return file.upload = Upload.upload({
-                url: '/importStudentFromFile',
+                url: '/API/importStudentFromFile',
                 data: {excelFile: file}
             });
         };
