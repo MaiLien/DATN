@@ -45,6 +45,10 @@ body{
     color: #245C8C;
 }
 
+.file-preview{
+    border: none;
+}
+
 .alert-danger {
     color: #a94442 !important;
     background-color: #f2dede !important;

@@ -28,18 +28,28 @@
 
     <section class="content-header">
         <h3 class="box-title">Thêm sinh viên từ file</h3>
-
-        <form ng-submit="addStudentFromFile(fileExcel)" name="fileForm">
-            <input
-                    ngf-select
-                    id="input-id"
-                    ng-model="fileExcel"
-                    name="file"
-                    type="file"
-                    class="file"
-                    data-allowed-file-extensions='["xlsx", "xls"]'>
-        </form>
     </section>
+
+    <section class="content" style="min-height: inherit;">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-body">
+                        <form ng-submit="addStudentFromFile(fileExcel)" name="fileForm">
+                            <input
+                                    ngf-select
+                                    id="input-id"
+                                    ng-model="fileExcel"
+                                    name="file"
+                                    type="file"
+                                    class="file"
+                                    data-allowed-file-extensions='["xlsx", "xls"]'>
+                        </form>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </section><!-- /.content -->
 
     <div ng-if="successItems.length != 0 || failItems.length != 0">
         <section class="content">
