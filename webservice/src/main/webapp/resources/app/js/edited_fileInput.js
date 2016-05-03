@@ -307,14 +307,14 @@
         '</div>';
     tMain2 = '{preview}\n<div class="kv-upload-progress hide"></div>\n{remove}\n{cancel}\n{upload}\n{browse}\n';
     tPreview = '<div class="file-preview {class}">\n' +
-        //'    {close}' +
-        //'    <div class="{dropClass}">\n' +
-        //'    <div class="file-preview-thumbnails">\n' +
-        //'    </div>\n' +
-        //'    <div class="clearfix"></div>' +
-        //'    <div class="file-preview-status text-center text-success"></div>\n' +
+            //'    {close}' +
+            //'    <div class="{dropClass}">\n' +
+            //'    <div class="file-preview-thumbnails">\n' +
+            //'    </div>\n' +
+            //'    <div class="clearfix"></div>' +
+            //'    <div class="file-preview-status text-center text-success"></div>\n' +
         '    <div class="kv-fileinput-error"></div>\n' +
-        //'    </div>\n' +
+            //'    </div>\n' +
         '</div>';
     tClose = '<div class="close fileinput-remove">&times;</div>\n';
     tIcon = '<span class="glyphicon glyphicon-file kv-caption-icon"></span>';
@@ -1602,7 +1602,7 @@
                             });
                         }
                         var filestack = self.getFileStack(true), len = filestack.length, chk = previewCache.count(
-                            self.id),
+                                self.id),
                             hasThumb = self.showPreview && self.$preview.find('.file-preview-frame').length;
                         self._clearFileInput();
                         if (len === 0 && chk === 0 && !hasThumb) {

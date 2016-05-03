@@ -71,7 +71,7 @@
 <%--date range picker--%>
 <script src="/resources/template2/plugins/daterangepicker/daterangepicker.js"></script>
 
-<script src="/resources/app/js/fileinput.js" charset="utf-8"></script>
+<script src="/resources/app/js/edited_fileInput.js" charset="utf-8"></script>
 
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/resources/template2/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
