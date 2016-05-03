@@ -15,7 +15,10 @@
                     <div class="box-body">
                         <div class="alert alert-danger fade in" ng-if="errMessage != null">
                             <a class="close" data-dismiss="alert" aria-label="close" ng-click="errMessage = null">&times;</a>
-                            <strong>Lỗi!</strong> {{errMessage}}
+                            {{errMessage}}
+                        </div>
+                        <div class="alert alert-info fade in" ng-if="successMessage">
+                            Thêm sinh viên thành công
                         </div>
                         <form name="addStudentForm" novalidate class="form-horizontal">
                             <div class="box-body">
@@ -72,7 +75,7 @@
 
                                 <div class="box-footer">
                                     <button type="button" class="btn btn-primary pull-right" ng-click="addStudent(student)">Thêm</button>
-                                    <button type="reset" class="btn btn-default" ng-click="addStudentForm.$setPristine()">Hủy</button>
+                                    <button type="reset" class="btn btn-default" ng-click="cancel()">Hủy</button>
                                 </div>
                             </div>
                         </form>

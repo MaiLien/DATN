@@ -10,6 +10,7 @@ import datn.interfaces.response.StudentResponse;
 import datn.interfaces.response.TeacherResponse;
 import datn.interfaces.util.DateFormatUtil;
 import datn.service.ITeacherService;
+import datn.service.exceptions.UserExistedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -59,9 +60,14 @@ public class TeacherServiceImpl implements ITeacherService {
 
     public RestApiResponse<TeacherResponse> addTeacher(TeacherRequest teacherRequest) {
         Teacher teacherEntity = convertTeacherRequestToTeacherEntity(teacherRequest);
-        teacherEntity = teacherRepository.save(teacherEntity);
+        try{
+            teacherEntity = teacherRepository.save(teacherEntity);
+        }catch (Exception e){
+            throw new UserExistedException(teacherEntity.getUsername());
+        }
+
         TeacherResponse teacherResponse = convertTeacherEntityToTeacherResponse(teacherEntity);
-        RestApiResponse<TeacherResponse> teacherResponseRestApiResponse = new RestApiResponse<TeacherResponse>(teacherResponse);
+        RestApiResponse<TeacherResponse> teacherResponseRestApiResponse = new RestApiResponse<>(teacherResponse);
 
         return teacherResponseRestApiResponse;
     }

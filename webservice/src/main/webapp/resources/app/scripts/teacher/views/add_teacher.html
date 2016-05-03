@@ -1,1 +1,95 @@
-AddTeacher
+<div>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h3 class="box-title">Nhập thông tin giảng viên hoặc <a ui-sref="teacher.addFromFile" class="btn btn-primary"> Thêm từ file</a> </h3>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <!--<h3 class="box-title">Hover Data Table</h3>-->
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="alert alert-info fade in" ng-if="successMessage">
+                            Thêm giảng viên thành công
+                        </div>
+                        <div class="alert alert-danger fade in" ng-if="errMessage != null">
+                            <a class="close" data-dismiss="alert" aria-label="close" ng-click="errMessage = null">&times;</a>
+                            {{errMessage}}
+                        </div>
+                        <form name="addTeacherForm" novalidate class="form-horizontal">
+                            <div class="box-body">
+                                <!-- Username-->
+                                <div class="form-group">
+                                    <label for="username" class="col-sm-2 control-label">Mã giảng viên</label>
+                                    <div class="col-sm-10" ng-class="{'has-error' : addTeacherForm.username.$invalid && !addTeacherForm.username.$pristine}">
+                                        <input ng-model="teacher.username" name="username" required type="text" class="form-control" id="username" placeholder="Mã giảng viên">
+                                        <label ng-if="addTeacherForm.username.$invalid && !addTeacherForm.username.$pristine" class="control-label" for="username"><i class="fa fa-times-circle-o"></i> Mã giảng viên không được trống</label>
+                                        <label ng-if="false" class="control-label" for="username"><i class="fa fa-times-circle-o"></i> Mã giảng viên đã tồn tại</label>
+                                    </div>
+                                </div>
+
+                                <!-- Name-->
+                                <div class="form-group">
+                                    <label for="name" class="col-sm-2 control-label">Họ tên</label>
+                                    <div class="col-sm-10" ng-class="{'has-error' : addTeacherForm.name.$invalid && !addTeacherForm.name.$pristine}">
+                                        <input ng-model="teacher.name" name="name" required type="text" class="form-control" id="name" placeholder="Họ tên">
+                                        <label ng-if="addTeacherForm.name.$invalid && !addTeacherForm.name.$pristine" class="control-label" for="name"><i class="fa fa-times-circle-o"></i> Họ tên không được trống</label>
+                                    </div>
+                                </div>
+
+                                <!-- Birthday-->
+                                <div class="form-group">
+                                    <label for="birthday" class="col-sm-2 control-label">Ngày sinh</label>
+                                    <div class="col-sm-10 date datepicker" data-provide="datepicker" ng-class="{'has-error' : addTeacherForm.birthday.$invalid && !addTeacherForm.birthday.$pristine}">
+                                        <input ng-model="teacher.birthday" name="birthday" required id="birthday" type="text" class="form-control"  placeholder="Ngày sinh">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                        <label ng-if="addTeacherForm.birthday.$invalid && !addTeacherForm.birthday.$pristine" class="control-label" for="birthday"><i class="fa fa-times-circle-o"></i> Ngày sinh không được trống</label>
+                                        <label ng-if="false" class="control-label" for="birthday"><i class="fa fa-times-circle-o"></i> Ngày sinh không đúng định dạng dd/MM/yyyy</label>
+                                    </div>
+                                    <script type="text/javascript">
+                                        $('.datepicker').datepicker({
+                                            format: "dd/mm/yyyy",
+                                            startDate: "-150y",
+                                            endDate: "+0d",
+                                            language: "vi",
+                                            autoclose: true,
+                                            defaultViewDate: { year: 1995, month: 01, day: 01 }
+                                        });
+                                    </script>
+                                </div>
+
+                                <!-- Gender-->
+                                <div class="form-group">
+                                    <label for="gender" class="col-sm-2 control-label">Giới tính</label>
+                                    <div class="col-sm-10" ng-class="{'has-error' : addTeacherForm.gender.$invalid && !addTeacherForm.gender.$pristine}">
+                                        <select id="gender" name="gender" required ng-model="teacher.gender" class="form-control">
+                                            <option value="0">Nam</option>
+                                            <option value="1">Nữ</option>
+                                            <option value="2">Khác</option>
+                                        </select>
+                                        <label ng-if="addTeacherForm.gender.$invalid && !addTeacherForm.gender.$pristine" class="control-label" for="gender"><i class="fa fa-times-circle-o"></i> Giới tính không được trống</label>
+                                    </div>
+                                </div>
+
+                                <div class="box-footer">
+                                    <button type="button" class="btn btn-primary pull-right" ng-click="addTeacher(teacher)">Thêm</button>
+                                    <button type="reset" class="btn btn-default" ng-click="cancel()">Hủy</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+
+    </section><!-- /.content -->
+
+</div><!-- /.content-wrapper -->
