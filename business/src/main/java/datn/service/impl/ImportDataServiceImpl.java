@@ -33,6 +33,7 @@ public class ImportDataServiceImpl implements IImportDataService{
     public static final String STUDENT_SHEET = "Student";
 
     private Map<String, Student> studentMap = null;
+    private Map<String, String> studentFileMap = null;
 
     private List<StudentResponse> successItems = null;
     private List<FailItemResponse<StudentRequest>> failItems = null;
@@ -91,6 +92,7 @@ public class ImportDataServiceImpl implements IImportDataService{
         failItems = new ArrayList<>();
         successItems = new ArrayList<>();
         studentMap = new HashMap<>();
+        studentFileMap = new HashMap<>();
         ArrayList<Student> students = (ArrayList<Student>) studentRepository.findAll();
         for (Student student: students) {
             studentMap.put(StringUtils.lowerCase(student.getUsername()), student);
@@ -120,7 +122,16 @@ public class ImportDataServiceImpl implements IImportDataService{
 
             if(student == null) break;
 
-            if(studentIsExist(student)){
+            if(studentIsExistInFile(student)){
+                FailItemResponse<StudentRequest> failItem = new FailItemResponse<>();
+                failItem.setRow(index);
+                failItem.setReason("Mã sinh viên đã có trong file");
+                failItem.setErrorItem(student);
+
+                failItems.add(failItem);
+            }
+
+            else if(studentIsExistInDatabase(student)){
                 FailItemResponse<StudentRequest> failItem = new FailItemResponse<>();
                 failItem.setRow(index);
                 failItem.setReason("Mã sinh viên đã tồn tại");
@@ -128,6 +139,7 @@ public class ImportDataServiceImpl implements IImportDataService{
 
                 failItems.add(failItem);
             }
+
             else if(isNotValidRow(student.getId(), student.getName(), student.getClass_(), student.getBirthday())){
                 FailItemResponse<StudentRequest> failItem = new FailItemResponse<>();
                 failItem.setRow(index);
@@ -136,17 +148,29 @@ public class ImportDataServiceImpl implements IImportDataService{
 
                 failItems.add(failItem);
             }
+
             else{
                 StudentResponse studentResponse = saveNewStudent(student);
                 successItems.add(studentResponse);
             }
 
+            studentFileMap.put(student.getUsername(), student.getUsername());
             index++;
         }
 
     }
 
-    private boolean studentIsExist(StudentRequest student){
+    private boolean studentIsExistInFile(StudentRequest student) {
+        String key = student.getUsername();
+        String result = studentFileMap.get(key);
+        if(result != null){
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean studentIsExistInDatabase(StudentRequest student){
         String key = student.getUsername();
         Student studentInMap = studentMap.get(key);
         if (studentInMap != null) {
