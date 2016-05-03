@@ -46,7 +46,7 @@ public class TeacherController {
     }
 
     @RequestMapping(value = "/deleteTeacher", method = RequestMethod.DELETE)
-    public RestApiResponse<TeacherResponse> deleteTeacher(@RequestBody TeacherRequest teacherRequest){
+    public RestApiResponse<TeacherResponse> deleteTeacher(TeacherRequest teacherRequest){
         return teacherService.deleteTeacher(teacherRequest);
     }
 

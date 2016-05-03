@@ -150,6 +150,7 @@ public class TeacherServiceImpl implements ITeacherService {
     private TeacherResponse convertTeacherEntityToTeacherResponse(Teacher teacherEntity){
         TeacherResponse teacherResponse = new TeacherResponse();
         teacherResponse.setId(teacherEntity.getId());
+        teacherResponse.setUsername(teacherEntity.getUsername());
         teacherResponse.setBirthday(DateFormatUtil.convertDateToString(teacherEntity.getBirthday()));
         teacherResponse.setDescription(teacherEntity.getDescription());
         teacherResponse.setEmail(teacherEntity.getEmail());

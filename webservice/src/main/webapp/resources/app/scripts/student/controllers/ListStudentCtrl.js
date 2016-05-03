@@ -42,7 +42,7 @@ angular.module('appDATN.student')
                 .error(function (error) {
                     $state.go('error');
                 });
-        }
+        };
 
         $scope.DoPagingAct = function(text, page, pageSize) {
             $scope.getStudents(page-1, pageSize);
