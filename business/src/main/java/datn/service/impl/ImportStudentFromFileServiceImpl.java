@@ -3,6 +3,7 @@ package datn.service.impl;
 import datn.dao.entity.Student;
 import datn.dao.repository.StudentRepository;
 import datn.interfaces.request.StudentRequest;
+import datn.interfaces.request.TeacherRequest;
 import datn.interfaces.response.*;
 import datn.service.IImportStudentFromFileService;
 import datn.service.IStudentService;
@@ -43,8 +44,6 @@ public class ImportStudentFromFileServiceImpl extends ImportDataServiceImpl impl
     StudentRepository studentRepository;
 
     public synchronized RestApiResponse<ImportFromFileResponse<StudentResponse, StudentRequest>> importData(MultipartFile excelFile){
-        RestApiResponse<ArrayList<StudentResponse>> response = new RestApiResponse<>(null);
-        response.setHeaders(new RestApiResponseHeaders());
 
         if (!excelFile.isEmpty()) {
             try {
@@ -93,7 +92,7 @@ public class ImportStudentFromFileServiceImpl extends ImportDataServiceImpl impl
         studentFileMap = new HashMap<>();
         ArrayList<Student> students = (ArrayList<Student>) studentRepository.findAll();
         for (Student student: students) {
-            studentMap.put(StringUtils.lowerCase(student.getUsername()), student);
+            studentMap.put(student.getUsername(), student);
         }
     }
 
@@ -121,41 +120,39 @@ public class ImportStudentFromFileServiceImpl extends ImportDataServiceImpl impl
             if(student == null) break;
 
             if(studentIsExistInFile(student)){
-                FailItemResponse<StudentRequest> failItem = new FailItemResponse<>();
-                failItem.setRow(index);
-                failItem.setReason("Mã sinh viên đã có trong file");
-                failItem.setErrorItem(student);
-
-                failItems.add(failItem);
+                addFailItemResponse(index, student, "Mã sinh viên đã có trong file");
             }
 
             else if(studentIsExistInDatabase(student)){
-                FailItemResponse<StudentRequest> failItem = new FailItemResponse<>();
-                failItem.setRow(index);
-                failItem.setReason("Mã sinh viên đã tồn tại");
-                failItem.setErrorItem(student);
-
-                failItems.add(failItem);
+                addFailItemResponse(index, student, "Mã sinh viên đã tồn tại");
             }
 
-            else if(isNotValidRow(student.getId(), student.getName(), student.getClass_(), student.getBirthday())){
-                FailItemResponse<StudentRequest> failItem = new FailItemResponse<>();
-                failItem.setRow(index);
-                failItem.setReason("Không đủ dữ liệu");
-                failItem.setErrorItem(student);
-
-                failItems.add(failItem);
+            else if(isNotValidRow(student.getUsername(), student.getName(), student.getClass_(), student.getBirthday())){
+                addFailItemResponse(index, student, "Không đủ dữ liệu");
             }
 
             else{
                 StudentResponse studentResponse = saveNewStudent(student);
-                successItems.add(studentResponse);
+                try{
+                    successItems.add(studentResponse);
+                }catch (RuntimeException e){
+                    addFailItemResponse(index, student, "Dữ liệu lỗi");
+                }
             }
 
             studentFileMap.put(student.getUsername(), student.getUsername());
             index++;
         }
 
+    }
+
+    private void addFailItemResponse(int rowIndex, StudentRequest student, String reason){
+        FailItemResponse<StudentRequest> failItem = new FailItemResponse<>();
+        failItem.setRow(rowIndex);
+        failItem.setReason(reason);
+        failItem.setErrorItem(student);
+
+        failItems.add(failItem);
     }
 
     private boolean studentIsExistInFile(StudentRequest student) {

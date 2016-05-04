@@ -1,13 +1,17 @@
 package datn.service.impl;
 
+import datn.interfaces.request.StudentRequest;
+import datn.interfaces.request.TeacherRequest;
+import datn.interfaces.response.FailItemResponse;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
 import java.math.BigDecimal;
 import java.util.Iterator;
+import java.util.List;
 
-public class ImportDataServiceImpl{
+public abstract class ImportDataServiceImpl{
 
     protected String getValueOfRowAt(Row row, int i) {
         String res = "";

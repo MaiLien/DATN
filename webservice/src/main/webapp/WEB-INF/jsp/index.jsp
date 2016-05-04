@@ -124,6 +124,7 @@
 <script src="/resources/app/scripts/teacher/services/TeacherService.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/teacher/controllers/AddTeacherCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/teacher/controllers/ListTeacherCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/teacher/controllers/AddTeacherFromFileCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
 
 <script src="/resources/app/scripts/wave/main.js" URIEncoding="UTF-8"></script>
