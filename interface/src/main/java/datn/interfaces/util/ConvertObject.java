@@ -5,7 +5,7 @@ import datn.dao.entity.Teacher;
 import datn.interfaces.response.StudentResponse;
 import datn.interfaces.response.TeacherResponse;
 
-public class ConvertStudentObject {
+public class ConvertObject {
 
     public static StudentResponse convertStudentEntityToStudentResponse(Student studentEntity){
         StudentResponse studentResponse = new StudentResponse();

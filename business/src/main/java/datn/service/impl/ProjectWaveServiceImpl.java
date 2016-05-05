@@ -9,7 +9,7 @@ import datn.interfaces.response.ProjectWaveResponse;
 import datn.interfaces.response.RestApiResponse;
 import datn.interfaces.response.StudentResponse;
 import datn.interfaces.response.TeacherResponse;
-import datn.interfaces.util.ConvertStudentObject;
+import datn.interfaces.util.ConvertObject;
 import datn.interfaces.util.FormatSearchInput;
 import datn.service.IProjectWaveService;
 import datn.service.exceptions.ProjectWaveNotFoundException;
@@ -87,7 +87,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     private ArrayList<StudentResponse> getStudentsFromStudentWaves(ArrayList<StudentWave> studentWaves){
         ArrayList<StudentResponse> out = new ArrayList<>();
         for (int i =0; i<studentWaves.size(); i++){
-            out.add(ConvertStudentObject.convertStudentEntityToStudentResponse(studentWaves.get(i).getStudent()));
+            out.add(ConvertObject.convertStudentEntityToStudentResponse(studentWaves.get(i).getStudent()));
         }
 
         return out;
@@ -96,7 +96,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     private ArrayList<TeacherResponse> getTeachersFromTeacherWaves(ArrayList<TeacherWave> teacherWaves){
         ArrayList<TeacherResponse> out = new ArrayList<>();
         for (int i =0; i<teacherWaves.size(); i++){
-            out.add(ConvertStudentObject.convertTeacherEntityToTeacherResponse(teacherWaves.get(i).getTeacher()));
+            out.add(ConvertObject.convertTeacherEntityToTeacherResponse(teacherWaves.get(i).getTeacher()));
         }
 
         return out;
@@ -153,7 +153,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         studentWave.setProjectWave(projectWave);
         studentWaveRepository.save(studentWave);
 
-        StudentResponse studentResponse = ConvertStudentObject.convertStudentEntityToStudentResponse(student);
+        StudentResponse studentResponse = ConvertObject.convertStudentEntityToStudentResponse(student);
         RestApiResponse<StudentResponse> responseRestApiResponse =  new RestApiResponse<>(studentResponse);
         return responseRestApiResponse;
     }
@@ -177,7 +177,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         teacherWave.setProjectWave(projectWave);
         teacherWaveRepository.save(teacherWave);
 
-        TeacherResponse teacherResponse = ConvertStudentObject.convertTeacherEntityToTeacherResponse(teacher);
+        TeacherResponse teacherResponse = ConvertObject.convertTeacherEntityToTeacherResponse(teacher);
         RestApiResponse<TeacherResponse> responseRestApiResponse =  new RestApiResponse<>(teacherResponse);
         return responseRestApiResponse;
     }
