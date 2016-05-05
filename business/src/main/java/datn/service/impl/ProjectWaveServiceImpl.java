@@ -1,14 +1,9 @@
 package datn.service.impl;
 
-import datn.dao.entity.ProjectWave;
-import datn.dao.entity.Report;
-import datn.dao.entity.Student;
-import datn.dao.entity.StudentWave;
-import datn.dao.repository.ProjectWaveRepository;
-import datn.dao.repository.ReportRepository;
-import datn.dao.repository.StudentRepository;
-import datn.dao.repository.StudentWaveRepository;
+import datn.dao.entity.*;
+import datn.dao.repository.*;
 import datn.interfaces.request.AddStudentForProjectWaveRequest;
+import datn.interfaces.request.AddTeacherForProjectWaveRequest;
 import datn.interfaces.request.ProjectWaveRequest;
 import datn.interfaces.response.ProjectWaveResponse;
 import datn.interfaces.response.RestApiResponse;
@@ -19,6 +14,7 @@ import datn.interfaces.util.FormatSearchInput;
 import datn.service.IProjectWaveService;
 import datn.service.exceptions.ProjectWaveNotFoundException;
 import datn.service.exceptions.StudentWaveIsExistedException;
+import datn.service.exceptions.TeacherWaveIsExistedException;
 import datn.service.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -48,6 +44,15 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     @Autowired
     StudentWaveRepository studentWaveRepository;
 
+    @Autowired
+    TeacherWaveRepository teacherWaveRepository;
+
+    @Autowired
+    StudentRepository studentRepository;
+
+    @Autowired
+    TeacherRepository teacherRepository;
+
     public RestApiResponse<ProjectWaveResponse> addProjectWave(ProjectWaveRequest request) {
         ProjectWave projectWave = convertProjectWaveRequestToProjectWaveEntity(request);
         ProjectWave entity = projectWaveRepository.save(projectWave);
@@ -73,14 +78,25 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     }
 
     @Override
-    public RestApiResponse<TeacherResponse> getTeachersOfProjectWave(String id) {
-        return null;
+    public RestApiResponse<ArrayList<TeacherResponse>> getTeachersOfProjectWave(String id) {
+        ArrayList<TeacherWave> teacherWaves = (ArrayList<TeacherWave>) teacherWaveRepository.findByProjectWave(new ProjectWave(id));
+        ArrayList<TeacherResponse> teacherResponses = getTeachersFromTeacherWaves(teacherWaves);
+        return new RestApiResponse<>(teacherResponses);
     }
 
     private ArrayList<StudentResponse> getStudentsFromStudentWaves(ArrayList<StudentWave> studentWaves){
         ArrayList<StudentResponse> out = new ArrayList<>();
         for (int i =0; i<studentWaves.size(); i++){
             out.add(ConvertStudentObject.convertStudentEntityToStudentResponse(studentWaves.get(i).getStudent()));
+        }
+
+        return out;
+    }
+
+    private ArrayList<TeacherResponse> getTeachersFromTeacherWaves(ArrayList<TeacherWave> teacherWaves){
+        ArrayList<TeacherResponse> out = new ArrayList<>();
+        for (int i =0; i<teacherWaves.size(); i++){
+            out.add(ConvertStudentObject.convertTeacherEntityToTeacherResponse(teacherWaves.get(i).getTeacher()));
         }
 
         return out;
@@ -117,8 +133,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
 
         return new RestApiResponse<>();
     }
-@Autowired
-    StudentRepository studentRepository;
+
     @Override
     public RestApiResponse<StudentResponse> addStudentForProjectWave(AddStudentForProjectWaveRequest request) {
         Student student = studentRepository.findByUsername(request.getStudentUsername());
@@ -140,6 +155,30 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
 
         StudentResponse studentResponse = ConvertStudentObject.convertStudentEntityToStudentResponse(student);
         RestApiResponse<StudentResponse> responseRestApiResponse =  new RestApiResponse<>(studentResponse);
+        return responseRestApiResponse;
+    }
+
+    @Override
+    public RestApiResponse<TeacherResponse> addTeacherForProjectWave(AddTeacherForProjectWaveRequest request) {
+        Teacher teacher = teacherRepository.findByUsername(request.getTeacherUsername());
+        if(teacher == null)
+            throw new UserNotFoundException(request.getTeacherUsername());
+
+        ProjectWave projectWave = projectWaveRepository.findOne(request.getProjectWaveId());
+        if(projectWave == null)
+            throw  new ProjectWaveNotFoundException(request.getProjectWaveId());
+
+        List<TeacherWave> sw = teacherWaveRepository.findByTeacherAndProjectWave(teacher, projectWave);
+        if(sw.size() > 0)
+            throw new TeacherWaveIsExistedException(teacher.getId(), projectWave.getId());
+
+        TeacherWave teacherWave = new TeacherWave();
+        teacherWave.setTeacher(teacher);
+        teacherWave.setProjectWave(projectWave);
+        teacherWaveRepository.save(teacherWave);
+
+        TeacherResponse teacherResponse = ConvertStudentObject.convertTeacherEntityToTeacherResponse(teacher);
+        RestApiResponse<TeacherResponse> responseRestApiResponse =  new RestApiResponse<>(teacherResponse);
         return responseRestApiResponse;
     }
 

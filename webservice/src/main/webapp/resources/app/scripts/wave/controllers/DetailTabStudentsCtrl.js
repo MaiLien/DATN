@@ -20,7 +20,6 @@ angular.module('appDATN.wave')
                 var request = $scope.createAddStudentRequest(studentUsername);
                 ProjectWaveService.addStudent(request)
                     .success(function(data){
-                        console.log(data);
                         if(data.headers.resultCode == 1062)
                             $scope.infoMessage = "Sinh viên đã tham gia đợt Đồ án";
 
@@ -29,6 +28,9 @@ angular.module('appDATN.wave')
 
                         else if(data.headers.resultCode == 1500)
                             $scope.errMessage = "Không tồn tại sinh viên này";
+
+                        else if(data.headers.resultCode == 500)
+                            $scope.errMessage = "Lỗi hệ thống";
 
                         else{
                             $scope.studentTemp = data.body;

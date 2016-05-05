@@ -18,5 +18,7 @@ public class MessageCodeConstant {
     public static final String ERROR_USER_EXISTED = "1060";
     public static final String PROJECT_WAVE_NOT_FOUND = "1061";
     public static final String STUDENT_WAVE_IS_EXISTED = "1062";
+    public static final String TEACHER_WAVE_IS_EXISTED = "1063";
+
 
 }

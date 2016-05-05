@@ -1,6 +1,7 @@
 package datn.service;
 
 import datn.interfaces.request.AddStudentForProjectWaveRequest;
+import datn.interfaces.request.AddTeacherForProjectWaveRequest;
 import datn.interfaces.request.ProjectWaveRequest;
 import datn.interfaces.response.ProjectWaveResponse;
 import datn.interfaces.response.RestApiResponse;
@@ -18,7 +19,7 @@ public interface IProjectWaveService{
 
     RestApiResponse<ArrayList<StudentResponse>> getStudentsOfProjectWave(String id);
 
-    RestApiResponse<TeacherResponse> getTeachersOfProjectWave(String id);
+    RestApiResponse<ArrayList<TeacherResponse>> getTeachersOfProjectWave(String id);
 
     RestApiResponse<ArrayList<ProjectWaveResponse>> getAllProjectWave();
 
@@ -27,4 +28,6 @@ public interface IProjectWaveService{
     RestApiResponse<ProjectWaveResponse> deleteProjectWave(String projectWaveId);
 
     RestApiResponse<StudentResponse> addStudentForProjectWave(AddStudentForProjectWaveRequest request);
+
+    RestApiResponse<TeacherResponse> addTeacherForProjectWave(AddTeacherForProjectWaveRequest request);
 }

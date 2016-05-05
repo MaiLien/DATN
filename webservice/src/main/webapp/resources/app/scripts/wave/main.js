@@ -71,7 +71,6 @@ angular.module('appDATN.wave')
                 resolve:{
                     projectWaveStudents: function ($q, $state, $stateParams, ProjectWaveService) {
                         var deferred = $q.defer();
-                        console.log("called waveDetailStudents: " + $stateParams.projectWaveId);
                         ProjectWaveService.getStudents($stateParams.projectWaveId)
                             .success(function (data) {
                                 if(data.headers.resultCode == 0) {
@@ -95,8 +94,27 @@ angular.module('appDATN.wave')
             })
             .state('wave.detail.teachers', {
                 url: '/tabs/teachers/:projectWaveId',
+                resolve:{
+                    projectWaveTeachers: function ($q, $state, $stateParams, ProjectWaveService) {
+                        console.log("wave.detail.teachers");
+                        var deferred = $q.defer();
+                        ProjectWaveService.getTeachers($stateParams.projectWaveId)
+                            .success(function (data) {
+                                if(data.headers.resultCode == 0) {
+                                    deferred.resolve(data.body);
+                                }else{
+                                    deferred.reject('Error');
+                                }
+                            })
+                            .error(function (error) {
+                                deferred.reject('Error');
+                            });
+                        return deferred.promise;
+                    }
+                },
                 views: {
                     detail_project_wave_tab_view: {
+                        controller: 'DetailTabTeachersCtrl',
                         templateUrl: '/resources/app/scripts/wave/views/detail_project_wave_tab_teachers.html'
                     }
                 }
@@ -105,6 +123,7 @@ angular.module('appDATN.wave')
                 url: '/tabs/assignments/:projectWaveId',
                 views: {
                     detail_project_wave_tab_view: {
+                        controller: 'DetailTabAssignmentsCtrl',
                         templateUrl: '/resources/app/scripts/wave/views/detail_project_wave_tab_assignments.html'
                     }
                 }

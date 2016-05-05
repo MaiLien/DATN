@@ -5,7 +5,6 @@ angular.module('appDATN.wave')
         $scope.projectWave;
 
         $scope.setCurrentProjectWaveId = function (id) {
-            console.log("setCurrentProjectWaveId : " + id);
             $scope.currentProjectWaveId = id;
             $scope.getInfoProjectWave(id);
         };

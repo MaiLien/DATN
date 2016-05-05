@@ -1,48 +1,38 @@
 <div class="tab-pane" id="teachers">
-    <form class="form-horizontal">
-        <div class="form-group">
-            <label for="inputName" class="col-sm-2 control-label">Name</label>
-            <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputName" placeholder="Name">
+    <div class="box-body">
+        <div class="row">
+            <div class="alert alert-warning fade in" ng-if="teachersOfWave.length == 0 && !errMessage && !successMessage">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <a class="close" data-dismiss="alert" aria-label="close" ng-click="init()">&times;</a>
+                Chưa có giảng viên nào tham gia
+            </div>
+            <div class="alert alert-danger fade in" ng-if="errMessage">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <a class="close" data-dismiss="alert" aria-label="close" ng-click="init()">&times;</a>
+                {{errMessage}}
+            </div>
+            <div class="alert alert-info fade in" ng-if="infoMessage">
+                <a class="close" data-dismiss="alert" aria-label="close" ng-click="init()">&times;</a>
+                Giảng viên {{teacherUsername}} đã tham gia đợt Đồ án
+            </div>
+            <div class="alert alert-info fade in" ng-if="successMessage">
+                <a class="close" data-dismiss="alert" aria-label="close" ng-click="init()">&times;</a>
+                Thêm thành công giảng viên {{teacherTemp.username}} ({{teacherTemp.name}}) vào đợt Đồ án
             </div>
         </div>
-        <div class="form-group">
-            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-            <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+
+        <form name="addTeacherForWave" class="form-horizontal borderForm" role="form">
+            <div class="form-group" style="padding-left: 15px;">
+                <a style="text-decoration: underline">Thêm giảng viên từ file</a> hoặc Nhập mã giảng viên
             </div>
-        </div>
-        <div class="form-group">
-            <label for="inputName" class="col-sm-2 control-label">Name</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputName" placeholder="Name">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-            <div class="col-sm-10">
-                <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                    </label>
+
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <input name="teacherUsername" ng-model="teacherUsername" type="text" class="form-control" id="email" placeholder="Nhập mã giảng viên">
                 </div>
+                <button class="btn btn-primary" type="button" ng-click="addTeacherForProjectWave(teacherUsername)">Thêm</button>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-danger">Submit</button>
-            </div>
-        </div>
-    </form>
+        </form>
+
+    </div> <!--close tab times-->
 </div>

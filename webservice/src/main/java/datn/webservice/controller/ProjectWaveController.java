@@ -1,11 +1,13 @@
 package datn.webservice.controller;
 
 import datn.interfaces.request.AddStudentForProjectWaveRequest;
+import datn.interfaces.request.AddTeacherForProjectWaveRequest;
 import datn.interfaces.request.ProjectWaveRequest;
 import datn.interfaces.request.StudentRequest;
 import datn.interfaces.response.ProjectWaveResponse;
 import datn.interfaces.response.RestApiResponse;
 import datn.interfaces.response.StudentResponse;
+import datn.interfaces.response.TeacherResponse;
 import datn.interfaces.util.JsonUtil;
 import datn.service.IProjectWaveService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +51,11 @@ public class ProjectWaveController {
         return projectWaveService.getStudentsOfProjectWave(id);
     }
 
+    @RequestMapping(value = "/getTeachersOfProjectWave", method = RequestMethod.GET)
+    public RestApiResponse<ArrayList<TeacherResponse>> getTeachersOfProjectWave(String id){
+        return projectWaveService.getTeachersOfProjectWave(id);
+    }
+
     /*Can not pass parameter with Postman if it has @RequestBody, otherwise website*/
     @RequestMapping(value = "/deleteProjectWave", method = RequestMethod.DELETE)
     public RestApiResponse<ProjectWaveResponse> deleteProjectWave(String projectWaveId){
@@ -58,6 +65,11 @@ public class ProjectWaveController {
     @RequestMapping(value = "/addStudentForProjectWave", method = RequestMethod.POST)
     public RestApiResponse<StudentResponse> addStudentForProjectWave(@RequestBody AddStudentForProjectWaveRequest request){
         return projectWaveService.addStudentForProjectWave(request);
+    }
+
+    @RequestMapping(value = "/addTeacherForProjectWave", method = RequestMethod.POST)
+    public RestApiResponse<TeacherResponse> addTeacherForProjectWave(@RequestBody AddTeacherForProjectWaveRequest request){
+        return projectWaveService.addTeacherForProjectWave(request);
     }
 
 }

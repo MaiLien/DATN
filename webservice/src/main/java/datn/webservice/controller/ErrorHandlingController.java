@@ -72,6 +72,12 @@ public class ErrorHandlingController {
         return createResponseError(request, MessageCodeConstant.STUDENT_WAVE_IS_EXISTED, exception.getErrMessages());
     }
 
+    @ExceptionHandler(TeacherWaveIsExistedException.class)
+    @ResponseBody
+    public RestApiResponse<?> handleTeacherWaveIsExistedException(HttpServletRequest request, TeacherWaveIsExistedException exception){
+        return createResponseError(request, MessageCodeConstant.TEACHER_WAVE_IS_EXISTED, exception.getErrMessages());
+    }
+
     @ExceptionHandler(NotFullInputAtRowException.class)
     @ResponseBody
     public RestApiResponse<?> handleNotFullInputAtRowException(HttpServletRequest request, NotFullInputAtRowException exception){

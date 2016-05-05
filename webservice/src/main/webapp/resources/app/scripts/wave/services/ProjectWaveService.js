@@ -6,13 +6,15 @@ angular.module('appDATN.wave')
         };
 
         getProjectWave = function(projectWaveId){
-            console.log("called getProjectWave service : " + projectWaveId);
             return $http.get('API/getProjectWave', {params : {id: projectWaveId}});
         };
 
         getStudents = function(projectWaveId){
-            console.log("called getStudents service : " + projectWaveId);
             return $http.get('API/getStudentsOfProjectWave', {params : {id: projectWaveId}});
+        };
+
+        getTeachers = function(projectWaveId){
+            return $http.get('API/getTeachersOfProjectWave', {params : {id: projectWaveId}});
         };
 
         getProjectWavesByPage = function(currentPage, pageSize, searchInput){
@@ -24,17 +26,23 @@ angular.module('appDATN.wave')
         };
 
         addStudent = function(studentId){
-            console.log("called addStudent service : " + studentId);
             return $http.post('API/addStudentForProjectWave', studentId);
+        };
+
+        addTeacher = function(teacherId){
+            console.log("called addTeacher service : " + teacherId);
+            return $http.post('API/addTeacherForProjectWave', teacherId);
         };
 
         return {
             addWave : addWave,
             getProjectWave : getProjectWave,
             getStudents : getStudents,
+            getTeachers: getTeachers,
             getProjectWavesByPage: getProjectWavesByPage,
             deleteProjectWave: deleteProjectWave,
-            addStudent: addStudent
+            addStudent: addStudent,
+            addTeacher: addTeacher
         };
 
     });
