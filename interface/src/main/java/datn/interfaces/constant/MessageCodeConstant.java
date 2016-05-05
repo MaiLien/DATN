@@ -16,5 +16,7 @@ public class MessageCodeConstant {
     public static final String ERROR_NOT_FULL_INPUT_AT_ROW = "1058";
     public static final String ERROR_SHEET_NOT_FOUND = "1059";
     public static final String ERROR_USER_EXISTED = "1060";
+    public static final String PROJECT_WAVE_NOT_FOUND = "1061";
+    public static final String STUDENT_WAVE_IS_EXISTED = "1062";
 
 }

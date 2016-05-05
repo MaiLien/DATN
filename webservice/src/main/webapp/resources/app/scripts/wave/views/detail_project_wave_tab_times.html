@@ -5,7 +5,7 @@
                 <b><i class="fa fa-clock-o"></i></b> Thời gian bắt đầu và kết thúc
             </div>
             <div class="col-sm-7 col-sm-offset-1">
-                <p>{{projectWave.startTimeAndEndTime}}</p>
+                <p>{{projectWaveTimes.startTimeAndEndTime}}</p>
             </div>
         </div>
 
@@ -16,7 +16,7 @@
                 <b><i class="fa fa-clock-o"></i></b> Thời gian giảng viên đề xuất sinh viên
             </div>
             <div class="col-sm-7 col-sm-offset-1">
-                <p>{{projectWave.timeForTeacherProposesStudent}}</p>
+                <p>{{projectWaveTimes.timeForTeacherProposesStudent}}</p>
             </div>
         </div>
 
@@ -27,7 +27,7 @@
                 <b><i class="fa fa-clock-o"></i></b> Thời gian sinh viên đăng kí giảng viên
             </div>
             <div class="col-sm-7 col-sm-offset-1">
-                {{projectWave.timeForStudentRegisterTeacher}}
+                {{projectWaveTimes.timeForStudentRegisterTeacher}}
             </div>
         </div>
 
@@ -38,7 +38,7 @@
                 <b><i class="fa fa-clock-o"></i></b> Lịch báo cáo tiền độ
             </div>
             <div class="col-sm-7 col-sm-offset-1">
-                <p ng-repeat="x in projectWave.reportTimes track by $index">{{x}}</p>
+                <p ng-repeat="x in projectWaveTimes.reportTimes track by $index">{{x}}</p>
             </div>
         </div>
 
@@ -49,7 +49,7 @@
                 <b><i class="fa fa-clock-o"></i></b> Thời gian bảo vệ demo
             </div>
             <div class="col-sm-7 col-sm-offset-1">
-                <p>{{projectWave.timeForStudentSubmitProject}}</p>
+                <p>{{projectWaveTimes.timeForStudentSubmitProject}}</p>
             </div>
         </div>
 
@@ -60,7 +60,7 @@
                 <b><i class="fa fa-clock-o"></i></b> Thời gian bảo vệ chính thức
             </div>
             <div class="col-sm-7 col-sm-offset-1">
-                <p>{{projectWave.timeForStudentDefend}}</p>
+                <p>{{projectWaveTimes.timeForStudentDefend}}</p>
             </div>
         </div>
     </div> <!--close tab times-->

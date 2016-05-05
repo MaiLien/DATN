@@ -1,5 +1,6 @@
 package datn.webservice.controller;
 
+import datn.interfaces.request.AddStudentForProjectWaveRequest;
 import datn.interfaces.request.ProjectWaveRequest;
 import datn.interfaces.request.StudentRequest;
 import datn.interfaces.response.ProjectWaveResponse;
@@ -52,6 +53,11 @@ public class ProjectWaveController {
     @RequestMapping(value = "/deleteProjectWave", method = RequestMethod.DELETE)
     public RestApiResponse<ProjectWaveResponse> deleteProjectWave(String projectWaveId){
         return projectWaveService.deleteProjectWave(projectWaveId);
+    }
+
+    @RequestMapping(value = "/addStudentForProjectWave", method = RequestMethod.POST)
+    public RestApiResponse<StudentResponse> addStudentForProjectWave(@RequestBody AddStudentForProjectWaveRequest request){
+        return projectWaveService.addStudentForProjectWave(request);
     }
 
 }

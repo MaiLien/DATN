@@ -14,10 +14,10 @@
             <div class="col-md-12">
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a ui-sref="wave.detail.times"> <b class="tag-name">Tiến độ thực hiện</b></a></li>
-                        <li><a ui-sref="wave.detail.students"> <b class="tag-name">Danh sách sinh viên</b></a></li>
-                        <li><a ui-sref="wave.detail.teachers"><b class="tag-name">Danh sách giảng viên</b></a></li>
-                        <li><a ui-sref="wave.detail.assignments"><b class="tag-name">Danh sách phân công hướng dẫn</b></a></li>
+                        <li><a ui-sref="wave.detail.times({projectWaveId: currentProjectWaveId})"> <b class="tag-name">Tiến độ thực hiện</b></a></li>
+                        <li><a ui-sref="wave.detail.students({projectWaveId: currentProjectWaveId})"> <b class="tag-name">Danh sách sinh viên</b></a></li>
+                        <li><a ui-sref="wave.detail.teachers({projectWaveId: currentProjectWaveId})"><b class="tag-name">Danh sách giảng viên</b></a></li>
+                        <li><a ui-sref="wave.detail.assignments({projectWaveId: currentProjectWaveId})"><b class="tag-name">Danh sách phân công hướng dẫn</b></a></li>
                     </ul>
                     <div class="tab-content">
                         <div ui-view="detail_project_wave_tab_view"></div>

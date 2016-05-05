@@ -30,12 +30,21 @@ angular.module('appDATN.wave')
                 }
             })
             .state('wave.detail', {
-                url: '/detail/:projectWaveId',
+                url: '/detail',
                 abstract: true,
+                views: {
+                    content_view: {
+                        controller: 'DetailCtrl',
+                        templateUrl: '/resources/app/scripts/wave/views/detail_project_wave.html'
+                    }
+                }
+            })
+            .state('wave.detail.times', {
+                url: '/tabs/times/:projectWaveId',
                 resolve:{
-                    projectWave: function ($q, $state, $stateParams, ProjectWaveService) {
+                    projectWaveTimes: function ($q, $state, $stateParams, ProjectWaveService) {
                         var deferred = $q.defer();
-                        console.log("called waveDetail: " + $stateParams.projectWaveId);
+                        console.log("called waveDetailTimes: " + $stateParams.projectWaveId);
                         ProjectWaveService.getProjectWave($stateParams.projectWaveId)
                             .success(function (data) {
                                 if(data.headers.resultCode == 0) {
@@ -49,47 +58,43 @@ angular.module('appDATN.wave')
                             });
                         return deferred.promise;
                     }
-                    //,students: function($q, $state, $stateParams, ProjectWaveService){
-                    //    var deferred = $q.defer();
-                    //    ProjectWaveService.getStudents($stateParams.projectWaveId)
-                    //        .success(function (data) {
-                    //            if(data.headers.resultCode == 0) {
-                    //                deferred.resolve(data.body);
-                    //            }else{
-                    //                deferred.reject('Error');
-                    //            }
-                    //        })
-                    //        .error(function (error) {
-                    //            deferred.reject('Error');
-                    //        });
-                    //    return deferred.promise;
-                    //}
                 },
                 views: {
-                    content_view: {
-                        controller: 'DetailProjectWaveCtrl',
-                        templateUrl: '/resources/app/scripts/wave/views/detail_project_wave.html'
-                    }
-                }
-            })
-            .state('wave.detail.times', {
-                url: '/detail/tabs/times',
-                views: {
                     detail_project_wave_tab_view: {
+                        controller: 'DetailTabTimesCtrl',
                         templateUrl: '/resources/app/scripts/wave/views/detail_project_wave_tab_times.html'
                     }
                 }
             })
             .state('wave.detail.students', {
-                url: '/detail/tabs/students',
+                url: '/tabs/students/:projectWaveId',
+                resolve:{
+                    projectWaveStudents: function ($q, $state, $stateParams, ProjectWaveService) {
+                        var deferred = $q.defer();
+                        console.log("called waveDetailStudents: " + $stateParams.projectWaveId);
+                        ProjectWaveService.getStudents($stateParams.projectWaveId)
+                            .success(function (data) {
+                                if(data.headers.resultCode == 0) {
+                                    deferred.resolve(data.body);
+                                }else{
+                                    deferred.reject('Error');
+                                }
+                            })
+                            .error(function (error) {
+                                deferred.reject('Error');
+                            });
+                        return deferred.promise;
+                    }
+                },
                 views: {
                     detail_project_wave_tab_view: {
+                        controller: 'DetailTabStudentsCtrl',
                         templateUrl: '/resources/app/scripts/wave/views/detail_project_wave_tab_students.html'
                     }
                 }
             })
             .state('wave.detail.teachers', {
-                url: '/detail/tabs/teachers',
+                url: '/tabs/teachers/:projectWaveId',
                 views: {
                     detail_project_wave_tab_view: {
                         templateUrl: '/resources/app/scripts/wave/views/detail_project_wave_tab_teachers.html'
@@ -97,7 +102,7 @@ angular.module('appDATN.wave')
                 }
             })
             .state('wave.detail.assignments', {
-                url: '/detail/tabs/assignments',
+                url: '/tabs/assignments/:projectWaveId',
                 views: {
                     detail_project_wave_tab_view: {
                         templateUrl: '/resources/app/scripts/wave/views/detail_project_wave_tab_assignments.html'

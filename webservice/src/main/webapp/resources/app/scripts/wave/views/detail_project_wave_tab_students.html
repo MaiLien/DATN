@@ -1,6 +1,38 @@
 <div class="tab-pane" id="students">
     <div class="box-body">
-        <p ng-if="students.length == 0">Khong co sv nao</p>
-        <p ng-if="students.length == 0">Co sv nao</p>
-    </div>
+        <div class="row">
+            <div class="alert alert-warning fade in" ng-if="studentsOfWave.length == 0 && !errMessage && !successMessage">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <a class="close" data-dismiss="alert" aria-label="close" ng-click="init()">&times;</a>
+                Chưa có sinh viên nào tham gia
+            </div>
+            <div class="alert alert-danger fade in" ng-if="errMessage">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <a class="close" data-dismiss="alert" aria-label="close" ng-click="init()">&times;</a>
+                {{errMessage}}
+            </div>
+            <div class="alert alert-info fade in" ng-if="infoMessage">
+                <a class="close" data-dismiss="alert" aria-label="close" ng-click="init()">&times;</a>
+                Sinh viên {{studentUsername}} đã tham gia đợt Đồ án
+            </div>
+            <div class="alert alert-info fade in" ng-if="successMessage">
+                <a class="close" data-dismiss="alert" aria-label="close" ng-click="init()">&times;</a>
+                Thêm thành công sinh viên {{studentTemp.username}} ({{studentTemp.name}}) vào đợt Đồ án
+            </div>
+        </div>
+
+        <form name="addStudentforWave" class="form-horizontal formAddStudentWave" role="form">
+            <div class="form-group" style="padding-left: 15px;">
+                <a style="text-decoration: underline">Thêm sinh viên từ file</a> hoặc Nhập mã sinh viên
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-7">
+                    <input name="studentUsername" ng-model="studentUsername" type="text" class="form-control" id="email" placeholder="Nhập mã sinh viên">
+                </div>
+                <button class="btn btn-primary" type="button" ng-click="addStudentForWave(studentUsername)">Thêm</button>
+            </div>
+        </form>
+
+    </div> <!--close tab times-->
 </div>

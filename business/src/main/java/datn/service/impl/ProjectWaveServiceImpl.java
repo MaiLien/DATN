@@ -6,7 +6,9 @@ import datn.dao.entity.Student;
 import datn.dao.entity.StudentWave;
 import datn.dao.repository.ProjectWaveRepository;
 import datn.dao.repository.ReportRepository;
+import datn.dao.repository.StudentRepository;
 import datn.dao.repository.StudentWaveRepository;
+import datn.interfaces.request.AddStudentForProjectWaveRequest;
 import datn.interfaces.request.ProjectWaveRequest;
 import datn.interfaces.response.ProjectWaveResponse;
 import datn.interfaces.response.RestApiResponse;
@@ -14,8 +16,10 @@ import datn.interfaces.response.StudentResponse;
 import datn.interfaces.response.TeacherResponse;
 import datn.interfaces.util.ConvertStudentObject;
 import datn.interfaces.util.FormatSearchInput;
-import datn.interfaces.util.JsonUtil;
 import datn.service.IProjectWaveService;
+import datn.service.exceptions.ProjectWaveNotFoundException;
+import datn.service.exceptions.StudentWaveIsExistedException;
+import datn.service.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -112,6 +116,31 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
             projectWaveRepository.delete(projectWaveId);
 
         return new RestApiResponse<>();
+    }
+@Autowired
+    StudentRepository studentRepository;
+    @Override
+    public RestApiResponse<StudentResponse> addStudentForProjectWave(AddStudentForProjectWaveRequest request) {
+        Student student = studentRepository.findByUsername(request.getStudentUsername());
+        if(student == null)
+            throw new UserNotFoundException(request.getStudentUsername());
+
+        ProjectWave projectWave = projectWaveRepository.findOne(request.getProjectWaveId());
+        if(projectWave == null)
+            throw  new ProjectWaveNotFoundException(request.getProjectWaveId());
+
+        List<StudentWave> sw = studentWaveRepository.findByStudentAndProjectWave(student, projectWave);
+        if(sw.size() > 0)
+            throw new StudentWaveIsExistedException(student.getId(), projectWave.getId());
+
+        StudentWave studentWave = new StudentWave();
+        studentWave.setStudent(student);
+        studentWave.setProjectWave(projectWave);
+        studentWaveRepository.save(studentWave);
+
+        StudentResponse studentResponse = ConvertStudentObject.convertStudentEntityToStudentResponse(student);
+        RestApiResponse<StudentResponse> responseRestApiResponse =  new RestApiResponse<>(studentResponse);
+        return responseRestApiResponse;
     }
 
     private boolean projectWaveIsExist(String id){

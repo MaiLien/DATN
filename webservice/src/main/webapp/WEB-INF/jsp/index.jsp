@@ -130,7 +130,9 @@
 <script src="/resources/app/scripts/wave/main.js" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/wave/services/ProjectWaveService.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/wave/controllers/AddProjectWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/wave/controllers/DetailProjectWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/wave/controllers/DetailCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/wave/controllers/DetailTabTimesCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/wave/controllers/DetailTabStudentsCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/wave/controllers/ListProjectWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
 </body>

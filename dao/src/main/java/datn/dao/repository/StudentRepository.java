@@ -17,4 +17,6 @@ public interface StudentRepository extends JpaRepository<Student, String> {
     @Query("select st from Student st where ((LOWER(st.name) like :searchInput) or (LOWER(st.username) like :searchInput))")
     Page<Student> findBySearchInput(Pageable pageable, @Param("searchInput") String searchInput);
 
+    @Query("select st from Student st where st.username =:username")
+    Student findByUsername(@Param("username")String studentUsername);
 }

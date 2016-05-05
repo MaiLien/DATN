@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.ConstraintViolationException;
 import java.io.IOException;
 
 @ControllerAdvice
@@ -55,16 +54,22 @@ public class ErrorHandlingController {
         return createResponseError(request, MessageCodeConstant.ERROR_HTTP_MESSAGE_NOT_READABLE, null);
     }
 
-    @ExceptionHandler(ExcelFileNotFoundException.class)
+    @ExceptionHandler(UserNotFoundException.class)
     @ResponseBody
-    public RestApiResponse<?> handleExcelFileNotFoundException(HttpServletRequest request, ExcelFileNotFoundException exception){
-        return createResponseError(request, MessageCodeConstant.ERROR_EXCEL_FILE_NOT_FOUND, null);
+    public RestApiResponse<?> handleUserNotFoundException(HttpServletRequest request, UserNotFoundException exception){
+        return createResponseError(request, MessageCodeConstant.ERROR_USER_NOT_FOUND, exception.getErrMessage());
     }
 
-    @ExceptionHandler(ExtensionExcelFileException.class)
+    @ExceptionHandler(ProjectWaveNotFoundException.class)
     @ResponseBody
-    public RestApiResponse<?> handleExtensionExcelFileException(HttpServletRequest request, ExtensionExcelFileException exception){
-        return createResponseError(request, MessageCodeConstant.ERROR_EXTENSION_EXCEL_FILE, null);
+    public RestApiResponse<?> handleProjectWaveNotFoundException(HttpServletRequest request, ProjectWaveNotFoundException exception){
+        return createResponseError(request, MessageCodeConstant.PROJECT_WAVE_NOT_FOUND, exception.getErrMessage());
+    }
+
+    @ExceptionHandler(StudentWaveIsExistedException.class)
+    @ResponseBody
+    public RestApiResponse<?> handleStudentWaveIsExistedException(HttpServletRequest request, StudentWaveIsExistedException exception){
+        return createResponseError(request, MessageCodeConstant.STUDENT_WAVE_IS_EXISTED, exception.getErrMessages());
     }
 
     @ExceptionHandler(NotFullInputAtRowException.class)
@@ -101,11 +106,11 @@ public class ErrorHandlingController {
     }
 
     private RestApiResponse<?> createResponseError(HttpServletRequest request, String resultCode, Object... messageArguments) {
-        RestApiResponse<String> RestApiResponse = new RestApiResponse<String>();
-        RestApiResponseHeaders responseHeaders = RestApiResponse.getHeaders();
+        RestApiResponse<String> restApiResponse = new RestApiResponse<>();
+        RestApiResponseHeaders responseHeaders = restApiResponse.getHeaders();
         responseHeaders.setResultCode(resultCode);
         responseHeaders.setResultDescription(getMessage(resultCode, messageArguments));
-        return RestApiResponse;
+        return restApiResponse;
     }
 
     private boolean isObjectValidateError(BindingResult result) {
