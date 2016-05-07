@@ -161,6 +161,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     @Override
     public RestApiResponse<TeacherResponse> addTeacherForProjectWave(AddTeacherForProjectWaveRequest request) {
         Teacher teacher = teacherRepository.findByUsername(request.getTeacherUsername());
+
         if(teacher == null)
             throw new UserNotFoundException(request.getTeacherUsername());
 
@@ -175,6 +176,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         TeacherWave teacherWave = new TeacherWave();
         teacherWave.setTeacher(teacher);
         teacherWave.setProjectWave(projectWave);
+        teacherWave.setMinNumberOfStudent(request.getNumberOfStudent());
         teacherWaveRepository.save(teacherWave);
 
         TeacherResponse teacherResponse = ConvertObject.convertTeacherEntityToTeacherResponse(teacher);

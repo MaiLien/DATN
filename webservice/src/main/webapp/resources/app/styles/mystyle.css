@@ -96,5 +96,11 @@ body{
     margin-bottom: 20px;
     border: 1px solid transparent;
     border-color: rgb(224,224,224);
-    border-radius: 3px; opacity: 1;"
+    border-radius: 3px;
+    opacity: 1;
+}
+
+.link{
+    text-decoration: underline;
+    cursor: pointer;
 }

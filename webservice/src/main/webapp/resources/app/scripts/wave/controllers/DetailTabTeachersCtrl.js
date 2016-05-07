@@ -14,14 +14,16 @@ angular.module('appDATN.wave')
 
         $scope.setCurrentProjectWaveId($stateParams.projectWaveId);
 
-        $scope.addTeacherForProjectWave = function(teacherUsername){
-            console.log("$scope.addTeacherForWave");
+        $scope.addTeacherForProjectWave = function(){
             $scope.init();
-            if(teacherUsername != null && teacherUsername != ""){
-                var request = $scope.createAddTeacherRequest(teacherUsername);
+            $scope.setDirty();
+            console.log("addTeacherForWaveForm");
+            if($scope.addTeacherForWaveForm.$valid){
+                console.log("addTeacherForWaveForm valid");
+                var request = $scope.createAddTeacherRequest();
                 ProjectWaveService.addTeacher(request)
                     .success(function(data){
-                        console.log(data);
+
                         if(data.headers.resultCode == 1062)
                             $scope.infoMessage = "Giảng viên đã tham gia đợt Đồ án";
 
@@ -47,11 +49,29 @@ angular.module('appDATN.wave')
             }
         };
 
-        $scope.createAddTeacherRequest = function(teacherUsername){
+        $scope.createAddTeacherRequest = function(){
             return {
-                teacherUsername: teacherUsername,
+                teacherUsername: $scope.teacherUsername,
+                numberOfStudent: $scope.numberOfStudent,
                 projectWaveId: $scope.getCurrentProjectWaveId()
             };
+        }
+
+        $scope.setDirty = function(){
+            if($scope.addTeacherForWaveForm.$invalid){
+                Object.keys($scope.addTeacherForWaveForm.$error).forEach(function (key) {
+                    $scope.addTeacherForWaveForm.$error[key].forEach(function (control) {
+                        control.$setDirty();
+                    });
+                });
+            }
+        }
+
+        $scope.cancel = function(){
+            $scope.init();
+            $scope.teacherUsername = null;
+            $scope.numberOfStudent = null;
+            $scope.addTeacherForWaveForm.$setPristine();
         }
 
     });

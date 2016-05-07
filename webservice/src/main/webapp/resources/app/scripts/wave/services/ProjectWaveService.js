@@ -29,9 +29,9 @@ angular.module('appDATN.wave')
             return $http.post('API/addStudentForProjectWave', studentId);
         };
 
-        addTeacher = function(teacherId){
-            console.log("called addTeacher service : " + teacherId);
-            return $http.post('API/addTeacherForProjectWave', teacherId);
+        addTeacher = function(addTeacherForWaveRequest){
+            console.log("called addTeacher service : " + addTeacherForWaveRequest);
+            return $http.post('API/addTeacherForProjectWave', addTeacherForWaveRequest);
         };
 
         return {
