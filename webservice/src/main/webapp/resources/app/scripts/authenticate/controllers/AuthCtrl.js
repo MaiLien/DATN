@@ -9,18 +9,29 @@ angular.module('appDATN.auth')
                 .success(function(data){
                     if(data.headers.resultCode == 0){
                         AuthService.setAuth();
-                        $state.go('student.list');
+
+                        var typeOfUser = data.body.typeOfUser;
+                        switch (typeOfUser){//TEACHER(0), STUDENT(1), OFFICER(2), ADMIN(3);
+                            case 0:
+                                $state.go('teacher.home');
+                                break;
+                            case 1:
+                                $state.go('student.home');
+                                break;
+                            case 2:
+                                $state.go('officer.home');
+                                break;
+                        }
                     }
                     else{
                         $scope.error = true;
                     }
                 })
                 .error(function(error){
-                    //$scope.error = true;
-                    console.log("Login error")
+                    console.log("Login error");
                     $state.go('error');
                 })
-        }
+        };
 
         $scope.logout = function () {
             $scope.error = false;
@@ -34,7 +45,7 @@ angular.module('appDATN.auth')
                     console.log("Logout error")
                     $state.go('error');
                 })
-        }
+        };
 
         $scope.getAuth = function () {
             return AuthService.getAuth();

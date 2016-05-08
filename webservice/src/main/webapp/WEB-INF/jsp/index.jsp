@@ -29,7 +29,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-    <div ui-view="menu_view"></div>
+    <div ui-view="menu_header_view"></div>
     <!-- Content Wrapper. Contains page content -->
     <div ui-view="sidebar_view"></div>
     <div class="content-wrapper">
@@ -85,8 +85,6 @@
 <!-- FastClick -->
 <script src="/resources/template2/plugins/fastclick/fastclick.min.js"></script>
 
-<%--<script src="/resources/app/js/datepicker.js"></script>--%>
-
 <script src="/resources/template_login/js/jquery.backstretch.min.js"></script>
 
 <div ui-view="js_imported"></div>
@@ -104,38 +102,45 @@
 
 <script src="/resources/app/scripts/app.js"  charset="utf-8"></script>
 
-<script src="/resources/app/scripts/common/main.js"  charset="utf-8"></script>
+<script src="/resources/app/scripts/common/common_main.js"  charset="utf-8"></script>
 <script src="/resources/app/scripts/common/directives/NgEnter.js"  charset="utf-8"></script>
 <script src="/resources/app/scripts/common/filters/SortDateTime.js"  charset="utf-8"></script>
 
-<script src="/resources/app/scripts/authenticate/main.js"  charset="utf-8"></script>
+<script src="/resources/app/scripts/authenticate/auth_main.js"  charset="utf-8"></script>
 <script src="/resources/app/scripts/authenticate/controllers/AuthCtrl.js"  charset="utf-8"></script>
 <script src="/resources/app/scripts/authenticate/services/AuthService.js"  charset="utf-8"></script>
 
-<script src="/resources/app/scripts/student/main.js"  charset="utf-8"></script>
-<script src="/resources/app/scripts/student/services/StudentService.js" charset="utf-8"></script>
-<script src="/resources/app/scripts/student/controllers/StudentCtrl.js" charset="utf-8"></script>
-<script src="/resources/app/scripts/student/controllers/AddStudentCtrl.js" charset="utf-8"></script>
-<script src="/resources/app/scripts/student/controllers/ListStudentCtrl.js" charset="utf-8"></script>
-<script src="/resources/app/scripts/student/controllers/EditStudentCtrl.js" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/student/controllers/AddStudentFromFileExcelCtrl.js" URIEncoding="UTF-8"></script>
+<%--Officer role--%>
+<script src="/resources/app/scripts/officer_role/officer_main.js"></script>
 
-<script src="/resources/app/scripts/teacher/main.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/teacher/services/TeacherService.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/teacher/controllers/AddTeacherCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/teacher/controllers/ListTeacherCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/teacher/controllers/AddTeacherFromFileCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/officer_role/officer_home/officer_home_main.js"></script>
+<script src="/resources/app/scripts/officer_role/officer_home/controllers/OfficerInfoCtrl.js"></script>
+<script src="/resources/app/scripts/officer_role/officer_home/services/OfficerInfoService.js"></script>
+
+<script src="/resources/app/scripts/officer_role/manage_student/officer_student_main.js"  charset="utf-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_student/services/StudentService.js" charset="utf-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_student/controllers/StudentCtrl.js" charset="utf-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_student/controllers/AddStudentCtrl.js" charset="utf-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_student/controllers/ListStudentCtrl.js" charset="utf-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_student/controllers/EditStudentCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_student/controllers/AddStudentFromFileExcelCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+
+<script src="/resources/app/scripts/officer_role/manage_teacher/officer_teacher_main.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_teacher/services/TeacherService.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_teacher/controllers/AddTeacherCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_teacher/controllers/ListTeacherCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_teacher/controllers/AddTeacherFromFileCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
 
-<script src="/resources/app/scripts/wave/main.js" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/wave/services/ProjectWaveService.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/wave/controllers/AddProjectWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/wave/controllers/DetailCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/wave/controllers/DetailTabTimesCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/wave/controllers/DetailTabStudentsCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/wave/controllers/DetailTabTeachersCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/wave/controllers/ListProjectWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
-
+<script src="/resources/app/scripts/officer_role/manage_wave/officer_wave_main.js" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_wave/services/ProjectWaveService.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_wave/controllers/AddProjectWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_wave/controllers/DetailCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_wave/controllers/DetailTabTimesCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_wave/controllers/DetailTabStudentsCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_wave/controllers/DetailTabTeachersCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_wave/controllers/DetailTabAssignmentsCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_wave/controllers/ListProjectWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 </body>
 </html>
 

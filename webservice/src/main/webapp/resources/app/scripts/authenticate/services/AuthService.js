@@ -21,7 +21,7 @@ angular.module('appDATN.auth')
                 isAdmin : false,
                 user : null
             };
-        }
+        };
 
         setAuth = function () {
             getSession()
@@ -51,26 +51,26 @@ angular.module('appDATN.auth')
                     auth.status = false;
                     auth.isAuthenticated = false;
                 })
-        }
+        };
 
         getAuth = function () {
             return auth;
-        }
+        };
 
         login = function (user) {
             return $http.post(
                 '/login',
                 $.param(user),
                 { headers: {'content-type': 'application/x-www-form-urlencoded'}});
-        }
+        };
 
         getSession = function (){
             return $http.get('/session')
-        }
+        };
 
         logout = function () {
             return $http.get('/logout')
-        }
+        };
 
         return{
             login:login,
