@@ -10,6 +10,8 @@ angular.module('appDATN.officer_wave', ['appDATN.common']);
 
 angular.module('appDATN.student', ['appDATN.auth']);
 
+angular.module('appDATN.teacher', ['appDATN.auth']);
+
 var app = angular.module('appDATN', [
   'appDATN.common',
   'appDATN.auth',
@@ -24,7 +26,7 @@ var app = angular.module('appDATN', [
   'appDATN.student',
 
   //  Teacher role
-
+  'appDATN.teacher',
 
   'ui.router',
   'bw.paging',
