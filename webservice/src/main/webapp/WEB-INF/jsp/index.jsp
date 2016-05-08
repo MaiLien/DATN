@@ -151,9 +151,9 @@
 <script src="/resources/app/scripts/student_role/student_home/services/StudentInfoService.js"></script>
 
 <%--Teacher role--%>
-<script src="/resources/app/scripts/teacher_role/student_main.js"></script>
+<script src="/resources/app/scripts/teacher_role/teacher_main.js"></script>
 
-<script src="/resources/app/scripts/teacher_role/teacher_home/student_home_main.js"></script>
+<script src="/resources/app/scripts/teacher_role/teacher_home/teacher_home_main.js"></script>
 <script src="/resources/app/scripts/teacher_role/teacher_home/controllers/TeacherInfoCtrl.js"></script>
 <script src="/resources/app/scripts/teacher_role/teacher_home/services/TeacherInfoService.js"></script>
 
