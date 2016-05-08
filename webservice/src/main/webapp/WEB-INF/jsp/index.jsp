@@ -150,6 +150,11 @@
 <script src="/resources/app/scripts/student_role/student_home/controllers/StudentInfoCtrl.js"></script>
 <script src="/resources/app/scripts/student_role/student_home/services/StudentInfoService.js"></script>
 
+<script src="/resources/app/scripts/student_role/student_wave/student_wave_main.js"></script>
+<script src="/resources/app/scripts/student_role/student_wave/services/StudentWaveService.js"></script>
+<script src="/resources/app/scripts/student_role/student_wave/controllers/StudentWaveListCtrl.js"></script>
+
+
 <%--Teacher role--%>
 <script src="/resources/app/scripts/teacher_role/teacher_main.js"></script>
 

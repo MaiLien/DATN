@@ -3,13 +3,17 @@
 angular.module('appDATN.common', ['ui.router']);
 angular.module('appDATN.auth', ['ui.router']);
 
+//Officer role
 angular.module('appDATN.officer', ['appDATN.auth']);
 angular.module('appDATN.officer_student', ['appDATN.common']);
 angular.module('appDATN.officer_teacher', []);
 angular.module('appDATN.officer_wave', ['appDATN.common']);
 
+//Student role
 angular.module('appDATN.student', ['appDATN.auth']);
+angular.module('appDATN.student_wave', ['appDATN.auth']);
 
+//Teacher role
 angular.module('appDATN.teacher', ['appDATN.auth']);
 
 var app = angular.module('appDATN', [
@@ -24,6 +28,7 @@ var app = angular.module('appDATN', [
 
   //  Student role
   'appDATN.student',
+  'appDATN.student_wave',
 
   //  Teacher role
   'appDATN.teacher',
