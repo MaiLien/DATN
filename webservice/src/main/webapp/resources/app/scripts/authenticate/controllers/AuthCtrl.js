@@ -13,10 +13,10 @@ angular.module('appDATN.auth')
                         var typeOfUser = data.body.typeOfUser;
                         switch (typeOfUser){//TEACHER(0), STUDENT(1), OFFICER(2), ADMIN(3);
                             case 0:
-                                $state.go('teacher.home');
+                                $state.go('teacher_role.home');
                                 break;
                             case 1:
-                                $state.go('student.home');
+                                $state.go('student_role.home');
                                 break;
                             case 2:
                                 $state.go('officer.home');

@@ -131,7 +131,6 @@
 <script src="/resources/app/scripts/officer_role/manage_teacher/controllers/ListTeacherCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/officer_role/manage_teacher/controllers/AddTeacherFromFileCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
-
 <script src="/resources/app/scripts/officer_role/manage_wave/officer_wave_main.js" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/officer_role/manage_wave/services/ProjectWaveService.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/officer_role/manage_wave/controllers/AddProjectWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
@@ -141,6 +140,18 @@
 <script src="/resources/app/scripts/officer_role/manage_wave/controllers/DetailTabTeachersCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/officer_role/manage_wave/controllers/DetailTabAssignmentsCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/officer_role/manage_wave/controllers/ListProjectWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+
+
+
+<%--Student role--%>
+<script src="/resources/app/scripts/student_role/student_main.js"></script>
+
+<script src="/resources/app/scripts/student_role/student_home/student_home_main.js"></script>
+<script src="/resources/app/scripts/student_role/student_home/controllers/StudentInfoCtrl.js"></script>
+<script src="/resources/app/scripts/student_role/student_home/services/StudentInfoService.js"></script>
+
+<%--Teacher role--%>
+
 </body>
 </html>
 
