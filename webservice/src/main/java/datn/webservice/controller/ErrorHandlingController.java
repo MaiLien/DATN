@@ -72,6 +72,12 @@ public class ErrorHandlingController {
         return createResponseError(request, MessageCodeConstant.STUDENT_WAVE_IS_EXISTED, exception.getErrMessages());
     }
 
+    @ExceptionHandler(ProjectWaveException.class)
+    @ResponseBody
+    public RestApiResponse<?> handleProjectWaveException(HttpServletRequest request, ProjectWaveException exception){
+        return createResponseError(request, exception.getErrCode(), null);
+    }
+
     @ExceptionHandler(TeacherWaveIsExistedException.class)
     @ResponseBody
     public RestApiResponse<?> handleTeacherWaveIsExistedException(HttpServletRequest request, TeacherWaveIsExistedException exception){

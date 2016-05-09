@@ -2,6 +2,7 @@ package datn.service.impl;
 
 import datn.dao.entity.*;
 import datn.dao.repository.*;
+import datn.interfaces.constant.MessageCodeConstant;
 import datn.interfaces.request.AddStudentForProjectWaveRequest;
 import datn.interfaces.request.AddTeacherForProjectWaveRequest;
 import datn.interfaces.request.ProjectWaveRequest;
@@ -12,10 +13,7 @@ import datn.interfaces.response.TeacherResponse;
 import datn.interfaces.util.ConvertObject;
 import datn.interfaces.util.FormatSearchInput;
 import datn.service.IProjectWaveService;
-import datn.service.exceptions.ProjectWaveNotFoundException;
-import datn.service.exceptions.StudentWaveIsExistedException;
-import datn.service.exceptions.TeacherWaveIsExistedException;
-import datn.service.exceptions.UserNotFoundException;
+import datn.service.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -148,6 +146,8 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         if(sw.size() > 0)
             throw new StudentWaveIsExistedException(student.getId(), projectWave.getId());
 
+        checkStudentJoinProjectWaveInSameTime(student, projectWave);
+
         StudentWave studentWave = new StudentWave();
         studentWave.setStudent(student);
         studentWave.setProjectWave(projectWave);
@@ -156,6 +156,34 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         StudentResponse studentResponse = ConvertObject.convertStudentEntityToStudentResponse(student);
         RestApiResponse<StudentResponse> responseRestApiResponse =  new RestApiResponse<>(studentResponse);
         return responseRestApiResponse;
+    }
+
+    private void checkStudentJoinProjectWaveInSameTime(Student student, ProjectWave projectWave) {
+        ArrayList<StudentWave> studentWaves = studentWaveRepository.findByStudent(student);
+        if((studentWaves != null) && (studentWaves.size() != 0)){
+            for(int i = 0; i < studentWaves.size(); i++){
+                if(checkProjectWaveInSameTime(projectWave, studentWaves.get(i).getProjectWave())){
+                    throw new ProjectWaveException(MessageCodeConstant.ERROR_STUDENT_CAN_NOT_JOIN_OTHER_WAVE_IN_SAME_TIME);
+                }
+            }
+        }
+    }
+
+    private boolean checkProjectWaveInSameTime(ProjectWave wave, ProjectWave otherWave) {
+        if(isDateInPeriodTime(wave.getStartDay(), otherWave.getStartDay(), otherWave.getEndDay()) || isDateInPeriodTime(wave.getEndDay(), otherWave.getStartDay(), otherWave.getEndDay()))
+            return true;
+
+        if(isDateInPeriodTime(otherWave.getStartDay(), wave.getStartDay(), wave.getEndDay()) || isDateInPeriodTime(otherWave.getEndDay(), wave.getStartDay(), wave.getEndDay()))
+            return true;
+
+        return false;
+    }
+
+    private boolean isDateInPeriodTime(Date date, Date startDate, Date endDate){
+        if(date.compareTo(startDate)>=0 && date.compareTo(endDate)<=0)
+            return true;
+
+        return false;
     }
 
     @Override

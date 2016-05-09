@@ -29,6 +29,7 @@
                                     <th>Học kỳ</th>
                                     <th>Thời gian</th>
                                     <th>Ngày bảo vệ</th>
+                                    <th>Tình trạng</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -38,6 +39,10 @@
                                     <td>Học kỳ {{projectWave.semester}}</td>
                                     <td>{{projectWave.startTimeAndEndTime}}</td>
                                     <td>{{projectWave.timeForStudentDefend}}</td>
+                                    <td>
+                                        <span ng-if="projectWave.status == 0">Đã kết thúc</span>
+                                        <span ng-if="projectWave.status != 0">Đang diễn ra</span>
+                                    </td>
                                     <td>
                                         <a class="" ng-click="deleteProjectWave($event, projectWave)">
                                             <span><i class="fa fa-trash" style="color: red"></i></span>

@@ -23,6 +23,9 @@ angular.module('appDATN.officer_wave')
                         if(data.headers.resultCode == 1062)
                             $scope.infoMessage = "Sinh viên đã tham gia đợt Đồ án";
 
+                        else if(data.headers.resultCode == 1064)
+                            $scope.errMessage ="Sinh viên không thể tham gia nhiều đợt đồ án trong cùng 1 khoảng thời gian";
+
                         else if(data.headers.resultCode == 1061)
                             $scope.errMessage = "Không tồn tại đợt đồ án";
 
