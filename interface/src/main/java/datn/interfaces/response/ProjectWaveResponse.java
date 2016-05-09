@@ -15,6 +15,15 @@ public class ProjectWaveResponse {
     private String timeForStudentSubmitProject;
     private String timeForStudentDefend;
     private String description;
+    private int status = 0;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public String getId() {
         return id;

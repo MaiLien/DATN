@@ -8,8 +8,6 @@ angular.module('appDATN.auth')
             AuthService.login(user)
                 .success(function(data){
                     if(data.headers.resultCode == 0){
-                        AuthService.setAuth();
-
                         var typeOfUser = data.body.typeOfUser;
                         switch (typeOfUser){//TEACHER(0), STUDENT(1), OFFICER(2), ADMIN(3);
                             case 0:
@@ -37,18 +35,11 @@ angular.module('appDATN.auth')
             $scope.error = false;
             AuthService.logout()
                 .success(function(){
-                    AuthService.initAuth();
                     $state.go('login')
                 })
                 .error(function () {
-                    //$scope.error = true;
-                    console.log("Logout error")
+                    console.log("Logout error");
                     $state.go('error');
                 })
         };
-
-        $scope.getAuth = function () {
-            return AuthService.getAuth();
-        }
-
     });

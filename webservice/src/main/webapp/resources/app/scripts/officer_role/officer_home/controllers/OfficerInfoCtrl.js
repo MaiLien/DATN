@@ -7,7 +7,6 @@ angular.module('appDATN.officer')
             $scope.error = false;
             AuthService.logout()
                 .success(function(){
-                    AuthService.initAuth();
                     $state.go('login')
                 })
                 .error(function () {

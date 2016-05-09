@@ -184,6 +184,42 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         return responseRestApiResponse;
     }
 
+    @Override
+    public RestApiResponse<ArrayList<ProjectWaveResponse>> getWavesStudentJoined(String studentId) {
+        Student student = studentRepository.findOne(studentId);
+        ArrayList<ProjectWaveResponse> responses;
+        if(student == null)
+            throw new UserNotFoundException();
+        else{
+            ArrayList<StudentWave> studentWaves = studentWaveRepository.findByStudent(student);
+            responses = new ArrayList<>();
+            ProjectWave temp;
+            for(int i = 0; i<studentWaves.size(); i++){
+                temp = studentWaves.get(i).getProjectWave();
+                responses.add(convertProjectWaveEntityToProjectWaveResponse(temp));
+            }
+        }
+        return new RestApiResponse<>(responses);
+    }
+
+    @Override
+    public RestApiResponse<ArrayList<ProjectWaveResponse>> getWavesTeacherJoined(String teacherId) {
+        Teacher teacher = teacherRepository.findOne(teacherId);
+        ArrayList<ProjectWaveResponse> responses;
+        if(teacher == null)
+            throw new UserNotFoundException();
+        else{
+            ArrayList<TeacherWave> teacherWaves = teacherWaveRepository.findByTeacher(teacher);
+            responses = new ArrayList<>();
+            ProjectWave temp;
+            for(int i = 0; i<teacherWaves.size(); i++){
+                temp = teacherWaves.get(i).getProjectWave();
+                responses.add(convertProjectWaveEntityToProjectWaveResponse(temp));
+            }
+        }
+        return new RestApiResponse<>(responses);
+    }
+
     private boolean projectWaveIsExist(String id){
         ProjectWave projectWave = projectWaveRepository.findOne(id);
         if(projectWave != null)
@@ -215,6 +251,10 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         response.setSchoolYear(entity.getSchoolYear());
         response.setSemester(entity.getSemester());
         response.setDescription(entity.getDescription());
+
+        if(entity.getEndDay().compareTo(new Date()) >= 0)
+            response.setStatus(1);
+
         response.setStartTimeAndEndTime(getTimeForStudentDefend(entity));
         response.setTimeForTeacherProposesStudent(getTimeForTeacherProposesStudent(entity));
         response.setTimeForStudentRegisterTeacher(getTimeForStudentRegisterTeacher(entity));

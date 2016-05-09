@@ -56,6 +56,16 @@ public class ProjectWaveController {
         return projectWaveService.getTeachersOfProjectWave(id);
     }
 
+    @RequestMapping(value = "/getWavesStudentJoined", method = RequestMethod.GET)
+    public RestApiResponse<ArrayList<ProjectWaveResponse>> getWavesStudentJoined(String studentId){
+        return projectWaveService.getWavesStudentJoined(studentId);
+    }
+
+    @RequestMapping(value = "/getWavesTeacherJoined", method = RequestMethod.GET)
+    public RestApiResponse<ArrayList<ProjectWaveResponse>> getWavesTeacherJoined(String teacherId){
+        return projectWaveService.getWavesTeacherJoined(teacherId);
+    }
+
     /*Can not pass parameter with Postman if it has @RequestBody, otherwise website*/
     @RequestMapping(value = "/deleteProjectWave", method = RequestMethod.DELETE)
     public RestApiResponse<ProjectWaveResponse> deleteProjectWave(String projectWaveId){

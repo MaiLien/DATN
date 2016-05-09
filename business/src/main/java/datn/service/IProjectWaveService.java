@@ -30,4 +30,8 @@ public interface IProjectWaveService{
     RestApiResponse<StudentResponse> addStudentForProjectWave(AddStudentForProjectWaveRequest request);
 
     RestApiResponse<TeacherResponse> addTeacherForProjectWave(AddTeacherForProjectWaveRequest request);
+
+    RestApiResponse<ArrayList<ProjectWaveResponse>> getWavesStudentJoined(String studentId);
+
+    RestApiResponse<ArrayList<ProjectWaveResponse>> getWavesTeacherJoined(String teacherId);
 }
