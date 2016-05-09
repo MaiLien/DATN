@@ -152,7 +152,7 @@
 
 <script src="/resources/app/scripts/student_role/student_wave/student_wave_main.js"></script>
 <script src="/resources/app/scripts/student_role/student_wave/services/StudentWaveService.js"></script>
-<script src="/resources/app/scripts/student_role/student_wave/controllers/StudentWaveListCtrl.js"></script>
+<script src="/resources/app/scripts/student_role/student_wave/controllers/InfoWavesStudentJoinedCtrl.js"></script>
 
 
 <%--Teacher role--%>

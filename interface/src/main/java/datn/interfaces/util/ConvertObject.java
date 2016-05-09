@@ -13,7 +13,7 @@ public class ConvertObject {
         studentResponse.setUsername(studentEntity.getUsername());
         studentResponse.setName(studentEntity.getName());
         if(studentEntity.getBirthday() != null)
-            studentResponse.setBirthday(DateFormatUtil.convertDateToString(studentEntity.getBirthday()));
+            studentResponse.setBirthday(DateUtil.convertDateToString(studentEntity.getBirthday()));
         studentResponse.setDescription(studentEntity.getDescription());
         studentResponse.setEmail(studentEntity.getEmail());
         studentResponse.setGender(studentEntity.getGender().getValue());
@@ -31,7 +31,7 @@ public class ConvertObject {
         teacherResponse.setId(teacherEntity.getId());
         teacherResponse.setUsername(teacherEntity.getUsername());
         if(teacherEntity.getBirthday() != null)
-            teacherResponse.setBirthday(DateFormatUtil.convertDateToString(teacherEntity.getBirthday()));
+            teacherResponse.setBirthday(DateUtil.convertDateToString(teacherEntity.getBirthday()));
         teacherResponse.setDescription(teacherEntity.getDescription());
         teacherResponse.setEmail(teacherEntity.getEmail());
         teacherResponse.setGender(teacherEntity.getGender().getValue());

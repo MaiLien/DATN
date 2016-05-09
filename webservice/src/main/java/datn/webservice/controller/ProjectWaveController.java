@@ -4,10 +4,7 @@ import datn.interfaces.request.AddStudentForProjectWaveRequest;
 import datn.interfaces.request.AddTeacherForProjectWaveRequest;
 import datn.interfaces.request.ProjectWaveRequest;
 import datn.interfaces.request.StudentRequest;
-import datn.interfaces.response.ProjectWaveResponse;
-import datn.interfaces.response.RestApiResponse;
-import datn.interfaces.response.StudentResponse;
-import datn.interfaces.response.TeacherResponse;
+import datn.interfaces.response.*;
 import datn.interfaces.util.JsonUtil;
 import datn.service.IProjectWaveService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +54,7 @@ public class ProjectWaveController {
     }
 
     @RequestMapping(value = "/getWavesStudentJoined", method = RequestMethod.GET)
-    public RestApiResponse<ArrayList<ProjectWaveResponse>> getWavesStudentJoined(String studentId){
+    public RestApiResponse<WavesStudentJoinedResponse> getWavesStudentJoined(String studentId){
         return projectWaveService.getWavesStudentJoined(studentId);
     }
 

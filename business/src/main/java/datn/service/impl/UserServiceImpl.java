@@ -3,7 +3,7 @@ package datn.service.impl;
 import datn.dao.entity.User;
 import datn.dao.repository.UserRepository;
 import datn.interfaces.response.UserResponse;
-import datn.interfaces.util.DateFormatUtil;
+import datn.interfaces.util.DateUtil;
 import datn.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -43,7 +43,7 @@ public class UserServiceImpl implements IUserService {
         UserResponse userResponse = new UserResponse();
         userResponse.setId(user.getId());
         userResponse.setUsername(user.getUsername());
-        userResponse.setBirthday(DateFormatUtil.convertDateToString(user.getBirthday()));
+        userResponse.setBirthday(DateUtil.convertDateToString(user.getBirthday()));
         userResponse.setDescription(user.getDescription());
         userResponse.setEmail(user.getEmail());
         userResponse.setGender(user.getGender().getValue());

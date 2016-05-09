@@ -5,7 +5,7 @@ import datn.dao.repository.OfficerRepository;
 import datn.interfaces.request.OfficerRequest;
 import datn.interfaces.response.OfficerResponse;
 import datn.interfaces.response.RestApiResponse;
-import datn.interfaces.util.DateFormatUtil;
+import datn.interfaces.util.DateUtil;
 import datn.service.IOfficerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +45,7 @@ public class OfficerServiceImpl implements IOfficerService{
     private OfficerResponse convertOfficerEntityToOfficerResponse(Officer officerEntity){
         OfficerResponse officerResponse = new OfficerResponse();
         officerResponse.setId(officerEntity.getId());
-        officerResponse.setBirthday(DateFormatUtil.convertDateToString(officerEntity.getBirthday()));
+        officerResponse.setBirthday(DateUtil.convertDateToString(officerEntity.getBirthday()));
         officerResponse.setDescription(officerEntity.getDescription());
         officerResponse.setEmail(officerEntity.getEmail());
         officerResponse.setGender(officerEntity.getGender().getValue());

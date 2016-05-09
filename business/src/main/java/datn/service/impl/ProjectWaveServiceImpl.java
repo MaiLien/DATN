@@ -6,10 +6,7 @@ import datn.interfaces.constant.MessageCodeConstant;
 import datn.interfaces.request.AddStudentForProjectWaveRequest;
 import datn.interfaces.request.AddTeacherForProjectWaveRequest;
 import datn.interfaces.request.ProjectWaveRequest;
-import datn.interfaces.response.ProjectWaveResponse;
-import datn.interfaces.response.RestApiResponse;
-import datn.interfaces.response.StudentResponse;
-import datn.interfaces.response.TeacherResponse;
+import datn.interfaces.response.*;
 import datn.interfaces.util.ConvertObject;
 import datn.interfaces.util.FormatSearchInput;
 import datn.service.IProjectWaveService;
@@ -213,21 +210,26 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     }
 
     @Override
-    public RestApiResponse<ArrayList<ProjectWaveResponse>> getWavesStudentJoined(String studentId) {
+    public RestApiResponse<WavesStudentJoinedResponse> getWavesStudentJoined(String studentId) {
         Student student = studentRepository.findOne(studentId);
-        ArrayList<ProjectWaveResponse> responses;
+        ArrayList<ProjectWaveResponse> projectWavesJoined;
+        ArrayList<ProjectWaveResponse> projectWavesJoining;
         if(student == null)
             throw new UserNotFoundException();
         else{
             ArrayList<StudentWave> studentWaves = studentWaveRepository.findByStudent(student);
-            responses = new ArrayList<>();
+            projectWavesJoined = new ArrayList<>();
+            projectWavesJoining = new ArrayList<>();
             ProjectWave temp;
+            Date currentDate = new Date();
             for(int i = 0; i<studentWaves.size(); i++){
                 temp = studentWaves.get(i).getProjectWave();
-                responses.add(convertProjectWaveEntityToProjectWaveResponse(temp));
+                if(isDateInPeriodTime(currentDate, temp.getStartDay(), temp.getEndDay()))
+                    projectWavesJoining.add(convertProjectWaveEntityToProjectWaveResponse(temp));
+                else projectWavesJoined.add(convertProjectWaveEntityToProjectWaveResponse(temp));
             }
         }
-        return new RestApiResponse<>(responses);
+        return new RestApiResponse<>(new WavesStudentJoinedResponse(projectWavesJoined, projectWavesJoining));
     }
 
     @Override

@@ -7,7 +7,7 @@ import datn.dao.repository.StudentRepository;
 import datn.interfaces.request.StudentRequest;
 import datn.interfaces.response.RestApiResponse;
 import datn.interfaces.response.StudentResponse;
-import datn.interfaces.util.DateFormatUtil;
+import datn.interfaces.util.DateUtil;
 import datn.interfaces.util.FormatSearchInput;
 import datn.service.IStudentService;
 import datn.service.exceptions.UserExistedException;
@@ -18,7 +18,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
-import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 
 @Service
@@ -140,7 +139,7 @@ public class StudentServiceImpl implements IStudentService{
         studentResponse.setId(studentEntity.getId());
         studentResponse.setUsername(studentEntity.getUsername());
         studentResponse.setName(studentEntity.getName());
-        studentResponse.setBirthday(DateFormatUtil.convertDateToString(studentEntity.getBirthday()));
+        studentResponse.setBirthday(DateUtil.convertDateToString(studentEntity.getBirthday()));
         studentResponse.setDescription(studentEntity.getDescription());
         studentResponse.setEmail(studentEntity.getEmail());
         studentResponse.setGender(studentEntity.getGender().getValue());
@@ -162,7 +161,7 @@ public class StudentServiceImpl implements IStudentService{
             }
         }
         studentEntity.setUsername(studentRequest.getUsername());
-        studentEntity.setBirthday(DateFormatUtil.convertStringToDate(studentRequest.getBirthday()));
+        studentEntity.setBirthday(DateUtil.convertStringToDate(studentRequest.getBirthday()));
         studentEntity.setDescription(studentRequest.getDescription());
         studentEntity.setEmail(studentRequest.getEmail());
         studentEntity.setGender(Gender.valueOfKey(studentRequest.getGender()));

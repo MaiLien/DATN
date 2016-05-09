@@ -1,14 +1,12 @@
 package datn.service.impl;
 
 import datn.dao.constant.Gender;
-import datn.dao.entity.Student;
 import datn.dao.entity.Teacher;
 import datn.dao.repository.TeacherRepository;
 import datn.interfaces.request.TeacherRequest;
 import datn.interfaces.response.RestApiResponse;
-import datn.interfaces.response.StudentResponse;
 import datn.interfaces.response.TeacherResponse;
-import datn.interfaces.util.DateFormatUtil;
+import datn.interfaces.util.DateUtil;
 import datn.service.ITeacherService;
 import datn.service.exceptions.UserExistedException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,7 +121,7 @@ public class TeacherServiceImpl implements ITeacherService {
         }
 
         teacherEntity.setUsername(teacherRequest.getUsername());
-        teacherEntity.setBirthday(DateFormatUtil.convertStringToDate(teacherRequest.getBirthday()));
+        teacherEntity.setBirthday(DateUtil.convertStringToDate(teacherRequest.getBirthday()));
         teacherEntity.setDescription(teacherRequest.getDescription());
         teacherEntity.setEmail(teacherRequest.getEmail());
         teacherEntity.setGender(Gender.valueOfKey(teacherRequest.getGender()));
@@ -151,7 +149,7 @@ public class TeacherServiceImpl implements ITeacherService {
         TeacherResponse teacherResponse = new TeacherResponse();
         teacherResponse.setId(teacherEntity.getId());
         teacherResponse.setUsername(teacherEntity.getUsername());
-        teacherResponse.setBirthday(DateFormatUtil.convertDateToString(teacherEntity.getBirthday()));
+        teacherResponse.setBirthday(DateUtil.convertDateToString(teacherEntity.getBirthday()));
         teacherResponse.setDescription(teacherEntity.getDescription());
         teacherResponse.setEmail(teacherEntity.getEmail());
         teacherResponse.setGender(teacherEntity.getGender().getValue());
