@@ -13,10 +13,10 @@ import java.util.ArrayList;
 
 public interface ProjectWaveRepository extends JpaRepository<ProjectWave, String> {
 
-    @Query("select st from ProjectWave st where LOWER(st.schoolYear) like :searchInput order by st.startDay desc")
+    @Query("select st from ProjectWave st where LOWER(st.schoolYear) like :searchInput order by st.startDay")
     Page<ProjectWave> findBySearchInput(Pageable pageable,@Param("searchInput") String searchInput);
 
-    @Query("select st from ProjectWave st order by st.startDay desc")
+    @Query("select st from ProjectWave st order by st.startDay")
     Page<ProjectWave> findAll(Pageable pageable);
 
 }
