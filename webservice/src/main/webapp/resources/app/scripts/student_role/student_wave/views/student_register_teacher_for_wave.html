@@ -1,0 +1,31 @@
+<div>
+    <section class="content">
+
+        <div ng-if="joiningWaves.length > 1">
+            <div class="alert alert-danger fade in">
+                <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Hiện tại bạn đang tham gia nhiều hơn 1 đợt ĐATN, cần liên hệ giáo vụ khoa để xử lý lỗi
+            </div>
+        </div>
+
+        <div ng-if="joiningWaves.length == 0">
+            <div class="alert alert-warning fade in">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Hiện tại bạn không tham gia đợt ĐATN nào
+            </div>
+        </div>
+
+        <div class="box box-primary" ng-if="joiningWaves.length == 1">
+            <div class="box-header">
+                <h3 class="strong">Đăng kí giảng viên hướng dẫn đồ án tốt nghiệp</h3>
+                Học kì {{joiningWaves[0].semester}}, năm học {{joiningWaves[0].schoolYear}} <br>
+                Thời gian đăng kí: {{joiningWaves[0].timeForStudentRegisterTeacher}}
+            </div>
+            <div class="box-body">
+
+            </div>
+        </div>
+
+    </section>
+</div>
