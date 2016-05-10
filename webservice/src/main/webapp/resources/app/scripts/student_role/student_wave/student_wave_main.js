@@ -34,4 +34,35 @@ angular.module('appDATN.student_wave')
                     }
                 }
             })
+            .state('student_role.student_register_teacher_for_wave', {
+                parent: 'student_role',
+                url: '/wave/registerTeacher',
+                resolve:{
+                    user: function ($q, $state, AuthService) {
+                        var deferred = $q.defer();
+                        AuthService.getSession()
+                            .success(function (data) {
+                                if(data.headers.resultCode == 0) {
+                                    if(data.body == null){
+                                        $state.go('login');
+                                    }else{
+                                        deferred.resolve(data.body);
+                                    }
+                                }else{
+                                    $state.go('login');
+                                }
+                            })
+                            .error(function (error) {
+                                deferred.reject('Error');
+                            });
+                        return deferred.promise;
+                    }
+                },
+                views: {
+                    content_view: {
+                        controller:'StudentRegisterTeacherForWave',
+                        templateUrl: '/resources/app/scripts/student_role/student_wave/views/student_register_teacher_for_wave.html'
+                    }
+                }
+            })
     });
