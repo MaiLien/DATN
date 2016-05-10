@@ -177,8 +177,9 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     }
 
     private boolean isDateInPeriodTime(Date date, Date startDate, Date endDate){
-        if(date.compareTo(startDate)>=0 && date.compareTo(endDate)<=0)
+        if(date.compareTo(startDate)>=0 && date.compareTo(endDate)<=0){
             return true;
+        }
 
         return false;
     }
@@ -229,7 +230,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
                 else projectWavesJoined.add(convertProjectWaveEntityToProjectWaveResponse(temp));
             }
         }
-        return new RestApiResponse<>(new WavesStudentJoinedResponse(projectWavesJoined, projectWavesJoining));
+        return new RestApiResponse<>(new WavesStudentJoinedResponse(projectWavesJoining, projectWavesJoined));
     }
 
     @Override
