@@ -49,7 +49,7 @@ public class ProjectWaveController {
     }
 
     @RequestMapping(value = "/getTeachersOfProjectWave", method = RequestMethod.GET)
-    public RestApiResponse<ArrayList<TeacherResponse>> getTeachersOfProjectWave(String id){//TODO repair return RestApiResponse<ArrayList<TeacherInProjectWaveResponse>>
+    public RestApiResponse<ArrayList<TeacherInProjectWaveResponse>> getTeachersOfProjectWave(String id){
         return projectWaveService.getTeachersOfProjectWave(id);
     }
 

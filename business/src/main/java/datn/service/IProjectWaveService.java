@@ -16,7 +16,7 @@ public interface IProjectWaveService{
 
     RestApiResponse<ArrayList<StudentResponse>> getStudentsOfProjectWave(String id);
 
-    RestApiResponse<ArrayList<TeacherResponse>> getTeachersOfProjectWave(String id);
+    RestApiResponse<ArrayList<TeacherInProjectWaveResponse>> getTeachersOfProjectWave(String id);
 
     RestApiResponse<ArrayList<ProjectWaveResponse>> getAllProjectWave();
 

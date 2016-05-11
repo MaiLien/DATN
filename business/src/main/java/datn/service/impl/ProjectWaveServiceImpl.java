@@ -77,10 +77,36 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     }
 
     @Override
-    public RestApiResponse<ArrayList<TeacherResponse>> getTeachersOfProjectWave(String id) {
-        ArrayList<TeacherWave> teacherWaves = teacherWaveRepository.findByProjectWave(new ProjectWave(id));
-        ArrayList<TeacherResponse> teacherResponses = getTeachersFromTeacherWaves(teacherWaves);
-        return new RestApiResponse<>(teacherResponses);
+    public RestApiResponse<ArrayList<TeacherInProjectWaveResponse>> getTeachersOfProjectWave(String id) {//TODO test
+        ArrayList<TeacherInProjectWaveResponse> responses = new ArrayList<>();
+        ProjectWave projectWave = new ProjectWave(id);
+        if(projectWave != null)
+            throw new ProjectWaveException(MessageCodeConstant.PROJECT_WAVE_NOT_FOUND, id);
+        else{
+            ArrayList<TeacherWave> teacherWaves = teacherWaveRepository.findByProjectWave(projectWave);
+            ArrayList<Teacher> teachers = getTeacherEntitiesFromTeacherWaves(teacherWaves);
+            TeacherInProjectWaveResponse teacherResponse;
+            Teacher teacherEntity;
+            for(int i = 0; i < teachers.size(); i++){
+                teacherEntity = teachers.get(i);
+                teacherResponse = convertTeacherEntityToTeacherInProjectWaveResponse(teacherEntity);
+                teacherResponse.setMaxGuide(getMaxGuideForTeacher(teacherEntity, projectWave));
+                teacherResponse.setActualGuide(getActualGuideForTeacher(teacherEntity, projectWave));
+                responses.add(teacherResponse);
+            }
+        }
+
+        return new RestApiResponse<>(responses);
+    }
+
+
+    private ArrayList<Teacher> getTeacherEntitiesFromTeacherWaves(ArrayList<TeacherWave> teacherWaves){
+        ArrayList<Teacher> out = new ArrayList<>();
+        for (int i =0; i<teacherWaves.size(); i++){
+            out.add(teacherWaves.get(i).getTeacher());
+        }
+
+        return out;
     }
 
     private ArrayList<StudentResponse> getStudentsFromStudentWaves(ArrayList<StudentWave> studentWaves){
@@ -92,7 +118,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         return out;
     }
 
-    private ArrayList<TeacherResponse> getTeachersFromTeacherWaves(ArrayList<TeacherWave> teacherWaves){
+    private ArrayList<TeacherResponse> getTeacherResponsesFromTeacherWaves(ArrayList<TeacherWave> teacherWaves){
         ArrayList<TeacherResponse> out = new ArrayList<>();
         for (int i =0; i<teacherWaves.size(); i++){
             out.add(ConvertObject.convertTeacherEntityToTeacherResponse(teacherWaves.get(i).getTeacher()));
@@ -206,7 +232,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         TeacherWave teacherWave = new TeacherWave();
         teacherWave.setTeacher(teacher);
         teacherWave.setProjectWave(projectWave);
-        teacherWave.setMinNumberOfStudent(request.getNumberOfStudent());
+        teacherWave.setMaxNumberOfStudent(request.getNumberOfStudent());
         teacherWaveRepository.save(teacherWave);
 
         TeacherResponse teacherResponse = ConvertObject.convertTeacherEntityToTeacherResponse(teacher);
