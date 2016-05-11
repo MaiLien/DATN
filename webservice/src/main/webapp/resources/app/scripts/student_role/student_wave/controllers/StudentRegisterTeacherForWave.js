@@ -7,8 +7,8 @@ angular.module('appDATN.student_wave')
         $scope.teachersWhoStudentRegister;
         $scope.studentId = user.id;
 
-        $scope.getListTeacherOfWave = function (projectWaveId) {
-            StudentWaveService.getListTeacherOfWave(projectWaveId)
+        $scope.getTeachersOfProjectWave = function (projectWaveId) {
+            StudentWaveService.getTeachersOfProjectWave(projectWaveId)
                 .success(function(data){
                     if(data.headers.resultCode == 0){
                         $scope.joinedTeachers = data.body;
@@ -42,7 +42,7 @@ angular.module('appDATN.student_wave')
                         $scope.joinedWaves = data.body.projectWavesJoined;
                         $scope.joiningWaves = data.body.projectWavesJoining;
                         if($scope.joiningWaves.length == 1){
-                            $scope.getListTeacherOfWave($scope.joiningWaves[0].id);
+                            $scope.getTeachersOfProjectWave($scope.joiningWaves[0].id);
                             $scope.getTeachersWhoStudentRegistered($scope.studentId, $scope.joiningWaves[0].id);
                         }
                     }else{

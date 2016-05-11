@@ -8,7 +8,6 @@ angular.module('appDATN.student_wave')
                 url: '/wave/detail',
                 resolve:{
                     user: function ($q, $state, AuthService) {
-                        console.log("user");
                         var deferred = $q.defer();
                         AuthService.getSession()
                             .success(function (data) {

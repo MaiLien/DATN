@@ -96,7 +96,6 @@ angular.module('appDATN.officer_wave')
                 url: '/tabs/teachers/:projectWaveId',
                 resolve:{
                     projectWaveTeachers: function ($q, $state, $stateParams, ProjectWaveService) {
-                        console.log("wave.detail.teachers");
                         var deferred = $q.defer();
                         ProjectWaveService.getTeachers($stateParams.projectWaveId)
                             .success(function (data) {

@@ -71,16 +71,22 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
 
     @Override
     public RestApiResponse<ArrayList<StudentResponse>> getStudentsOfProjectWave(String id) {
-        ArrayList<StudentWave> studentWaves = (ArrayList<StudentWave>) studentWaveRepository.findByProjectWave(new ProjectWave(id));
-        ArrayList<StudentResponse> students = getStudentsFromStudentWaves(studentWaves);
+        ArrayList<StudentResponse> students;
+        ProjectWave projectWave = projectWaveRepository.findOne(id);
+        if(projectWave == null)
+            throw new ProjectWaveException(MessageCodeConstant.PROJECT_WAVE_NOT_FOUND, id);
+        else{
+            ArrayList<StudentWave> studentWaves = (ArrayList<StudentWave>) studentWaveRepository.findByProjectWave(projectWave);
+            students = getStudentsFromStudentWaves(studentWaves);
+        }
         return new RestApiResponse<>(students);
     }
 
     @Override
     public RestApiResponse<ArrayList<TeacherInProjectWaveResponse>> getTeachersOfProjectWave(String id) {//TODO test
         ArrayList<TeacherInProjectWaveResponse> responses = new ArrayList<>();
-        ProjectWave projectWave = new ProjectWave(id);
-        if(projectWave != null)
+        ProjectWave projectWave = projectWaveRepository.findOne(id);
+        if(projectWave == null)
             throw new ProjectWaveException(MessageCodeConstant.PROJECT_WAVE_NOT_FOUND, id);
         else{
             ArrayList<TeacherWave> teacherWaves = teacherWaveRepository.findByProjectWave(projectWave);
@@ -232,6 +238,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         TeacherWave teacherWave = new TeacherWave();
         teacherWave.setTeacher(teacher);
         teacherWave.setProjectWave(projectWave);
+        teacherWave.setMinNumberOfStudent(request.getNumberOfStudent());
         teacherWave.setMaxNumberOfStudent(request.getNumberOfStudent());
         teacherWaveRepository.save(teacherWave);
 
@@ -335,7 +342,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
             throw new ProjectWaveException(MessageCodeConstant.ERROR_TEACHER_IN_WAVE_EXIST_MORE_ONE, teacher.getId(), wave.getId());
         }
         else if(teacherWaves.size() == 1){
-            maxGuide = teacherWaves.get(0).getMaxNumberOfStudent();
+            maxGuide = teacherWaves.get(0).getMinNumberOfStudent();
         }
 
         return maxGuide;
