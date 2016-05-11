@@ -32,4 +32,5 @@ public interface IProjectWaveService{
 
     RestApiResponse<ArrayList<ProjectWaveResponse>> getWavesTeacherJoined(String teacherId);
 
+    RestApiResponse<ArrayList<TeacherInProjectWaveResponse>> getTeachersWhoDirectingStudentInProjectWave(String studentId, String waveId);
 }

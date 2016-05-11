@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Locale;
 
 @ControllerAdvice
 public class ErrorHandlingController {
@@ -131,7 +132,7 @@ public class ErrorHandlingController {
 
     private String getMessage(String resultCode, Object[] messageAgruments) {
         try {
-            return messageSource.getMessage(resultCode, messageAgruments, LocaleContextHolder.getLocale());
+            return messageSource.getMessage(resultCode, messageAgruments, Locale.ENGLISH);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -5,8 +5,18 @@ angular.module('appDATN.student_wave')
             return $http.get('API/getWavesStudentJoined', {params : {studentId: studentId}})
         };
 
+        getListTeacherOfWave = function (waveId) {
+            return $http.get('API/getTeachersOfProjectWave', {params : {id: waveId}})
+        };
+
+        getTeachersWhoStudentRegistered = function(studentId, waveId){
+            return $http.get('API/getTeachersWhoDirectingStudentInProjectWave', {params : {studentId: studentId, waveId: waveId}});
+        };
+
         return {
-            getWavesStudentJoined: getWavesStudentJoined
+            getWavesStudentJoined: getWavesStudentJoined,
+            getListTeacherOfWave: getListTeacherOfWave,
+            getTeachersWhoStudentRegistered: getTeachersWhoStudentRegistered
         };
 
     });

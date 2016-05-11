@@ -3,10 +3,11 @@ package datn.service.exceptions;
 public class ProjectWaveException extends RuntimeException{
 
     private String errCode;
-    private String errMessage;
+    private String[] errMessages;
 
-    public ProjectWaveException(String errCode) {
+    public ProjectWaveException(String errCode, String... errMessage) {
         this.errCode = errCode;
+        this.errMessages = errMessages;
     }
 
     public String getErrCode() {
@@ -17,11 +18,11 @@ public class ProjectWaveException extends RuntimeException{
         this.errCode = errCode;
     }
 
-    public String getErrMessage() {
-        return errMessage;
+    public String[] getErrMessages() {
+        return errMessages;
     }
 
-    public void setErrMessage(String errMessage) {
-        this.errMessage = errMessage;
+    public void setErrMessages(String[] errMessages) {
+        this.errMessages = errMessages;
     }
 }

@@ -55,6 +55,8 @@ public class DateUtil {
     }
 
     public static String convertDateToString(Date date){
+        if(date == null)
+            return "";
         return  simpleDateFormat.format(date);
     }
 

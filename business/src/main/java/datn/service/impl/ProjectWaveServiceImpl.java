@@ -8,6 +8,7 @@ import datn.interfaces.request.AddTeacherForProjectWaveRequest;
 import datn.interfaces.request.ProjectWaveRequest;
 import datn.interfaces.response.*;
 import datn.interfaces.util.ConvertObject;
+import datn.interfaces.util.DateUtil;
 import datn.interfaces.util.FormatSearchInput;
 import datn.service.IProjectWaveService;
 import datn.service.exceptions.*;
@@ -48,6 +49,9 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     @Autowired
     TeacherRepository teacherRepository;
 
+    @Autowired
+    AssignmentRepository assignmentRepository;
+
     public RestApiResponse<ProjectWaveResponse> addProjectWave(ProjectWaveRequest request) {
         ProjectWave projectWave = convertProjectWaveRequestToProjectWaveEntity(request);
         ProjectWave entity = projectWaveRepository.save(projectWave);
@@ -74,7 +78,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
 
     @Override
     public RestApiResponse<ArrayList<TeacherResponse>> getTeachersOfProjectWave(String id) {
-        ArrayList<TeacherWave> teacherWaves = (ArrayList<TeacherWave>) teacherWaveRepository.findByProjectWave(new ProjectWave(id));
+        ArrayList<TeacherWave> teacherWaves = teacherWaveRepository.findByProjectWave(new ProjectWave(id));
         ArrayList<TeacherResponse> teacherResponses = getTeachersFromTeacherWaves(teacherWaves);
         return new RestApiResponse<>(teacherResponses);
     }
@@ -250,6 +254,91 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         }
         return new RestApiResponse<>(responses);
     }
+
+    @Override
+    public RestApiResponse<ArrayList<TeacherInProjectWaveResponse>> getTeachersWhoDirectingStudentInProjectWave(String studentId, String waveId) {
+        Student student = studentRepository.findOne(studentId);
+        if(student == null)
+            throw new UserNotFoundException(studentId);
+
+        ProjectWave projectWave = projectWaveRepository.findOne(waveId);
+        if(projectWave == null)
+            throw  new ProjectWaveNotFoundException(waveId);
+
+        ArrayList<Assignment>  assignments = assignmentRepository.findByStudentAndWave(student, projectWave);
+
+        ArrayList<TeacherInProjectWaveResponse> teacherInProjectWaveResponses = getTeachersInProjectWaveResponses(assignments);
+
+        return new RestApiResponse<>(teacherInProjectWaveResponses);
+    }
+
+    private ArrayList<TeacherInProjectWaveResponse> getTeachersInProjectWaveResponses(ArrayList<Assignment> assignments) {
+        ArrayList<TeacherInProjectWaveResponse> responses = new ArrayList<>();
+
+        TeacherInProjectWaveResponse teacherResponse;
+        ProjectWave projectWave;
+        Teacher teacher;
+        Assignment assignment;
+        for(int i = 0; i < assignments.size(); i++){
+            assignment = assignments.get(i);
+            projectWave = assignment.getProjectWave();
+            teacher = assignment.getTeacher();
+            teacherResponse = convertTeacherEntityToTeacherInProjectWaveResponse(teacher);
+            teacherResponse.setMaxGuide(getMaxGuideForTeacher(teacher, projectWave));
+            teacherResponse.setActualGuide(getActualGuideForTeacher(teacher, projectWave));
+
+            responses.add(teacherResponse);
+        }
+
+        return responses;
+    }
+
+    private int getActualGuideForTeacher(Teacher teacher, ProjectWave projectWave) {
+        int actualGuide = 0;
+
+        ArrayList<Assignment> assignments = assignmentRepository.findByTeacherAndWave(teacher, projectWave);
+        actualGuide = assignments.size();
+
+        return actualGuide;
+    }
+
+    private int getMaxGuideForTeacher(Teacher teacher, ProjectWave wave) {
+        ArrayList<TeacherWave> teacherWaves = teacherWaveRepository.findByTeacherAndProjectWave(teacher, wave);
+        int maxGuide = 0;
+        if(teacherWaves.size() > 1){
+            throw new ProjectWaveException(MessageCodeConstant.ERROR_TEACHER_IN_WAVE_EXIST_MORE_ONE, teacher.getId(), wave.getId());
+        }
+        else if(teacherWaves.size() == 1){
+            maxGuide = teacherWaves.get(0).getMaxNumberOfStudent();
+        }
+
+        return maxGuide;
+    }
+
+    public TeacherInProjectWaveResponse convertTeacherEntityToTeacherInProjectWaveResponse(Teacher teacher) {
+        TeacherInProjectWaveResponse response = new TeacherInProjectWaveResponse();
+
+        response.setId(teacher.getId());
+        response.setUsername(teacher.getUsername());
+        response.setBirthday(DateUtil.convertDateToString(teacher.getBirthday()));
+        response.setDeleted(teacher.getDeleted());
+        response.setDescription(teacher.getDescription());
+        response.setEmail(teacher.getEmail());
+        if(teacher.getGender() != null)
+            response.setGender(teacher.getGender().getValue());
+        response.setName(teacher.getName());
+        response.setPhoneNumber(teacher.getPhoneNumber());
+        response.setStatus(teacher.getStatus());
+        if(teacher.getTypeOfUser() != null)
+            response.setTypeOfUser(teacher.getTypeOfUser().getValue());
+        response.setMajor(teacher.getMajor());
+        response.setDegree(teacher.getDegree());
+        response.setResearchDirection(teacher.getResearchDirection());
+
+        return response;
+    }
+
+
 
     private boolean projectWaveIsExist(String id){
         ProjectWave projectWave = projectWaveRepository.findOne(id);

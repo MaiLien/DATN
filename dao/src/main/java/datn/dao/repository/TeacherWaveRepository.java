@@ -13,10 +13,10 @@ import java.util.List;
 public interface TeacherWaveRepository extends JpaRepository<TeacherWave, String> {
 
     @Query("select st from TeacherWave st where st.projectWave=:wave")
-    List<TeacherWave> findByProjectWave(@Param("wave") ProjectWave wave);
+    ArrayList<TeacherWave> findByProjectWave(@Param("wave") ProjectWave wave);
 
     @Query("select st from TeacherWave st where st.projectWave=:wave and st.teacher=:teacher")
-    List<TeacherWave> findByTeacherAndProjectWave(@Param("teacher")Teacher teacher, @Param("wave") ProjectWave wave);
+    ArrayList<TeacherWave> findByTeacherAndProjectWave(@Param("teacher")Teacher teacher, @Param("wave") ProjectWave wave);
 
     @Query("select st from TeacherWave st where st.id=:id")
     TeacherWave findOne(@Param("id") String id);
