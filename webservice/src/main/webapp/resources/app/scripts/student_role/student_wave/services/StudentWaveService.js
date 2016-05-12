@@ -26,7 +26,7 @@ angular.module('appDATN.student_wave')
             getTeachersOfProjectWave: getTeachersOfProjectWave,
             getTeachersWhoStudentRegistered: getTeachersWhoStudentRegistered,
             cancelRegisterTeacher: cancelRegisterTeacher,
-            registerTeache: registerTeacher
+            registerTeacher: registerTeacher
         };
 
     });

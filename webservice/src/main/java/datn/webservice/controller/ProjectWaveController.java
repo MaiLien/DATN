@@ -65,13 +65,13 @@ public class ProjectWaveController {
         return projectWaveService.getTeachersWhoDirectingStudentInProjectWave(studentId, waveId);
     }
 
-    @RequestMapping(value = "/cancelRegisterTeacher", method = RequestMethod.GET)
-    public RestApiResponse<RegisterTeacherResponse> cancelRegisterTeacher(RegisterTeacherRequest request){
+    @RequestMapping(value = "/cancelRegisterTeacher", method = RequestMethod.POST)
+    public RestApiResponse<RegisterTeacherResponse> cancelRegisterTeacher(@RequestBody RegisterTeacherRequest request){
         return projectWaveService.cancelRegisterTeacher(request);
     }
 
-    @RequestMapping(value = "/registerTeacher", method = RequestMethod.GET)
-    public RestApiResponse<RegisterTeacherResponse> registerTeacher(RegisterTeacherRequest request){
+    @RequestMapping(value = "/registerTeacher", method = RequestMethod.POST)
+    public RestApiResponse<RegisterTeacherResponse> registerTeacher(@RequestBody RegisterTeacherRequest request){
         return projectWaveService.registerTeacher(request);
     }
 

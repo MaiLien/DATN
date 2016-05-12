@@ -28,24 +28,27 @@
 
             <div class="box-body">
                 <div>
+                    <div class="alert alert-info fade in" ng-if="successMessage" ng-cloak>
+                        <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{successMessage}}
+                    </div>
+                    <div class="alert alert-danger fade in" ng-if="errMessage" ng-cloak>
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{errMessage}}
+                    </div>
                     <div class="alert alert-warning fade in" ng-if="teachersWhoStudentRegister == null || teachersWhoStudentRegister.length == 0">
                         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                         <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         Bạn chưa đăng ký giảng viên nào
                     </div>
-                    <div class="alert alert-danger fade in" ng-if="teachersWhoStudentRegister.length > 1">
+                    <div class="alert alert-danger fade in" ng-if="!(successMessage || errMessage) && (teachersWhoStudentRegister.length > 1)">
                         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                         <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         Bạn không được phép đăng ký nhiều hơn 1 giảng viên hướng dẫn
                     </div>
                     <div ng-if="teachersWhoStudentRegister.length > 0">
                         <div>
-                        <!--<div class="borderForm borderInBox">-->
-                            <!--<div class="alert alert-warning fade in" ng-if="teachersWhoStudentRegister == null || teachersWhoStudentRegister.length == 0">-->
-                                <!--<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>-->
-                                <!--<a class="close" data-dismiss="alert" aria-label="close">&times;</a>-->
-                                <!--Bạn đã đăng ký giảng viên -->
-                            <!--</div>-->
                             <h4 class="strong">Bạn đã đăng ký giảng viên</h4>
                             <table class="table table-bordered table-hover table-middle">
                                 <thead>

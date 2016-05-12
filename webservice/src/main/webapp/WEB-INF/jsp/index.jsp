@@ -144,24 +144,24 @@
 
 
 <%--Student role--%>
-<script src="/resources/app/scripts/student_role/student_main.js"></script>
+<script src="/resources/app/scripts/student_role/student_main.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
-<script src="/resources/app/scripts/student_role/student_home/student_home_main.js"></script>
-<script src="/resources/app/scripts/student_role/student_home/controllers/StudentInfoCtrl.js"></script>
-<script src="/resources/app/scripts/student_role/student_home/services/StudentInfoService.js"></script>
+<script src="/resources/app/scripts/student_role/student_home/student_home_main.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/student_role/student_home/controllers/StudentInfoCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/student_role/student_home/services/StudentInfoService.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
-<script src="/resources/app/scripts/student_role/student_wave/student_wave_main.js"></script>
-<script src="/resources/app/scripts/student_role/student_wave/services/StudentWaveService.js"></script>
-<script src="/resources/app/scripts/student_role/student_wave/controllers/InfoWavesStudentJoinedCtrl.js"></script>
-<script src="/resources/app/scripts/student_role/student_wave/controllers/StudentRegisterTeacherForWaveCtrl.js"></script>
+<script src="/resources/app/scripts/student_role/student_wave/student_wave_main.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/student_role/student_wave/services/StudentWaveService.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/student_role/student_wave/controllers/InfoWavesStudentJoinedCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/student_role/student_wave/controllers/StudentRegisterTeacherForWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
 
 <%--Teacher role--%>
-<script src="/resources/app/scripts/teacher_role/teacher_main.js"></script>
+<script src="/resources/app/scripts/teacher_role/teacher_main.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
-<script src="/resources/app/scripts/teacher_role/teacher_home/teacher_home_main.js"></script>
-<script src="/resources/app/scripts/teacher_role/teacher_home/controllers/TeacherInfoCtrl.js"></script>
-<script src="/resources/app/scripts/teacher_role/teacher_home/services/TeacherInfoService.js"></script>
+<script src="/resources/app/scripts/teacher_role/teacher_home/teacher_home_main.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/teacher_role/teacher_home/controllers/TeacherInfoCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/teacher_role/teacher_home/services/TeacherInfoService.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
 </body>
 </html>

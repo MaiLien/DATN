@@ -121,8 +121,12 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
             throw new ProjectWaveNotFoundException(request.getProjectWaveId());
 
         ArrayList<TeacherWave> teacherWave = teacherWaveRepository.findByTeacherAndProjectWave(teacher, projectWave);
-        if(teacherWave.size() > 0)
+        if(teacherWave.size() == 0)
             throw new ProjectWaveException(MessageCodeConstant.ERROR_TEACHER_NOT_IN_WAVE, request.getTeacherId(), request.getProjectWaveId());
+
+        ArrayList<Assignment> assignments = assignmentRepository.findByStudentAndWave(student, projectWave);
+        if(assignments.size() > 0)
+            throw  new ProjectWaveException(MessageCodeConstant.ERROR_STUDENT_CAN_NOT_REGISTER_MORE_ONE_TEACHER_IN_SAME_WAVE, student.getId(), projectWave.getId());
 
         Assignment assignment = assignmentRepository.findByStudentAndTeacherAndWave(student, teacher, projectWave);
         if(assignment != null)
@@ -132,7 +136,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         newAssignment.setStudent(student);
         newAssignment.setTeacher(teacher);
         newAssignment.setProjectWave(projectWave);
-        assignmentRepository.save(assignment);
+        assignmentRepository.save(newAssignment);
 
         return new RestApiResponse<>();
     }
