@@ -1,9 +1,6 @@
 package datn.webservice.controller;
 
-import datn.interfaces.request.AddStudentForProjectWaveRequest;
-import datn.interfaces.request.AddTeacherForProjectWaveRequest;
-import datn.interfaces.request.ProjectWaveRequest;
-import datn.interfaces.request.StudentRequest;
+import datn.interfaces.request.*;
 import datn.interfaces.response.*;
 import datn.interfaces.util.JsonUtil;
 import datn.service.IProjectWaveService;
@@ -66,6 +63,16 @@ public class ProjectWaveController {
     @RequestMapping(value = "/getTeachersWhoDirectingStudentInProjectWave", method = RequestMethod.GET)
     public RestApiResponse<ArrayList<TeacherInProjectWaveResponse>> getTeachersWhoDirectingStudentInProjectWave(String studentId, String waveId){
         return projectWaveService.getTeachersWhoDirectingStudentInProjectWave(studentId, waveId);
+    }
+
+    @RequestMapping(value = "/cancelRegisterTeacher", method = RequestMethod.GET)
+    public RestApiResponse<RegisterTeacherResponse> cancelRegisterTeacher(RegisterTeacherRequest request){
+        return projectWaveService.cancelRegisterTeacher(request);
+    }
+
+    @RequestMapping(value = "/registerTeacher", method = RequestMethod.GET)
+    public RestApiResponse<RegisterTeacherResponse> registerTeacher(RegisterTeacherRequest request){
+        return projectWaveService.registerTeacher(request);
     }
 
     /*Can not pass parameter with Postman if it has @RequestBody, otherwise website*/

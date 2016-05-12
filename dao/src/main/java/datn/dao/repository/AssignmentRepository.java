@@ -20,4 +20,6 @@ public interface AssignmentRepository extends JpaRepository<Assignment, String> 
     @Query("select st from Assignment st where (st.teacher=:teacher and st.projectWave=:projectWave)")
     ArrayList<Assignment> findByTeacherAndWave(@Param("teacher")Teacher teacher, @Param("projectWave")ProjectWave wave);
 
+    @Query("select st from Assignment st where (st.student=:student and st.teacher=:teacher and st.projectWave=:projectWave)")
+    Assignment findByStudentAndTeacherAndWave(@Param("student")Student student, @Param("teacher") Teacher teacher, @Param("projectWave")ProjectWave projectWave);
 }

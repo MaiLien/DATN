@@ -21,4 +21,10 @@ public class MessageCodeConstant {
     public static final String TEACHER_WAVE_IS_EXISTED = "1063";
     public static final String ERROR_STUDENT_CAN_NOT_JOIN_OTHER_WAVE_IN_SAME_TIME = "1064";
     public static final String ERROR_TEACHER_IN_WAVE_EXIST_MORE_ONE = "1065";
+    public static final String ERROR_ASSIGNMENT_EXISTED = "1066";
+    public static final String ERROR_ASSIGNMENT_NOT_EXISTED = "1067";
+    public static final String ERROR_STUDENT_NOT_FOUND = "1068";
+    public static final String ERROR_TEACHER_NOT_FOUND = "1069";
+    public static final String ERROR_TEACHER_NOT_IN_WAVE = "1070";
+
 }

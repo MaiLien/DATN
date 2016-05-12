@@ -49,6 +49,18 @@ public class ErrorHandlingController {
         return createResponseError(request, exception.getMessage(), null);
     }
 
+    @ExceptionHandler(StudentNotFoundException.class)
+    @ResponseBody
+    public RestApiResponse<?> handleStudentNotFoundException(HttpServletRequest request, StudentNotFoundException exception){
+        return createResponseError(request, MessageCodeConstant.ERROR_STUDENT_NOT_FOUND, exception.getErrMessage());
+    }
+
+    @ExceptionHandler(TeacherNotFoundException.class)
+    @ResponseBody
+    public RestApiResponse<?> handleTeacherNotFoundException(HttpServletRequest request, TeacherNotFoundException exception){
+        return createResponseError(request, MessageCodeConstant.ERROR_TEACHER_NOT_FOUND, exception.getErrMessage());
+    }
+
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseBody
     public RestApiResponse<?> handleHttpMessageNotReadableException(HttpServletRequest request, HttpMessageNotReadableException exception){
@@ -65,6 +77,12 @@ public class ErrorHandlingController {
     @ResponseBody
     public RestApiResponse<?> handleProjectWaveNotFoundException(HttpServletRequest request, ProjectWaveNotFoundException exception){
         return createResponseError(request, MessageCodeConstant.PROJECT_WAVE_NOT_FOUND, exception.getErrMessage());
+    }
+
+    @ExceptionHandler(AssignmentException.class)
+    @ResponseBody
+    public RestApiResponse<?> handleAssignmentException(HttpServletRequest request, AssignmentException exception){
+        return createResponseError(request, exception.getErrCode(), exception.getErrMessages());
     }
 
     @ExceptionHandler(StudentWaveIsExistedException.class)

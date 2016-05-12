@@ -18,11 +18,13 @@
 
         <div class="box box-primary" ng-if="joiningWaves.length == 1">
 
-            <div class="box-header">
+            <div class="box-header" style="text-align: center">
                 <h3 class="strong">Đăng ký giảng viên hướng dẫn đồ án tốt nghiệp</h3>
                 Học kì {{joiningWaves[0].semester}}, năm học {{joiningWaves[0].schoolYear}} <br>
                 Thời gian đăng kí: {{joiningWaves[0].timeForStudentRegisterTeacher}}
             </div>
+
+            <br>
 
             <div class="box-body">
                 <div>
@@ -37,23 +39,34 @@
                         Bạn không được phép đăng ký nhiều hơn 1 giảng viên hướng dẫn
                     </div>
                     <div ng-if="teachersWhoStudentRegister.length > 0">
-                        <h4>Bạn đã đăng ký giảng viên</h4>
-                        <table>
-                            <thead>
+                        <div>
+                        <!--<div class="borderForm borderInBox">-->
+                            <!--<div class="alert alert-warning fade in" ng-if="teachersWhoStudentRegister == null || teachersWhoStudentRegister.length == 0">-->
+                                <!--<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>-->
+                                <!--<a class="close" data-dismiss="alert" aria-label="close">&times;</a>-->
+                                <!--Bạn đã đăng ký giảng viên -->
+                            <!--</div>-->
+                            <h4 class="strong">Bạn đã đăng ký giảng viên</h4>
+                            <table class="table table-bordered table-hover table-middle">
+                                <thead>
                                 <td>Tên giảng viên</td>
                                 <td>Số lượng đăng ký</td>
                                 <td>Thao tác</td>
-                            </thead>
-                            <tbody>
+                                </thead>
+                                <tbody>
                                 <tr ng-repeat="teacher in teachersWhoStudentRegister">
                                     <td><a>{{teacher.name}}</a></td>
                                     <td>{{teacher.actualGuide}}/{{teacher.maxGuide}}</td>
-                                    <td><button class="btn">Hủy</button></td>
+                                    <td><button class="btn" ng-click="cancelRegisterTeacher(teacher.id, joiningWaves[0].id)">Hủy</button></td>
                                 </tr>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+
+                <br>
+                <br>
 
                 <div>
                     <div class="alert alert-warning fade in" ng-if="joinedTeachers.length == 0">
@@ -62,22 +75,25 @@
                         Danh sách giảng viên hướng dẫn đợt Đồ án tốt nghiệp chưa được cập nhật
                     </div>
                     <div ng-if="joinedTeachers.length != 0">
-                        <table>
-                            <thead>
+                        <div>
+                            <h4 class="strong">Danh sách giảng viên tham gia hướng dẫn</h4>
+                            <table class="table table-bordered table-hover table-middle">
+                                <thead>
                                 <td>STT</td>
                                 <td>Tên giảng viên</td>
                                 <td>Số lượng đăng ký</td>
                                 <td>Thao tác</td>
-                            </thead>
-                            <tbody>
+                                </thead>
+                                <tbody>
                                 <tr ng-repeat="teacher in joinedTeachers">
                                     <td>{{$index}}</td>
-                                    <td>{{teacher.name}}</td>
+                                    <td><a>{{teacher.name}}</a></td>
                                     <td>{{teacher.actualGuide}}/{{teacher.maxGuide}}</td>
-                                    <td><button class="btn">Đăng ký</button></td>
+                                    <td><button class="btn" ng-click="registerTeacher(teacher.id, joiningWaves[0].id)">Đăng ký</button></td>
                                 </tr>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

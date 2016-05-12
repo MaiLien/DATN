@@ -3,6 +3,7 @@ package datn.service;
 import datn.interfaces.request.AddStudentForProjectWaveRequest;
 import datn.interfaces.request.AddTeacherForProjectWaveRequest;
 import datn.interfaces.request.ProjectWaveRequest;
+import datn.interfaces.request.RegisterTeacherRequest;
 import datn.interfaces.response.*;
 import org.springframework.data.domain.Page;
 
@@ -33,4 +34,8 @@ public interface IProjectWaveService{
     RestApiResponse<ArrayList<ProjectWaveResponse>> getWavesTeacherJoined(String teacherId);
 
     RestApiResponse<ArrayList<TeacherInProjectWaveResponse>> getTeachersWhoDirectingStudentInProjectWave(String studentId, String waveId);
+
+    RestApiResponse<RegisterTeacherResponse> registerTeacher(RegisterTeacherRequest request);
+
+    RestApiResponse<RegisterTeacherResponse> cancelRegisterTeacher(RegisterTeacherRequest request);
 }

@@ -6,6 +6,7 @@ import datn.interfaces.constant.MessageCodeConstant;
 import datn.interfaces.request.AddStudentForProjectWaveRequest;
 import datn.interfaces.request.AddTeacherForProjectWaveRequest;
 import datn.interfaces.request.ProjectWaveRequest;
+import datn.interfaces.request.RegisterTeacherRequest;
 import datn.interfaces.response.*;
 import datn.interfaces.util.ConvertObject;
 import datn.interfaces.util.DateUtil;
@@ -83,7 +84,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     }
 
     @Override
-    public RestApiResponse<ArrayList<TeacherInProjectWaveResponse>> getTeachersOfProjectWave(String id) {//TODO test
+    public RestApiResponse<ArrayList<TeacherInProjectWaveResponse>> getTeachersOfProjectWave(String id) {
         ArrayList<TeacherInProjectWaveResponse> responses = new ArrayList<>();
         ProjectWave projectWave = projectWaveRepository.findOne(id);
         if(projectWave == null)
@@ -105,6 +106,59 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         return new RestApiResponse<>(responses);
     }
 
+    @Override
+    public RestApiResponse<RegisterTeacherResponse> registerTeacher(RegisterTeacherRequest request) {
+        Student student = studentRepository.findOne(request.getStudentId());
+        if(student == null)
+            throw new StudentNotFoundException(request.getStudentId());
+
+        Teacher teacher = teacherRepository.findOne(request.getTeacherId());
+        if(teacher == null)
+            throw new TeacherNotFoundException(request.getTeacherId());
+
+        ProjectWave projectWave = projectWaveRepository.findOne(request.getProjectWaveId());
+        if(projectWave == null)
+            throw new ProjectWaveNotFoundException(request.getProjectWaveId());
+
+        ArrayList<TeacherWave> teacherWave = teacherWaveRepository.findByTeacherAndProjectWave(teacher, projectWave);
+        if(teacherWave.size() > 0)
+            throw new ProjectWaveException(MessageCodeConstant.ERROR_TEACHER_NOT_IN_WAVE, request.getTeacherId(), request.getProjectWaveId());
+
+        Assignment assignment = assignmentRepository.findByStudentAndTeacherAndWave(student, teacher, projectWave);
+        if(assignment != null)
+            throw new AssignmentException(MessageCodeConstant.ERROR_ASSIGNMENT_EXISTED, student.getId(), teacher.getId(), projectWave.getId());
+
+        Assignment newAssignment = new Assignment();
+        newAssignment.setStudent(student);
+        newAssignment.setTeacher(teacher);
+        newAssignment.setProjectWave(projectWave);
+        assignmentRepository.save(assignment);
+
+        return new RestApiResponse<>();
+    }
+
+    @Override
+    public RestApiResponse<RegisterTeacherResponse> cancelRegisterTeacher(RegisterTeacherRequest request) {
+        Student student = studentRepository.findOne(request.getStudentId());
+        if(student == null)
+            throw new StudentNotFoundException(request.getStudentId());
+
+        Teacher teacher = teacherRepository.findOne(request.getTeacherId());
+        if(teacher == null)
+            throw new TeacherNotFoundException(request.getTeacherId());
+
+        ProjectWave projectWave = projectWaveRepository.findOne(request.getProjectWaveId());
+        if(projectWave == null)
+            throw new ProjectWaveNotFoundException(request.getProjectWaveId());
+
+        Assignment assignment = assignmentRepository.findByStudentAndTeacherAndWave(student, teacher, projectWave);
+        if(assignment == null)
+            throw new AssignmentException(MessageCodeConstant.ERROR_ASSIGNMENT_NOT_EXISTED, student.getId(), teacher.getId(), projectWave.getId());
+
+        assignmentRepository.delete(assignment);
+
+        return new RestApiResponse<>();
+    }
 
     private ArrayList<Teacher> getTeacherEntitiesFromTeacherWaves(ArrayList<TeacherWave> teacherWaves){
         ArrayList<Teacher> out = new ArrayList<>();

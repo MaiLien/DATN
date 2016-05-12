@@ -108,3 +108,15 @@ body{
 .strong{
     font-weight: bold !important;
 }
+
+.borderInBox{
+    padding: 30px 19px 25px;
+    margin-left: 3px;
+    margin-right: 8px;
+    margin-bottom: 37px;
+    margin-top: 22px;
+}
+
+.table-middle td {
+    text-align: center;
+}
