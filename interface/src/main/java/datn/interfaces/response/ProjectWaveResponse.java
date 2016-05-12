@@ -16,14 +16,11 @@ public class ProjectWaveResponse {
     private String timeForStudentDefend;
     private String description;
     private int status = 0;
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
+    private boolean done = false;
+    private boolean timeTeacherProposesStudent = false;
+    private boolean timeStudentRegistersTeacher = false;
+    private boolean timeStudentSubmit = false;
+    private boolean timeStudentDefend = false;
 
     public String getId() {
         return id;
@@ -103,5 +100,53 @@ public class ProjectWaveResponse {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+
+    public boolean isTimeTeacherProposesStudent() {
+        return timeTeacherProposesStudent;
+    }
+
+    public void setTimeTeacherProposesStudent(boolean timeTeacherProposesStudent) {
+        this.timeTeacherProposesStudent = timeTeacherProposesStudent;
+    }
+
+    public boolean isTimeStudentRegistersTeacher() {
+        return timeStudentRegistersTeacher;
+    }
+
+    public void setTimeStudentRegistersTeacher(boolean timeStudentRegistersTeacher) {
+        this.timeStudentRegistersTeacher = timeStudentRegistersTeacher;
+    }
+
+    public boolean isTimeStudentSubmit() {
+        return timeStudentSubmit;
+    }
+
+    public void setTimeStudentSubmit(boolean timeStudentSubmit) {
+        this.timeStudentSubmit = timeStudentSubmit;
+    }
+
+    public boolean isTimeStudentDefend() {
+        return timeStudentDefend;
+    }
+
+    public void setTimeStudentDefend(boolean timeStudentDefend) {
+        this.timeStudentDefend = timeStudentDefend;
     }
 }

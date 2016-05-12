@@ -53,7 +53,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     @Autowired
     AssignmentRepository assignmentRepository;
 
-    public RestApiResponse<ProjectWaveResponse> addProjectWave(ProjectWaveRequest request) {
+    public RestApiResponse<ProjectWaveResponse> addProjectWave(ProjectWaveRequest request) {//TODO ProjectWaveResponse
         ProjectWave projectWave = convertProjectWaveRequestToProjectWaveEntity(request);
         ProjectWave entity = projectWaveRepository.save(projectWave);
         addProgressReportsToProjectWave(entity, request.getReportTimes());
@@ -83,7 +83,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         return new RestApiResponse<>(students);
     }
 
-    @Override
+    @Override//TODO ProjectWaveResponse
     public RestApiResponse<ArrayList<TeacherInProjectWaveResponse>> getTeachersOfProjectWave(String id) {
         ArrayList<TeacherInProjectWaveResponse> responses = new ArrayList<>();
         ProjectWave projectWave = projectWaveRepository.findOne(id);
@@ -191,7 +191,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         return out;
     }
 
-    @Override
+    @Override//TODO ProjectWaveResponse
     public RestApiResponse<ArrayList<ProjectWaveResponse>> getAllProjectWave(){
         ArrayList<ProjectWave> projectWaves = (ArrayList<ProjectWave>) projectWaveRepository.findAll();
         ArrayList<ProjectWaveResponse> projectWaveResponses = convertProjectWaveEntitiesToProjectWaveResponses(projectWaves);
@@ -199,7 +199,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         return new RestApiResponse<>(projectWaveResponses);
     }
 
-    @Override
+    @Override//TODO ProjectWaveResponse
     public RestApiResponse<Page<ProjectWaveResponse>> getPageProjectWaves(int pageIndex, int sizeOfPage, String searchInput) {
         PageRequest pageable = new PageRequest(pageIndex, sizeOfPage);
         Page<ProjectWave> projectWavePage = null;
@@ -215,7 +215,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         return  response;
     }
 
-    @Override
+    @Override//TODO ProjectWaveResponse
     public RestApiResponse<ProjectWaveResponse> deleteProjectWave(String projectWaveId) {
         if(projectWaveIsExist(projectWaveId))
             projectWaveRepository.delete(projectWaveId);
@@ -305,30 +305,29 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         return responseRestApiResponse;
     }
 
-    @Override
+    @Override//TODO ProjectWaveResponse
     public RestApiResponse<WavesStudentJoinedResponse> getWavesStudentJoined(String studentId) {
         Student student = studentRepository.findOne(studentId);
-        ArrayList<ProjectWaveResponse> projectWavesJoined;
-        ArrayList<ProjectWaveResponse> projectWavesJoining;
+        ArrayList<ProjectWaveResponse> projectWavesJoined = new ArrayList<>();
+        ArrayList<ProjectWaveResponse> projectWavesJoining = new ArrayList<>();
         if(student == null)
             throw new UserNotFoundException();
         else{
             ArrayList<StudentWave> studentWaves = studentWaveRepository.findByStudent(student);
-            projectWavesJoined = new ArrayList<>();
-            projectWavesJoining = new ArrayList<>();
-            ProjectWave temp;
-            Date currentDate = new Date();
+            ProjectWave tempProjectWave;
+            ProjectWaveResponse projectWaveResponse;
             for(int i = 0; i<studentWaves.size(); i++){
-                temp = studentWaves.get(i).getProjectWave();
-                if(isDateInPeriodTime(currentDate, temp.getStartDay(), temp.getEndDay()))
-                    projectWavesJoining.add(convertProjectWaveEntityToProjectWaveResponse(temp));
-                else projectWavesJoined.add(convertProjectWaveEntityToProjectWaveResponse(temp));
+                tempProjectWave = studentWaves.get(i).getProjectWave();
+                projectWaveResponse = convertProjectWaveEntityToProjectWaveResponse(tempProjectWave);
+                if(projectWaveResponse.isDone())
+                    projectWavesJoined.add(projectWaveResponse);
+                else projectWavesJoining.add(projectWaveResponse);
             }
         }
         return new RestApiResponse<>(new WavesStudentJoinedResponse(projectWavesJoining, projectWavesJoined));
     }
 
-    @Override
+    @Override//TODO ProjectWaveResponse
     public RestApiResponse<ArrayList<ProjectWaveResponse>> getWavesTeacherJoined(String teacherId) {
         Teacher teacher = teacherRepository.findOne(teacherId);
         ArrayList<ProjectWaveResponse> responses;
@@ -346,7 +345,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         return new RestApiResponse<>(responses);
     }
 
-    @Override
+    @Override//TODO ProjectWaveResponse
     public RestApiResponse<ArrayList<TeacherInProjectWaveResponse>> getTeachersWhoDirectingStudentInProjectWave(String studentId, String waveId) {
         Student student = studentRepository.findOne(studentId);
         if(student == null)
@@ -363,7 +362,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         return new RestApiResponse<>(teacherInProjectWaveResponses);
     }
 
-    private ArrayList<TeacherInProjectWaveResponse> getTeachersInProjectWaveResponses(ArrayList<Assignment> assignments) {
+    private ArrayList<TeacherInProjectWaveResponse> getTeachersInProjectWaveResponses(ArrayList<Assignment> assignments) { //TODO ProjectWaveResponse
         ArrayList<TeacherInProjectWaveResponse> responses = new ArrayList<>();
 
         TeacherInProjectWaveResponse teacherResponse;
@@ -406,7 +405,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         return maxGuide;
     }
 
-    public TeacherInProjectWaveResponse convertTeacherEntityToTeacherInProjectWaveResponse(Teacher teacher) {
+    public TeacherInProjectWaveResponse convertTeacherEntityToTeacherInProjectWaveResponse(Teacher teacher) {//TODO ProjectWaveResponse
         TeacherInProjectWaveResponse response = new TeacherInProjectWaveResponse();
 
         response.setId(teacher.getId());
@@ -438,13 +437,13 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
 
         return false;
     }
-
+    //TODO ProjectWaveResponse
     private Page<ProjectWaveResponse> convertProjectWaveEntityPageToProjectWaveResponsePage(Page<ProjectWave> projectWavePage, PageRequest pageable){
         ArrayList<ProjectWaveResponse> projectWaveResponses = convertProjectWaveEntitiesToProjectWaveResponses(new ArrayList<>(projectWavePage.getContent()));
         Page<ProjectWaveResponse> projectWaveResponsePage = new PageImpl<>(projectWaveResponses, pageable, projectWavePage.getTotalElements());
         return projectWaveResponsePage;
     }
-
+    //TODO ProjectWaveResponse
     private ArrayList<ProjectWaveResponse> convertProjectWaveEntitiesToProjectWaveResponses(ArrayList<ProjectWave> entities){
         ArrayList<ProjectWaveResponse> responses = new ArrayList<>();
         ProjectWaveResponse temp;
@@ -455,7 +454,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
 
         return responses;
     }
-
+    //TODO ProjectWaveResponse
     private ProjectWaveResponse convertProjectWaveEntityToProjectWaveResponse(ProjectWave entity){
         ProjectWaveResponse response = new ProjectWaveResponse();
         response.setId(entity.getId());
@@ -463,7 +462,8 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         response.setSemester(entity.getSemester());
         response.setDescription(entity.getDescription());
 
-        if(entity.getEndDay().compareTo(new Date()) >= 0)
+        Date currentDate = new Date();
+        if(entity.getEndDay().compareTo(currentDate) >= 0)
             response.setStatus(1);
 
         response.setStartTimeAndEndTime(getTimeForStudentDefend(entity));
@@ -472,6 +472,27 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         response.setTimeForStudentSubmitProject(getTimeForStudentSubmitProject(entity));
         response.setTimeForStudentDefend(getTimeForStudentStudentDefend(entity));
         response.setReportTimes(getReportTimes(entity));
+
+        if(isDateInPeriodTime(currentDate, entity.getStartDay(), entity.getEndDay()))
+            response.setDone(false);
+        else response.setDone(true);
+
+        if(isDateInPeriodTime(currentDate, entity.getStartTimeForDefendingProject(), entity.getEndTimeForDefendingProject()))
+            response.setTimeStudentDefend(true);
+        else response.setTimeStudentDefend(false);
+
+        if(isDateInPeriodTime(currentDate, entity.getStartTimeForStudentRegisterTeacher(), entity.getEndTimeForStudentRegisterTeacher()))
+            response.setTimeStudentRegistersTeacher(true);
+        else response.setTimeStudentRegistersTeacher(false);
+
+        if(isDateInPeriodTime(currentDate, entity.getStartTimeForStudentSubmitProject(), entity.getEndTimeForStudentSubmitProject()))
+            response.setTimeStudentSubmit(true);
+        else response.setTimeStudentSubmit(false);
+
+        if(isDateInPeriodTime(currentDate, entity.getStartTimeForTeacherProposeStudent(), entity.getEndTimeForTeacherProposeStudent()))
+            response.setTimeTeacherProposesStudent(true);
+        else response.setTimeTeacherProposesStudent(false);
+
         return response;
     }
 
@@ -543,7 +564,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         String out = start + " - " + end;
         return out;
     }
-
+    //TODO ProjectWaveResponse
     private ProjectWaveResponse convertProjectWaveRequestToProjectWaveResponse(ProjectWave entity, ProjectWaveRequest request){
         ProjectWaveResponse response = new ProjectWaveResponse();
         response.setId(entity.getId());

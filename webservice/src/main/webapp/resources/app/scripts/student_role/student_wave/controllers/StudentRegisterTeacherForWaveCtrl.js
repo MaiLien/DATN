@@ -1,26 +1,26 @@
 angular.module('appDATN.student_wave')
     .controller('StudentRegisterTeacherForWave', function ($scope, $state, StudentWaveService, user) {
 
-        $scope.errMessage;
-        $scope.successMessage;
+        //$scope.errMessage;
+        //$scope.successMessage;
 
         //$scope.joinedWaves;
         //$scope.joiningWaves;
         //$scope.joinedTeachers;
         //$scope.teachersWhoStudentRegister;
+        //$scope.isTimeRegisters = false;
 
         $scope.studentId = user.id;
 
         refresh = function(){
             $scope.errMessage = null;
             $scope.successMessage = null;
+            $scope.isTimeRegisters = false;
 
             $scope.joinedWaves = null;
             $scope.joiningWaves = null;
             $scope.joinedTeachers = null;
             $scope.teachersWhoStudentRegister = null;
-
-            $scope.getWavesStudentJoined();
         };
 
         $scope.getTeachersOfProjectWave = function (projectWaveId) {
@@ -77,8 +77,12 @@ angular.module('appDATN.student_wave')
                         $scope.joinedWaves = data.body.projectWavesJoined;
                         $scope.joiningWaves = data.body.projectWavesJoining;
                         if($scope.joiningWaves.length == 1){
-                            $scope.getTeachersOfProjectWave($scope.joiningWaves[0].id);
-                            $scope.getTeachersWhoStudentRegistered($scope.studentId, $scope.joiningWaves[0].id);
+                            var joiningProject = $scope.joiningWaves[0];
+                            $scope.isTimeRegisters = joiningProject.timeStudentRegistersTeacher;
+                            if($scope.isTimeRegisters){
+                                $scope.getTeachersOfProjectWave(joiningProject.id);
+                            }
+                            $scope.getTeachersWhoStudentRegistered($scope.studentId, joiningProject.id);
                         }
                     }
 
@@ -96,6 +100,7 @@ angular.module('appDATN.student_wave')
             var request = $scope.prepareRequestRegisterTeacher(teacherId, projectWaveId);
             StudentWaveService.cancelRegisterTeacher(request)
                 .success(function(data){
+                    $scope.getWavesStudentJoined();
                     var resultCode = data.headers.resultCode;
                     if(resultCode == 0 || resultCode == 1067)
                         $scope.successMessage = "Bạn đã hủy đăng ký thành công";
@@ -119,6 +124,7 @@ angular.module('appDATN.student_wave')
             var request = $scope.prepareRequestRegisterTeacher(teacherId, projectWaveId);
             StudentWaveService.registerTeacher(request)
                 .success(function(data){
+                    $scope.getWavesStudentJoined();
                     var resultCode = data.headers.resultCode;
                     console.log("data.headers.resultCode: " + resultCode);
                     if(resultCode == 0)

@@ -1,6 +1,5 @@
 <div>
     <section class="content">
-
         <div ng-if="joiningWaves.length > 1">
             <div class="alert alert-danger fade in">
                 <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -37,7 +36,7 @@
                         <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         {{errMessage}}
                     </div>
-                    <div class="alert alert-warning fade in" ng-if="teachersWhoStudentRegister == null || teachersWhoStudentRegister.length == 0">
+                    <div class="alert alert-warning fade in" ng-if="teachersWhoStudentRegister.length == 0">
                         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                         <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         Bạn chưa đăng ký giảng viên nào
@@ -60,7 +59,7 @@
                                 <tr ng-repeat="teacher in teachersWhoStudentRegister">
                                     <td><a>{{teacher.name}}</a></td>
                                     <td>{{teacher.actualGuide}}/{{teacher.maxGuide}}</td>
-                                    <td><button class="btn" ng-click="cancelRegisterTeacher(teacher.id, joiningWaves[0].id)">Hủy</button></td>
+                                    <td ng-if="isTimeRegisters"><button class="btn" ng-click="cancelRegisterTeacher(teacher.id, joiningWaves[0].id)">Hủy</button></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -72,33 +71,41 @@
                 <br>
 
                 <div>
-                    <div class="alert alert-warning fade in" ng-if="joinedTeachers.length == 0">
+                    <div class="alert alert-danger fade in" ng-if="!isTimeRegisters">
                         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                         <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        Danh sách giảng viên hướng dẫn đợt Đồ án tốt nghiệp chưa được cập nhật
+                        Đây không phải là thời gian đăng ký giảng viên hướng dẫn
                     </div>
-                    <div ng-if="joinedTeachers.length != 0">
-                        <div>
-                            <h4 class="strong">Danh sách giảng viên tham gia hướng dẫn</h4>
-                            <table class="table table-bordered table-hover table-middle">
-                                <thead>
-                                <td>STT</td>
-                                <td>Tên giảng viên</td>
-                                <td>Số lượng đăng ký</td>
-                                <td>Thao tác</td>
-                                </thead>
-                                <tbody>
-                                <tr ng-repeat="teacher in joinedTeachers">
-                                    <td>{{$index}}</td>
-                                    <td><a>{{teacher.name}}</a></td>
-                                    <td>{{teacher.actualGuide}}/{{teacher.maxGuide}}</td>
-                                    <td><button class="btn" ng-click="registerTeacher(teacher.id, joiningWaves[0].id)">Đăng ký</button></td>
-                                </tr>
-                                </tbody>
-                            </table>
+                    <div>
+                        <div class="alert alert-warning fade in" ng-if="isTimeRegisters && joinedTeachers.length == 0">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            Danh sách giảng viên hướng dẫn đợt Đồ án tốt nghiệp chưa được cập nhật
+                        </div>
+                        <div ng-if="isTimeRegisters && joinedTeachers.length != 0">
+                            <div>
+                                <h4 class="strong">Danh sách giảng viên tham gia hướng dẫn</h4>
+                                <table class="table table-bordered table-hover table-middle">
+                                    <thead>
+                                    <td>STT</td>
+                                    <td>Tên giảng viên</td>
+                                    <td>Số lượng đăng ký</td>
+                                    <td>Thao tác</td>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="teacher in joinedTeachers">
+                                        <td>{{$index}}</td>
+                                        <td><a>{{teacher.name}}</a></td>
+                                        <td>{{teacher.actualGuide}}/{{teacher.maxGuide}}</td>
+                                        <td ng-if="isTimeRegisters"><button class="btn" ng-click="registerTeacher(teacher.id, joiningWaves[0].id)">Đăng ký</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
