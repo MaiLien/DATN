@@ -20,10 +20,9 @@ angular.module('appDATN.student')
                     }
                 }
             })
-            .state('student_role.waves_student', {
+            .state('student_role.student_session', {
                 parent: 'student_role',
                 abstract: true,
-                url: '/wave/detail',
                 resolve:{
                     user: function ($q, $state, AuthService) {
                         var deferred = $q.defer();

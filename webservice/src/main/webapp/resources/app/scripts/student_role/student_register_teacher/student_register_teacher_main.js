@@ -4,7 +4,7 @@ angular.module('appDATN.student_wave')
     .config(function ($stateProvider) {
         $stateProvider
             .state('student_role.student_register_teacher_for_wave', {
-                parent: 'student_role.waves_student',
+                parent: 'student_role.student_session',
                 url: '/wave/registerTeacher',
                 views: {
                     content_view: {

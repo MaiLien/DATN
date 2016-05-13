@@ -94,7 +94,7 @@
                                     </thead>
                                     <tbody>
                                     <tr ng-repeat="teacher in joinedTeachers">
-                                        <td>{{$index}}</td>
+                                        <td>{{$index + 1}}</td>
                                         <td><a>{{teacher.name}}</a></td>
                                         <td>{{teacher.actualGuide}}/{{teacher.maxGuide}}</td>
                                         <td  ng-if="isTimeRegisters"><button class="btn" ng-click="registerTeacher(teacher.id, joiningWaves[0].id)">Đăng ký</button></td>

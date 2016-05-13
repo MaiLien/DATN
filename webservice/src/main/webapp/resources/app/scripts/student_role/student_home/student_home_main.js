@@ -4,7 +4,7 @@ angular.module('appDATN.student')
     .config(function ($stateProvider) {
         $stateProvider
             .state('student_role.home', {
-                parent: 'student_role',
+                parent: 'student_role.student_session',
                 url: '/home',
                 views: {
                     content_view: {

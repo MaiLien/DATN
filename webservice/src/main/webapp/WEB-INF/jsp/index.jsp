@@ -158,6 +158,10 @@
 <script src="/resources/app/scripts/student_role/student_project_wave_info/services/StudentWaveInfoService.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/student_role/student_project_wave_info/controllers/StudentWavesInfoCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
+<script src="/resources/app/scripts/student_role/student_report/student_report.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/student_role/student_report/services/StudentReportService.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/student_role/student_report/controllers/StudentReportCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+
 <%--Teacher role--%>
 <script src="/resources/app/scripts/teacher_role/teacher_main.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
