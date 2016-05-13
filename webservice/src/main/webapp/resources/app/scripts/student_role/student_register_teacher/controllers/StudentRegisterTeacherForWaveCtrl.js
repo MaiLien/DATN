@@ -1,5 +1,5 @@
 angular.module('appDATN.student_wave')
-    .controller('StudentRegisterTeacherForWave', function ($scope, $state, StudentWaveService, user) {
+    .controller('StudentRegisterTeacherForWave', function ($scope, $state, StudentRegisterTeacherService, user) {
 
         //$scope.errMessage;
         //$scope.successMessage;
@@ -24,7 +24,7 @@ angular.module('appDATN.student_wave')
         };
 
         $scope.getTeachersOfProjectWave = function (projectWaveId) {
-            StudentWaveService.getTeachersOfProjectWave(projectWaveId)
+            StudentRegisterTeacherService.getTeachersOfProjectWave(projectWaveId)
                 .success(function(data){
                     var resultCode = data.headers.resultCode;
 
@@ -45,7 +45,7 @@ angular.module('appDATN.student_wave')
         };
 
         $scope.getTeachersWhoStudentRegistered = function(studentId, waveId){
-            StudentWaveService.getTeachersWhoStudentRegistered(studentId, waveId)
+            StudentRegisterTeacherService.getTeachersWhoStudentRegistered(studentId, waveId)
                 .success(function(data){
                     var resultCode = data.headers.resultCode;
 
@@ -66,7 +66,7 @@ angular.module('appDATN.student_wave')
         };
 
         $scope.getWavesStudentJoined = function () {
-            StudentWaveService.getWavesStudentJoined($scope.studentId)
+            StudentRegisterTeacherService.getWavesStudentJoined($scope.studentId)
                 .success(function (data) {
                     var resultCode = data.headers.resultCode;
 
@@ -79,9 +79,7 @@ angular.module('appDATN.student_wave')
                         if($scope.joiningWaves.length == 1){
                             var joiningProject = $scope.joiningWaves[0];
                             $scope.isTimeRegisters = joiningProject.timeStudentRegistersTeacher;
-                            if($scope.isTimeRegisters){
-                                $scope.getTeachersOfProjectWave(joiningProject.id);
-                            }
+                            $scope.getTeachersOfProjectWave(joiningProject.id);
                             $scope.getTeachersWhoStudentRegistered($scope.studentId, joiningProject.id);
                         }
                     }
@@ -98,7 +96,7 @@ angular.module('appDATN.student_wave')
         $scope.cancelRegisterTeacher = function (teacherId, projectWaveId) {
             refresh();
             var request = $scope.prepareRequestRegisterTeacher(teacherId, projectWaveId);
-            StudentWaveService.cancelRegisterTeacher(request)
+            StudentRegisterTeacherService.cancelRegisterTeacher(request)
                 .success(function(data){
                     $scope.getWavesStudentJoined();
                     var resultCode = data.headers.resultCode;
@@ -112,6 +110,9 @@ angular.module('appDATN.student_wave')
                         $scope.errMessage = "Giảng viên bạn đăng ký không tồn tại";
                     else if(resultCode == 1061)
                         $state.go('error');
+                    else if(resultCode == 1072){
+                        isTimeRegisters = false;
+                    }
                     else $scope.errMessage = "Lỗi hệ thống";
                 })
                 .error(function(error){
@@ -122,7 +123,7 @@ angular.module('appDATN.student_wave')
         $scope.registerTeacher = function (teacherId, projectWaveId) {
             refresh();
             var request = $scope.prepareRequestRegisterTeacher(teacherId, projectWaveId);
-            StudentWaveService.registerTeacher(request)
+            StudentRegisterTeacherService.registerTeacher(request)
                 .success(function(data){
                     $scope.getWavesStudentJoined();
                     var resultCode = data.headers.resultCode;
@@ -143,6 +144,9 @@ angular.module('appDATN.student_wave')
                         $scope.successMessage = "Bạn đã đăng ký giảng viên này";
                     else if(resultCode == 1071)
                         $scope.errMessage = "Bạn không được phép đăng ký nhiều hơn 1 giảng viên hướng dẫn";
+                    else if(resultCode == 1072){
+                        isTimeRegisters = false;
+                    }
                     else $scope.errMessage = "Lỗi hệ thống";
                 })
                 .error(function(error){

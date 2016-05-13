@@ -150,11 +150,13 @@
 <script src="/resources/app/scripts/student_role/student_home/controllers/StudentInfoCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/student_role/student_home/services/StudentInfoService.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
-<script src="/resources/app/scripts/student_role/student_wave/student_wave_main.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/student_role/student_wave/services/StudentWaveService.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/student_role/student_wave/controllers/InfoWavesStudentJoinedCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/student_role/student_wave/controllers/StudentRegisterTeacherForWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/student_role/student_register_teacher/student_register_teacher_main.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/student_role/student_register_teacher/services/StudentRegisterTeacherService.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/student_role/student_register_teacher/controllers/StudentRegisterTeacherForWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
+<script src="/resources/app/scripts/student_role/student_project_wave_info/student_wave_info_main.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/student_role/student_project_wave_info/services/StudentWaveInfoService.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/student_role/student_project_wave_info/controllers/StudentWavesInfoCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
 <%--Teacher role--%>
 <script src="/resources/app/scripts/teacher_role/teacher_main.js" charset="utf-8" URIEncoding="UTF-8"></script>

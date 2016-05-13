@@ -120,7 +120,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         if(projectWave == null)
             throw new ProjectWaveNotFoundException(request.getProjectWaveId());
 
-        if(isDateInPeriodTime(new Date(), projectWave.getStartTimeForStudentRegisterTeacher(), projectWave.getEndTimeForStudentRegisterTeacher()))
+        if(!isDateInPeriodTime(new Date(), projectWave.getStartTimeForStudentRegisterTeacher(), projectWave.getEndTimeForStudentRegisterTeacher()))
             throw new ProjectWaveException(MessageCodeConstant.ERROR_NOT_TIME_TO_REGISTER_TEACHER, request.getProjectWaveId());
 
         ArrayList<TeacherWave> teacherWave = teacherWaveRepository.findByTeacherAndProjectWave(teacher, projectWave);
@@ -158,7 +158,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         if(projectWave == null)
             throw new ProjectWaveNotFoundException(request.getProjectWaveId());
 
-        if(isDateInPeriodTime(new Date(), projectWave.getStartTimeForStudentRegisterTeacher(), projectWave.getEndTimeForStudentRegisterTeacher()))
+        if(!isDateInPeriodTime(new Date(), projectWave.getStartTimeForStudentRegisterTeacher(), projectWave.getEndTimeForStudentRegisterTeacher()))
             throw new ProjectWaveException(MessageCodeConstant.ERROR_NOT_TIME_TO_REGISTER_TEACHER, request.getProjectWaveId());
 
         Assignment assignment = assignmentRepository.findByStudentAndTeacherAndWave(student, teacher, projectWave);
