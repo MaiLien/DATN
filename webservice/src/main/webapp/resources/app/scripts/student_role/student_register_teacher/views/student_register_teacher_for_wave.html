@@ -58,13 +58,13 @@
                                 <thead>
                                 <td>Tên giảng viên</td>
                                 <td>Số lượng đăng ký</td>
-                                <td>Thao tác</td>
+                                <td  ng-if="isTimeRegisters">Thao tác</td>
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="teacher in teachersWhoStudentRegister">
                                     <td><a>{{teacher.name}}</a></td>
                                     <td>{{teacher.actualGuide}}/{{teacher.maxGuide}}</td>
-                                    <td><button ng-disabled="!isTimeRegisters" class="btn" ng-click="cancelRegisterTeacher(teacher.id, joiningWaves[0].id)">Hủy</button></td>
+                                    <td ng-if="isTimeRegisters"><button class="btn" ng-click="cancelRegisterTeacher(teacher.id, joiningWaves[0].id)">Hủy</button></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -90,14 +90,14 @@
                                     <td>STT</td>
                                     <td>Tên giảng viên</td>
                                     <td>Số lượng đăng ký</td>
-                                    <td>Thao tác</td>
+                                    <td  ng-if="isTimeRegisters">Thao tác</td>
                                     </thead>
                                     <tbody>
                                     <tr ng-repeat="teacher in joinedTeachers">
                                         <td>{{$index}}</td>
                                         <td><a>{{teacher.name}}</a></td>
                                         <td>{{teacher.actualGuide}}/{{teacher.maxGuide}}</td>
-                                        <td><button ng-disabled="!isTimeRegisters" class="btn" ng-click="registerTeacher(teacher.id, joiningWaves[0].id)">Đăng ký</button></td>
+                                        <td  ng-if="isTimeRegisters"><button class="btn" ng-click="registerTeacher(teacher.id, joiningWaves[0].id)">Đăng ký</button></td>
                                     </tr>
                                     </tbody>
                                 </table>
