@@ -27,5 +27,6 @@ public class MessageCodeConstant {
     public static final String ERROR_TEACHER_NOT_FOUND = "1069";
     public static final String ERROR_TEACHER_NOT_IN_WAVE = "1070";
     public static final String ERROR_STUDENT_CAN_NOT_REGISTER_MORE_ONE_TEACHER_IN_SAME_WAVE = "1071";
+    public static final String ERROR_NOT_TIME_TO_REGISTER_TEACHER = "1072";
 
 }
