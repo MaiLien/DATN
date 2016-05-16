@@ -120,7 +120,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         if(projectWave == null)
             throw new ProjectWaveNotFoundException(request.getProjectWaveId());
 
-        if(!isDateInPeriodTime(new Date(), projectWave.getStartTimeForStudentRegisterTeacher(), projectWave.getEndTimeForStudentRegisterTeacher()))
+        if(!DateUtil.isDateInPeriodTime(new Date(), projectWave.getStartTimeForStudentRegisterTeacher(), projectWave.getEndTimeForStudentRegisterTeacher()))
             throw new ProjectWaveException(MessageCodeConstant.ERROR_NOT_TIME_TO_REGISTER_TEACHER, request.getProjectWaveId());
 
         ArrayList<TeacherWave> teacherWave = teacherWaveRepository.findByTeacherAndProjectWave(teacher, projectWave);
@@ -158,7 +158,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         if(projectWave == null)
             throw new ProjectWaveNotFoundException(request.getProjectWaveId());
 
-        if(!isDateInPeriodTime(new Date(), projectWave.getStartTimeForStudentRegisterTeacher(), projectWave.getEndTimeForStudentRegisterTeacher()))
+        if(!DateUtil.isDateInPeriodTime(new Date(), projectWave.getStartTimeForStudentRegisterTeacher(), projectWave.getEndTimeForStudentRegisterTeacher()))
             throw new ProjectWaveException(MessageCodeConstant.ERROR_NOT_TIME_TO_REGISTER_TEACHER, request.getProjectWaveId());
 
         Assignment assignment = assignmentRepository.findByStudentAndTeacherAndWave(student, teacher, projectWave);
@@ -267,19 +267,11 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     }
 
     private boolean checkProjectWaveInSameTime(ProjectWave wave, ProjectWave otherWave) {
-        if(isDateInPeriodTime(wave.getStartDay(), otherWave.getStartDay(), otherWave.getEndDay()) || isDateInPeriodTime(wave.getEndDay(), otherWave.getStartDay(), otherWave.getEndDay()))
+        if(DateUtil.isDateInPeriodTime(wave.getStartDay(), otherWave.getStartDay(), otherWave.getEndDay()) || DateUtil.isDateInPeriodTime(wave.getEndDay(), otherWave.getStartDay(), otherWave.getEndDay()))
             return true;
 
-        if(isDateInPeriodTime(otherWave.getStartDay(), wave.getStartDay(), wave.getEndDay()) || isDateInPeriodTime(otherWave.getEndDay(), wave.getStartDay(), wave.getEndDay()))
+        if(DateUtil.isDateInPeriodTime(otherWave.getStartDay(), wave.getStartDay(), wave.getEndDay()) || DateUtil.isDateInPeriodTime(otherWave.getEndDay(), wave.getStartDay(), wave.getEndDay()))
             return true;
-
-        return false;
-    }
-
-    private boolean isDateInPeriodTime(Date date, Date startDate, Date endDate){
-        if(date.compareTo(startDate)>=0 && date.compareTo(endDate)<=0){
-            return true;
-        }
 
         return false;
     }
@@ -461,7 +453,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         return responses;
     }
 
-    private ProjectWaveResponse convertProjectWaveEntityToProjectWaveResponse(ProjectWave entity){
+    public ProjectWaveResponse convertProjectWaveEntityToProjectWaveResponse(ProjectWave entity){
         ProjectWaveResponse response = new ProjectWaveResponse();
         response.setId(entity.getId());
         response.setSchoolYear(entity.getSchoolYear());
@@ -479,23 +471,23 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         response.setTimeForStudentDefend(getTimeForStudentStudentDefend(entity));
         response.setReportTimes(getReportTimes(entity));
 
-        if(isDateInPeriodTime(currentDate, entity.getStartDay(), entity.getEndDay()))
+        if(DateUtil.isDateInPeriodTime(currentDate, entity.getStartDay(), entity.getEndDay()))
             response.setDone(false);
         else response.setDone(true);
 
-        if(isDateInPeriodTime(currentDate, entity.getStartTimeForDefendingProject(), entity.getEndTimeForDefendingProject()))
+        if(DateUtil.isDateInPeriodTime(currentDate, entity.getStartTimeForDefendingProject(), entity.getEndTimeForDefendingProject()))
             response.setTimeStudentDefend(true);
         else response.setTimeStudentDefend(false);
 
-        if(isDateInPeriodTime(currentDate, entity.getStartTimeForStudentRegisterTeacher(), entity.getEndTimeForStudentRegisterTeacher()))
+        if(DateUtil.isDateInPeriodTime(currentDate, entity.getStartTimeForStudentRegisterTeacher(), entity.getEndTimeForStudentRegisterTeacher()))
             response.setTimeStudentRegistersTeacher(true);
         else response.setTimeStudentRegistersTeacher(false);
 
-        if(isDateInPeriodTime(currentDate, entity.getStartTimeForStudentSubmitProject(), entity.getEndTimeForStudentSubmitProject()))
+        if(DateUtil.isDateInPeriodTime(currentDate, entity.getStartTimeForStudentSubmitProject(), entity.getEndTimeForStudentSubmitProject()))
             response.setTimeStudentSubmit(true);
         else response.setTimeStudentSubmit(false);
 
-        if(isDateInPeriodTime(currentDate, entity.getStartTimeForTeacherProposeStudent(), entity.getEndTimeForTeacherProposeStudent()))
+        if(DateUtil.isDateInPeriodTime(currentDate, entity.getStartTimeForTeacherProposeStudent(), entity.getEndTimeForTeacherProposeStudent()))
             response.setTimeTeacherProposesStudent(true);
         else response.setTimeTeacherProposesStudent(false);
 

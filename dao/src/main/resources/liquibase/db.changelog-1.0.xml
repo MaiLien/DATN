@@ -149,7 +149,7 @@
             <column name="created_date" type="TIMESTAMP"/>
             <column name="student_opinion" type="VARCHAR(36)"/>
             <column name="teacher_opinion" type="VARCHAR(36)"/>
-            <column name="status" type="VARCHAR(45)"/>
+            <column name="status" type="INT(11)"/>
         </createTable>
     </changeSet>
     <changeSet author="lienhtm (generated)" id="1456905020428-12">

@@ -22,7 +22,7 @@ public class StudentReport implements Serializable {
 	@Column(name="created_date")
 	private Timestamp createdDate;
 
-	private String status;
+	private int status;// 0: Nhap , 1: Da nop
 
 	@Column(name="student_opinion")
 	private String studentOpinion;
@@ -58,11 +58,11 @@ public class StudentReport implements Serializable {
 		this.createdDate = createdDate;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

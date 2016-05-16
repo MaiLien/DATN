@@ -60,4 +60,12 @@ public class DateUtil {
         return  simpleDateFormat.format(date);
     }
 
+    public static boolean isDateInPeriodTime(Date date, Date startDate, Date endDate){
+        if(date.compareTo(startDate)>=0 && date.compareTo(endDate)<=0){
+            return true;
+        }
+
+        return false;
+    }
+
 }
