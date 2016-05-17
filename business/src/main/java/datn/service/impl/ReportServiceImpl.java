@@ -4,6 +4,7 @@ import datn.dao.entity.*;
 import datn.dao.repository.*;
 import datn.interfaces.response.*;
 import datn.interfaces.util.ConvertObject;
+import datn.interfaces.util.DateUtil;
 import datn.service.IProjectWaveService;
 import datn.service.IReportService;
 import datn.service.exceptions.ProjectWaveNotFoundException;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class ReportServiceImpl implements IReportService {
@@ -48,27 +50,55 @@ public class ReportServiceImpl implements IReportService {
             throw new ProjectWaveNotFoundException(projectWaveId);
         else response.setProjectWave(getProjectWaveResponse(projectWave));
 
+        ArrayList<ReportResponse> reportResponses = new ArrayList<>();
+
+        StudentReport studentReport;
+
+        ArrayList<StudentReportDetail> studentReportDetails;
+        StudentReportDetail studentReportDetail;
+
+        ReportResponse reportResponse;
+        ArrayList<ReportDetailResponse> reportDetailResponses;
+        ReportDetailResponse reportDetailResponse;
+
         ArrayList<Report> reports = reportRepository.findByProjectWave(projectWave);
         Report report;
-        StudentReport studentReport;
-        StudentReportDetail studentReportDetail;
-        ArrayList<ReportResponse> reportResponses = new ArrayList<>();
-        ReportResponse reportResponse;
-        ReportDetailResponse reportDetailResponse;
         for (int i =0; i<reports.size(); i++){
             report = reports.get(i);
+
+            reportResponse = new ReportResponse();
+            String start = DateUtil.convertDateTimeToString(report.getStartTime());
+            String end = DateUtil.convertDateTimeToString(report.getEndTime());
+            reportResponse.setTimeSubmitReportString(start + " - "+ end);
+            reportResponse.setTimeSubmitReport(DateUtil.isDateInPeriodTime(new Date(), report.getStartTime(), report.getEndTime()));
+            reportResponse.setOrdinal(report.getOrdinal());
+
             studentReport = studentReportRepository.findByStudentAndReport(student, report);
             if(studentReport != null){
-                reportResponse = new ReportResponse();
-//                reportResponse.setTimeSubmitReportString();
-                studentReportDetail = studentReportDetailRepository.findByStudentReport(studentReport);
+                reportResponse.setId(studentReport.getId());
+                reportResponse.setStatus(studentReport.getStatus());
+                reportResponse.setCreatedDate(DateUtil.convertDateTimeToString(studentReport.getCreatedDate()));
+                reportResponse.setStudentOpinion(studentReport.getStudentOpinion());
+                reportResponse.setTeacherOpinion(studentReport.getTeacherOpinion());
+                studentReportDetails = studentReportDetailRepository.findByStudentReport(studentReport);
 
-                reportResponses.add(reportResponse);
+                reportDetailResponses = new ArrayList<>();
+                for(int j = 0; j < studentReportDetails.size(); j++){
+                    studentReportDetail = studentReportDetails.get(j);
+                    reportDetailResponse = new ReportDetailResponse();
+                    reportDetailResponse.setStartTime(DateUtil.convertDateTimeToString(studentReportDetail.getStartTime()));
+                    reportDetailResponse.setEndTime(DateUtil.convertDateTimeToString(studentReportDetail.getEndTime()));
+                    reportDetailResponse.setWorkContent(studentReportDetail.getWorkContent());
+                    reportDetailResponse.setNote(studentReportDetail.getNote());
+                    reportDetailResponses.add(reportDetailResponse);
+                }
+                reportResponse.setReportDetails(reportDetailResponses);
             }
+            reportResponses.add(reportResponse);
         }
         response.setReports(reportResponses);
 
-        return null;
+        return new RestApiResponse<>(response);
     }
 
     private ProjectWaveResponse getProjectWaveResponse(ProjectWave projectWave) {

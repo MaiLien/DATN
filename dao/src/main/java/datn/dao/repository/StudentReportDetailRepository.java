@@ -6,9 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.ArrayList;
+
 public interface StudentReportDetailRepository extends JpaRepository <StudentReportDetail, String>{
 
     @Query("select st from StudentReportDetail st where (st.studentReport=:studentReport)")
-    StudentReportDetail findByStudentReport(@Param("studentReport")StudentReport studentReport);
+    ArrayList<StudentReportDetail> findByStudentReport(@Param("studentReport")StudentReport studentReport);
 
 }

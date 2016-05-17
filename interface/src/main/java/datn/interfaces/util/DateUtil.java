@@ -7,9 +7,10 @@ import java.util.Date;
 
 public class DateUtil {
 
-    private static String format = "dd/MM/yyyy";
+    private static String dateFormat = "dd/MM/yyyy";
+    private static DateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
 
     public static boolean isFormatDate(String dateInputString) {
         simpleDateFormat.setLenient(false);
@@ -44,7 +45,7 @@ public class DateUtil {
     }
 
     public static Date convertStringToDate(String dateString) {
-        DateFormat df = new SimpleDateFormat(format);
+        DateFormat df = new SimpleDateFormat(dateFormat);
         Date date = null;
         try {
             date = df.parse(dateString);
@@ -58,6 +59,10 @@ public class DateUtil {
         if(date == null)
             return "";
         return  simpleDateFormat.format(date);
+    }
+
+    public static String convertDateTimeToString(Date date){
+        return dateTimeFormat.format(date);
     }
 
     public static boolean isDateInPeriodTime(Date date, Date startDate, Date endDate){

@@ -5,11 +5,11 @@ import java.util.UUID;
 
 public class ReportResponse {
 
-    private String id = UUID.randomUUID().toString();
+    private String id;//id student report
     private boolean timeSubmitReport;
     private String timeSubmitReportString;
     private int ordinal;
-    private int status;
+    private int status;//0 : chua nop, 1:nhap, 2 da nop
     private String createdDate;
     private String studentOpinion;
     private String teacherOpinion;
