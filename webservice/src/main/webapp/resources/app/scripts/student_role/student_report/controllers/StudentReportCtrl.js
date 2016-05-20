@@ -1,5 +1,5 @@
 angular.module('appDATN.student_wave')
-    .controller('StudentReportCtrl', function ($scope, $state, StudentReportService, user) {
+    .controller('StudentReportCtrl', function ($scope, $state, $mdMedia, $mdDialog, StudentReportService, user) {
 
         $scope.studentId = user.id;
 
@@ -43,11 +43,22 @@ angular.module('appDATN.student_wave')
         $scope.getStudentReportsOfWave = function(studentId, projectWaveId){
             StudentReportService.getStudentReportsOfWave(studentId, projectWaveId)
                 .success(function (data) {
-
+                    if(data.headers.resultCode == 1054){
+                        $state.go('login');
+                    }
+                    else{
+                        $scope.student = data.body.student;
+                        $scope.projectWave = data.body.projectWave;
+                        $scope.reports = data.body.reports;
+                    }
                 })
                 .error(function (error) {
-
+                    $state.go('error');
                 })
+        };
+
+        $scope.setViewingReport = function (report) {
+            $scope.viewing_report = report;
         };
 
         function load() {
