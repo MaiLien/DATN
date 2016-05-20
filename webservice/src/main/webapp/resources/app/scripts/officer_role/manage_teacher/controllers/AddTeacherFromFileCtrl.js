@@ -1,5 +1,5 @@
 angular.module('appDATN.officer_teacher')
-    .controller('AddTeacherFromFileCtrl', function ($scope, $timeout, TeacherService) {
+    .controller('AddTeacherFromFileCtrl', function ($scope, $timeout, $state, TeacherService) {
 
         $scope.successItems = [];
         $scope.failItems = [];
@@ -55,11 +55,16 @@ angular.module('appDATN.officer_teacher')
             $scope.resetData();
             TeacherService.addTeacherFromFile(file)
                 .then(function (response) {
-                    console.log(response);
-                    $scope.successItems = response.data.body.successItems;
-                    $scope.failItems = response.data.body.failItems;
-                    $scope.totalItem = response.data.body.totalItem;
-                    $scope.setValuePaging();
+                    console.log("response.data.headers.resultCode: " + response.data.headers.resultCode);
+                    if(response.data.headers.resultCode == 1054){
+                        $state.go('login');
+                    }
+                    else{
+                        $scope.successItems = response.data.body.successItems;
+                        $scope.failItems = response.data.body.failItems;
+                        $scope.totalItem = response.data.body.totalItem;
+                        $scope.setValuePaging();
+                    }
                 }, function (response) {
                     if (response.status != 200)
                         $scope.errMessage = "Lỗi hệ thống";

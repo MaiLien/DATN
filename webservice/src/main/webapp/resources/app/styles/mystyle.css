@@ -120,3 +120,7 @@ body{
 .table-middle td {
     text-align: center;
 }
+
+.login_div{
+    min-height: 100vh;
+}

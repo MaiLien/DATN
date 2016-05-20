@@ -14,6 +14,9 @@ angular.module('appDATN.common')
                     },
                     js_imported: {
                         templateUrl: '/resources/app/scripts/authenticate/views/_js_imported.html'
+                    },
+                    footer_view:{
+                        templateUrl: '/resources/app/scripts/common/views/_footer.html'
                     }
                 }
             })
