@@ -1,4 +1,4 @@
-angular.module('appDATN.student')
+angular.module('appDATN.teacher')
     .controller('TeacherInfoCtrl', function ($scope, $state, TeacherInfoService, AuthService) {
 
         $scope.teacher;
