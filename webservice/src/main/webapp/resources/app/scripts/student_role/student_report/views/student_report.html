@@ -71,6 +71,115 @@
                 </div>
             </div>
 
+            <div class="box box-primary">
+                <div class="box-header" style="text-align: center">
+                    <h3 class="strong">Báo cáo tiến độ đợt {{viewing_report.ordinal}}</h3>
+                </div>
+                <div class="box-body">
+                    <form name="reportForm" novalidate>
+
+                        <!-- topic-->
+                        <div class="form-group">
+                            <label class="control-label"><i class="fa fa-book margin-r-5"></i>Tên đề tài : </label>
+                            <br>
+                            This is a nonstandard attribute supported by WebKit on iOS (therefore nearly all browsers running on iOS, including Safari, Firefox, and Chrome) which controls whether and how
+                        </div>
+
+                        <!-- Progress-->
+                        <div class="form-group">
+                            <label class="control-label"><i class="fa fa-pencil margin-r-5"></i>Tiến độ thực hiện đề tài</label>
+                            <div>
+                                <div>
+                                    <link rel="stylesheet" href="/resources/bower_components/bootstrap/dist/css/bootstrap.css">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 25%;">Thời gian</th>
+                                                <th style="width: 55%;">Nội dung công việc</th>
+                                                <th>Ghi chú</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Column content</td>
+                                                <td>Column contentColumn conteColumn contentColumn contentColumn contentColumn contentntColumn contentColumn contentColumn contentColumn contentColumn contentColumn content</td>
+                                                <td>Column content</td>
+                                                <td><button class="btn">Xóa</button></td>
+                                            </tr>
+                                            <tr ng-repeat="item in viewing_report.reportDetails track by $index">
+                                                <td>
+                                                    reportDetails
+                                                </td>
+                                                <td>
+                                                    DetailsreportDetailsreportDetailsreportDetailsDetDetailsreportDetailsreportDetailsreportDetailsDetailsreportDetailsreportDetailsreportDetails
+                                                </td>
+                                                <td>
+                                                    {{item.note}}reportDetailsreportDetails
+                                                </td>
+                                                <td><button class="btn">Xóa</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="input-group"  style="width: 100%;">
+                                                        <textarea ng-model="reportDetail.time"
+                                                                  type="text"
+                                                                  style="padding: 0px"
+                                                                  class="form-control"
+                                                                  name="time"></textarea>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-group" style="width: 100%;">
+                                                        <textarea ng-model="reportDetail.content"
+                                                                  type="text"
+                                                                  style="padding: 0px"
+                                                                  class="form-control"
+                                                                  name="content"></textarea>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-group" style="width: 100%;">
+                                                        <textarea ng-model="reportDetail.note"
+                                                                  type="text"
+                                                                  style="padding: 0px;"
+                                                                  class="form-control"
+                                                                  name="note"></textarea>
+                                                    </div>
+                                                </td>
+                                                <td><button class="btn">Thêm</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- -->
+                        <div class="form-group">
+                            <label class="control-label"><i class="fa fa-pencil margin-r-5"></i>Nhận xét khối lượng công việc đã thực hiện được theo đề cương : </label>
+                            <br>
+                            <input class="form-control" style="width: 100%;" value="50%">
+                        </div>
+
+                        <!-- Student opinion-->
+                        <div class="form-group">
+                            <label class="control-label"><i class="fa fa-pencil margin-r-5"></i>Ý kiến của sinh viên : </label>
+                            <br>
+                            <textarea class="form-control" style="width: 100%;"></textarea>
+                        </div>
+
+                        <!-- Teacher opinion-->
+                        <div class="form-group">
+                            <label class="control-label"><i class="fa fa-pencil margin-r-5"></i>Ý kiến của giảng viên : </label>
+                            <br>
+                            <textarea class="form-control" style="width: 100%;"></textarea>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
         </div>
 
     </section>

@@ -130,6 +130,6 @@ body{
     margin-right: 30px;
 }
 
-table td{
-    white-space: nowrap;
+table td {
+    white-space: normal;
 }
