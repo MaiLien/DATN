@@ -150,6 +150,10 @@
 <script src="/resources/app/scripts/student_role/student_home/controllers/StudentInfoCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/student_role/student_home/services/StudentInfoService.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
+<script src="/resources/app/scripts/student_role/student_wave_research_topic/student_wave_research_topic_main.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/student_role/student_wave_research_topic/services/StudentResearchTopicService.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/student_role/student_wave_research_topic/controllers/StudentResearchTopicCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+
 <script src="/resources/app/scripts/student_role/student_register_teacher/student_register_teacher_main.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/student_role/student_register_teacher/services/StudentRegisterTeacherService.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/student_role/student_register_teacher/controllers/StudentRegisterTeacherForWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
@@ -158,7 +162,7 @@
 <script src="/resources/app/scripts/student_role/student_project_wave_info/services/StudentWaveInfoService.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/student_role/student_project_wave_info/controllers/StudentWavesInfoCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
-<script src="/resources/app/scripts/student_role/student_report/student_report.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/student_role/student_report/student_report_main.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/student_role/student_report/services/StudentReportService.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/student_role/student_report/controllers/StudentReportCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
