@@ -1,0 +1,97 @@
+<div>
+    <section class="content">
+        <div class="box box-primary" ng-if="joinedWaves.length != 0">
+            <div class="box-header" style="text-align: center">
+                <b><h3 class="strong">Danh sách đợt ĐATN</h3></b>
+                <div class="row">
+                    <div class="">
+                        <form class="form-inline" role="form">
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option>Đang hoạt động</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                </select>
+                                <input class="form-control" placeholder="Năm học">
+                                <button class="btn btn-primary">Tìm kiếm</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="box-body">
+                <div style="overflow:auto">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Năm học</th>
+                            <th>Học kỳ</th>
+                            <th>Thời gian bắt đầu và kết thúc</th>
+                            <th>Tình trạng</th>
+                            <td></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>2013 - 2014</td>
+                            <td>Học kỳ 1</td>
+                            <td>10/09/2013 - 15/01/2014</td>
+                            <td>Đã kết thúc</td>
+                            <td><a>Xem chi tiết</a></td>
+                        </tr>
+                        <tr>
+                            <td>2014 - 2015</td>
+                            <td>Học kỳ 1</td>
+                            <td>10/09/2014 - 15/01/2015</td>
+                            <td>Đã kết thúc</td>
+                            <td><a>Xem chi tiết</a></td>
+                        </tr>
+                        <tr>
+                            <td>2015 - 2016</td>
+                            <td>Học kỳ 1</td>
+                            <td>10/09/2015 - 15/01/2016</td>
+                            <td>Đã kết thúc</td>
+                            <td><a>Xem chi tiết</a></td>
+                        </tr>
+                        <tr>
+                            <td>2015 - 2016</td>
+                            <td>Học kỳ 2</td>
+                            <td>20/01/2015 - 10/06/2016</td>
+                            <td>Đã kết thúc</td>
+                            <td><a>Xem chi tiết</a></td>
+                        </tr>
+                        <tr>
+                            <td>2013 - 2014</td>
+                            <td>Học kỳ 1</td>
+                            <td>10/09/2013 - 15/01/2014</td>
+                            <td>Đang diễn ra</td>
+                            <td><a>Xem chi tiết</a></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-7 col-sm-offset-5">
+                        <div class="pull-right">
+                            <paging class="small"
+                                    page="currentPage"
+                                    page-size="pageSize"
+                                    total="total"
+                                    adjacent="{{adjacent}}"
+                                    dots="{{dots}}"
+                                    hide-if-empty="{{hideIfEmpty}}"
+                                    show-prev-next="{{showPrevNext}}"
+                                    show-first-last="{{showFirstLast}}"
+                                    paging-action="DoPagingAct('clicked', page, pageSize)">
+                            </paging>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div><!-- /.box-body -->
+        </div>
+    </section>
+</div>

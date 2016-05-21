@@ -173,6 +173,10 @@
 <script src="/resources/app/scripts/teacher_role/teacher_home/controllers/TeacherInfoCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/teacher_role/teacher_home/services/TeacherInfoService.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
+<script src="/resources/app/scripts/teacher_role/teacher_project_wave/teacher_project_wave_main.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/teacher_role/teacher_project_wave/services/TeacherProjectWaveService.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/teacher_role/teacher_project_wave/controllers/TeacherProjectWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+
 <script src="/resources/app/scripts/teacher_role/teacher_propose_student/teacher_propose_student_main.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/teacher_role/teacher_propose_student/services/TeacherProposeStudentService.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/teacher_role/teacher_propose_student/controllers/TeacherProposeStudentCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
