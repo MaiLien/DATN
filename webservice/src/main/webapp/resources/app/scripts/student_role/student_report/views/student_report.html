@@ -53,7 +53,7 @@
                                     </thead>
                                     <tbody>
                                     <tr ng-repeat="report in reports">
-                                        <td><a ng-click="setViewingReport(report)">Báo cáo đợt {{report.ordinal}}</a></td>
+                                        <td><a data-toggle="modal" data-target=".viewing_report_modal" ng-click="setViewingReport(report)">Báo cáo đợt {{report.ordinal}}</a></td>
                                         <td>{{report.timeSubmitReportString}}</td>
                                         <td>
                                             <span ng-if="report.status == 0">Đang lưu nháp</span>
@@ -71,18 +71,29 @@
                 </div>
             </div>
 
-            <div class="box box-primary">
-                <div class="box-header" style="text-align: center">
-                    <h3 class="strong">Báo cáo tiến độ đợt {{viewing_report.ordinal}}</h3>
+            <!-- -->
+
+        </div>
+
+    </section>
+</div>
+
+<div class="modal fade viewing_report_modal"  aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div>
+                <div class="modal-header" style="text-align: center">
+                    <h3 class="strong">BÁO CÁO TIẾN ĐỘ ĐỢT {{viewing_report.ordinal}}</h3>
                 </div>
-                <div class="box-body">
+                <div class="modal-body">
                     <form name="reportForm" novalidate>
 
                         <!-- topic-->
                         <div class="form-group">
                             <label class="control-label"><i class="fa fa-book margin-r-5"></i>Tên đề tài : </label>
                             <br>
-                            This is a nonstandard attribute supported by WebKit on iOS (therefore nearly all browsers running on iOS, including Safari, Firefox, and Chrome) which controls whether and how
+                            Xây dựng website hỗ trợ quá trình quản lý làm đồ án tốt nghiệp tại khoa Công nghệ thông tin - ĐHBK - ĐHĐN
                         </div>
 
                         <!-- Progress-->
@@ -93,62 +104,62 @@
                                     <link rel="stylesheet" href="/resources/bower_components/bootstrap/dist/css/bootstrap.css">
                                     <table class="table table-bordered table-hover">
                                         <thead>
-                                            <tr>
-                                                <th style="width: 25%;">Thời gian</th>
-                                                <th style="width: 55%;">Nội dung công việc</th>
-                                                <th>Ghi chú</th>
-                                                <th></th>
-                                            </tr>
+                                        <tr style="color: #666;">
+                                            <th style="width: 25%;">Thời gian</th>
+                                            <th style="width: 55%;">Nội dung công việc</th>
+                                            <th>Ghi chú</th>
+                                            <th></th>
+                                        </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Column content</td>
-                                                <td>Column contentColumn conteColumn contentColumn contentColumn contentColumn contentntColumn contentColumn contentColumn contentColumn contentColumn contentColumn content</td>
-                                                <td>Column content</td>
-                                                <td><button class="btn">Xóa</button></td>
-                                            </tr>
-                                            <tr ng-repeat="item in viewing_report.reportDetails track by $index">
-                                                <td>
-                                                    reportDetails
-                                                </td>
-                                                <td>
-                                                    DetailsreportDetailsreportDetailsreportDetailsDetDetailsreportDetailsreportDetailsreportDetailsDetailsreportDetailsreportDetailsreportDetails
-                                                </td>
-                                                <td>
-                                                    {{item.note}}reportDetailsreportDetails
-                                                </td>
-                                                <td><button class="btn">Xóa</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="input-group"  style="width: 100%;">
+                                        <tr>
+                                            <td>01/01/2016 - 12/01/2016</td>
+                                            <td> - Chọn đề tài <br> - Phân tích thiết kế hệ thống</td>
+                                            <td></td>
+                                            <td><button class="btn">Xóa</button></td>
+                                        </tr>
+                                        <tr ng-repeat="item in viewing_report.reportDetails track by $index">
+                                            <td>
+                                                {{item.startTime}} - {{item.endTime}}
+                                            </td>
+                                            <td>
+                                                {{item.workContent}}
+                                            </td>
+                                            <td>
+                                                {{item.note}}
+                                            </td>
+                                            <td><button class="btn">Xóa</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="input-group"  style="width: 100%;">
                                                         <textarea ng-model="reportDetail.time"
                                                                   type="text"
                                                                   style="padding: 0px"
                                                                   class="form-control"
                                                                   name="time"></textarea>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group" style="width: 100%;">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group" style="width: 100%;">
                                                         <textarea ng-model="reportDetail.content"
                                                                   type="text"
                                                                   style="padding: 0px"
                                                                   class="form-control"
                                                                   name="content"></textarea>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group" style="width: 100%;">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group" style="width: 100%;">
                                                         <textarea ng-model="reportDetail.note"
                                                                   type="text"
                                                                   style="padding: 0px;"
                                                                   class="form-control"
                                                                   name="note"></textarea>
-                                                    </div>
-                                                </td>
-                                                <td><button class="btn">Thêm</button></td>
-                                            </tr>
+                                                </div>
+                                            </td>
+                                            <td><button class="btn">Thêm</button></td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -178,9 +189,12 @@
 
                     </form>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Lưu nháp</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+                </div>
             </div>
 
         </div>
-
-    </section>
+    </div>
 </div>
