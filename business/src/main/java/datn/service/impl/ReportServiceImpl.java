@@ -39,7 +39,7 @@ public class ReportServiceImpl implements IReportService {
     @Override
     public RestApiResponse<ReportsOfWaveResponse> getStudentReportsOfWave(String studentId, String projectWaveId) {
         ReportsOfWaveResponse response = new ReportsOfWaveResponse();
-//TODO implement don't finish
+
         Student student = studentRepository.findOne(studentId);
         if(student == null)
             throw new StudentNotFoundException(studentId);
