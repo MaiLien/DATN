@@ -2,6 +2,8 @@ package datn.service.impl;
 
 import datn.dao.entity.*;
 import datn.dao.repository.*;
+import datn.interfaces.request.ReportDetailRequest;
+import datn.interfaces.request.StudentReportRequest;
 import datn.interfaces.response.*;
 import datn.interfaces.util.ConvertObject;
 import datn.interfaces.util.DateUtil;
@@ -11,11 +13,17 @@ import datn.service.exceptions.StudentNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 @Service
 public class ReportServiceImpl implements IReportService {
+
+    private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private DateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     @Autowired
     StudentRepository studentRepository ;
@@ -50,6 +58,68 @@ public class ReportServiceImpl implements IReportService {
         response.setProjectInforResponse(studentWaveResponse);
 
         return new RestApiResponse<>(response);
+    }
+
+    @Override//TODO saveStudentReport
+    public RestApiResponse<StudentResponse> saveStudentReport (StudentReportRequest request) {
+        StudentReport studentReport = studentReportRepository.findOne(request.getId());
+        if(studentReport == null){
+            studentReport = new StudentReport();
+            studentReport.setStudent(studentRepository.findOne(request.getStudentId()));
+//            studentReport.setReport(); //TODO setReport
+        }else{
+//            studentReportDetailRepository.deleteByStudentReport(studentReport);//TODO deleteByStudentReport
+        }
+
+        studentReport.setStatus(request.getStatus());
+        studentReport.setPercentFinish(request.getPercentFinish());
+        studentReport.setCreatedDate(new Date());
+        studentReport.setStudentOpinion(request.getStudentOpinion());
+        studentReport.setTeacherOpinion(request.getTeacherOpinion());
+
+        saveStudentReportDetails(request.getReportDetails(), studentReport);
+
+        return null;
+    }
+
+    private void saveStudentReportDetails(ArrayList<ReportDetailRequest> reportDetails, StudentReport studentReport){
+        ReportDetailRequest reportDetailRequest;
+        StudentReportDetail studentReportDetail;
+        ArrayList<Date> dates;
+        for(int i = 0; i<reportDetails.size(); i++){
+            reportDetailRequest = reportDetails.get(i);
+            studentReportDetail = new StudentReportDetail();
+
+            dates = convertStringArrayDateTimeToDate(reportDetailRequest.getStartTimeAndEndTime());
+            studentReportDetail.setStartTime(dates.get(0));
+            studentReportDetail.setEndTime(dates.get(1));
+            studentReportDetail.setWorkContent(reportDetailRequest.getWorkContent());
+            studentReportDetail.setNote(reportDetailRequest.getNote());
+
+            studentReportDetail.setStudentReport(studentReport);
+            studentReportDetailRepository.save(studentReportDetail);
+        }
+    }
+
+    private ArrayList<Date> convertStringArrayDateTimeToDate(String s){
+        String[] arrTemp = s.split(" - ");
+        String start = arrTemp[0];
+        String end = arrTemp[1];
+
+        Date startDate = null;
+        Date endDate = null;
+        try {
+            startDate = dateFormat.parse(start);
+            endDate = dateFormat.parse(end);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<Date> out = new ArrayList<Date>();
+        out.add(startDate);
+        out.add(endDate);
+
+        return out;
     }
 
     private StudentWaveResponse getStudentWaveForProjectInfo(Student student, ProjectWave projectWave) {

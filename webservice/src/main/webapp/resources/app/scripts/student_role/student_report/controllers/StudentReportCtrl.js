@@ -94,6 +94,43 @@ angular.module('appDATN.student_wave')
             }
         };
 
+        $scope.saveReportWithStatusIsDone = function(report){
+            var request = createReportRequest(report, 3);
+            $scope.saveStudentReport(request);
+        };
+
+        $scope.saveReportWithStatusIsDraft = function(report){
+            var request = createReportRequest(report, 2);
+            $scope.saveStudentReport(request);
+        };
+
+        createReportRequest = function(report, status){
+            return {
+                id: report.id,
+                studentId: $scope.studentId,
+                teacherId: $scope.projectWave.id,
+                status: status,
+                percentFinish: report.percentFinish,
+                studentOpinion: report.studentOpinion,
+                teacherOpinion: report.teacherOpinion,
+                reportDetails: report.reportDetails
+            }
+        };
+
+        $scope.saveStudentReport = function(request){
+            StudentReportService.saveStudentReport(request)
+                .success(function(data){
+                    var resultCode = data.headers.resultCode;
+                    if(resultCode == 1054)
+                        $state.go('login');
+                    else if(resultCode == 0)
+                        $scope.getWavesStudentJoined();
+                })
+                .error(function(error){
+                    $state.go('error');
+                })
+        };
+
         function load() {
             $scope.getWavesStudentJoined();
         }

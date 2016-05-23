@@ -208,8 +208,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal" ng-disabled="viewing_report.status == 3">Nộp báo cáo</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="">Lưu bản nháp</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" ng-disabled="viewing_report.status == 3" ng-click="saveReportWithStatusIsDone(viewing_report)">Nộp báo cáo</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveReportWithStatusIsDraft(viewing_report)">Lưu bản nháp</button>
                     <button type="button" class="btn" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
