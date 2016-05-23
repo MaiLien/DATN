@@ -83,7 +83,8 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
-            <div>
+            <form name="reportForm">
+                <div>
                 <div class="modal-header" style="text-align: center">
                     <h3 class="strong">BÁO CÁO TIẾN ĐỘ ĐỢT {{viewing_report.ordinal}}</h3>
                 </div>
@@ -123,27 +124,31 @@
                                             <td>
                                                 {{item.note}}
                                             </td>
-                                            <td><a class="btn" ng-click="deleteItemOfReportDetails(item)">Xóa</a></td>
+                                            <td><a ng-click="deleteItemOfReportDetails(item)">Xóa</a></td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="input-group">
+                                                <div ng-class="{'error' : reportForm.startTimeAndEndTime.$invalid && reportDetailsDirty}"
+                                                    class="input-group"
+                                                    style="width: 100%;">
                                                     <!--<textarea required ng-model="reportDetail.startTimeAndEndTime" type="text" class="form-control reservation" name="startTimeAndEndTime"></textarea>-->
                                                     <input ng-model="reportDetail.startTimeAndEndTime"
                                                               required
-                                                              style="padding: 0px"
+                                                              style="padding: 0px;"
                                                               class="form-control reservation"
                                                               name="startTimeAndEndTime">
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="input-group" style="width: 100%;">
-                                                        <textarea ng-model="reportDetail.workContent"
-                                                                  required
-                                                                  type="text"
-                                                                  style="padding: 0px"
-                                                                  class="form-control"
-                                                                  name="content"></textarea>
+                                                <div ng-class="{'error' : reportForm.workContent.$invalid && reportDetailsDirty}"
+                                                     class="input-group"
+                                                     style="width: 100%;">
+                                                    <textarea ng-model="reportDetail.workContent"
+                                                              required
+                                                              type="text"
+                                                              style="padding: 0px"
+                                                              class="form-control"
+                                                              name="workContent"></textarea>
                                                 </div>
                                             </td>
                                             <td>
@@ -156,7 +161,7 @@
                                                                   name="note"></textarea>
                                                 </div>
                                             </td>
-                                            <td><a class="btn" ng-click="addItemOfReportDetails(reportDetail)">Thêm</a></td>
+                                            <td><a ng-click="addItemOfReportDetails(reportDetail)">Thêm</a></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -193,6 +198,7 @@
                     <button type="button" class="btn" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
+            </form>
 
         </div>
     </div>
