@@ -150,6 +150,7 @@
             <column name="student_opinion" type="VARCHAR(36)"/>
             <column name="teacher_opinion" type="VARCHAR(36)"/>
             <column name="status" type="INT(11)"/>
+            <column name="percent_finish" type="INT(11)"/>
         </createTable>
     </changeSet>
     <changeSet author="lienhtm (generated)" id="1456905020428-12">

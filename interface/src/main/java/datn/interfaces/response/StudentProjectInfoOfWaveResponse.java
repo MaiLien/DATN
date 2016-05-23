@@ -1,23 +1,20 @@
 package datn.interfaces.response;
 
-import datn.dao.entity.Report;
-
-import java.util.ArrayList;
 import java.util.UUID;
 
-public class ReportsOfWaveResponse {
+public class StudentProjectInfoOfWaveResponse {
 
     private String id = UUID.randomUUID().toString();
-    StudentResponse student;
-    ProjectWaveResponse projectWave;
-    ArrayList<ReportResponse> reports;
+    private StudentResponse student;
+    private ProjectWaveResponse projectWave;
+    private StudentWaveResponse projectInforResponse;
 
-    public ArrayList<ReportResponse> getReports() {
-        return reports;
+    public StudentWaveResponse getProjectInforResponse() {
+        return projectInforResponse;
     }
 
-    public void setReports(ArrayList<ReportResponse> reports) {
-        this.reports = reports;
+    public void setProjectInforResponse(StudentWaveResponse projectInforResponse) {
+        this.projectInforResponse = projectInforResponse;
     }
 
     public ProjectWaveResponse getProjectWave() {

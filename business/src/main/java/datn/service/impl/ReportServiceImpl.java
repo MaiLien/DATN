@@ -5,7 +5,6 @@ import datn.dao.repository.*;
 import datn.interfaces.response.*;
 import datn.interfaces.util.ConvertObject;
 import datn.interfaces.util.DateUtil;
-import datn.service.IProjectWaveService;
 import datn.service.IReportService;
 import datn.service.exceptions.ProjectWaveNotFoundException;
 import datn.service.exceptions.StudentNotFoundException;
@@ -25,6 +24,9 @@ public class ReportServiceImpl implements IReportService {
     ProjectWaveRepository projectWaveRepository;
 
     @Autowired
+    StudentWaveRepository studentWaveRepository;
+
+    @Autowired
     ReportRepository reportRepository;
 
     @Autowired
@@ -37,27 +39,31 @@ public class ReportServiceImpl implements IReportService {
     ProjectWaveServiceImpl projectWaveService;
 
     @Override
-    public RestApiResponse<ReportsOfWaveResponse> getStudentReportsOfWave(String studentId, String projectWaveId) {
-        ReportsOfWaveResponse response = new ReportsOfWaveResponse();
+    public RestApiResponse<StudentProjectInfoOfWaveResponse> getStudentProjectInfoOfWaveResponse(String studentId, String projectWaveId) {
+        StudentProjectInfoOfWaveResponse response = new StudentProjectInfoOfWaveResponse();
 
-        Student student = studentRepository.findOne(studentId);
-        if(student == null)
-            throw new StudentNotFoundException(studentId);
-        else response.setStudent(ConvertObject.convertStudentEntityToStudentResponse(student));
+        Student student = saveStudentForProjectInfo(studentId, response);
 
-        ProjectWave projectWave = projectWaveRepository.findOne(projectWaveId);
-        if(projectWave == null)
-            throw new ProjectWaveNotFoundException(projectWaveId);
-        else response.setProjectWave(getProjectWaveResponse(projectWave));
+        ProjectWave projectWave = saveProjectWaveForProjectInfo(projectWaveId, response);
 
-        ArrayList<ReportResponse> reportResponses = new ArrayList<>();
+        StudentWaveResponse studentWaveResponse = getStudentWaveForProjectInfo(student, projectWave);
+        response.setProjectInforResponse(studentWaveResponse);
+
+        return new RestApiResponse<>(response);
+    }
+
+    private StudentWaveResponse getStudentWaveForProjectInfo(Student student, ProjectWave projectWave) {
+
+        StudentWaveResponse studentWaveResponse = saveProjectInfo(student, projectWave);
 
         StudentReport studentReport;
 
         ArrayList<StudentReportDetail> studentReportDetails;
         StudentReportDetail studentReportDetail;
 
+        ArrayList<ReportResponse> reportResponses = new ArrayList<>();
         ReportResponse reportResponse;
+
         ArrayList<ReportDetailResponse> reportDetailResponses;
         ReportDetailResponse reportDetailResponse;
 
@@ -80,14 +86,18 @@ public class ReportServiceImpl implements IReportService {
                 reportResponse.setCreatedDate(DateUtil.convertDateTimeToString(studentReport.getCreatedDate()));
                 reportResponse.setStudentOpinion(studentReport.getStudentOpinion());
                 reportResponse.setTeacherOpinion(studentReport.getTeacherOpinion());
-                studentReportDetails = studentReportDetailRepository.findByStudentReport(studentReport);
+                reportResponse.setPercentFinish(studentReport.getPercentFinish());
 
+                studentReportDetails = studentReportDetailRepository.findByStudentReport(studentReport);
                 reportDetailResponses = new ArrayList<>();
+                String startTime;
+                String endTime;
                 for(int j = 0; j < studentReportDetails.size(); j++){
                     studentReportDetail = studentReportDetails.get(j);
                     reportDetailResponse = new ReportDetailResponse();
-                    reportDetailResponse.setStartTime(DateUtil.convertDateTimeToString(studentReportDetail.getStartTime()));
-                    reportDetailResponse.setEndTime(DateUtil.convertDateTimeToString(studentReportDetail.getEndTime()));
+                    startTime = DateUtil.convertDateToString(studentReportDetail.getStartTime());
+                    endTime = DateUtil.convertDateToString(studentReportDetail.getEndTime());
+                    reportDetailResponse.setStartTimeAndEndTime(startTime + " - " + endTime);
                     reportDetailResponse.setWorkContent(studentReportDetail.getWorkContent());
                     reportDetailResponse.setNote(studentReportDetail.getNote());
                     reportDetailResponses.add(reportDetailResponse);
@@ -96,9 +106,43 @@ public class ReportServiceImpl implements IReportService {
             }
             reportResponses.add(reportResponse);
         }
-        response.setReports(reportResponses);
+        studentWaveResponse.setReports(reportResponses);
 
-        return new RestApiResponse<>(response);
+        return studentWaveResponse;
+    }
+
+    private StudentWaveResponse saveProjectInfo(Student student, ProjectWave projectWave) {
+        StudentWaveResponse studentWaveResponse = new StudentWaveResponse();
+
+        ArrayList<StudentWave> studentWaves = studentWaveRepository.findByStudentAndProjectWave(student, projectWave);
+        StudentWave studentWave;
+        if (studentWaves.size() == 1){
+            studentWave = studentWaves.get(0);
+            studentWaveResponse.setId(studentWave.getId());
+            studentWaveResponse.setStatus(studentWave.getStatus());
+            studentWaveResponse.setTopic(studentWave.getTopic());
+            studentWaveResponse.setDescription(studentWave.getDescription());
+        }
+
+        return studentWaveResponse;
+    }
+
+    private ProjectWave saveProjectWaveForProjectInfo(String projectWaveId, StudentProjectInfoOfWaveResponse response) {
+        ProjectWave projectWave = projectWaveRepository.findOne(projectWaveId);
+        if(projectWave == null)
+            throw new ProjectWaveNotFoundException(projectWaveId);
+        else response.setProjectWave(getProjectWaveResponse(projectWave));
+
+        return projectWave;
+    }
+
+    private Student saveStudentForProjectInfo(String studentId, StudentProjectInfoOfWaveResponse response) {
+        Student student = studentRepository.findOne(studentId);
+        if(student == null)
+            throw new StudentNotFoundException(studentId);
+        else response.setStudent(ConvertObject.convertStudentEntityToStudentResponse(student));
+
+        return student;
     }
 
     private ProjectWaveResponse getProjectWaveResponse(ProjectWave projectWave) {

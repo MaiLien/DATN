@@ -6,6 +6,7 @@ import org.springframework.data.annotation.CreatedDate;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,10 +18,8 @@ public class StudentReport implements Serializable {
 	@Id
 	private String id = UUID.randomUUID().toString();
 
-	@CreatedDate
-	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	@Column(name="created_date")
-	private Timestamp createdDate;
+	private Date createdDate;
 
 	private int status;// 0: Nhap , 1: Da nop
 
@@ -29,6 +28,9 @@ public class StudentReport implements Serializable {
 
 	@Column(name="teacher_opinion")
 	private String teacherOpinion;
+
+	@Column(name="percent_finish")
+	private int percentFinish;
 
 	@ManyToOne
 	private Report report;
@@ -42,6 +44,14 @@ public class StudentReport implements Serializable {
 	public StudentReport() {
 	}
 
+	public int getPercentFinish() {
+		return percentFinish;
+	}
+
+	public void setPercentFinish(int percentFinish) {
+		this.percentFinish = percentFinish;
+	}
+
 	public String getId() {
 		return this.id;
 	}
@@ -50,11 +60,11 @@ public class StudentReport implements Serializable {
 		this.id = id;
 	}
 
-	public Timestamp getCreatedDate() {
-		return this.createdDate;
+	public Date getCreatedDate() {
+		return createdDate;
 	}
 
-	public void setCreatedDate(Timestamp createdDate) {
+	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
 

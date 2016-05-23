@@ -1,8 +1,8 @@
 angular.module('appDATN.student_wave')
     .factory("StudentReportService", function ($http) {
 
-        getStudentReportsOfWave = function (studentId, projectWaveId) {
-            return $http.get('API/getStudentReportsOfWave', {params : {studentId: studentId, projectWaveId: projectWaveId}});
+        getStudentProjectInfoOfWaveResponse = function (studentId, projectWaveId) {
+            return $http.get('API/getStudentProjectInfoOfWaveResponse', {params : {studentId: studentId, projectWaveId: projectWaveId}});
         };
 
         getWavesStudentJoined = function (studentId) {
@@ -11,7 +11,7 @@ angular.module('appDATN.student_wave')
 
         return {
             getWavesStudentJoined: getWavesStudentJoined,
-            getStudentReportsOfWave: getStudentReportsOfWave
+            getStudentProjectInfoOfWaveResponse: getStudentProjectInfoOfWaveResponse
         };
 
     });

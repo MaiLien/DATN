@@ -9,10 +9,11 @@ public class ReportResponse {
     private boolean timeSubmitReport;
     private String timeSubmitReportString;
     private int ordinal;
-    private int status;//0 : chua nop, 1:nhap, 2 da nop
+    private int status;//0 : chua nop, 1:dang cho duyet, 2 da nop
     private String createdDate;
     private String studentOpinion;
     private String teacherOpinion;
+    private int percentFinish;
     private ArrayList<ReportDetailResponse> reportDetails;
 
     public String getTimeSubmitReportString() {
@@ -21,6 +22,14 @@ public class ReportResponse {
 
     public void setTimeSubmitReportString(String timeSubmitReportString) {
         this.timeSubmitReportString = timeSubmitReportString;
+    }
+
+    public int getPercentFinish() {
+        return percentFinish;
+    }
+
+    public void setPercentFinish(int percentFinish) {
+        this.percentFinish = percentFinish;
     }
 
     public String getId() {

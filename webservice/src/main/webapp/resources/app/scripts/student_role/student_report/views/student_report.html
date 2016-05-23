@@ -58,7 +58,8 @@
                                         <td>
                                             <span ng-if="report.status == 0">Đang lưu nháp</span>
                                             <span ng-if="report.status == 1">Đang đợi giảng viên duyệt</span>
-                                            <span ng-if="report.status == 2">Đã nộp</span>
+                                            <span ng-if="report.status == 2">Giảng viên đã phản hồi, cần xem lại</span>
+                                            <span ng-if="report.status == 3">Đã nộp</span>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -93,7 +94,7 @@
                         <div class="form-group">
                             <label class="control-label"><i class="fa fa-book margin-r-5"></i>Tên đề tài : </label>
                             <br>
-                            Xây dựng website hỗ trợ quá trình quản lý làm đồ án tốt nghiệp tại khoa Công nghệ thông tin - ĐHBK - ĐHĐN
+                            {{projectInfo.topic}}
                         </div>
 
                         <!-- Progress-->
@@ -112,15 +113,15 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>01/01/2016 - 12/01/2016</td>
-                                            <td> - Chọn đề tài <br> - Phân tích thiết kế hệ thống</td>
-                                            <td></td>
-                                            <td><button class="btn">Xóa</button></td>
-                                        </tr>
+                                        <!--<tr>-->
+                                            <!--<td>01/01/2016 - 12/01/2016</td>-->
+                                            <!--<td> - Chọn đề tài <br> - Phân tích thiết kế hệ thống</td>-->
+                                            <!--<td></td>-->
+                                            <!--<td><button class="btn">Xóa</button></td>-->
+                                        <!--</tr>-->
                                         <tr ng-repeat="item in viewing_report.reportDetails track by $index">
                                             <td>
-                                                {{item.startTime}} - {{item.endTime}}
+                                                {{item.startTimeAndEndTime}}
                                             </td>
                                             <td>
                                                 {{item.workContent}}
@@ -128,12 +129,13 @@
                                             <td>
                                                 {{item.note}}
                                             </td>
-                                            <td><button class="btn">Xóa</button></td>
+                                            <td><a class="btn" ng-click="deleteItemOfReportDetails(item)">Xóa</a></td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <div class="input-group"  style="width: 100%;">
-                                                        <textarea ng-model="reportDetail.time"
+                                                        <textarea ng-model="reportDetail.startTimeAndEndTime"
+                                                                  required
                                                                   type="text"
                                                                   style="padding: 0px"
                                                                   class="form-control"
@@ -142,7 +144,8 @@
                                             </td>
                                             <td>
                                                 <div class="input-group" style="width: 100%;">
-                                                        <textarea ng-model="reportDetail.content"
+                                                        <textarea ng-model="reportDetail.workContent"
+                                                                  required
                                                                   type="text"
                                                                   style="padding: 0px"
                                                                   class="form-control"
@@ -152,13 +155,14 @@
                                             <td>
                                                 <div class="input-group" style="width: 100%;">
                                                         <textarea ng-model="reportDetail.note"
+                                                                  required
                                                                   type="text"
                                                                   style="padding: 0px;"
                                                                   class="form-control"
                                                                   name="note"></textarea>
                                                 </div>
                                             </td>
-                                            <td><button class="btn">Thêm</button></td>
+                                            <td><a class="btn" ng-click="addItemOfReportDetails(reportDetail)">Thêm</a></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -168,23 +172,23 @@
 
                         <!-- -->
                         <div class="form-group">
-                            <label class="control-label"><i class="fa fa-pencil margin-r-5"></i>Nhận xét khối lượng công việc đã thực hiện được theo đề cương : </label>
+                            <label class="control-label"><i class="fa fa-pencil margin-r-5"></i>Nhận xét khối lượng công việc đã thực hiện được theo đề cương (%) : </label>
                             <br>
-                            <input class="form-control" style="width: 100%;" value="50%">
+                            <input class="form-control" type="number" min="0" max="100" style="width: 100%;">
                         </div>
 
                         <!-- Student opinion-->
                         <div class="form-group">
                             <label class="control-label"><i class="fa fa-pencil margin-r-5"></i>Ý kiến của sinh viên : </label>
                             <br>
-                            <textarea class="form-control" style="width: 100%;"></textarea>
+                            <textarea ng-model="viewing_report.studentOpinion" class="form-control" style="width: 100%;"></textarea>
                         </div>
 
                         <!-- Teacher opinion-->
                         <div class="form-group">
                             <label class="control-label"><i class="fa fa-pencil margin-r-5"></i>Ý kiến của giảng viên : </label>
                             <br>
-                            <textarea class="form-control" style="width: 100%;"></textarea>
+                            {{viewing_report.teacherOpinion}}
                         </div>
 
                     </form>

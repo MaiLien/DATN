@@ -3,6 +3,16 @@ angular.module('appDATN.student_wave')
 
         $scope.studentId = user.id;
 
+        $scope.viewing_report = {
+            reportDetails: [
+                {
+                    'startTimeAndEndTime':'01/01/2016 - 12/01/2016',
+                    'workContent':'Chọn đề tài và phân tích thiết kế hệ thống',
+                    'note':''
+                }
+            ]
+        };
+
         refresh = function(){
             $scope.errMessage = null;
             $scope.successMessage = null;
@@ -27,7 +37,7 @@ angular.module('appDATN.student_wave')
                         $scope.joiningWaves = data.body.projectWavesJoining;
                         if($scope.joiningWaves.length == 1){
                             var joiningProject = $scope.joiningWaves[0];
-                            $scope.getStudentReportsOfWave($scope.studentId, joiningProject.id);
+                            $scope.getStudentProjectInfoOfWaveResponse($scope.studentId, joiningProject.id);
                         }
                     }
 
@@ -40,16 +50,18 @@ angular.module('appDATN.student_wave')
                 });
         };
 
-        $scope.getStudentReportsOfWave = function(studentId, projectWaveId){
-            StudentReportService.getStudentReportsOfWave(studentId, projectWaveId)
+        $scope.getStudentProjectInfoOfWaveResponse = function(studentId, projectWaveId){
+            StudentReportService.getStudentProjectInfoOfWaveResponse(studentId, projectWaveId)
                 .success(function (data) {
                     if(data.headers.resultCode == 1054){
                         $state.go('login');
                     }
                     else{
+                        console.log("aa");
                         $scope.student = data.body.student;
                         $scope.projectWave = data.body.projectWave;
-                        $scope.reports = data.body.reports;
+                        $scope.projectInfo = data.body.projectInforResponse;
+                        $scope.reports = $scope.projectInfo.reports;
                     }
                 })
                 .error(function (error) {
@@ -59,6 +71,22 @@ angular.module('appDATN.student_wave')
 
         $scope.setViewingReport = function (report) {
             $scope.viewing_report = report;
+        };
+
+        $scope.addItemOfReportDetails = function (reportDetail) {
+            if(reportDetail != null){
+                $scope.viewing_report.reportDetails.push(reportDetail);
+                $scope.reportDetail = null;
+            }
+            $scope.reportDetailsDurty = true;
+        };
+
+        $scope.deleteItemOfReportDetails = function(item){
+            if(item != null){
+                var index = $scope.viewing_report.reportDetails.indexOf(item);
+                $scope.viewing_report.reportDetails.splice(index, 1);
+            }
+            $scope.reportDetailsDurty = true;
         };
 
         function load() {

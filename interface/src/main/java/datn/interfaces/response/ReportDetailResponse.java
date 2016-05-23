@@ -5,8 +5,7 @@ import java.util.UUID;
 public class ReportDetailResponse {
 
     private String id = UUID.randomUUID().toString();
-    private String startTime;
-    private String endTime;
+    private String startTimeAndEndTime;
     private String workContent;
     private String note;
 
@@ -18,20 +17,12 @@ public class ReportDetailResponse {
         this.id = id;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getStartTimeAndEndTime() {
+        return startTimeAndEndTime;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setStartTimeAndEndTime(String startTimeAndEndTime) {
+        this.startTimeAndEndTime = startTimeAndEndTime;
     }
 
     public String getWorkContent() {
