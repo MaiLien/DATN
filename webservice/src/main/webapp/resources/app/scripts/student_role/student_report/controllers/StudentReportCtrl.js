@@ -77,16 +77,21 @@ angular.module('appDATN.student_wave')
             if(reportDetail != null && reportDetail.startTimeAndEndTime && reportDetail.workContent){
                 $scope.viewing_report.reportDetails.push(reportDetail);
                 $scope.reportDetail = null;
+                $scope.reportDetailsDirty = false;
+            }else{
+                $scope.reportDetailsDirty = true;
             }
-            $scope.reportDetailsDirty = true;
         };
 
         $scope.deleteItemOfReportDetails = function(item){
+            $scope.reportDetailsDirty = false;
             if(item != null){
                 var index = $scope.viewing_report.reportDetails.indexOf(item);
                 $scope.viewing_report.reportDetails.splice(index, 1);
             }
-            $scope.reportDetailsDirty = true;
+            if($scope.viewing_report.reportDetails.length == 0){
+                $scope.reportDetailsDirty = true;
+            }
         };
 
         function load() {

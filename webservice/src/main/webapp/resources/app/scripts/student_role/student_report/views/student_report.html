@@ -173,14 +173,29 @@
                         <div class="form-group">
                             <label class="control-label"><i class="fa fa-pencil margin-r-5"></i>Nhận xét khối lượng công việc đã thực hiện được theo đề cương (%) : </label>
                             <br>
-                            <input class="form-control" type="number" min="0" max="100" style="width: 100%;">
+                            <div ng-class="{'error' : reportForm.percentFinish.$invalid && reportForm.percentFinish.$dirty}">
+                                <input
+                                        data-ng-model="viewing_report.percentFinish"
+                                        name="percentFinish"
+                                        class="form-control"
+                                        type="number"
+                                        min="0"
+                                        max="100"
+                                        required
+                                        style="width: 100%;">
+                            </div>
                         </div>
 
                         <!-- Student opinion-->
                         <div class="form-group">
                             <label class="control-label"><i class="fa fa-pencil margin-r-5"></i>Ý kiến của sinh viên : </label>
                             <br>
-                            <textarea ng-model="viewing_report.studentOpinion" class="form-control" style="width: 100%;"></textarea>
+                            <div>
+                                <textarea
+                                        ng-model="viewing_report.studentOpinion"
+                                        class="form-control"
+                                        style="width: 100%;"></textarea>
+                            </div>
                         </div>
 
                         <!-- Teacher opinion-->
@@ -193,8 +208,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">Nộp báo cáo</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Lưu bản nháp</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" ng-disabled="viewing_report.status == 3">Nộp báo cáo</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="">Lưu bản nháp</button>
                     <button type="button" class="btn" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
