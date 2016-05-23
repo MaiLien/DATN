@@ -8,7 +8,7 @@ public class StudentReportRequest {
 
     private String id;
     private String studentId;
-    private String teacherId;
+    private String reportId;
     private int status;
     private int percentFinish;
     private String studentOpinion;
@@ -31,12 +31,12 @@ public class StudentReportRequest {
         this.studentId = studentId;
     }
 
-    public String getTeacherId() {
-        return teacherId;
+    public String getReportId() {
+        return reportId;
     }
 
-    public void setTeacherId(String teacherId) {
-        this.teacherId = teacherId;
+    public void setReportId(String reportId) {
+        this.reportId = reportId;
     }
 
     public int getStatus() {

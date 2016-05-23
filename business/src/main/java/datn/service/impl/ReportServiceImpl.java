@@ -62,11 +62,13 @@ public class ReportServiceImpl implements IReportService {
 
     @Override//TODO saveStudentReport
     public RestApiResponse<StudentResponse> saveStudentReport (StudentReportRequest request) {
-        StudentReport studentReport = studentReportRepository.findOne(request.getId());
+        StudentReport studentReport = studentReportRepository.findOne(request.getId()==null?"":request.getId());
         if(studentReport == null){
             studentReport = new StudentReport();
+            studentReport.setCreatedDate(new Date());
             studentReport.setStudent(studentRepository.findOne(request.getStudentId()));
-//            studentReport.setReport(); //TODO setReport
+            studentReport.setReport(reportRepository.findOne(request.getReportId())); //TODO setReport
+            studentReportRepository.save(studentReport);
         }else{
             ArrayList<StudentReportDetail> temp= studentReportDetailRepository.findByStudentReport(studentReport);
             for(int i =0; i<temp.size(); i++)
@@ -145,6 +147,7 @@ public class ReportServiceImpl implements IReportService {
             report = reports.get(i);
 
             reportResponse = new ReportResponse();
+            reportResponse.setReportOfWaveId(report.getId());
             String start = DateUtil.convertDateTimeToString(report.getStartTime());
             String end = DateUtil.convertDateTimeToString(report.getEndTime());
             reportResponse.setTimeSubmitReportString(start + " - "+ end);
@@ -155,7 +158,8 @@ public class ReportServiceImpl implements IReportService {
             if(studentReport != null){
                 reportResponse.setId(studentReport.getId());
                 reportResponse.setStatus(studentReport.getStatus());
-                reportResponse.setCreatedDate(DateUtil.convertDateTimeToString(studentReport.getCreatedDate()));
+                //TODO
+//                reportResponse.setCreatedDate(DateUtil.convertDateTimeToString(studentReport.getCreatedDate()));
                 reportResponse.setStudentOpinion(studentReport.getStudentOpinion());
                 reportResponse.setTeacherOpinion(studentReport.getTeacherOpinion());
                 reportResponse.setPercentFinish(studentReport.getPercentFinish());

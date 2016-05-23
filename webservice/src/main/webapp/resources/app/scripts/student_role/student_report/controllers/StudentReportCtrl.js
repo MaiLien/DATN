@@ -75,6 +75,9 @@ angular.module('appDATN.student_wave')
 
         $scope.addItemOfReportDetails = function (reportDetail) {
             if(reportDetail != null && reportDetail.startTimeAndEndTime && reportDetail.workContent){
+                if($scope.viewing_report.reportDetails == null){
+                    $scope.viewing_report.reportDetails = [];
+                }
                 $scope.viewing_report.reportDetails.push(reportDetail);
                 $scope.reportDetail = null;
                 $scope.reportDetailsDirty = false;
@@ -105,10 +108,11 @@ angular.module('appDATN.student_wave')
         };
 
         createReportRequest = function(report, status){
+            console.log(report);
             return {
                 id: report.id,
                 studentId: $scope.studentId,
-                teacherId: $scope.projectWave.id,
+                reportId: report.reportOfWaveId,
                 status: status,
                 percentFinish: report.percentFinish,
                 studentOpinion: report.studentOpinion,

@@ -6,6 +6,7 @@ import java.util.UUID;
 public class ReportResponse {
 
     private String id;//id student report
+    private String ReportOfWaveId; //Id report entity
     private boolean timeSubmitReport;
     private String timeSubmitReportString;
     private int ordinal;
@@ -30,6 +31,14 @@ public class ReportResponse {
 
     public void setPercentFinish(int percentFinish) {
         this.percentFinish = percentFinish;
+    }
+
+    public String getReportOfWaveId() {
+        return ReportOfWaveId;
+    }
+
+    public void setReportOfWaveId(String reportOfWaveId) {
+        ReportOfWaveId = reportOfWaveId;
     }
 
     public String getId() {
