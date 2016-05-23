@@ -109,16 +109,10 @@
                                             <th style="width: 25%;">Thời gian</th>
                                             <th style="width: 55%;">Nội dung công việc</th>
                                             <th>Ghi chú</th>
-                                            <th></th>
+                                            <th style="width: 5%;"></th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <!--<tr>-->
-                                            <!--<td>01/01/2016 - 12/01/2016</td>-->
-                                            <!--<td> - Chọn đề tài <br> - Phân tích thiết kế hệ thống</td>-->
-                                            <!--<td></td>-->
-                                            <!--<td><button class="btn">Xóa</button></td>-->
-                                        <!--</tr>-->
                                         <tr ng-repeat="item in viewing_report.reportDetails track by $index">
                                             <td>
                                                 {{item.startTimeAndEndTime}}
@@ -133,13 +127,13 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="input-group"  style="width: 100%;">
-                                                        <textarea ng-model="reportDetail.startTimeAndEndTime"
-                                                                  required
-                                                                  type="text"
-                                                                  style="padding: 0px"
-                                                                  class="form-control"
-                                                                  name="time"></textarea>
+                                                <div class="input-group">
+                                                    <!--<textarea required ng-model="reportDetail.startTimeAndEndTime" type="text" class="form-control reservation" name="startTimeAndEndTime"></textarea>-->
+                                                    <input ng-model="reportDetail.startTimeAndEndTime"
+                                                              required
+                                                              style="padding: 0px"
+                                                              class="form-control reservation"
+                                                              name="startTimeAndEndTime">
                                                 </div>
                                             </td>
                                             <td>
@@ -203,3 +197,11 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    //Date range picker
+    $('.reservation').daterangepicker();
+    //Date range picker with time picker
+    $('.reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'DD/MM/YYYY HH:mm:ss'});
+</script>
