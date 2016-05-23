@@ -25,7 +25,7 @@ public class StudentReportController {
     }
 
     @RequestMapping(value = "/saveStudentReport", method = RequestMethod.POST)
-    public RestApiResponse<StudentResponse> saveStudentReport(@RequestBody StudentReportRequest request){
+    public RestApiResponse<?> saveStudentReport(@RequestBody StudentReportRequest request){
         return reportService.saveStudentReport(request);
     }
 

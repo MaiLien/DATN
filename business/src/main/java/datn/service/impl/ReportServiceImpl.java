@@ -61,11 +61,10 @@ public class ReportServiceImpl implements IReportService {
     }
 
     @Override//TODO saveStudentReport
-    public RestApiResponse<StudentResponse> saveStudentReport (StudentReportRequest request) {
+    public RestApiResponse<?> saveStudentReport (StudentReportRequest request) {
         StudentReport studentReport = studentReportRepository.findOne(request.getId()==null?"":request.getId());
         if(studentReport == null){
             studentReport = new StudentReport();
-            studentReport.setCreatedDate(new Date());
             studentReport.setStudent(studentRepository.findOne(request.getStudentId()));
             studentReport.setReport(reportRepository.findOne(request.getReportId())); //TODO setReport
             studentReportRepository.save(studentReport);
@@ -83,7 +82,8 @@ public class ReportServiceImpl implements IReportService {
 
         saveStudentReportDetails(request.getReportDetails(), studentReport);
 
-        return null;
+        studentReportRepository.save(studentReport);
+        return new RestApiResponse<>();
     }
 
     private void saveStudentReportDetails(ArrayList<ReportDetailRequest> reportDetails, StudentReport studentReport){

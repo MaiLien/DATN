@@ -9,5 +9,5 @@ public interface IReportService {
 
     RestApiResponse<StudentProjectInfoOfWaveResponse> getStudentProjectInfoOfWaveResponse(String studentId, String projectWaveId);
 
-    RestApiResponse<StudentResponse> saveStudentReport(StudentReportRequest request);
+    RestApiResponse<?> saveStudentReport(StudentReportRequest request);
 }

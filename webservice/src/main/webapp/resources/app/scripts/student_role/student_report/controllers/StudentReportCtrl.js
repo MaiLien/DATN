@@ -70,7 +70,10 @@ angular.module('appDATN.student_wave')
         };
 
         $scope.setViewingReport = function (report) {
-            $scope.viewing_report = report;
+            $scope.viewing_report = angular.copy(report);
+            $scope.reportDetail = null;
+            $scope.reportDetailsDirty = false;
+
         };
 
         $scope.addItemOfReportDetails = function (reportDetail) {
@@ -98,12 +101,12 @@ angular.module('appDATN.student_wave')
         };
 
         $scope.saveReportWithStatusIsDone = function(report){
-            var request = createReportRequest(report, 3);
+            var request = createReportRequest(report, 1);
             $scope.saveStudentReport(request);
         };
 
         $scope.saveReportWithStatusIsDraft = function(report){
-            var request = createReportRequest(report, 2);
+            var request = createReportRequest(report, 0);
             $scope.saveStudentReport(request);
         };
 
