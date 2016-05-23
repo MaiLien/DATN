@@ -68,7 +68,9 @@ public class ReportServiceImpl implements IReportService {
             studentReport.setStudent(studentRepository.findOne(request.getStudentId()));
 //            studentReport.setReport(); //TODO setReport
         }else{
-//            studentReportDetailRepository.deleteByStudentReport(studentReport);//TODO deleteByStudentReport
+            ArrayList<StudentReportDetail> temp= studentReportDetailRepository.findByStudentReport(studentReport);
+            for(int i =0; i<temp.size(); i++)
+                studentReportDetailRepository.delete(temp.get(i));
         }
 
         studentReport.setStatus(request.getStatus());
