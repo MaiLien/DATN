@@ -73,6 +73,9 @@
 
 <script src="/resources/app/js/edited_fileInput.js" charset="utf-8"></script>
 
+<!-- CK Editor -->
+<script src="/resources/template2/plugins/ckeditor/ckeditor.js"></script>
+
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/resources/template2/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 

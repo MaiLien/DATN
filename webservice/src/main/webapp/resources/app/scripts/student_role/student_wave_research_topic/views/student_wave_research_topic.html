@@ -23,7 +23,7 @@
 
                 <hr>
 
-                <button class="btn btn-primary">Cập nhật đề tài</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target=".research_topic_modal">Cập nhật đề tài</button>
 
             </div><!-- /.box-body -->
         </div>
@@ -31,23 +31,38 @@
     </section>
 </div>
 
-<div class="modal fade viewing_report_modal"  aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal fade research_topic_modal"  aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
             <div>
                 <div class="modal-header" style="text-align: center">
-                    <h3 class="strong">BÁO CÁO TIẾN ĐỘ ĐỢT {{viewing_report.ordinal}}</h3>
-                </div>
-                <div class="modal-body">
+                    <h3 class="strong">ĐỀ TÀI ĐỒ ÁN TỐT NGHIỆP</h3>
 
                 </div>
+                <div class="modal-body">
+                    <form>
+                        <textarea id="editor1" name="editor1" rows="10" cols="80">
+                        </textarea>
+                    </form>
+                </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Lưu nháp</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Lưu</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
                 </div>
             </div>
 
         </div>
     </div>
 </div>
+
+<script>
+    $(function () {
+        // Replace the <textarea id="editor1"> with a CKEditor
+        // instance, using default configuration.
+        CKEDITOR.replace('editor1');
+        //bootstrap WYSIHTML5 - text editor
+        $(".textarea").wysihtml5();
+    });
+</script>
+

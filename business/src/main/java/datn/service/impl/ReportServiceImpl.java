@@ -60,13 +60,13 @@ public class ReportServiceImpl implements IReportService {
         return new RestApiResponse<>(response);
     }
 
-    @Override//TODO saveStudentReport
+    @Override
     public RestApiResponse<?> saveStudentReport (StudentReportRequest request) {
         StudentReport studentReport = studentReportRepository.findOne(request.getId()==null?"":request.getId());
         if(studentReport == null){
             studentReport = new StudentReport();
             studentReport.setStudent(studentRepository.findOne(request.getStudentId()));
-            studentReport.setReport(reportRepository.findOne(request.getReportId())); //TODO setReport
+            studentReport.setReport(reportRepository.findOne(request.getReportId()));
             studentReportRepository.save(studentReport);
         }else{
             ArrayList<StudentReportDetail> temp= studentReportDetailRepository.findByStudentReport(studentReport);

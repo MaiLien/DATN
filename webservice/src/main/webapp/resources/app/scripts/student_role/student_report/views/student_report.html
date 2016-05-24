@@ -134,7 +134,6 @@
                                                     style="width: 100%;">
                                                     <!--<textarea required ng-model="reportDetail.startTimeAndEndTime" type="text" class="form-control reservation" name="startTimeAndEndTime"></textarea>-->
                                                     <input ng-model="reportDetail.startTimeAndEndTime"
-                                                              required
                                                               style="padding: 0px;"
                                                               class="form-control reservation"
                                                               name="startTimeAndEndTime">
@@ -145,7 +144,6 @@
                                                      class="input-group"
                                                      style="width: 100%;">
                                                     <textarea ng-model="reportDetail.workContent"
-                                                              required
                                                               type="text"
                                                               style="padding: 0px"
                                                               class="form-control"
@@ -155,7 +153,6 @@
                                             <td>
                                                 <div class="input-group" style="width: 100%;">
                                                         <textarea ng-model="reportDetail.note"
-                                                                  required
                                                                   type="text"
                                                                   style="padding: 0px;"
                                                                   class="form-control"
@@ -209,8 +206,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal" ng-disabled="!viewing_report.timeSubmitReport || viewing_report.status == 3" ng-click="saveReportWithStatusIsDone(viewing_report)">Nộp báo cáo</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveReportWithStatusIsDraft(viewing_report)">Lưu bản nháp</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" ng-disabled="!viewing_report.timeSubmitReport || viewing_report.status == 3 || reportForm.$invalid || viewing_report.reportDetails.length == 0" ng-click="saveReportWithStatusIsDone(viewing_report)">Nộp báo cáo</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveReportWithStatusIsDraft(viewing_report)" ng-disabled="reportForm.$invalid || viewing_report.reportDetails.length == 0">Lưu bản nháp</button>
                     <button type="button" class="btn" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
