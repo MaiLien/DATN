@@ -3,7 +3,9 @@ package datn.service.impl;
 import datn.dao.entity.*;
 import datn.dao.repository.*;
 import datn.interfaces.request.ReportDetailRequest;
+import datn.interfaces.request.ResearchTopic;
 import datn.interfaces.request.StudentReportRequest;
+import datn.interfaces.request.StudentResearchTopicRequest;
 import datn.interfaces.response.*;
 import datn.interfaces.util.ConvertObject;
 import datn.interfaces.util.DateUtil;
@@ -84,6 +86,45 @@ public class ReportServiceImpl implements IReportService {
 
         studentReportRepository.save(studentReport);
         return new RestApiResponse<>();
+    }
+
+    @Override
+    public RestApiResponse<StudentResearchTopicResponse> getStudentWaveResearchTopic(String studentId, String projectWaveId) {
+        StudentResearchTopicResponse response = new StudentResearchTopicResponse();
+
+        Student student = studentRepository.findOne(studentId);
+        response.setStudent(ConvertObject.convertStudentEntityToStudentResponse(student));
+
+        ProjectWave projectWave = projectWaveRepository.findOne(projectWaveId);
+        response.setProjectWave(projectWaveService.convertProjectWaveEntityToProjectWaveResponse(projectWave));
+
+        ResearchTopic researchTopic = new ResearchTopic();
+        ArrayList<StudentWave> studentWaves = studentWaveRepository.findByStudentAndProjectWave(student, projectWave);
+        researchTopic.setTopic(studentWaves.get(0).getTopic());
+        researchTopic.setDescription(studentWaves.get(0).getDescription());
+        response.setResearchTopic(researchTopic);
+
+        return new RestApiResponse<>(response);
+    }
+
+    @Override
+    public RestApiResponse<StudentResearchTopicResponse> saveResearchTopic(StudentResearchTopicRequest request) {
+        StudentResearchTopicResponse response = new StudentResearchTopicResponse();
+
+        Student student = studentRepository.findOne(request.getStudentId());
+        response.setStudent(ConvertObject.convertStudentEntityToStudentResponse(student));
+
+        ProjectWave projectWave = projectWaveRepository.findOne(request.getProjectWaveId());
+        response.setProjectWave(projectWaveService.convertProjectWaveEntityToProjectWaveResponse(projectWave));
+
+        ArrayList<StudentWave> studentWaves = studentWaveRepository.findByStudentAndProjectWave(student, projectWave);
+        StudentWave st = studentWaves.get(0);
+        st.setTopic(request.getResearchTopic().getTopic());
+        st.setDescription(request.getResearchTopic().getDescription());
+
+        studentWaveRepository.save(st);
+
+        return new RestApiResponse<>(response);
     }
 
     private void saveStudentReportDetails(ArrayList<ReportDetailRequest> reportDetails, StudentReport studentReport){
