@@ -3,6 +3,11 @@ angular.module('appDATN.student_wave')
 
         $scope.studentId = user.id;
 
+        $scope.project = {
+            'description':'<p>sfdsdgf<strong>sdfg</strong><strong><s>dfgdf</s></strong></p>'
+        };
+
+
         function load() {
         }
 

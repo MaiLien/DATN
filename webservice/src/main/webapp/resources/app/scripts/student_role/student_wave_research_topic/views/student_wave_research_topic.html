@@ -9,17 +9,13 @@
             <div class="box-body">
                 <strong><i class="fa fa-book margin-r-5"></i>  Tên đề tài</strong>
                 <p class="text-muted">
-                    Xây dựng website hỗ trợ quản lý quá trình làm đồ án tốt nghiệp
+                    {{project.topic}}
                 </p>
 
                 <hr>
 
                 <strong><i class="fa fa-file-text-o margin-r-5"></i> Nội dung đề tài </strong>
-                <p class="text-muted">
-                    - Giáo vụ khoa có thể sử dụng chức năng quản lý sinh viên, giảng viên, đợt đồ án tốt nghiệp đồng thời với chức năng tìm kiếm.<br>
-                    - Giảng viên có thể cập nhật hướng nghiên cứu của mình để sinh viên tham khảo, nhằm mục đích tìm kiếm giảng viên phù hợp với mình.<br>
-                    - Giảng viên có thể đề xuất sinh viên để hướng dẫn nhằm đảm bảo rằng trong trường hợp sinh viên và giảng viên đã làm việc với nhau trước đó thì chắc chắn người hướng dẫn đồ án tốt nghiệp cho sinh viên chính là giảng viên đó (tất nhiên là sẽ có sự xác nhận đồng ý của sinh viên).
-                </p>
+                <p class="text-muted" ng-bind-html="project.description"></p>
 
                 <hr>
 
@@ -41,10 +37,15 @@
 
                 </div>
                 <div class="modal-body">
-                    htmlEditor: {{value}}
-                    <form>
-                        <!--<textarea id="editor1" name="editor1" rows="10" cols="80"></textarea>-->
-                        <textarea ck-editor ng-model="value" name="editor1"></textarea>
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="topic">Tên đề tài</label>
+                            <textarea class="form-control" data-ng-model="project.topic" id="topic" placeholder="Tên đề tài"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Mô tả bài toán</label>
+                            <textarea ck-editor ng-model="project.description" name="description" id="description"></textarea>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
