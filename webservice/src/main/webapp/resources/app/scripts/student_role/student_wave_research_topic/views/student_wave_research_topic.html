@@ -41,9 +41,10 @@
 
                 </div>
                 <div class="modal-body">
+                    htmlEditor: {{value}}
                     <form>
-                        <textarea id="editor1" name="editor1" rows="10" cols="80">
-                        </textarea>
+                        <!--<textarea id="editor1" name="editor1" rows="10" cols="80"></textarea>-->
+                        <textarea ck-editor ng-model="value" name="editor1"></textarea>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -55,14 +56,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    $(function () {
-        // Replace the <textarea id="editor1"> with a CKEditor
-        // instance, using default configuration.
-        CKEDITOR.replace('editor1');
-        //bootstrap WYSIHTML5 - text editor
-        $(".textarea").wysihtml5();
-    });
-</script>
-

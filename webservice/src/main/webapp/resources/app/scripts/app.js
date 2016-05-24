@@ -11,7 +11,7 @@ angular.module('appDATN.officer_wave', ['appDATN.common']);
 
 //Student role
 angular.module('appDATN.student', ['appDATN.auth']);
-angular.module('appDATN.student_wave', ['appDATN.auth']);
+angular.module('appDATN.student_wave', ['appDATN.auth', 'appDATN.common']);
 
 //Teacher role
 angular.module('appDATN.teacher', ['appDATN.auth']);

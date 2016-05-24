@@ -101,12 +101,12 @@
 <script src="/resources/bower_components/angular-aria/angular-aria.js"></script>
 <script src="/resources/bower_components/angular-messages/angular-messages.js"></script>
 <script src="/resources/bower_components/ng-file-upload/ng-file-upload.js"></script>
-    <script src="/resources/app/scripts/app.js" URIEncoding="UTF-8"></script>
 
 <script src="/resources/app/scripts/app.js"  charset="utf-8"></script>
 
 <script src="/resources/app/scripts/common/common_main.js"  charset="utf-8"></script>
 <script src="/resources/app/scripts/common/directives/NgEnter.js"  charset="utf-8"></script>
+<script src="/resources/app/scripts/common/directives/ckEditor.js"  charset="utf-8"></script>
 <script src="/resources/app/scripts/common/filters/SortDateTime.js"  charset="utf-8"></script>
 
 <script src="/resources/app/scripts/authenticate/auth_main.js"  charset="utf-8"></script>
