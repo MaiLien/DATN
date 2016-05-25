@@ -181,9 +181,9 @@
 <script src="/resources/app/scripts/teacher_role/teacher_project_wave/services/TeacherProjectWaveService.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/teacher_role/teacher_project_wave/controllers/TeacherProjectWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
-<script src="/resources/app/scripts/teacher_role/teacher_propose_student/teacher_propose_student_main.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/teacher_role/teacher_propose_student/services/TeacherProposeStudentService.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/teacher_role/teacher_propose_student/controllers/TeacherProposeStudentCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/teacher_role/teacher_guide_students/teacher_guide_students_main.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/teacher_role/teacher_guide_students/services/TeacherGuideStudentsService.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/teacher_role/teacher_guide_students/controllers/TeacherGuideStudentsCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
 </body>
 </html>

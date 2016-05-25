@@ -1,5 +1,5 @@
 angular.module('appDATN.teacher')
-    .factory("TeacherProposeStudentService", function ($http) {
+    .factory("TeacherGuideStudentsService", function ($http) {
 
         return {
         };

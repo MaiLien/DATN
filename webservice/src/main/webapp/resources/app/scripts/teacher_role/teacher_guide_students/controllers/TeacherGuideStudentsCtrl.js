@@ -1,5 +1,5 @@
 angular.module('appDATN.student')
-    .controller('TeacherProposeStudentCtrl', function ($scope, $state, TeacherProposeStudentService) {
+    .controller('TeacherGuideStudentsCtrl', function ($scope, $state, TeacherGuideStudentsService) {
 
         $scope.teacher;
 
