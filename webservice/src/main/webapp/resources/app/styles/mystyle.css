@@ -133,3 +133,7 @@ a{
 table td {
     white-space: normal;
 }
+
+.table-middle th {
+    text-align: center;
+}

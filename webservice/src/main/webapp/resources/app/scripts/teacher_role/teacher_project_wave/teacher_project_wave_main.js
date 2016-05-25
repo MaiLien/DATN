@@ -5,7 +5,7 @@ angular.module('appDATN.teacher')
         $stateProvider
             .state('teacher_role.project_wave_list', {
                 parent: 'teacher_role',
-                url: '/propose_student',
+                url: '/project_wave_list',
                 views: {
                     content_view: {
                         controller:'TeacherProjectWaveCtrl',

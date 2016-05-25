@@ -1,1 +1,88 @@
-ahihi
+<div>
+    <section class="content">
+        <div class="box box-primary" ng-if="joinedWaves.length != 0">
+            <div class="box-header" style="text-align: center">
+                <b><h3 class="strong">Danh sách sinh viên trong đợt ĐATN</h3></b>
+                <div class="row">
+                    <div class="">
+                        <form class="form-inline" role="form">
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option>Đợt 7, học kì 1, năm học 2015-2016 (Đang hoạt động)</option>
+                                    <option>Đợt 8, học kì 2, năm học 2015-2016 (Đang hoạt động)</option>
+                                </select>
+                                <button class="btn">Xem danh sách sinh viên</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="box-body">
+                <div style="overflow:auto">
+                    <table class="table table-hover table-bordered table-middle">
+                        <thead>
+                        <tr>
+                            <th>Mã sinh viên</th>
+                            <th>Tên sinh viên</th>
+                            <th>Lớp</th>
+                            <th style="width: 30%;">Chi tiết ĐATN của sinh viên</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>102139281</td>
+                            <td>Nguyễn Văn A</td>
+                            <td>11T2</td>
+                            <td><a>Chi tiết ĐATN của sinh viên</a></td>
+                        </tr>
+                        <tr>
+                            <td>102139282</td>
+                            <td>Nguyễn Văn B</td>
+                            <td>11T3</td>
+                            <td><a>Chi tiết ĐATN của sinh viên</a></td>
+                        </tr>
+                        <tr>
+                            <td>102139283</td>
+                            <td>Nguyễn Văn C</td>
+                            <td>11T2</td>
+                            <td><a>Chi tiết ĐATN của sinh viên</a></td>
+                        </tr>
+                        <tr>
+                            <td>102139284</td>
+                            <td>Nguyễn Văn D</td>
+                            <td>11T2</td>
+                            <td><a>Chi tiết ĐATN của sinh viên</a></td>
+                        </tr>
+                        <tr>
+                            <td>102139285</td>
+                            <td>Nguyễn Văn E</td>
+                            <td>11T1</td>
+                            <td><a>Chi tiết ĐATN của sinh viên</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-7 col-sm-offset-5">
+                        <div class="pull-right">
+                            <paging class="small"
+                                    page="currentPage"
+                                    page-size="pageSize"
+                                    total="total"
+                                    adjacent="{{adjacent}}"
+                                    dots="{{dots}}"
+                                    hide-if-empty="{{hideIfEmpty}}"
+                                    show-prev-next="{{showPrevNext}}"
+                                    show-first-last="{{showFirstLast}}"
+                                    paging-action="DoPagingAct('clicked', page, pageSize)">
+                            </paging>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div><!-- /.box-body -->
+        </div>
+    </section>
+</div>

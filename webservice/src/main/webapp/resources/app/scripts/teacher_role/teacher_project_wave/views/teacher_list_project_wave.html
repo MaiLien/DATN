@@ -9,8 +9,8 @@
                             <div class="form-group">
                                 <select class="form-control">
                                     <option>Đang hoạt động</option>
-                                    <option>3</option>
-                                    <option>4</option>
+                                    <option>Đã kết thúc</option>
+                                    <option>Tất cả</option>
                                 </select>
                                 <input class="form-control" placeholder="Năm học">
                                 <button class="btn btn-primary">Tìm kiếm</button>
@@ -21,13 +21,15 @@
             </div>
             <div class="box-body">
                 <div style="overflow:auto">
-                    <table class="table table-hover table-bordered">
+                    <table class="table table-hover table-bordered table-middle">
                         <thead>
                         <tr>
                             <th>Năm học</th>
                             <th>Học kỳ</th>
                             <th>Thời gian bắt đầu và kết thúc</th>
                             <th>Tình trạng</th>
+                            <th>Xem chi tiết</th>
+                            <th>Đề xuất SV hướng dẫn</th>
                             <td></td>
                         </tr>
                         </thead>
@@ -37,35 +39,40 @@
                             <td>Học kỳ 1</td>
                             <td>10/09/2013 - 15/01/2014</td>
                             <td>Đã kết thúc</td>
-                            <td><a>Xem chi tiết</a></td>
+                            <td><a data-toggle="modal" data-target=".projectWave_details_modal">Xem chi tiết</a></td>
+                            <td><a data-toggle="modal" data-target=".propose_student_modal">Đề xuất SV hướng dẫn</a></td>
                         </tr>
                         <tr>
                             <td>2014 - 2015</td>
                             <td>Học kỳ 1</td>
                             <td>10/09/2014 - 15/01/2015</td>
                             <td>Đã kết thúc</td>
-                            <td><a>Xem chi tiết</a></td>
+                            <td><a data-toggle="modal" data-target=".projectWave_details_modal">Xem chi tiết</a></td>
+                            <td><a data-toggle="modal" data-target=".propose_student_modal">Đề xuất SV hướng dẫn</a></td>
                         </tr>
                         <tr>
                             <td>2015 - 2016</td>
                             <td>Học kỳ 1</td>
                             <td>10/09/2015 - 15/01/2016</td>
                             <td>Đã kết thúc</td>
-                            <td><a>Xem chi tiết</a></td>
+                            <td><a data-toggle="modal" data-target=".projectWave_details_modal">Xem chi tiết</a></td>
+                            <td><a data-toggle="modal" data-target=".propose_student_modal">Đề xuất SV hướng dẫn</a></td>
                         </tr>
                         <tr>
                             <td>2015 - 2016</td>
                             <td>Học kỳ 2</td>
                             <td>20/01/2015 - 10/06/2016</td>
                             <td>Đã kết thúc</td>
-                            <td><a>Xem chi tiết</a></td>
+                            <td><a data-toggle="modal" data-target=".projectWave_details_modal">Xem chi tiết</a></td>
+                            <td><a data-toggle="modal" data-target=".propose_student_modal">Đề xuất SV hướng dẫn</a></td>
                         </tr>
                         <tr>
                             <td>2013 - 2014</td>
                             <td>Học kỳ 1</td>
                             <td>10/09/2013 - 15/01/2014</td>
                             <td>Đang diễn ra</td>
-                            <td><a>Xem chi tiết</a></td>
+                            <td><a data-toggle="modal" data-target=".projectWave_details_modal">Xem chi tiết</a></td>
+                            <td><a data-toggle="modal" data-target=".propose_student_modal">Đề xuất SV hướng dẫn</a></td>
                         </tr>
 
                         </tbody>
@@ -95,3 +102,152 @@
         </div>
     </section>
 </div>
+
+
+<div class="modal fade propose_student_modal"  aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div>
+                <div class="modal-header" style="text-align: center">
+                    <h3 class="strong">ĐỀ XUẤT SINH VIÊN HƯỚNG DẪN</h3>
+                    Đợt Đồ án tốt nghiệp học kì 1, năm học 2015-2016
+                </div>
+                <div class="modal-body">
+                    <div style="overflow:auto">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                            <tr>
+                                <td></td>
+                                <th>Mã sinh viên</th>
+                                <th>Tên sinh viên</th>
+                                <th>Lớp</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><label><input type="checkbox" value=""></label></td>
+                                <td><a>102139281</a></td>
+                                <td>Nguyễn Văn A</td>
+                                <td>11T2</td>
+                            </tr>
+                            <tr>
+                                <td><label><input type="checkbox" value=""></label></td>
+                                <td><a>102139282</a></td>
+                                <td>Nguyễn Văn B</td>
+                                <td>11T3</td>
+                            </tr>
+                            <tr>
+                                <td><label><input type="checkbox" value=""></label></td>
+                                <td><a>102139283</a></td>
+                                <td>Nguyễn Văn C</td>
+                                <td>11T2</td>
+                            </tr>
+                            <tr>
+                                <td><label><input type="checkbox" value=""></label></td>
+                                <td><a>102139284</a></td>
+                                <td>Nguyễn Văn D</td>
+                                <td>11T2</td>
+                            </tr>
+                            <tr>
+                                <td><label><input type="checkbox" value=""></label></td>
+                                <td><a>102139285</a></td>
+                                <td>Nguyễn Văn E</td>
+                                <td>11T1</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveResearchTopic(project)">Lưu</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="project = null;">Hủy</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade projectWave_details_modal"  aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div>
+                <div class="modal-header" style="text-align: center">
+                    <h3 class="strong">ĐỢT ĐỒ ÁN TỐT NGHIỆP HỌC KỲ 1, NĂM HỌC 2015-2016</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <b><i class="fa fa-clock-o"></i></b> Thời gian bắt đầu và kết thúc
+                        </div>
+                        <div class="col-sm-7 col-sm-offset-1">
+                            <p>{{joiningWaves[0].startTimeAndEndTime}}</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <b><i class="fa fa-clock-o"></i></b> Thời gian giảng viên đề xuất sinh viên
+                        </div>
+                        <div class="col-sm-7 col-sm-offset-1">
+                            <p>{{joiningWaves[0].timeForTeacherProposesStudent}}</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <b><i class="fa fa-clock-o"></i></b> Thời gian sinh viên đăng kí giảng viên
+                        </div>
+                        <div class="col-sm-7 col-sm-offset-1">
+                            {{joiningWaves[0].timeForStudentRegisterTeacher}}
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <b><i class="fa fa-clock-o"></i></b> Lịch báo cáo tiền độ
+                        </div>
+                        <div class="col-sm-7 col-sm-offset-1">
+                            <p ng-repeat="x in joiningWaves[0].reportTimes track by $index">{{x}}</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <b><i class="fa fa-clock-o"></i></b> Thời gian bảo vệ demo
+                        </div>
+                        <div class="col-sm-7 col-sm-offset-1">
+                            <p>{{joiningWaves[0].timeForStudentSubmitProject}}</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <b><i class="fa fa-clock-o"></i></b> Thời gian bảo vệ chính thức
+                        </div>
+                        <div class="col-sm-7 col-sm-offset-1">
+                            <p>{{joiningWaves[0].timeForStudentDefend}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
