@@ -3,10 +3,7 @@ package datn.service.impl;
 import datn.dao.entity.*;
 import datn.dao.repository.*;
 import datn.interfaces.constant.MessageCodeConstant;
-import datn.interfaces.request.AddStudentForProjectWaveRequest;
-import datn.interfaces.request.AddTeacherForProjectWaveRequest;
-import datn.interfaces.request.ProjectWaveRequest;
-import datn.interfaces.request.RegisterTeacherRequest;
+import datn.interfaces.request.*;
 import datn.interfaces.response.*;
 import datn.interfaces.util.ConvertObject;
 import datn.interfaces.util.DateUtil;
@@ -81,6 +78,38 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
             students = getStudentsFromStudentWaves(studentWaves);
         }
         return new RestApiResponse<>(students);
+    }
+
+    @Override//TODO implement is not done
+    public RestApiResponse<ArrayList<StudentOfProjectWaveToProposeResponse>> getStudentsOfProjectWaveToPropose(String teacherId, String projectWaveId) {
+        ArrayList<StudentOfProjectWaveToProposeResponse> responses = new ArrayList<>();
+        Teacher teacher = teacherRepository.findOne(teacherId);
+        ProjectWave projectWave = projectWaveRepository.findOne(projectWaveId);
+
+        ArrayList<StudentWave> studentWaves = (ArrayList<StudentWave>) studentWaveRepository.findByProjectWave(projectWave);
+        StudentOfProjectWaveToProposeResponse studentOfProjectWaveToProposeResponse;
+        Student student;
+        Assignment assignment;
+        ArrayList<Assignment> assignments;
+        for (int i =0; i < studentWaves.size(); i++){
+            studentOfProjectWaveToProposeResponse = new StudentOfProjectWaveToProposeResponse();
+            student = studentWaves.get(i).getStudent();
+            studentOfProjectWaveToProposeResponse.setStudentResponse(ConvertObject.convertStudentEntityToStudentResponse(student));
+
+            assignment = assignmentRepository.findByStudentAndTeacherAndWave(student, teacher, projectWave);
+            if(assignment != null){
+                studentOfProjectWaveToProposeResponse.setProposed(true);
+            }else{
+                assignments = assignmentRepository.findByStudentAndWave(student, projectWave);
+                if(assignments.size() > 0){
+                    studentOfProjectWaveToProposeResponse.setProposedByAnotherTeacher(true);
+                    studentOfProjectWaveToProposeResponse.setNote("Đã được hướng dẫn bởi giảng viên " + assignments.get(0).getTeacher().getName());
+                }
+            }
+            responses.add(studentOfProjectWaveToProposeResponse);
+        }
+
+        return new RestApiResponse<>(responses);
     }
 
     @Override
@@ -168,6 +197,53 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         assignmentRepository.delete(assignment);
 
         return new RestApiResponse<>();
+    }
+
+    @Override
+    public RestApiResponse<WavesTeacherJoinedResponse> getProjectWaveTeacherJoin(String teacherId) {
+        Teacher teacher = teacherRepository.findOne(teacherId);
+        ArrayList<ProjectWaveResponse> projectWavesJoined = new ArrayList<>();
+        ArrayList<ProjectWaveResponse> projectWavesJoining = new ArrayList<>();
+        if(teacher == null)
+            throw new UserNotFoundException();
+        else{
+            ArrayList<TeacherWave> teacherWaves = teacherWaveRepository.findByTeacher(teacher);
+            ProjectWave tempProjectWave;
+            ProjectWaveResponse projectWaveResponse;
+            for(int i = 0; i<teacherWaves.size(); i++){
+                tempProjectWave = teacherWaves.get(i).getProjectWave();
+                projectWaveResponse = convertProjectWaveEntityToProjectWaveResponse(tempProjectWave);
+                if(projectWaveResponse.isDone())
+                    projectWavesJoined.add(projectWaveResponse);
+                else projectWavesJoining.add(projectWaveResponse);
+            }
+        }
+        return new RestApiResponse<>(new WavesTeacherJoinedResponse(projectWavesJoining, projectWavesJoined));
+    }
+
+    @Override
+    public RestApiResponse<ProposeStudentResponse> proposeStudent(ProposeStudentRequest request) {
+        Teacher teacher = teacherRepository.findOne(request.getTeacherId());
+        ProjectWave projectWave = projectWaveRepository.findOne(request.getProjectWaveId());
+        deleteAssignmentByTeacherAndProjectWave(teacher, projectWave);
+        Assignment assignment;
+        Student student;
+        for (int i = 0; i<request.getStudentsProposed().size(); i++){
+            student = studentRepository.findOne(request.getStudentsProposed().get(i));
+            assignment = new Assignment();
+            assignment.setStudent(student);
+            assignment.setTeacher(teacher);
+            assignment.setProjectWave(projectWave);
+            assignmentRepository.save(assignment);
+        }
+        return new RestApiResponse<>();
+    }
+
+    private void deleteAssignmentByTeacherAndProjectWave(Teacher teacher, ProjectWave projectWave){
+        ArrayList<Assignment> assignments = assignmentRepository.findByTeacherAndWave(teacher, projectWave);
+        for(int i = 0; i<assignments.size(); i++){
+            assignmentRepository.delete(assignments.get(i));
+        }
     }
 
     private ArrayList<Teacher> getTeacherEntitiesFromTeacherWaves(ArrayList<TeacherWave> teacherWaves){

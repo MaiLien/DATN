@@ -2,7 +2,6 @@ package datn.webservice.controller;
 
 import datn.interfaces.request.*;
 import datn.interfaces.response.*;
-import datn.interfaces.util.JsonUtil;
 import datn.service.IProjectWaveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,6 +40,11 @@ public class ProjectWaveController {
     @RequestMapping(value = "/getStudentsOfProjectWave", method = RequestMethod.GET)
     public RestApiResponse<ArrayList<StudentResponse>> getStudentsOfProjectWave(String id){
         return projectWaveService.getStudentsOfProjectWave(id);
+    }
+
+    @RequestMapping(value = "/getStudentsOfProjectWaveToPropose", method = RequestMethod.GET)
+    public RestApiResponse<ArrayList<StudentOfProjectWaveToProposeResponse>> getStudentsOfProjectWaveToPropose(String teacherId, String projectWaveId){
+        return projectWaveService.getStudentsOfProjectWaveToPropose(teacherId, projectWaveId);
     }
 
     @RequestMapping(value = "/getTeachersOfProjectWave", method = RequestMethod.GET)
