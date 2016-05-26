@@ -2,7 +2,7 @@ angular.module('appDATN.student')
     .controller('TeacherProjectWaveCtrl', function ($scope, $state, TeacherProjectWaveService, user) {
 
         $scope.teacherId = user.id;
-        $scope.waveOptions = [{ name: "Đang hoạt động", value: 0 }, { name: "Đã kết thúc", value: 1 }, { name: "Tất cả", value: 2 }];
+        $scope.waveOptions = [{ name: "Đang diễn ra", value: 0 }, { name: "Đã kết thúc", value: 1 }, { name: "Tất cả", value: 2 }];
         $scope.selectedWaveOption = $scope.waveOptions[0];
         $scope.teacher;
 
