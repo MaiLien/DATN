@@ -20,4 +20,34 @@ angular.module('appDATN.teacher')
                     }
                 }
             })
+            .state('teacher_role.teacher_session', {
+                parent: 'teacher_role',
+                abstract: true,
+                resolve:{
+                    user: function ($q, $state, AuthService) {
+                        var deferred = $q.defer();
+                        AuthService.getSession()
+                            .success(function (data) {
+                                if(data.headers.resultCode == 0) {
+                                    if(data.body == null){
+                                        $state.go('login');
+                                    }else{
+                                        deferred.resolve(data.body);
+                                    }
+                                }else{
+                                    $state.go('login');
+                                }
+                            })
+                            .error(function (error) {
+                                deferred.reject('Error');
+                            });
+                        return deferred.promise;
+                    }
+                },
+                views: {
+                    content_view: {
+                        template: '<div ui-view="content_view"></div>'
+                    }
+                }
+            })
     });
