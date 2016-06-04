@@ -10,7 +10,7 @@ public class ReportResponse {
     private boolean timeSubmitReport;
     private String timeSubmitReportString;
     private int ordinal;
-    private int status;//0 : chua nop, 1:dang cho duyet, 2 da nop
+    private int status;//0 : chua nop, 1:dang cho duyet, 2 da nop, 3 Đã phản hồi ý kiến
     private String createdDate;
     private String studentOpinion;
     private String teacherOpinion;

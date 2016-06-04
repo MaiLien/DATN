@@ -1,87 +1,55 @@
 angular.module('appDATN.officer_wave')
     .controller('DetailTabTeachersCtrl', function ($scope, $stateParams, ProjectWaveService, projectWaveTeachers) {
 
-        $scope.init = function(){
-            $scope.infoMessage = null;
-            $scope.errMessage = null;
-            $scope.successMessage = null;
-            $scope.teacherTemp = null;
-        };
+        $scope.projectWaveId = $stateParams.projectWaveId;
 
-        $scope.resetScopeVar = function(){
-            $scope.teacherUsername = null;
-            $scope.numberOfStudent = null;
-        };
-
-        $scope.teachersOfWave = projectWaveTeachers;
-
-        $scope.init();
-
-        $scope.setCurrentProjectWaveId($stateParams.projectWaveId);
-
-        $scope.addTeacherForProjectWave = function(){
-            $scope.init();
-            $scope.setDirty();
-            if($scope.addTeacherForWaveForm.$valid){
-                var request = $scope.createAddTeacherRequest();
-                ProjectWaveService.addTeacher(request)
-                    .success(function(data){
-
-                        if(data.headers.resultCode == 1062)
-                            $scope.infoMessage = "Giảng viên đã tham gia đợt Đồ án";
-
-                        else if(data.headers.resultCode == 1061)
-                            $scope.errMessage = "Không tồn tại đợt đồ án";
-
-                        else if(data.headers.resultCode == 1500)
-                            $scope.errMessage = "Không tồn tại giảng viên này";
-
-                        else if(data.headers.resultCode == 1063)
-                            $scope.infoMessage = "Giảng viên đã tham gia đợt đồ án";
-
-                        else if(data.headers.resultCode == 500)
-                            $scope.errMessage = "Lỗi hệ thống";
-
-                        else  if(data.headers.resultCode == 0){
-                            $scope.teacherTemp = data.body;
-                            $scope.successMessage = "Thêm thành công giảng viên vào đợt Đồ án";
-                            $scope.teachersOfWave.push($scope.teacherTemp);
-                            $scope.resetScopeVar();
-                            $scope.addTeacherForWaveForm.$setPristine();
-
-                        }
-                        else{
-                            $scope.errMessage = "Lỗi hệ thống";
-                        }
-                    })
-                    .error(function(error){
-
-                    })
-            }
-        };
-
-        $scope.createAddTeacherRequest = function(){
-            return {
-                teacherUsername: $scope.teacherUsername,
-                numberOfStudent: $scope.numberOfStudent,
-                projectWaveId: $scope.getCurrentProjectWaveId()
-            };
-        };
-
-        $scope.setDirty = function(){
-            if($scope.addTeacherForWaveForm.$invalid){
-                Object.keys($scope.addTeacherForWaveForm.$error).forEach(function (key) {
-                    $scope.addTeacherForWaveForm.$error[key].forEach(function (control) {
-                        control.$setDirty();
-                    });
+        $scope.getTeachersToAddForProjectWave = function(){
+            ProjectWaveService.getTeachersToAddForProjectWave($stateParams.projectWaveId)
+                .success(function(data){
+                    $scope.teachersToAddForWave = data.body;
                 });
+        };
+
+        $scope.getTeachersOfWave = function(){
+            ProjectWaveService.getTeachers($scope.projectWaveId)
+                .success(function(data){
+                    $scope.teachersOfProjectWave = data.body;
+                });
+        };
+
+        $scope.addTeachersForWave = function(){
+            var request = createAddTeacherForWaveRequest();
+            if(request.teachers.length > 0){
+                ProjectWaveService.addTeachersForWave(request)
+                    .success(function(data){
+                        $scope.getTeachersOfWave();
+                    })
             }
         };
 
-        $scope.cancel = function(){
-            $scope.init();
-            $scope.resetScopeVar();
-            $scope.addTeacherForWaveForm.$setPristine();
-        }
+        $scope.deleteTeacherFromWave = function(teacher){
+            ProjectWaveService.deleteTeacherFromWave(teacher.id, $scope.projectWaveId)
+                .success(function(data){
+                    $scope.getTeachersOfWave();
+                })
+        };
+
+        createAddTeacherForWaveRequest = function(){
+            var out = [];
+            for(i=0; i<$scope.teachersToAddForWave.length; i++){
+                if($scope.teachersToAddForWave[i].checked)
+                    out.push({teacherId: $scope.teachersToAddForWave[i].id, maxGuide: $scope.teachersToAddForWave[i].maxGuide});
+            }
+            return {
+                projectWaveId: $scope.projectWaveId,
+                teachers: out
+            }
+        };
+
+        load = function(){
+            $scope.getTeachersOfWave();
+        };
+
+        load();
 
     });

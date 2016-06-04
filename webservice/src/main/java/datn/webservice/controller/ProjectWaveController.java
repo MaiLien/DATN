@@ -52,6 +52,21 @@ public class ProjectWaveController {
         return projectWaveService.getTeachersOfProjectWave(id);
     }
 
+    @RequestMapping(value = "/getTeachersToAddForProjectWave", method = RequestMethod.GET)
+    public RestApiResponse<ArrayList<TeacherResponse>> getTeachersToAddForProjectWave(String id){
+        return projectWaveService.getTeachersToAddForProjectWave(id);
+    }
+
+    @RequestMapping(value = "/addTeachersForWave", method = RequestMethod.POST)
+    public RestApiResponse<?> addTeachersForWave(@RequestBody AddTeachersForWaveRequest request){
+        return projectWaveService.addTeachersForWave(request);
+    }
+
+    @RequestMapping(value = "/deleteTeacherFromWave", method = RequestMethod.DELETE)
+    public RestApiResponse<?> deleteStudent(String teacherId, String projectWaveId){
+        return projectWaveService.deleteTeacherFromWave(teacherId, projectWaveId);
+    }
+
     @RequestMapping(value = "/getWavesStudentJoined", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public RestApiResponse<WavesStudentJoinedResponse> getWavesStudentJoined(String studentId){
@@ -59,8 +74,8 @@ public class ProjectWaveController {
     }
 
     @RequestMapping(value = "/getWavesTeacherJoined", method = RequestMethod.GET)
-    public RestApiResponse<ArrayList<ProjectWaveResponse>> getWavesTeacherJoined(String teacherId){
-        return projectWaveService.getWavesTeacherJoined(teacherId);
+    public RestApiResponse<WavesTeacherJoinedResponse> getProjectWaveTeacherJoin(String teacherId){
+        return projectWaveService.getProjectWaveTeacherJoin(teacherId);
     }
 
     @RequestMapping(value = "/getTeachersWhoDirectingStudentInProjectWave", method = RequestMethod.GET)
@@ -92,6 +107,16 @@ public class ProjectWaveController {
     @RequestMapping(value = "/addTeacherForProjectWave", method = RequestMethod.POST)
     public RestApiResponse<TeacherResponse> addTeacherForProjectWave(@RequestBody AddTeacherForProjectWaveRequest request){
         return projectWaveService.addTeacherForProjectWave(request);
+    }
+
+    @RequestMapping(value = "/getListStudentWhoTeacherGuideInWave", method = RequestMethod.GET)
+    public RestApiResponse<ArrayList<StudentResponse>> getListStudentWhoTeacherGuideInWave(String teacherId, String waveId){
+        return projectWaveService.getListStudentWhoTeacherGuideInWave(teacherId, waveId);
+    }
+
+    @RequestMapping(value = "/approveReport", method = RequestMethod.POST)
+    public RestApiResponse<?> approveReport(@RequestBody ApproveReportRequest request){
+        return projectWaveService.approveReport(request);
     }
 
 }

@@ -2,31 +2,14 @@
     <section class="content">
         <div class="box box-primary" ng-if="joinedWaves.length != 0">
             <div class="box-header" style="text-align: center">
-                <b><h3 class="strong">Xem và duyệt báo cáo tiến độ</h3></b>
-                <div class="row">
-                    <div class="">
-                        <form class="form-inline" role="form">
-                            <div class="form-group">
-                                <select class="form-control">
-                                    <option>Đang chờ duyệt</option>
-                                    <option>Đã duyệt</option>
-                                    <option>Tất cả</option>
-                                </select>
-                                <select class="form-control">
-                                    <option>Đợt 7, học kì 2, năm học 2015-2016</option>
-                                    <option>Đợt 8, học kì 2, năm học 2015-2016</option>
-                                </select>
-                                <button class="btn btn-primary">Xem</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                <b><h3 class="strong">Danh sách báo cáo tiến độ đang chờ duyệt</h3></b>
             </div>
             <div class="box-body">
                 <div style="overflow:auto">
                     <table class="table table-hover table-bordered table-middle">
                         <thead>
                         <tr>
+                            <th>Đợt ĐATN</th>
                             <th>Mã sinh viên</th>
                             <th>Tên sinh viên</th>
                             <th>Báo cáo tiến độ</th>
@@ -34,52 +17,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>102110134</td>
-                            <td>Nguyễn Văn A</td>
-                            <td><a data-toggle="modal" data-target=".report_modal">Báo cáo tiến độ đợt 1</a></td>
-                            <td>Đang chờ duyệt</td>
+                        <tr ng-repeat="report in reports">
+                            <td>{{report.time}}</td>
+                            <td>{{report.username}}</td>
+                            <td>{{report.name}}</td>
+                            <td><a data-toggle="modal" data-target=".report_modal" ng-click="setViewingReport(report)">Báo cáo tiến độ đợt {{report.baoCaoDot}}</a></td>
+                            <td>{{report.status}}</td>
                         </tr>
-                        <tr>
-                            <td>102110135</td>
-                            <td>Nguyễn Văn B</td>
-                            <td><a data-toggle="modal" data-target=".report_modal">Báo cáo tiến độ đợt 1</a></td>
-                            <td>Đang chờ duyệt</td>
-                        </tr>
-                        <tr>
-                            <td>102110136</td>
-                            <td>Nguyễn Văn C</td>
-                            <td><a data-toggle="modal" data-target=".report_modal">Báo cáo tiến độ đợt 1</a></td>
-                            <td>Đang chờ duyệt</td>
-                        </tr>
-                        <tr>
-                            <td>102110137</td>
-                            <td>Nguyễn Văn D</td>
-                            <td><a data-toggle="modal" data-target=".report_modal">Báo cáo tiến độ đợt 1</a></td>
-                            <td>Đang chờ duyệt</td>
-                        </tr>
-
                         </tbody>
                     </table>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-7 col-sm-offset-5">
-                        <div class="pull-right">
-                            <paging class="small"
-                                    page="currentPage"
-                                    page-size="pageSize"
-                                    total="total"
-                                    adjacent="{{adjacent}}"
-                                    dots="{{dots}}"
-                                    hide-if-empty="{{hideIfEmpty}}"
-                                    show-prev-next="{{showPrevNext}}"
-                                    show-first-last="{{showFirstLast}}"
-                                    paging-action="DoPagingAct('clicked', page, pageSize)">
-                            </paging>
-                        </div>
-
-                    </div>
                 </div>
 
             </div><!-- /.box-body -->
@@ -89,88 +35,5 @@
 
 
 <div class="modal fade report_modal"  aria-hidden="true" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
 
-            <div>
-                <div class="modal-header" style="text-align: center">
-                    <h3 class="strong">BÁO CÁO TIỀN ĐỘ ĐỢT 1</h3>
-                    Đợt Đồ án tốt nghiệp học kì 1, năm học 2015-2016
-                </div>
-                <div class="modal-body">
-                    <form name="reportForm" novalidate>
-
-                        <div class="form-group col-sm-6">
-                            <label class="control-label">Mã sinh viên: </label>
-                            102110142
-                        </div>
-
-                        <div class="form-group col-sm-6">
-                            <label class="control-label">Họ và tên: </label>
-                            Nguyễn Văn A
-                        </div>
-
-                        <!-- topic-->
-                        <div class="form-group col-sm-12">
-                            <label class="control-label">Tên đề tài : </label>
-                            Xây dựng website hỗ trợ quá trình quản lý làm đồ án tốt nghiệp tại khoa Công nghệ thông tin - ĐHBK - ĐHĐN
-                        </div>
-
-                        <!-- Progress-->
-                        <div class="form-group col-sm-12">
-                            <label class="control-label">Tiến độ thực hiện đề tài</label>
-                            <div>
-                                <div>
-                                    <link rel="stylesheet" href="/resources/bower_components/bootstrap/dist/css/bootstrap.css">
-                                    <table class="table table-bordered table-hover">
-                                        <thead>
-                                        <tr style="color: #666;">
-                                            <th style="width: 30%; align-content: center">Thời gian</th>
-                                            <th style="width: 55%;">Nội dung công việc</th>
-                                            <th>Ghi chú</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>20/04/2016 - 25/04/2016</td>
-                                            <td>Chọn đề tài</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>26/04/2016 - 03/05/2016</td>
-                                            <td>Phân tích, thiết kế hệ thống</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>07/05/2016 - 25/05/2016</td>
-                                            <td>Tìm hiểu về Spring Framework</td>
-                                            <td></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- -->
-                        <div class="form-group col-sm-12">
-                            <label class="control-label">Nhận xét khối lượng công việc đã thực hiện được theo đề cương : 45%</label>
-                        </div>
-
-                        <!-- Student opinion-->
-                        <div class="form-group col-sm-12">
-                            <label class="control-label">Ý kiến của sinh viên : </label>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="">Phản hồi ý kiến</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="">Duyệt báo cáo</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="">Đóng</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
 </div>
-

@@ -15,12 +15,6 @@ public class TeacherWaveController {
     @Autowired
     IProjectWaveService projectWaveService;
 
-    @RequestMapping(value = "/getProjectWaveTeacherJoin", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public RestApiResponse<WavesTeacherJoinedResponse> getProjectWaveTeacherJoin(String teacherId){
-        return projectWaveService.getProjectWaveTeacherJoin(teacherId);
-    }
-
     @RequestMapping(value = "/proposeStudent", method = RequestMethod.POST)
     public RestApiResponse<ProposeStudentResponse> proposeStudent(@RequestBody ProposeStudentRequest request){
         return projectWaveService.proposeStudent(request);

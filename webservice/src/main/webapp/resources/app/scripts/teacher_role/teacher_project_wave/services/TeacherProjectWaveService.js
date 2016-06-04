@@ -2,7 +2,7 @@ angular.module('appDATN.teacher')
     .factory("TeacherProjectWaveService", function ($http) {
 
         getProjectWaveTeacherJoin = function(teacherId){
-            return $http.get('API/getProjectWaveTeacherJoin', {params : {teacherId: teacherId}})
+            return $http.get('API/getWavesTeacherJoined', {params : {teacherId: teacherId}})
         };
 
         getStudentsOfProjectWaveToPropose = function (teacherId, projectWaveId) {

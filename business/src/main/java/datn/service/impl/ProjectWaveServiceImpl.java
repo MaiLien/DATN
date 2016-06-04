@@ -50,6 +50,9 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     @Autowired
     AssignmentRepository assignmentRepository;
 
+    @Autowired
+    StudentReportRepository studentReportRepository;
+
     public RestApiResponse<ProjectWaveResponse> addProjectWave(ProjectWaveRequest request) {
         ProjectWave projectWave = convertProjectWaveRequestToProjectWaveEntity(request);
         ProjectWave entity = projectWaveRepository.save(projectWave);
@@ -110,6 +113,71 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         }
 
         return new RestApiResponse<>(responses);
+    }
+
+    @Override
+    public RestApiResponse<ArrayList<TeacherResponse>> getTeachersToAddForProjectWave(String projectWaveId) {
+        ProjectWave projectWave = projectWaveRepository.findOne(projectWaveId);
+
+        ArrayList<Teacher> teachers = teacherRepository.findTeacherNotJoinProjectWave(projectWave);
+        ArrayList<TeacherResponse> responses = new ArrayList<>();
+        TeacherResponse teacherResponse;
+        for (int i = 0; i<teachers.size(); i++){
+            teacherResponse = ConvertObject.convertTeacherEntityToTeacherResponse(teachers.get(i));
+            responses.add(teacherResponse);
+        }
+
+        return new RestApiResponse<>(responses);
+    }
+
+    @Override
+    public RestApiResponse<?> addTeachersForWave(AddTeachersForWaveRequest request) {
+        ProjectWave projectWave = projectWaveRepository.findOne(request.getProjectWaveId());
+        Teacher teacher;
+        TeacherWave teacherWave;
+        for (int i = 0; i<request.getTeachers().size(); i++){
+            teacher = teacherRepository.findOne(request.getTeachers().get(i).getTeacherId());
+
+            teacherWave = new TeacherWave();
+            teacherWave.setTeacher(teacher);
+            teacherWave.setProjectWave(projectWave);
+            teacherWave.setMinNumberOfStudent(request.getTeachers().get(i).getMaxGuide());
+            teacherWave.setMaxNumberOfStudent(request.getTeachers().get(i).getMaxGuide());
+            teacherWaveRepository.save(teacherWave);
+        }
+        return new RestApiResponse<>();
+    }
+
+    @Override
+    public RestApiResponse<?> deleteTeacherFromWave(String teacherId, String projectWaveId) {
+        Teacher teacher = teacherRepository.findOne(teacherId);
+        ProjectWave projectWave = projectWaveRepository.findOne(projectWaveId);
+
+        ArrayList<TeacherWave> teacherWave = teacherWaveRepository.findByTeacherAndProjectWave(teacher, projectWave);
+        if(teacherWave.size() > 0){
+            teacherWaveRepository.delete(teacherWave.get(0));
+        }
+        return new RestApiResponse<>();
+    }
+
+    @Override
+    public RestApiResponse<ArrayList<StudentResponse>> getListStudentWhoTeacherGuideInWave(String teacherId, String waveId) {
+        Teacher teacher = teacherRepository.findOne(teacherId);
+        ProjectWave projectWave = projectWaveRepository.findOne(waveId);
+        ArrayList<StudentWave> students = studentWaveRepository.findByTeacherAndProjectWave(teacher, projectWave);
+        ArrayList<StudentResponse> out = getStudentsFromStudentWaves(students);
+
+        return new RestApiResponse<>(out);
+    }
+
+    @Override
+    public RestApiResponse<?> approveReport(ApproveReportRequest request) {
+        StudentReport studentReport = studentReportRepository.findOne(request.getReportId());
+        studentReport.setStatus(request.getStatus());
+        studentReport.setTeacherOpinion(request.getTeacherOpinions());
+        studentReportRepository.save(studentReport);
+
+        return new RestApiResponse<>();
     }
 
     @Override

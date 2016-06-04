@@ -1,17 +1,26 @@
 <div>
     <section class="content">
-        <div class="box box-primary" ng-if="joinedWaves.length != 0">
+        <!-- List student-->
+        <div class="box box-primary" ng-if="joinedWaves.length != 0 && view_list">
             <div class="box-header" style="text-align: center">
                 <b><h3 class="strong">Danh sách sinh viên trong đợt ĐATN</h3></b>
                 <div class="row">
                     <div class="">
                         <form class="form-inline" role="form">
                             <div class="form-group">
-                                <select class="form-control">
-                                    <option>Đợt 7, học kì 1, năm học 2015-2016 (Đang hoạt động)</option>
-                                    <option>Đợt 8, học kì 2, năm học 2015-2016 (Đang hoạt động)</option>
+                                <select class="form-control" data-ng-model="selectedWaveOption">
+                                    <option ng-repeat="x in projectWavesJoined"
+                                            ng-selected="{{x.id == selectedWaveOption}}"
+                                            value="{{x.id}}">
+                                        Đợt ĐATN học kì {{x.semester}}, năm học {{x.schoolYear}} (đã kết thúc)
+                                    </option>
+                                    <option ng-repeat="x in projectWavesJoining"
+                                            ng-selected="{{x.id == selectedWaveOption}}"
+                                            value="{{x.id}}">
+                                        Đợt ĐATN học kì {{x.semester}}, năm học {{x.schoolYear}} (đang diễn ra)
+                                    </option>
                                 </select>
-                                <button class="btn">Xem danh sách sinh viên</button>
+                                <button class="btn" ng-click="getListStudent()">Xem danh sách sinh viên</button>
                             </div>
                         </form>
                     </div>
@@ -29,60 +38,203 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>102139281</td>
-                            <td>Nguyễn Văn A</td>
-                            <td>11T2</td>
-                            <td><a>Chi tiết ĐATN của sinh viên</a></td>
-                        </tr>
-                        <tr>
-                            <td>102139282</td>
-                            <td>Nguyễn Văn B</td>
-                            <td>11T3</td>
-                            <td><a>Chi tiết ĐATN của sinh viên</a></td>
-                        </tr>
-                        <tr>
-                            <td>102139283</td>
-                            <td>Nguyễn Văn C</td>
-                            <td>11T2</td>
-                            <td><a>Chi tiết ĐATN của sinh viên</a></td>
-                        </tr>
-                        <tr>
-                            <td>102139284</td>
-                            <td>Nguyễn Văn D</td>
-                            <td>11T2</td>
-                            <td><a>Chi tiết ĐATN của sinh viên</a></td>
-                        </tr>
-                        <tr>
-                            <td>102139285</td>
-                            <td>Nguyễn Văn E</td>
-                            <td>11T1</td>
-                            <td><a>Chi tiết ĐATN của sinh viên</a></td>
+                        <tr ng-repeat="x in students">
+                            <td>{{x.username}}</td>
+                            <td>{{x.name}}</td>
+                            <td>{{x.class_}}</td>
+                            <td><a ng-click="view_student_details(x.id)">Chi tiết ĐATN của sinh viên</a></td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="row">
-                    <div class="col-sm-7 col-sm-offset-5">
-                        <div class="pull-right">
-                            <paging class="small"
-                                    page="currentPage"
-                                    page-size="pageSize"
-                                    total="total"
-                                    adjacent="{{adjacent}}"
-                                    dots="{{dots}}"
-                                    hide-if-empty="{{hideIfEmpty}}"
-                                    show-prev-next="{{showPrevNext}}"
-                                    show-first-last="{{showFirstLast}}"
-                                    paging-action="DoPagingAct('clicked', page, pageSize)">
-                            </paging>
-                        </div>
+            </div><!-- /.box-body -->
+        </div>
 
-                    </div>
+        <!-- Student_project details-->
+        <div class="box" ng-if="!view_list">
+            <div class="box-header" style="text-align: center">
+                <b><h3 class="strong">Thông tin sinh viên trong đợt ĐATN</h3></b>
+                Học kì 1, năm học 2015-2016
+                <hr>
+            </div>
+            <div class="box-body">
+
+                <div class="form-group col-sm-4">
+                    <label class="control-label">Mã sinh viên: </label>
+                    <span class="text-muted">{{student.username}}</span>
                 </div>
 
-            </div><!-- /.box-body -->
+                <div class="form-group col-sm-4">
+                    <label class="control-label">Họ và tên: </label>
+                    <span class="text-muted">{{student.name}}</span>
+                </div>
+
+                <div class="form-group col-sm-4">
+                    <label class="control-label">Lớp: </label>
+                    <span class="text-muted">{{student.class_}}</span>
+                </div>
+
+                <div class="form-group col-sm-12">
+                    <label class="control-label">Tên đề tài : </label> <br>
+                    <span class="text-muted">{{projectInfo.topic}}</span>
+                </div>
+
+                <div class="form-group col-sm-12">
+                    <label class="control-label">Mô tả đề tài: </label>
+                    <br>
+                    <span class="text-muted" ng-bind-html="projectInfo.description"></span>
+                </div>
+
+                <div class="form-group col-sm-12">
+                    <label class="control-label">Báo cáo tiến độ: </label>
+                    <table class="table table-bordered table-hover table-middle">
+                        <thead>
+                        <tr style="color: #666;">
+                            <th style="width: 25%;">Đợt báo cáo</th>
+                            <th style="width: 55%;">Thời gian báo cáo</th>
+                            <th>Tình trạng</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in reports">
+                                <td class="text-muted"><a data-toggle="modal" data-target=".report_modal" ng-click="setViewingReport(x)">Báo cáo tiến độ đợt {{x.ordinal}}</a></td>
+                                <td class="text-muted">{{x.timeSubmitReportString}}</td>
+                                <td>
+                                    <span class="text-muted" ng-if="x.status == 0">Chưa nộp</span>
+                                    <span class="text-muted" ng-if="x.status == 1">Đang chờ duyệt</span>
+                                    <span class="text-muted" ng-if="x.status == 2">Đã nộp</span>
+                                    <span class="text-muted" ng-if="x.status == 3">Đã phản hồi ý kiến</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
         </div>
     </section>
 </div>
+
+<div class="modal fade report_modal"  aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div>
+                <div class="modal-header" style="text-align: center">
+                    <h3 class="strong">BÁO CÁO TIỀN ĐỘ ĐỢT {{viewingReport.ordinal}}</h3>
+                    {{viewingReport.timeSubmitReportString}}
+                </div>
+                <div class="modal-body">
+                    <form name="reportForm" novalidate>
+
+                        <div class="form-group col-sm-6">
+                            <label class="control-label">Mã sinh viên: </label>
+                            {{student.username}}
+                        </div>
+
+                        <div class="form-group col-sm-6">
+                            <label class="control-label">Họ và tên: </label>
+                            {{student.name}}
+                        </div>
+
+                        <!-- topic-->
+                        <div class="form-group col-sm-12">
+                            <label class="control-label">Tên đề tài : </label>
+                            {{projectInfo.topic}}
+                        </div>
+
+                        <!--Progress-->
+                        <div class="form-group col-sm-12">
+                            <label class="control-label">Tiến độ thực hiện đề tài</label>
+                            <div>
+                                <div>
+                                    <link rel="stylesheet" href="/resources/bower_components/bootstrap/dist/css/bootstrap.css">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr style="color: #666;">
+                                            <th style="width: 30%; align-content: center">Thời gian</th>
+                                            <th style="width: 55%;">Nội dung công việc</th>
+                                            <th>Ghi chú</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="nd in viewingReport.reportDetails">
+                                            <td>{{nd.startTimeAndEndTime}}</td>
+                                            <td>{{nd.workContent}}</td>
+                                            <td>{{nd.note}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group col-sm-12">
+                            <label class="control-label">Nhận xét khối lượng công việc đã thực hiện được theo đề cương : </label>{{viewingReport.percentFinish}}%
+                        </div>
+
+                        <!-- Student opinion-->
+                        <div class="form-group col-sm-12">
+                            <label class="control-label">Ý kiến của sinh viên : </label>{{viewingReport.studentOpinion}}
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" ng-disabled="viewingReport.status != 1" data-toggle="modal" data-target="#refundReport">Phản hồi ý kiến</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="viewingReport.status != 1" data-toggle="modal" data-target="#acceptReport">Duyệt báo cáo</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="">Đóng</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="refundReport">
+    <div class="modal-dialog">
+        <form name="refundReportForm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Phản hồi ý kiến</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <label class="control-label"><i></i>Ý kiến của giảng viên: </label> <br>
+                        <textarea ng-class="{'error' : refundReportForm.teacherOpinions.$invalid && !refundReportForm.teacherOpinions.$pristine}" name="teacherOpinions" style="width: 100%;" data-ng-model="viewingReport.teacherOpinions" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="refundReport()">Gửi ý kiến phản hồi</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </form>
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="acceptReport">
+    <div class="modal-dialog">
+        <form name="acceptReportFrom">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Duyệt báo cáo tiến độ</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <label class="control-label"><i></i>Ý kiến của giảng viên: </label> <br>
+                        <textarea ng-class="{'error' : acceptReportFrom.teacherOpinions.$invalid && !acceptReportFrom.teacherOpinions.$pristine}" required style="width: 100%;" data-ng-model="viewingReport.teacherOpinions" rows="3" name="teacherOpinions"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="acceptReport()">Duyệt</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </form>
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

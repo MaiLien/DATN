@@ -17,6 +17,19 @@ angular.module('appDATN.officer_wave')
             return $http.get('API/getTeachersOfProjectWave', {params : {id: projectWaveId}});
         };
 
+        getTeachersToAddForProjectWave = function(projectWaveId){
+            return $http.get('API/getTeachersToAddForProjectWave', {params : {id: projectWaveId}});
+        };
+
+        addTeachersForWave = function(request){
+            return $http.post('API/addTeachersForWave', request);
+
+        };
+
+        deleteTeacherFromWave = function(teacherId, projectWaveId){
+            return $http.delete('API/deleteTeacherFromWave', {params : {teacherId: teacherId, projectWaveId: projectWaveId}})
+        };
+
         getProjectWavesByPage = function(currentPage, pageSize, searchInput){
             return $http.get('API/getProjectWavesByPage', {params : {pageIndex: currentPage, sizeOfPage:pageSize, searchInput:searchInput}});
         };
@@ -39,6 +52,9 @@ angular.module('appDATN.officer_wave')
             getProjectWave : getProjectWave,
             getStudents : getStudents,
             getTeachers: getTeachers,
+            getTeachersToAddForProjectWave: getTeachersToAddForProjectWave,
+            addTeachersForWave: addTeachersForWave,
+            deleteTeacherFromWave: deleteTeacherFromWave,
             getProjectWavesByPage: getProjectWavesByPage,
             deleteProjectWave: deleteProjectWave,
             addStudent: addStudent,

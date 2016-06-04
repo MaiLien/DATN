@@ -42,4 +42,13 @@ public interface IProjectWaveService{
 
     RestApiResponse<ArrayList<StudentOfProjectWaveToProposeResponse>> getStudentsOfProjectWaveToPropose(String teacherId, String projectWaveId);
 
+    RestApiResponse<ArrayList<TeacherResponse>> getTeachersToAddForProjectWave(String id);
+
+    RestApiResponse<?> addTeachersForWave(AddTeachersForWaveRequest request);
+
+    RestApiResponse<?> deleteTeacherFromWave(String teacherId, String projectWaveId);
+
+    RestApiResponse<ArrayList<StudentResponse>> getListStudentWhoTeacherGuideInWave(String teacherId, String waveId);
+
+    RestApiResponse<?> approveReport(ApproveReportRequest request);
 }

@@ -199,8 +199,8 @@ public class ReportServiceImpl implements IReportService {
             if(studentReport != null){
                 reportResponse.setId(studentReport.getId());
                 reportResponse.setStatus(studentReport.getStatus());
-                //TODO
-//                reportResponse.setCreatedDate(DateUtil.convertDateTimeToString(studentReport.getCreatedDate()));
+                //TODO reportResponse.setCreatedDate
+                reportResponse.setCreatedDate(DateUtil.convertDateTimeToString(studentReport.getCreatedDate()));
                 reportResponse.setStudentOpinion(studentReport.getStudentOpinion());
                 reportResponse.setTeacherOpinion(studentReport.getTeacherOpinion());
                 reportResponse.setPercentFinish(studentReport.getPercentFinish());

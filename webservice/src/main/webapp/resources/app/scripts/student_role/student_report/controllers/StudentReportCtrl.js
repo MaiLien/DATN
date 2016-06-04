@@ -57,7 +57,6 @@ angular.module('appDATN.student_wave')
                         $state.go('login');
                     }
                     else{
-                        console.log("aa");
                         $scope.student = data.body.student;
                         $scope.projectWave = data.body.projectWave;
                         $scope.projectInfo = data.body.projectInforResponse;
