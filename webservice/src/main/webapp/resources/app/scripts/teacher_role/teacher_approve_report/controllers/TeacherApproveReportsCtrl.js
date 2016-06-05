@@ -18,7 +18,7 @@ angular.module('appDATN.student')
         };
 
         $scope.acceptReport = function(){
-            if($scope.acceptReportFrom.$valid){
+            if($scope.approveReportForm.$valid){
                 var request = createApproveReportRequest(2);
                 TeacherApproveReportsService.approveReport(request)
                     .success(function(data){
@@ -28,7 +28,7 @@ angular.module('appDATN.student')
         };
 
         $scope.refundReport = function(){
-            if($scope.refundReportForm.$valid){
+            if($scope.approveReportForm.$valid){
                 var request = createApproveReportRequest(3);
                 TeacherApproveReportsService.approveReport(request)
                     .success(function(data){

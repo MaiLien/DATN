@@ -70,7 +70,7 @@ angular.module('appDATN.student')
         };
 
         $scope.acceptReport = function(){
-            if($scope.acceptReportFrom.$valid){
+            if($scope.approveReportForm.$valid){
                 var request = createApproveReportRequest(2);
                 TeacherGuideStudentsService.approveReport(request)
                     .success(function(data){
@@ -80,7 +80,7 @@ angular.module('appDATN.student')
         };
 
         $scope.refundReport = function(){
-            if($scope.refundReportForm.$valid){
+            if($scope.approveReportForm.$valid){
                 var request = createApproveReportRequest(3);
                 TeacherGuideStudentsService.approveReport(request)
                     .success(function(data){
@@ -95,6 +95,10 @@ angular.module('appDATN.student')
                 teacherOpinions: $scope.viewingReport.teacherOpinions,
                 status: status
             }
+        };
+
+        $scope.setOptionApprove = function(option){
+            $scope.isRefund = option;
         };
 
         load = function(){
