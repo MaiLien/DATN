@@ -185,9 +185,9 @@
 <script src="/resources/app/scripts/teacher_role/teacher_guide_students/services/TeacherGuideStudentsService.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/teacher_role/teacher_guide_students/controllers/TeacherGuideStudentsCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
-<script src="/resources/app/scripts/teacher_role/teacher_view_report/teacher_view_report.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/teacher_role/teacher_view_report/services/TeacherViewsReportsService.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/teacher_role/teacher_view_report/controllers/TeacherViewsReportsCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/teacher_role/teacher_approve_report/teacher_approve_report.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/teacher_role/teacher_approve_report/services/TeacherApproveReportsService.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/teacher_role/teacher_approve_report/controllers/TeacherApproveReportsCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
 </body>
 </html>

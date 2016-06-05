@@ -51,4 +51,6 @@ public interface IProjectWaveService{
     RestApiResponse<ArrayList<StudentResponse>> getListStudentWhoTeacherGuideInWave(String teacherId, String waveId);
 
     RestApiResponse<?> approveReport(ApproveReportRequest request);
+
+    RestApiResponse<ArrayList<ReportToApproveResponse>> getReportToApprove(String teacherId);
 }

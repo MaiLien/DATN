@@ -53,6 +53,9 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     @Autowired
     StudentReportRepository studentReportRepository;
 
+    @Autowired
+    StudentReportDetailRepository studentReportDetailRepository;
+
     public RestApiResponse<ProjectWaveResponse> addProjectWave(ProjectWaveRequest request) {
         ProjectWave projectWave = convertProjectWaveRequestToProjectWaveEntity(request);
         ProjectWave entity = projectWaveRepository.save(projectWave);
@@ -178,6 +181,91 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         studentReportRepository.save(studentReport);
 
         return new RestApiResponse<>();
+    }
+
+    @Override
+    public RestApiResponse<ArrayList<ReportToApproveResponse>> getReportToApprove(String teacherId){
+        ArrayList<ReportToApproveResponse> out = new ArrayList<>();
+
+        Teacher teacher = teacherRepository.findOne(teacherId);
+        ArrayList<Assignment> assignments = assignmentRepository.findByTeacher(teacher);
+        ProjectWave projectWave;
+        Student student;
+        StudentWave studentWave;
+        StudentReport studentReport;
+        ArrayList<Report> reports;
+        Report report;
+        ReportToApproveResponse response = null;
+        ArrayList<StudentReportDetail> studentReportDetails;
+        ArrayList<ReportDetailResponse> reportDetailResponses;
+        ReportDetailResponse reportDetailResponse;
+        StudentReportDetail studentReportDetail;
+        for(int i = 0; i < assignments.size(); i++){
+            projectWave = assignments.get(i).getProjectWave();
+            student = assignments.get(i).getStudent();
+            studentWave = getStudentWave(student, projectWave);
+            reports = reportRepository.findByProjectWave(projectWave);
+            for (int j = 0; j<reports.size(); j++){
+                report = reports.get(j);
+                studentReport = studentReportRepository.findByStudentAndReport(student, report);
+                if(studentReport != null && studentReport.getStatus() == 1){
+                    response = new ReportToApproveResponse();
+                    response.setId(studentReport.getId());
+                    response.setStudentId(student.getId());
+                    response.setStudentUserName(student.getUsername());
+                    response.setStudentName(student.getName());
+                    response.setStudentClass(student.getClass_());
+
+                    response.setTopic(studentWave.getTopic());
+                    response.setDescription(studentWave.getDescription());
+                    response.setTimeSubmitReport(DateUtil.isDateInPeriodTime(new Date(), report.getStartTime(), report.getEndTime()));
+                    response.setTimeSubmitReportString(getPeriodDateString(report.getStartTime(), report.getEndTime()));
+                    response.setOrdinal(report.getOrdinal());
+
+                    response.setStatus(studentReport.getStatus());
+                    response.setCreatedDate(DateUtil.convertDateTimeToString(studentReport.getCreatedDate()));
+                    response.setStudentOpinion(studentReport.getStudentOpinion());
+                    response.setTeacherOpinion(studentReport.getTeacherOpinion());
+                    response.setPercentFinish(studentReport.getPercentFinish());
+
+                    studentReportDetails = studentReportDetailRepository.findByStudentReport(studentReport);
+                    reportDetailResponses = new ArrayList<>();
+                    String startTime;
+                    String endTime;
+                    for(int k = 0; k < studentReportDetails.size(); k++){
+                        studentReportDetail = studentReportDetails.get(k);
+                        reportDetailResponse = new ReportDetailResponse();
+                        startTime = DateUtil.convertDateToString(studentReportDetail.getStartTime());
+                        endTime = DateUtil.convertDateToString(studentReportDetail.getEndTime());
+                        reportDetailResponse.setStartTimeAndEndTime(startTime + " - " + endTime);
+                        reportDetailResponse.setWorkContent(studentReportDetail.getWorkContent());
+                        reportDetailResponse.setNote(studentReportDetail.getNote());
+                        reportDetailResponses.add(reportDetailResponse);
+                    }
+                    response.setReportDetails(reportDetailResponses);
+
+                    out.add(response);
+                }
+            }
+
+        }
+
+        return new RestApiResponse<>(out);
+    }
+
+    private String getPeriodDateString(Date dateStart, Date dateEnd){
+        String start = DateUtil.convertDateTimeToString(dateStart);
+        String end = DateUtil.convertDateTimeToString(dateEnd);
+
+        return start + " - "+ end;
+    }
+
+    private StudentWave getStudentWave(Student student, ProjectWave projectWave){
+        ArrayList<StudentWave> studentWaves = studentWaveRepository.findByStudentAndProjectWave(student, projectWave);
+        if(studentWaves.size() > 0)
+            return studentWaves.get(0);
+        else
+            return null;
     }
 
     @Override
