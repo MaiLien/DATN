@@ -106,8 +106,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal" ng-disabled="viewingReport.status != 1" data-toggle="modal" data-target="#refundReport">Phản hồi ý kiến</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="viewingReport.status != 1" data-toggle="modal" data-target="#acceptReport">Duyệt báo cáo</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" ng-disabled="viewingReport.status != 1" data-toggle="modal" data-target="#teacherOpinionMadal" ng-click="setOptionApprove(true)">Phản hồi ý kiến</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="viewingReport.status != 1" data-toggle="modal" data-target="#teacherOpinionMadal" ng-click="setOptionApprove(false)">Duyệt báo cáo</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="">Đóng</button>
                 </div>
             </div>
@@ -116,22 +116,24 @@
     </div>
 </div>
 
-<div class="modal fade" id="refundReport">
+<div class="modal fade" id="teacherOpinionMadal">
     <div class="modal-dialog">
-        <form name="refundReportForm">
+        <form name="approveReportForm">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Phản hồi ý kiến</h4>
+                    <h4 ng-if="isRefund" class="modal-title">Phản hồi ý kiến</h4>
+                    <h4 ng-if="!isRefund" class="modal-title">Duyệt báo cáo tiến độ</h4>
                 </div>
                 <div class="modal-body">
                     <div>
                         <label class="control-label"><i></i>Ý kiến của giảng viên: </label> <br>
-                        <textarea ng-class="{'error' : refundReportForm.teacherOpinions.$invalid && !refundReportForm.teacherOpinions.$pristine}" name="teacherOpinions" style="width: 100%;" data-ng-model="viewingReport.teacherOpinions" rows="3"></textarea>
+                        <textarea required name="teacherOpinions" style="width: 100%;" data-ng-model="viewingReport.teacherOpinions" rows="3"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="refundReport()">Gửi ý kiến phản hồi</button>
+                    <button ng-if="isRefund" type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="approveReportForm.$invalid" ng-click="refundReport()">Gửi ý kiến phản hồi</button>
+                    <button ng-if="!isRefund" type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="approveReportForm.$invalid" ng-click="acceptReport()">Duyệt</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
                 </div>
             </div><!-- /.modal-content -->
@@ -139,25 +141,4 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<div class="modal fade" id="acceptReport">
-    <div class="modal-dialog">
-        <form name="acceptReportFrom">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Duyệt báo cáo tiến độ</h4>
-                </div>
-                <div class="modal-body">
-                    <div>
-                        <label class="control-label"><i></i>Ý kiến của giảng viên: </label> <br>
-                        <textarea ng-class="{'error' : acceptReportFrom.teacherOpinions.$invalid && !acceptReportFrom.teacherOpinions.$pristine}" required style="width: 100%;" data-ng-model="viewingReport.teacherOpinions" rows="3" name="teacherOpinions"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="acceptReport()">Duyệt</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </form>
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+

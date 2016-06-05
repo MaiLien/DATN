@@ -45,6 +45,10 @@ angular.module('appDATN.student')
             }
         };
 
+        $scope.setOptionApprove = function(option){
+            $scope.isRefund = option;
+        };
+
         load = function(){
             $scope.getReportToApprove();
         };
