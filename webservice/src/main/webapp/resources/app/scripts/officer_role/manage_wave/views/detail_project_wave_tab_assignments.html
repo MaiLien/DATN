@@ -1,13 +1,13 @@
 <div class="tab-pane" id="assign">
     <form class="assignmentForm">
         <div class="box-body">
-            <div class="form-group col-sm-4">
-                <select class="form-control"
-                        ng-model="selectedDisplayOption"
-                        ng-options="item.value as item.text for item in displayOptions"
-                        ng-change="refreshDisplay()">
-                </select>
-            </div>
+            <!--<div class="form-group col-sm-4">-->
+                <!--<select class="form-control"-->
+                        <!--ng-model="selectedDisplayOption"-->
+                        <!--ng-options="item.value as item.text for item in displayOptions"-->
+                        <!--ng-change="refreshDisplay()">-->
+                <!--</select>-->
+            <!--</div>-->
             <div class="form-group col-sm-12">
                 <!-- Table students-->
                 <table ng-if="selectedDisplayOption == 0" class="table table-bordered table-hover table-middle">

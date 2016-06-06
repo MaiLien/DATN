@@ -945,6 +945,21 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
             reports.add(report);
         }
 
+        for(int i = 0; i<reports.size()-1; i++){
+            for(int j = i+1; j<reports.size(); j++){
+                if(reports.get(i).getStartTime().compareTo(reports.get(j).getStartTime()) > 0){
+                    report = reports.get(i);
+                    reports.set(i, reports.get(j));
+                    reports.set(j, report);
+                }
+            }
+        }
+
+        for(int i = 0; i<reports.size(); i++) {
+            reports.get(i).setOrdinal(i+1);
+            reportRepository.save(reports.get(i));
+        }
+
         projectWave.setReports(reports);
     }
 

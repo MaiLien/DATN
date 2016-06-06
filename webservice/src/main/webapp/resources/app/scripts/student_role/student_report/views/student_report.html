@@ -58,8 +58,8 @@
                                         <td>
                                             <span ng-if="report.status == 0">Đang lưu nháp</span>
                                             <span ng-if="report.status == 1">Đang đợi giảng viên duyệt</span>
-                                            <span ng-if="report.status == 2">Giảng viên đã phản hồi, cần xem lại</span>
-                                            <span ng-if="report.status == 3">Đã nộp</span>
+                                            <span ng-if="report.status == 3">Giảng viên đã phản hồi, cần xem lại</span>
+                                            <span ng-if="report.status == 2">Đã nộp</span>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -206,8 +206,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal" ng-disabled="!viewing_report.timeSubmitReport || viewing_report.status == 3 || reportForm.$invalid || viewing_report.reportDetails.length == 0" ng-click="saveReportWithStatusIsDone(viewing_report)">Nộp báo cáo</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveReportWithStatusIsDraft(viewing_report)" ng-disabled="reportForm.$invalid || viewing_report.reportDetails.length == 0">Lưu bản nháp</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" ng-disabled="!viewing_report.timeSubmitReport || viewing_report.status == 2 || reportForm.$invalid || viewing_report.reportDetails.length == 0" ng-click="saveReportWithStatusIsDone(viewing_report)">Nộp báo cáo</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveReportWithStatusIsDraft(viewing_report)" ng-disabled="reportForm.$invalid || viewing_report.reportDetails.length == 2">Lưu bản nháp</button>
                     <button type="button" class="btn" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
