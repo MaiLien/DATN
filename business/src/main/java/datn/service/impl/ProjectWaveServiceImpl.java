@@ -273,11 +273,14 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         return new RestApiResponse<>(out);
     }
 
-    private TeacherResponse getTeacherGuideStudent(Student student, ProjectWave projectWave) {
+    private ArrayList<TeacherResponse> getTeacherGuideStudent(Student student, ProjectWave projectWave) {
         ArrayList<Assignment> assignments = assignmentRepository.findByStudentAndWave(student, projectWave);
-        if(assignments.size() > 0)
-            return ConvertObject.convertTeacherEntityToTeacherResponse(assignments.get(0).getTeacher());
-        return null;
+        ArrayList<TeacherResponse> responses = new ArrayList<>();
+        for(int i = 0; i<assignments.size(); i++){
+            responses.add(ConvertObject.convertTeacherEntityToTeacherResponse(assignments.get(i).getTeacher()));
+        }
+
+        return responses;
     }
 
     private String getPeriodDateString(Date dateStart, Date dateEnd){
@@ -293,6 +296,95 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
             return studentWaves.get(0);
         else
             return null;
+    }
+
+    @Override
+    public RestApiResponse<ChangeAssignmentResponse> getTeachersToChangeAssignment(String studentId, String projectWaveId) {
+        Student student = studentRepository.findOne(studentId);
+        ProjectWave projectWave = projectWaveRepository.findOne(projectWaveId);
+
+        ChangeAssignmentResponse response = new ChangeAssignmentResponse();
+        response.setStudent(ConvertObject.convertStudentEntityToStudentResponse(student));
+        response.setGuideTeachers(getTeacherGuideStudent(student, projectWave));
+        response.setTeacherOptions(getTeacherOptionsToChangeAssignment(student, projectWave));
+
+        return new RestApiResponse<>(response);
+    }
+
+    @Override
+    public RestApiResponse<?> changeAssignment(ChangeAssignmentRequest request) {
+        Student student = studentRepository.findOne(request.getStudentId());
+        ProjectWave projectWave = projectWaveRepository.findOne(request.getProjectWaveId());
+
+        ArrayList<Assignment> assignments = assignmentRepository.findByStudentAndWave(student, projectWave);
+        for (int i = 0; i < assignments.size(); i++){
+            assignmentRepository.delete(assignments.get(i));
+        }
+
+        Assignment assignment;
+        Teacher teacher;
+        for (int i = 0; i < request.getTeachers().size(); i++){
+            teacher = teacherRepository.findOne(request.getTeachers().get(i));
+            assignment = new Assignment();
+            assignment.setTeacher(teacher);
+            assignment.setStudent(student);
+            assignment.setProjectWave(projectWave);
+
+            assignmentRepository.save(assignment);
+        }
+
+        return new RestApiResponse<>();
+    }
+
+    private ArrayList<TeacherToChangeAssignmentResponse> getTeacherOptionsToChangeAssignment(Student student, ProjectWave projectWave) {
+        ArrayList<TeacherToChangeAssignmentResponse> responses = new ArrayList<>();
+
+        ArrayList<TeacherWave> teacherWaves = teacherWaveRepository.findByProjectWave(projectWave);
+        ArrayList<Teacher> teachers = getTeacherEntitiesFromTeacherWaves(teacherWaves);
+        TeacherToChangeAssignmentResponse teacherResponse;
+        Teacher teacherEntity;
+        for(int i = 0; i < teachers.size(); i++){
+            teacherEntity = teachers.get(i);
+            teacherResponse = convertTeacherEntityToTeacherToChangeAssignmentResponse(teacherEntity);
+            teacherResponse.setMaxGuide(getMaxGuideForTeacher(teacherEntity, projectWave));
+            teacherResponse.setActualGuide(getActualGuideForTeacher(teacherEntity, projectWave));
+            teacherResponse.setGuideStudent(isGuideStudent(student, teacherEntity, projectWave));
+
+            responses.add(teacherResponse);
+        }
+
+        return responses;
+    }
+
+    private boolean isGuideStudent(Student student, Teacher teacher, ProjectWave projectWave) {
+        Assignment assignment = assignmentRepository.findByStudentAndTeacherAndWave(student, teacher, projectWave);
+        if(assignment == null)
+            return false;
+        else
+            return true;
+    }
+
+    private TeacherToChangeAssignmentResponse convertTeacherEntityToTeacherToChangeAssignmentResponse(Teacher teacher){
+        TeacherToChangeAssignmentResponse response = new TeacherToChangeAssignmentResponse();
+
+        response.setId(teacher.getId());
+        response.setUsername(teacher.getUsername());
+        response.setBirthday(DateUtil.convertDateToString(teacher.getBirthday()));
+        response.setDeleted(teacher.getDeleted());
+        response.setDescription(teacher.getDescription());
+        response.setEmail(teacher.getEmail());
+        if(teacher.getGender() != null)
+            response.setGender(teacher.getGender().getValue());
+        response.setName(teacher.getName());
+        response.setPhoneNumber(teacher.getPhoneNumber());
+        response.setStatus(teacher.getStatus());
+        if(teacher.getTypeOfUser() != null)
+            response.setTypeOfUser(teacher.getTypeOfUser().getValue());
+        response.setMajor(teacher.getMajor());
+        response.setDegree(teacher.getDegree());
+        response.setResearchDirection(teacher.getResearchDirection());
+
+        return response;
     }
 
     @Override
@@ -656,7 +748,7 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
             throw new ProjectWaveException(MessageCodeConstant.ERROR_TEACHER_IN_WAVE_EXIST_MORE_ONE, teacher.getId(), wave.getId());
         }
         else if(teacherWaves.size() == 1){
-            maxGuide = teacherWaves.get(0).getMinNumberOfStudent();
+            maxGuide = teacherWaves.get(0).getMaxNumberOfStudent();
         }
 
         return maxGuide;

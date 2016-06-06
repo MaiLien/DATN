@@ -124,4 +124,14 @@ public class ProjectWaveController {
         return projectWaveService.getAssignmentsDispalyedInStudents(projectWaveId);
     }
 
+    @RequestMapping(value = "/getTeachersToChangeAssignment", method = RequestMethod.GET)
+    public RestApiResponse<ChangeAssignmentResponse> getTeachersToChangeAssignment(String studentId, String projectWaveId){
+        return projectWaveService.getTeachersToChangeAssignment(studentId, projectWaveId);
+    }
+
+    @RequestMapping(value = "/changeAssignment", method = RequestMethod.POST)
+    public RestApiResponse<?> changeAssignment(@RequestBody ChangeAssignmentRequest request){
+        return projectWaveService.changeAssignment(request);
+    }
+
 }

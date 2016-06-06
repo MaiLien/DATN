@@ -22,8 +22,18 @@
                         <tr ng-repeat="x in assignmentsDispalyedInStudents">
                             <td>{{x.student.username}}</td>
                             <td>{{x.student.name}}</td>
-                            <td>{{x.teacher.name}}</td>
-                            <td><button class="btn">Chuyển</button></td>
+                            <td>
+                                <span ng-repeat="item in x.teacher">
+                                    {{item.name}}
+                                    <br>
+                                </span>
+                            </td>
+                            <td><button class="btn"
+                                        data-toggle="modal"
+                                        data-target="#assignmentModal"
+                                        ng-click="getTeachersToChangeAssignment(x.student)">Chuyển
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -51,3 +61,46 @@
         </div> <!--.box-body-->
     </form>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="assignmentModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title strong">Thay đổi giảng viên hướng dẫn</h4>
+            </div>
+            <div class="modal-body">
+                <p>Sinh viên: {{changingAssignment.student.name}}</p>
+                <p>Giảng viên hướng dẫn hiện tại: <span ng-repeat="x in changingAssignment.guideTeachers">{{x.name}} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span></p>
+
+                <table class="table table-bordered table-hover table-middle">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Mã giảng viên</th>
+                        <th>Tên giảng viên</th>
+                        <th>Số SV hướng dẫn</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="teacher in changingAssignment.teacherOptions" ng-init="teacher.checked = teacher.guideStudent">
+                            <td><input type="checkbox" data-ng-model="teacher.checked"></td>
+                            <td>{{teacher.username}}</td>
+                            <td>{{teacher.name}}</td>
+                            <td>{{teacher.actualGuide}}/{{teacher.maxGuide}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="changeAssignment()">Lưu</button>
+                <button type="button" class="btn" data-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+
+    </div>
+</div><!--modal-->

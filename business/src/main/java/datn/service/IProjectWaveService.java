@@ -55,4 +55,8 @@ public interface IProjectWaveService{
     RestApiResponse<ArrayList<ReportToApproveResponse>> getReportToApprove(String teacherId);
 
     RestApiResponse<ArrayList<AssignmentDispalyedInStudentResponse>> getAssignmentsDispalyedInStudents(String projectWaveId);
+
+    RestApiResponse<ChangeAssignmentResponse> getTeachersToChangeAssignment(String studentId, String projectWaveId);
+
+    RestApiResponse<?> changeAssignment(ChangeAssignmentRequest request);
 }
