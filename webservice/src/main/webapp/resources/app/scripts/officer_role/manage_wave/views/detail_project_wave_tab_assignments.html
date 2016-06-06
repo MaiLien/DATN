@@ -2,14 +2,14 @@
     <form class="assignmentForm">
         <div class="box-body">
             <div class="form-group col-sm-4">
-                <select class="form-control">
-                    <option>Hiện thị theo danh sách sinh viên</option>
-                    <option>Hiện thị theo danh sách giảng viên</option>
-                </select> <br>
+                <select class="form-control"
+                        ng-model="selectedDisplayOption"
+                        ng-options="item.value as item.text for item in displayOptions">
+                </select>
             </div>
             <div class="form-group col-sm-12">
                 <!-- Table students-->
-                <table class="table table-bordered table-hover table-middle">
+                <table ng-if="selectedDisplayOption == 0" class="table table-bordered table-hover table-middle">
                     <thead>
                     <tr>
                         <th>Mã sinh viên</th>
@@ -29,7 +29,7 @@
                 </table>
 
                 <!-- Table teachers-->
-                <table class="table table-bordered table-hover table-middle">
+                <table ng-if="selectedDisplayOption == 1" class="table table-bordered table-hover table-middle">
                     <thead>
                     <tr>
                         <th>Giảng viên HD</th>

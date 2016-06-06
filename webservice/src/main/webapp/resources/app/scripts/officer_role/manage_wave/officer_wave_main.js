@@ -122,7 +122,7 @@ angular.module('appDATN.officer_wave')
                 url: '/tabs/assignments/:projectWaveId',
                 views: {
                     detail_project_wave_tab_view: {
-                        controller: '',
+                        controller: 'DetailTabAssignmentsCtrl',
                         templateUrl: '/resources/app/scripts/officer_role/manage_wave/views/detail_project_wave_tab_assignments.html'
                     }
                 }
