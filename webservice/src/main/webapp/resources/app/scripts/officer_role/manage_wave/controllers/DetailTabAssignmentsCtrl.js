@@ -6,4 +6,37 @@ angular.module('appDATN.officer_wave')
 
         $scope.setCurrentProjectWaveId($stateParams.projectWaveId);
 
+        $scope.getAssignmentsDispalyedInTeachers = function(){
+            ProjectWaveService.getAssignmentsDispalyedInTeachers($stateParams.projectWaveId)
+                .success(function(data){
+
+                })
+                .error(function(error){
+
+                })
+        };
+
+        $scope.getAssignmentsDispalyedInStudents = function(){
+            ProjectWaveService.getAssignmentsDispalyedInStudents($stateParams.projectWaveId)
+                .success(function(data){
+                    var resultCode = data.headers.resultCode;
+                    if(resultCode == 1054) {
+                        $state.go('login');
+                    }
+                    if (resultCode == 0) {
+                        $scope.assignmentsDispalyedInStudents = data.body;
+                    }
+                })
+                .error(function(error){
+                    $state.go('error');
+                })
+        };
+
+
+        load = function(){
+            $scope.getAssignmentsDispalyedInStudents();
+        };
+
+        load();
+
     });

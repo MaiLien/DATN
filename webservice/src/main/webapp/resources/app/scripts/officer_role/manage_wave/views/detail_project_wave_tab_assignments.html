@@ -19,10 +19,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>102110134</td>
-                            <td>Hoàng Hải Hà</td>
-                            <td>Lê Quý Lộc</td>
+                        <tr ng-repeat="x in assignmentsDispalyedInStudents">
+                            <td>{{x.student.username}}</td>
+                            <td>{{x.student.name}}</td>
+                            <td>{{x.teacher.name}}</td>
                             <td><button class="btn">Chuyển</button></td>
                         </tr>
                     </tbody>

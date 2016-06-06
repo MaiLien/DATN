@@ -43,8 +43,15 @@ angular.module('appDATN.officer_wave')
         };
 
         addTeacher = function(addTeacherForWaveRequest){
-            console.log("called addTeacher service : " + addTeacherForWaveRequest);
             return $http.post('API/addTeacherForProjectWave', addTeacherForWaveRequest);
+        };
+
+        getAssignmentsDispalyedInStudents = function(projectWaveId){
+            return $http.get('API/getAssignmentsDispalyedInStudents', {params : {projectWaveId: projectWaveId}});
+        };
+
+        getAssignmentsDispalyedInTeachers = function(projectWaveId){
+            return $http.get('API/getAssignmentsDispalyedInTeachers', {params : {projectWaveId: projectWaveId}});
         };
 
         return {
@@ -58,7 +65,9 @@ angular.module('appDATN.officer_wave')
             getProjectWavesByPage: getProjectWavesByPage,
             deleteProjectWave: deleteProjectWave,
             addStudent: addStudent,
-            addTeacher: addTeacher
+            addTeacher: addTeacher,
+            getAssignmentsDispalyedInStudents: getAssignmentsDispalyedInStudents,
+            getAssignmentsDispalyedInTeachers: getAssignmentsDispalyedInTeachers
         };
 
     });

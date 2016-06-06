@@ -119,4 +119,9 @@ public class ProjectWaveController {
         return projectWaveService.approveReport(request);
     }
 
+    @RequestMapping(value = "/getAssignmentsDispalyedInStudents", method = RequestMethod.GET)
+    public RestApiResponse<ArrayList<AssignmentDispalyedInStudentResponse>> getAssignmentsDispalyedInStudents(String projectWaveId){
+        return projectWaveService.getAssignmentsDispalyedInStudents(projectWaveId);
+    }
+
 }

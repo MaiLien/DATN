@@ -74,7 +74,13 @@ angular.module('appDATN.student')
                 var request = createApproveReportRequest(2);
                 TeacherGuideStudentsService.approveReport(request)
                     .success(function(data){
-                        $scope.getListStudent();
+                        var resultCode = data.headers.resultCode;
+                        if(resultCode == 1054) {
+                            $state.go('login');
+                        }
+                        if (resultCode == 0) {
+                            $scope.getListStudent();
+                        }
                     })
             }
         };
@@ -84,7 +90,13 @@ angular.module('appDATN.student')
                 var request = createApproveReportRequest(3);
                 TeacherGuideStudentsService.approveReport(request)
                     .success(function(data){
-                        $scope.getListStudent();
+                        var resultCode = data.headers.resultCode;
+                        if(resultCode == 1054) {
+                            $state.go('login');
+                        }
+                        if (resultCode == 0) {
+                            $scope.getListStudent();
+                        }
                     })
             }
         };

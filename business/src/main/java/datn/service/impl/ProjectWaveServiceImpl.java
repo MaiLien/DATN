@@ -253,6 +253,33 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         return new RestApiResponse<>(out);
     }
 
+    @Override
+    public RestApiResponse<ArrayList<AssignmentDispalyedInStudentResponse>> getAssignmentsDispalyedInStudents(String projectWaveId) {
+        ArrayList<AssignmentDispalyedInStudentResponse> out = new ArrayList<>();
+        AssignmentDispalyedInStudentResponse responseItem;
+        ProjectWave projectWave = projectWaveRepository.findOne(projectWaveId);
+        Student student;
+        ArrayList<StudentWave> studentWaves = studentWaveRepository.findByProjectWave(projectWave);
+        ArrayList<Assignment> assignments;
+        for (int i = 0; i<studentWaves.size(); i++){
+            responseItem = new AssignmentDispalyedInStudentResponse();
+            student = studentWaves.get(i).getStudent();
+            responseItem.setStudent(ConvertObject.convertStudentEntityToStudentResponse(student));
+            responseItem.setTeacher(getTeacherGuideStudent(student, projectWave));
+
+            out.add(responseItem);
+        }
+
+        return new RestApiResponse<>(out);
+    }
+
+    private TeacherResponse getTeacherGuideStudent(Student student, ProjectWave projectWave) {
+        ArrayList<Assignment> assignments = assignmentRepository.findByStudentAndWave(student, projectWave);
+        if(assignments.size() > 0)
+            return ConvertObject.convertTeacherEntityToTeacherResponse(assignments.get(0).getTeacher());
+        return null;
+    }
+
     private String getPeriodDateString(Date dateStart, Date dateEnd){
         String start = DateUtil.convertDateTimeToString(dateStart);
         String end = DateUtil.convertDateTimeToString(dateEnd);
