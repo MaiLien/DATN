@@ -80,6 +80,16 @@ angular.module('appDATN.officer_wave')
             }
         };
 
+        $scope.refreshDisplay = function(){
+            if($scope.selectedDisplayOption == 0){
+                $scope.getAssignmentsDispalyedInStudents();
+            }
+            else {
+                //$scope.getAssignmentsDispalyedInTeachers();
+                console.log('getAssignmentsDispalyedInTeachers');
+            }
+        };
+
         load = function(){
             $scope.getAssignmentsDispalyedInStudents();
         };
