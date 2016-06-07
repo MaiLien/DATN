@@ -10,7 +10,6 @@ angular.module('appDATN.officer_wave')
 
         $scope.getReportStatistic = function(){
             if($scope.selectedReport != null){
-                console.log('selectedReport: ' + $scope.selectedReport);
                 ProjectWaveService.getReportStatistic($scope.selectedReport.id)
                     .success(function(data){
                         var resultCode = data.headers.resultCode;

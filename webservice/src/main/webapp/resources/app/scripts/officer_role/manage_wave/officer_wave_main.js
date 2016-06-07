@@ -67,23 +67,6 @@ angular.module('appDATN.officer_wave')
             })
             .state('wave.detail.students', {
                 url: '/tabs/students/:projectWaveId',
-                resolve:{
-                    projectWaveStudents: function ($q, $state, $stateParams, ProjectWaveService) {
-                        var deferred = $q.defer();
-                        ProjectWaveService.getStudents($stateParams.projectWaveId)
-                            .success(function (data) {
-                                if(data.headers.resultCode == 0) {
-                                    deferred.resolve(data.body);
-                                }else{
-                                    deferred.reject('Error');
-                                }
-                            })
-                            .error(function (error) {
-                                deferred.reject('Error');
-                            });
-                        return deferred.promise;
-                    }
-                },
                 views: {
                     detail_project_wave_tab_view: {
                         controller: 'DetailTabStudentsCtrl',
@@ -93,23 +76,6 @@ angular.module('appDATN.officer_wave')
             })
             .state('wave.detail.teachers', {
                 url: '/tabs/teachers/:projectWaveId',
-                resolve:{
-                    projectWaveTeachers: function ($q, $state, $stateParams, ProjectWaveService) {
-                        var deferred = $q.defer();
-                        ProjectWaveService.getTeachers($stateParams.projectWaveId)
-                            .success(function (data) {
-                                if(data.headers.resultCode == 0) {
-                                    deferred.resolve(data.body);
-                                }else{
-                                    deferred.reject('Error');
-                                }
-                            })
-                            .error(function (error) {
-                                deferred.reject('Error');
-                            });
-                        return deferred.promise;
-                    }
-                },
                 views: {
                     detail_project_wave_tab_view: {
                         controller: 'DetailTabTeachersCtrl',

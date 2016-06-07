@@ -1,5 +1,5 @@
 angular.module('appDATN.officer_wave')
-    .controller('DetailTabTeachersCtrl', function ($scope, $stateParams, ProjectWaveService, projectWaveTeachers) {
+    .controller('DetailTabTeachersCtrl', function ($scope, $stateParams, ProjectWaveService) {
 
         $scope.projectWaveId = $stateParams.projectWaveId;
 
@@ -13,7 +13,19 @@ angular.module('appDATN.officer_wave')
         $scope.getTeachersOfWave = function(){
             ProjectWaveService.getTeachers($scope.projectWaveId)
                 .success(function(data){
-                    $scope.teachersOfProjectWave = data.body;
+                    var resultCode = data.headers.resultCode;
+                    if(resultCode == 1054){
+                        $state.go('login');
+                    }
+                    else if(resultCode == 0){
+                        $scope.teachersOfProjectWave = data.body;
+                    }
+                    else{
+                        $state.go('error');
+                    }
+                })
+                .error(function(error){
+                    $state.go('error');
                 });
         };
 

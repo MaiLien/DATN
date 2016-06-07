@@ -1,5 +1,7 @@
 angular.module('appDATN.officer_wave')
-    .controller('DetailTabStudentsCtrl', function ($scope, $stateParams, ProjectWaveService, projectWaveStudents) {
+    .controller('DetailTabStudentsCtrl', function ($scope, $stateParams, ProjectWaveService) {
+
+        $scope.setCurrentProjectWaveId($stateParams.projectWaveId);
 
         $scope.init = function(){
             $scope.infoMessage = null;
@@ -8,11 +10,7 @@ angular.module('appDATN.officer_wave')
             $scope.studentTemp =null;
         };
 
-        $scope.studentsOfWave = projectWaveStudents;
-
         $scope.init();
-
-        $scope.setCurrentProjectWaveId($stateParams.projectWaveId);
 
         $scope.addStudentForWave = function(studentUsername){
             $scope.init();
@@ -39,7 +37,7 @@ angular.module('appDATN.officer_wave')
                             $scope.studentTemp = data.body;
                             $scope.successMessage = "Thêm thành công sinh viên vào đợt Đồ án";
                             $scope.studentUsername = null;
-                            $scope.studentsOfWave.push($scope.studentTemp);
+                            $scope.getStudentsOfProjectWave();
                         }
                     })
                     .error(function(error){
@@ -53,6 +51,31 @@ angular.module('appDATN.officer_wave')
                 studentUsername: studentUsername,
                 projectWaveId: $scope.getCurrentProjectWaveId()
             };
-        }
+        };
+
+        $scope.getStudentsOfProjectWave = function(){
+            ProjectWaveService.getStudents($stateParams.projectWaveId)
+                .success(function (data){
+                    var resultCode = data.headers.resultCode;
+                    if(resultCode == 1054){
+                        $state.go('login');
+                    }
+                    else if(resultCode == 0){
+                        $scope.studentsOfWave = data.body;
+                    }
+                    else{
+                        $state.go('error');
+                    }
+                })
+                .error(function (error) {
+                    $state.go('error');
+                });
+        };
+
+        load = function(){
+            $scope.getStudentsOfProjectWave();
+        };
+
+        load();
 
     });
