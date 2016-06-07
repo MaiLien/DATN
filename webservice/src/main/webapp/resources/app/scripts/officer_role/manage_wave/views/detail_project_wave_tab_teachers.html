@@ -18,7 +18,7 @@
                 <td>{{teacher.name}}</td>
                 <td>{{teacher.maxGuide}}</td>
                 <td>
-                    <button class="btn" ng-click="deleteTeacherFromWave(teacher)">Xóa</button>
+                    <button ng-click="setTeacherToDelete(teacher)" class="btn" data-toggle="modal" data-target="#deleteTeacherFromWaveModal">Xóa</button>
                 </td>
             </tr>
 
@@ -67,5 +67,27 @@
             </div>
 
         </div>
+    </div>
+</div>
+
+<!-- deleteTeacherFromWaveModal -->
+<div class="modal fade" id="deleteTeacherFromWaveModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Xóa giảng viên khỏi đợt ĐATN</h4>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc muốn xóa giảng viên khỏi đợt ĐATN?</p>
+            </div>
+            <div class="modal-footer">
+                <button  ng-click="deleteTeacherFromWave()" type="button" class="btn btn-primary" data-dismiss="modal">Xóa</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+
     </div>
 </div>

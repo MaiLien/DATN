@@ -41,8 +41,12 @@ angular.module('appDATN.officer_wave')
             }
         };
 
-        $scope.deleteTeacherFromWave = function(teacher){
-            ProjectWaveService.deleteTeacherFromWave(teacher.id, $scope.projectWaveId)
+        $scope.setTeacherToDelete=function(teacher){
+            $scope.teacherToDelete = teacher;
+        };
+
+        $scope.deleteTeacherFromWave = function(){
+            ProjectWaveService.deleteTeacherFromWave($scope.teacherToDelete.id, $scope.projectWaveId)
                 .success(function(data){
                     $scope.getTeachersOfWave();
                 })
