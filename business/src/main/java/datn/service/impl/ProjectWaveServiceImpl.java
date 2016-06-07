@@ -158,8 +158,8 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         ProjectWave projectWave = projectWaveRepository.findOne(projectWaveId);
 
         ArrayList<TeacherWave> teacherWave = teacherWaveRepository.findByTeacherAndProjectWave(teacher, projectWave);
-        if(teacherWave.size() > 0){
-            teacherWaveRepository.delete(teacherWave.get(0));
+        for(int i = 0; i<teacherWave.size(); i++){
+            teacherWaveRepository.delete(teacherWave.get(i));
         }
         return new RestApiResponse<>();
     }
@@ -380,6 +380,42 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         response.setNotPercent(df.format(response.getNotList().size() * 100.0 / size));
 
         return new RestApiResponse<>(response);
+    }
+
+    @Override
+    public RestApiResponse<?> deleteStudentFromWave(String studentId, String projectWaveId) {
+        Student student = studentRepository.findOne(studentId);
+        ProjectWave projectWave = projectWaveRepository.findOne(projectWaveId);
+
+        deleteStudentReportsByStudentAndProjectWave(student, projectWave);
+        deleteAssignmentByStudentAndProjectWave(student, projectWave);
+        deleteStudentWaveByStudentAndProjectWave(student, projectWave);
+
+        return new RestApiResponse<>();
+    }
+
+    private void deleteStudentReportsByStudentAndProjectWave(Student student, ProjectWave projectWave) {
+        ArrayList<Report> reports = reportRepository.findByProjectWave(projectWave);
+        StudentReport studentReport;
+        for(int i = 0; i<reports.size(); i++) {
+            studentReport = studentReportRepository.findByStudentAndReport(student, reports.get(i));
+            if(studentReport != null)
+                studentReportRepository.delete(studentReport);
+        }
+    }
+
+    private void deleteAssignmentByStudentAndProjectWave(Student student, ProjectWave projectWave){
+        ArrayList<Assignment> assignments = assignmentRepository.findByStudentAndWave(student, projectWave);
+        for(int i = 0; i<assignments.size(); i++) {
+            assignmentRepository.delete(assignments.get(i));
+        }
+    }
+
+    private void deleteStudentWaveByStudentAndProjectWave(Student student, ProjectWave projectWave) {
+        ArrayList<StudentWave> studentWaves = studentWaveRepository.findByStudentAndProjectWave(student, projectWave);
+        for(int i = 0; i<studentWaves.size(); i++){
+            studentWaveRepository.delete(studentWaves.get(i));
+        }
     }
 
     private ArrayList<StudentResponse> getStudentsWithReportIsNot(Report report, ReportStatisticResponse reportStatisticResponse) {

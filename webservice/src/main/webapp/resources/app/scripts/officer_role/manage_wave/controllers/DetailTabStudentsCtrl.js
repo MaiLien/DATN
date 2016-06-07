@@ -1,5 +1,5 @@
 angular.module('appDATN.officer_wave')
-    .controller('DetailTabStudentsCtrl', function ($scope, $stateParams, ProjectWaveService) {
+    .controller('DetailTabStudentsCtrl', function ($scope, $timeout, $stateParams, ProjectWaveService){
 
         $scope.setCurrentProjectWaveId($stateParams.projectWaveId);
 
@@ -70,6 +70,33 @@ angular.module('appDATN.officer_wave')
                 .error(function (error) {
                     $state.go('error');
                 });
+        };
+
+        $scope.addStudentForProjectWaveFromFile = function (file) {
+            ProjectWaveService.addStudentForProjectWaveFromFile(file, $stateParams.projectWaveId)
+                .then(function (response){
+                    $scope.successItems = response.data.body.successItems;
+                    $scope.failItems = response.data.body.failItems;
+                    $scope.totalItem = response.data.body.totalItem;
+                    $scope.addStudentForProjectWaveFromFileMessage = "Sinh viên đã tham gia đợt Đồ án";
+                    $scope.getStudentsOfProjectWave();
+                }, function (response) {
+                    if (response.status != 200)
+                        $state.go('error');
+                }, function (evt){
+                    //progress
+                });
+        };
+
+        $scope.setStudentToDelete = function(student){
+            $scope.studentToDelete = student;
+        };
+
+        $scope.deleteStudentFromWave = function(){
+            ProjectWaveService.deleteStudentFromWave($scope.studentToDelete.id, $stateParams.projectWaveId)
+                .success(function(data){
+                    $scope.getStudentsOfProjectWave();
+                })
         };
 
         load = function(){

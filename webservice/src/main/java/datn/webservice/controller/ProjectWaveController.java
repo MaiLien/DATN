@@ -2,11 +2,13 @@ package datn.webservice.controller;
 
 import datn.interfaces.request.*;
 import datn.interfaces.response.*;
+import datn.service.IAddStudentForProjectWaveFromFile;
 import datn.service.IProjectWaveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 
@@ -16,6 +18,9 @@ public class ProjectWaveController {
 
     @Autowired
     IProjectWaveService projectWaveService;
+
+    @Autowired
+    IAddStudentForProjectWaveFromFile addStudentForProjectWaveFromFile;
 
     @RequestMapping(value = "/addProjectWave", method = RequestMethod.POST)
     public RestApiResponse<ProjectWaveResponse> addProjectWave(@RequestBody ProjectWaveRequest projectWaveRequest){
@@ -63,8 +68,13 @@ public class ProjectWaveController {
     }
 
     @RequestMapping(value = "/deleteTeacherFromWave", method = RequestMethod.DELETE)
-    public RestApiResponse<?> deleteStudent(String teacherId, String projectWaveId){
+    public RestApiResponse<?> deleteTeacherFromWave(String teacherId, String projectWaveId){
         return projectWaveService.deleteTeacherFromWave(teacherId, projectWaveId);
+    }
+
+    @RequestMapping(value = "/deleteStudentFromWave", method = RequestMethod.DELETE)
+    public RestApiResponse<?> deleteStudentFromWave(String studentId, String projectWaveId){
+        return projectWaveService.deleteStudentFromWave(studentId, projectWaveId);
     }
 
     @RequestMapping(value = "/getWavesStudentJoined", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -142,6 +152,12 @@ public class ProjectWaveController {
     @RequestMapping(value = "/getReportStatistic", method = RequestMethod.GET)
     public RestApiResponse<ReportStatisticResponse> getReportStatistic(String reportId){
         return projectWaveService.getReportStatistic(reportId);
+    }
+
+    @RequestMapping(value = "/addStudentForProjectWaveFromFile", method = RequestMethod.POST)
+    @ResponseBody
+    public RestApiResponse<ImportFromFileResponse<StudentResponse, StudentRequest>> addStudentForProjectWaveFromFile(@RequestParam("excelFile") MultipartFile excelFile, String projectWaveId){
+        return addStudentForProjectWaveFromFile.addStudentForProjectWaveFromFile(excelFile, projectWaveId);
     }
 
 }

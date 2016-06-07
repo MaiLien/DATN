@@ -63,4 +63,6 @@ public interface IProjectWaveService{
     RestApiResponse<ArrayList<ReportOfWaveResponse>> getReportsOfWave(String projectWaveId);
 
     RestApiResponse<ReportStatisticResponse> getReportStatistic(String reportId);
+
+    RestApiResponse<?> deleteStudentFromWave(String studentId, String projectWaveId);
 }

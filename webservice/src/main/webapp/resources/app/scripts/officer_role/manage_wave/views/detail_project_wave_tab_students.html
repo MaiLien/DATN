@@ -19,6 +19,12 @@
                 <a class="close" data-dismiss="alert" aria-label="close" ng-click="init()">&times;</a>
                 Thêm thành công sinh viên {{studentTemp.username}} ({{studentTemp.name}}) vào đợt Đồ án
             </div>
+            <div class="alert alert-warning fade in" ng-if="addStudentForProjectWaveFromFileMessage">
+                <a class="close" data-dismiss="alert" aria-label="close" ng-click="init()">&times;</a>
+                <a style="color: #3c8dbc !important;" data-toggle="modal" data-target="#addSuccessModal">Thêm thành công {{successItems.length}} sinh viên vào đợt ĐATN</a>
+                <br>
+                <a style="color: #3c8dbc !important;" data-toggle="modal" data-target="#addFailModal">Thêm thất bại {{failItems.length}} sinh viên</a>
+            </div>
         </div>
 
         <div class="borderForm">
@@ -34,7 +40,7 @@
             <br>
             <span>Hoặc</span>
 
-            <form style="margin-top: 30px;" ng-submit="addStudentFromFile(fileExcel)" name="fileForm">
+            <form style="margin-top: 30px;" ng-submit="addStudentForProjectWaveFromFile(fileExcel)" name="fileForm">
                 <input
                         ngf-select
                         id="input-id"
@@ -58,12 +64,114 @@
                 <td>{{x.username}}</td>
                 <td>{{x.name}}</td>
                 <td>{{x.class_}}</td>
-                <td><button class="btn">Xóa</button></td>
+                <td><button class="btn" ng-click="setStudentToDelete(x)" data-toggle="modal" data-target="#deleteStudentFromWaveModal" class="btn">Xóa</button></td>
             </tr>
             </tbody>
         </table>
 
     </div> <!--close tab times-->
+</div>
+
+<!-- deleteStudentFromWaveModal -->
+<div class="modal fade" id="deleteStudentFromWaveModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Xóa sinh viên khỏi đợt ĐATN</h4>
+            </div>
+            <div class="modal-body">
+                <p>Nếu xóa sinh viên khỏi đợt ĐATN thì mọi thông tin sinh viên trong đợt ĐATN sẽ bị mất.</p>
+                <p>Bạn có muốn xóa?</p>
+            </div>
+            <div class="modal-footer">
+                <button ng-click="deleteStudentFromWave()" type="button" class="btn btn-primary" data-dismiss="modal">Xóa</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- addSuccessModal -->
+<div class="modal fade" id="addSuccessModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Danh sách sinh viên thêm thành công vào đợt ĐATN</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>Mã sinh viên</th>
+                        <th>Họ tên</th>
+                        <th>Lớp</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in successItems">
+                            <td>{{item.username}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.class_}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- addFailModal-->
+<div class="modal fade" id="addFailModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Danh sách sinh viên thêm thất bại vào đợt ĐATN</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã sinh viên</th>
+                        <th>Họ tên</th>
+                        <th>Lớp</th>
+                        <th>Ngày sinh</th>
+                        <th>Lý do</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in failItems">
+                        <td>{{item.row}}</td>
+                        <td>{{item.errorItem.username}}</td>
+                        <td>{{item.errorItem.name}}</td>
+                        <td>{{item.errorItem.class_}}</td>
+                        <td>{{item.errorItem.birthday}}</td>
+                        <td>{{item.reason}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 <script>

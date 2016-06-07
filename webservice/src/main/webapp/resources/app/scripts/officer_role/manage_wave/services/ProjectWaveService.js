@@ -1,5 +1,5 @@
 angular.module('appDATN.officer_wave')
-    .factory("ProjectWaveService", function ($http) {
+    .factory("ProjectWaveService", function ($http, Upload) {
 
         addWave = function (wave) {
             return $http.post('API/addProjectWave', wave);
@@ -30,6 +30,10 @@ angular.module('appDATN.officer_wave')
             return $http.delete('API/deleteTeacherFromWave', {params : {teacherId: teacherId, projectWaveId: projectWaveId}})
         };
 
+        deleteStudentFromWave = function(studentId, projectWaveId){
+            return $http.delete('API/deleteStudentFromWave', {params : {studentId: studentId, projectWaveId: projectWaveId}})
+        };
+
         getProjectWavesByPage = function(currentPage, pageSize, searchInput){
             return $http.get('API/getProjectWavesByPage', {params : {pageIndex: currentPage, sizeOfPage:pageSize, searchInput:searchInput}});
         };
@@ -40,6 +44,13 @@ angular.module('appDATN.officer_wave')
 
         addStudent = function(studentId){
             return $http.post('API/addStudentForProjectWave', studentId);
+        };
+
+        addStudentForProjectWaveFromFile = function(file, projectWaveId){
+            return file.upload = Upload.upload({
+                url: '/API/addStudentForProjectWaveFromFile',
+                data: {excelFile: file, projectWaveId: projectWaveId}
+            });
         };
 
         addTeacher = function(addTeacherForWaveRequest){
@@ -77,6 +88,7 @@ angular.module('appDATN.officer_wave')
             getTeachers: getTeachers,
             getTeachersToAddForProjectWave: getTeachersToAddForProjectWave,
             addTeachersForWave: addTeachersForWave,
+            deleteStudentFromWave: deleteStudentFromWave,
             deleteTeacherFromWave: deleteTeacherFromWave,
             getProjectWavesByPage: getProjectWavesByPage,
             deleteProjectWave: deleteProjectWave,
@@ -87,7 +99,8 @@ angular.module('appDATN.officer_wave')
             getTeachersToChangeAssignment: getTeachersToChangeAssignment,
             changeAssignment: changeAssignment,
             getReportsOfWave: getReportsOfWave,
-            getReportStatistic: getReportStatistic
+            getReportStatistic: getReportStatistic,
+            addStudentForProjectWaveFromFile: addStudentForProjectWaveFromFile
         };
 
     });
