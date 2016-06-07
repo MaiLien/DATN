@@ -1,10 +1,11 @@
 angular.module('appDATN.officer_wave')
-    .controller('DetailTabAssignmentsCtrl', function ($scope, $stateParams, ProjectWaveService) {
+    .controller('DetailTabAssignmentsCtrl', function ($scope, $stateParams, ProjectWaveService, projectWaveInfo) {
 
         $scope.displayOptions = [{value: 0, text: 'Hiện thị theo danh sách sinh viên'}, {value: 1, text: 'Hiện thị theo danh sách giảng viên'}];
         $scope.selectedDisplayOption = $scope.displayOptions[0].value;
 
         $scope.setCurrentProjectWaveId($stateParams.projectWaveId);
+        $scope.projectWaveInfo = projectWaveInfo;
 
         $scope.getAssignmentsDispalyedInTeachers = function(){
             ProjectWaveService.getAssignmentsDispalyedInTeachers($stateParams.projectWaveId)

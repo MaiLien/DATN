@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <div class="borderForm">
+        <div ng-if="!projectWaveInfo.done" class="borderForm">
             <form name="addStudentforWave" class="form-horizontal" role="form">
                 <div class="form-group">
                     <div class="col-sm-7">
@@ -57,14 +57,14 @@
             <th>Mã sinh viên</th>
             <th>Họ tên</th>
             <th>Lớp</th>
-            <th style="width: 10%;"></th>
+            <th ng-if="!projectWaveInfo.done" style="width: 10%;"></th>
             </thead>
             <tbody>
             <tr ng-repeat="x in studentsOfWave">
                 <td>{{x.username}}</td>
                 <td>{{x.name}}</td>
                 <td>{{x.class_}}</td>
-                <td><button class="btn" ng-click="setStudentToDelete(x)" data-toggle="modal" data-target="#deleteStudentFromWaveModal" class="btn">Xóa</button></td>
+                <td ng-if="!projectWaveInfo.done"><button class="btn" ng-click="setStudentToDelete(x)" data-toggle="modal" data-target="#deleteStudentFromWaveModal" class="btn">Xóa</button></td>
             </tr>
             </tbody>
         </table>

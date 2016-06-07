@@ -1,7 +1,8 @@
 angular.module('appDATN.officer_wave')
-    .controller('DetailTabStudentsCtrl', function ($scope, $timeout, $stateParams, ProjectWaveService){
+    .controller('DetailTabStudentsCtrl', function ($scope, $timeout, $stateParams, ProjectWaveService, projectWaveInfo){
 
         $scope.setCurrentProjectWaveId($stateParams.projectWaveId);
+        $scope.projectWaveInfo = projectWaveInfo;
 
         $scope.init = function(){
             $scope.infoMessage = null;

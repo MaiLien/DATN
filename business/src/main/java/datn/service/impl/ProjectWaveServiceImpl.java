@@ -69,7 +69,10 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     @Override
     public RestApiResponse<ProjectWaveResponse> getProjectWave(String id) {
         ProjectWave projectWave = projectWaveRepository.findOne(id);
-        ProjectWaveResponse response = convertProjectWaveEntityToProjectWaveResponse(projectWave);
+        ProjectWaveResponse response = null;
+        if(projectWave != null){
+            response = convertProjectWaveEntityToProjectWaveResponse(projectWave);
+        }
 
         return new RestApiResponse<>(response);
     }

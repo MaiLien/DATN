@@ -1,7 +1,8 @@
 angular.module('appDATN.officer_wave')
-    .controller('DetailTabTeachersCtrl', function ($scope, $stateParams, ProjectWaveService) {
+    .controller('DetailTabTeachersCtrl', function ($scope, $stateParams, ProjectWaveService, projectWaveInfo) {
 
         $scope.setCurrentProjectWaveId($stateParams.projectWaveId);
+        $scope.projectWaveInfo = projectWaveInfo;
 
         $scope.projectWaveId = $stateParams.projectWaveId;
 

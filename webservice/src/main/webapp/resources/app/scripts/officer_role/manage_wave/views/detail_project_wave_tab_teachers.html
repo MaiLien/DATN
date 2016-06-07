@@ -1,7 +1,7 @@
 <div class="tab-pane" id="teachers">
     <div class="box-body">
 
-        <button data-toggle="modal" data-target=".add_teacher_for_wave_modal" ng-click="getTeachersToAddForProjectWave()" class="btn btn-primary" style="margin-bottom: 20px;">Thêm giảng viên hướng dẫn</button> <br>
+        <button ng-if="!projectWaveInfo.done" data-toggle="modal" data-target=".add_teacher_for_wave_modal" ng-click="getTeachersToAddForProjectWave()" class="btn btn-primary" style="margin-bottom: 20px;">Thêm giảng viên hướng dẫn</button> <br>
 
         <table class="table table-bordered table-hover table-middle">
             <thead>
@@ -9,7 +9,7 @@
                 <th>Mã giảng viên</th>
                 <th>Họ tên</th>
                 <th>Hướng dẫn SL SV</th>
-                <th></th>
+                <th ng-if="!projectWaveInfo.done"></th>
             </tr>
             </thead>
             <tbody>
@@ -17,7 +17,7 @@
                 <td><a>{{teacher.username}}</a></td>
                 <td>{{teacher.name}}</td>
                 <td>{{teacher.maxGuide}}</td>
-                <td>
+                <td ng-if="!projectWaveInfo.done">
                     <button ng-click="setTeacherToDelete(teacher)" class="btn" data-toggle="modal" data-target="#deleteTeacherFromWaveModal">Xóa</button>
                 </td>
             </tr>

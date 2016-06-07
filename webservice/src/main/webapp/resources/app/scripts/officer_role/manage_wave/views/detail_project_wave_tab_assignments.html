@@ -16,7 +16,7 @@
                         <th>Mã sinh viên</th>
                         <th>Tên sinh viên</th>
                         <th>Giảng viên HD</th>
-                        <th>Thao tác</th>
+                        <th ng-if="!projectWaveInfo.done">Thao tác</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -30,6 +30,7 @@
                                 </span>
                             </td>
                             <td><button class="btn"
+                                        ng-if="!projectWaveInfo.done"
                                         data-toggle="modal"
                                         data-target="#assignmentModal"
                                         ng-click="getTeachersToChangeAssignment(x.student)">Chuyển
@@ -46,7 +47,7 @@
                         <th>Giảng viên HD</th>
                         <th>Mã sinh viên</th>
                         <th>Tên sinh viên</th>
-                        <th>Thao tác</th>
+                        <th ng-if="!projectWaveInfo.done">Thao tác</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -54,7 +55,7 @@
                         <td>102110134</td>
                         <td>Hoàng Hải Hà</td>
                         <td>Lê Quý Lộc</td>
-                        <td><button class="btn">Chuyển</button></td>
+                        <td ng-if="!projectWaveInfo.done"><button class="btn">Chuyển</button></td>
                     </tr>
                     </tbody>
                 </table>
