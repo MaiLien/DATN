@@ -21,18 +21,30 @@
             </div>
         </div>
 
-        <form name="addStudentforWave" class="form-horizontal borderForm" role="form">
-            <div class="form-group" style="padding-left: 15px;">
-                <a style="text-decoration: underline">Thêm sinh viên từ file</a> hoặc Nhập mã sinh viên
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-7">
-                    <input name="studentUsername" ng-model="studentUsername" type="text" class="form-control" id="email" placeholder="Nhập mã sinh viên">
+        <div class="borderForm">
+            <form name="addStudentforWave" class="form-horizontal" role="form">
+                <div class="form-group">
+                    <div class="col-sm-7">
+                        <input name="studentUsername" ng-model="studentUsername" type="text" class="form-control" id="email" placeholder="Nhập mã sinh viên">
+                    </div>
+                    <button class="btn btn-primary" type="button" ng-click="addStudentForWave(studentUsername)">Thêm</button>
                 </div>
-                <button class="btn btn-primary" type="button" ng-click="addStudentForWave(studentUsername)">Thêm</button>
-            </div>
-        </form>
+            </form>
+
+            <br>
+            <span>Hoặc</span>
+
+            <form style="margin-top: 30px;" ng-submit="addStudentFromFile(fileExcel)" name="fileForm">
+                <input
+                        ngf-select
+                        id="input-id"
+                        ng-model="fileExcel"
+                        name="file"
+                        type="file"
+                        class="file"
+                        data-allowed-file-extensions='["xlsx", "xls"]'>
+            </form>
+        </div>
 
         <table class="table table-hover table-bordered">
             <thead>
@@ -53,3 +65,7 @@
 
     </div> <!--close tab times-->
 </div>
+
+<script>
+    $("#input-id").fileinput();
+</script>
