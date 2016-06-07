@@ -134,4 +134,14 @@ public class ProjectWaveController {
         return projectWaveService.changeAssignment(request);
     }
 
+    @RequestMapping(value = "/getReportsOfWave", method = RequestMethod.GET)
+    public RestApiResponse<ArrayList<ReportOfWaveResponse>> getReportsOfWave(String projectWaveId){
+        return projectWaveService.getReportsOfWave(projectWaveId);
+    }
+
+    @RequestMapping(value = "/getReportStatistic", method = RequestMethod.GET)
+    public RestApiResponse<ReportStatisticResponse> getReportStatistic(String reportId){
+        return projectWaveService.getReportStatistic(reportId);
+    }
+
 }

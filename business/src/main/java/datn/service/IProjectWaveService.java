@@ -60,5 +60,7 @@ public interface IProjectWaveService{
 
     RestApiResponse<?> changeAssignment(ChangeAssignmentRequest request);
 
-    RestApiResponse<ArrayList<ReportOfWaveRespone>> getReportsOfWave(String projectWaveId);
+    RestApiResponse<ArrayList<ReportOfWaveResponse>> getReportsOfWave(String projectWaveId);
+
+    RestApiResponse<ReportStatisticResponse> getReportStatistic(String reportId);
 }

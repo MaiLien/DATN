@@ -16,4 +16,6 @@ public interface StudentReportRepository extends JpaRepository<StudentReport, St
     @Query("select st from StudentReport st where (st.student=:student and st.report=:report)")
     StudentReport findByStudentAndReport(@Param("student")Student student, @Param("report")Report report);
 
+    @Query("select st from StudentReport st where (st.report=:report and st.status=:i)")
+    ArrayList<StudentReport> findByReportAndStatus(@Param("report")Report report, @Param("i")int i);
 }

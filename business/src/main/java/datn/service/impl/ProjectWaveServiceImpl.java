@@ -17,6 +17,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -337,25 +338,95 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
     }
 
     @Override
-    public RestApiResponse<ArrayList<ReportOfWaveRespone>> getReportsOfWave(String projectWaveId) {
-        ArrayList<ReportOfWaveRespone> respones = new ArrayList<>();
+    public RestApiResponse<ArrayList<ReportOfWaveResponse>> getReportsOfWave(String projectWaveId) {
+        ArrayList<ReportOfWaveResponse> respones = new ArrayList<>();
 
         ProjectWave projectWave = projectWaveRepository.findOne(projectWaveId);
         ArrayList<Report> reports = reportRepository.findByProjectWave(projectWave);
         Report report;
-        ReportOfWaveRespone reportRespone;
         for (int i = 0; i<reports.size(); i++){
             report = reports.get(i);
-            reportRespone = new ReportOfWaveRespone();
-            reportRespone.setId(report.getId());
-            reportRespone.setStartTime(DateUtil.convertDateTimeToString(report.getStartTime()));
-            reportRespone.setEndTime(DateUtil.convertDateTimeToString(report.getEndTime()));
-            reportRespone.setOrdinal(report.getOrdinal());
-            reportRespone.setTimeToReport(DateUtil.isDateInPeriodTime(new Date(), report.getStartTime(), report.getEndTime()));
-
-            respones.add(reportRespone);
+            respones.add(convertReportToReportOfWaveResponse(report));
         }
         return new RestApiResponse<>(respones);
+    }
+
+    private ReportOfWaveResponse convertReportToReportOfWaveResponse(Report report){
+        ReportOfWaveResponse reportRespone = new ReportOfWaveResponse();
+        reportRespone.setId(report.getId());
+        reportRespone.setStartTime(DateUtil.convertDateTimeToString(report.getStartTime()));
+        reportRespone.setEndTime(DateUtil.convertDateTimeToString(report.getEndTime()));
+        reportRespone.setOrdinal(report.getOrdinal());
+        reportRespone.setTimeToReport(DateUtil.isDateInPeriodTime(new Date(), report.getStartTime(), report.getEndTime()));
+
+        return reportRespone;
+    }
+
+    @Override
+    public RestApiResponse<ReportStatisticResponse> getReportStatistic(String reportId) {
+        ReportStatisticResponse response = new ReportStatisticResponse();
+        Report report = reportRepository.findOne(reportId);
+
+        ReportOfWaveResponse reportResponse = convertReportToReportOfWaveResponse(report);
+        response.setReport(reportResponse);
+        response.setDoneList(getStudentsWithReportDone(report));
+        response.setWaitingList(getStudentsWithReportWaiting(report));
+        response.setNotList(getStudentsWithReportIsNot(report, response));
+
+        int size = response.getDoneList().size() + response.getWaitingList().size() + response.getNotList().size();
+        DecimalFormat df = new DecimalFormat("0.0");
+        response.setDonePercent(df.format(response.getDoneList().size() * 100.0 / size));
+        response.setWaitingPercent(df.format(response.getWaitingList().size() * 100.0 / size));
+        response.setNotPercent(df.format(response.getNotList().size() * 100.0 / size));
+
+        return new RestApiResponse<>(response);
+    }
+
+    private ArrayList<StudentResponse> getStudentsWithReportIsNot(Report report, ReportStatisticResponse reportStatisticResponse) {
+        ArrayList<StudentResponse> responses = new ArrayList<>();
+
+        ArrayList<StudentWave> studentWaves = studentWaveRepository.findByProjectWave(report.getProjectWave());
+        ArrayList<StudentResponse> done = reportStatisticResponse.getDoneList();
+        ArrayList<StudentResponse> waiting = reportStatisticResponse.getWaitingList();
+        boolean ok;
+        for(int i = 0; i<studentWaves.size(); i++){
+            ok = true;
+            for(int j = 0; j<done.size(); j++){
+                if(studentWaves.get(i).getStudent().getId().equals(done.get(j).getId()))
+                    ok = false;
+            }
+            if(ok){
+                for(int j = 0; j<waiting.size(); j++){
+                    if(studentWaves.get(i).getStudent().getId().equals(waiting.get(j).getId()))
+                        ok = false;
+                }
+            }
+            if(ok){
+                responses.add(ConvertObject.convertStudentEntityToStudentResponse(studentWaves.get(i).getStudent()));
+            }
+        }
+
+        return responses;
+    }
+
+    private ArrayList<StudentResponse> getStudentsWithReportDone(Report report) {
+        ArrayList<StudentResponse> responses = new ArrayList<>();
+                ArrayList<StudentReport> studentReports = studentReportRepository.findByReportAndStatus(report, 2);
+                for(int i = 0; i<studentReports.size(); i++){
+            responses.add(ConvertObject.convertStudentEntityToStudentResponse(studentReports.get(i).getStudent()));
+        }
+
+        return responses;
+    }
+
+    private ArrayList<StudentResponse> getStudentsWithReportWaiting(Report report) {
+        ArrayList<StudentResponse> responses = new ArrayList<>();
+        ArrayList<StudentReport> studentReports = studentReportRepository.findByReportAndStatus(report, 1);
+        for(int i = 0; i<studentReports.size(); i++){
+            responses.add(ConvertObject.convertStudentEntityToStudentResponse(studentReports.get(i).getStudent()));
+        }
+
+        return responses;
     }
 
     private ArrayList<TeacherToChangeAssignmentResponse> getTeacherOptionsToChangeAssignment(Student student, ProjectWave projectWave) {

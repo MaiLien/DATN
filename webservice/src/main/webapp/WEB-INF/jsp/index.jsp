@@ -138,12 +138,13 @@
 <script src="/resources/app/scripts/officer_role/manage_wave/officer_wave_main.js" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/officer_role/manage_wave/services/ProjectWaveService.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/officer_role/manage_wave/controllers/AddProjectWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_wave/controllers/ListProjectWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/officer_role/manage_wave/controllers/DetailCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/officer_role/manage_wave/controllers/DetailTabTimesCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/officer_role/manage_wave/controllers/DetailTabStudentsCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/officer_role/manage_wave/controllers/DetailTabTeachersCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 <script src="/resources/app/scripts/officer_role/manage_wave/controllers/DetailTabAssignmentsCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
-<script src="/resources/app/scripts/officer_role/manage_wave/controllers/ListProjectWaveCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
+<script src="/resources/app/scripts/officer_role/manage_wave/controllers/DetailTabReportsCtrl.js" charset="utf-8" URIEncoding="UTF-8"></script>
 
 
 

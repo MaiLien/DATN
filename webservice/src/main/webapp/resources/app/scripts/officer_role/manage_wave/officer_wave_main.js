@@ -44,7 +44,6 @@ angular.module('appDATN.officer_wave')
                 resolve:{
                     projectWaveTimes: function ($q, $state, $stateParams, ProjectWaveService) {
                         var deferred = $q.defer();
-                        console.log("called waveDetailTimes: " + $stateParams.projectWaveId);
                         ProjectWaveService.getProjectWave($stateParams.projectWaveId)
                             .success(function (data) {
                                 if(data.headers.resultCode == 0) {
@@ -124,6 +123,36 @@ angular.module('appDATN.officer_wave')
                     detail_project_wave_tab_view: {
                         controller: 'DetailTabAssignmentsCtrl',
                         templateUrl: '/resources/app/scripts/officer_role/manage_wave/views/detail_project_wave_tab_assignments.html'
+                    }
+                }
+            })
+            .state('wave.detail.reports', {
+                url: '/tabs/reports/:projectWaveId',
+                resolve:{
+                    projectWaveReports: function ($q, $state, $stateParams, ProjectWaveService) {
+                        var deferred = $q.defer();
+                        ProjectWaveService.getReportsOfWave($stateParams.projectWaveId)
+                            .success(function (data) {
+                                if(data.headers.resultCode == 0) {
+                                    deferred.resolve(data.body);
+                                }
+                                if(data.headers.resultCode == 1054){
+                                    $state.go('login');
+                                }
+                                else{
+                                    deferred.reject('Error');
+                                }
+                            })
+                            .error(function (error) {
+                                deferred.reject('Error');
+                            });
+                        return deferred.promise;
+                    }
+                },
+                views: {
+                    detail_project_wave_tab_view: {
+                        controller: 'DetailTabReportsCtrl',
+                        templateUrl: '/resources/app/scripts/officer_role/manage_wave/views/detail_project_wave_tab_reports.html'
                     }
                 }
             })

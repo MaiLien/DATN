@@ -6,7 +6,7 @@ import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.UUID;
 
-public class ReportOfWaveRespone{
+public class ReportOfWaveResponse {
 
     private String id;
     private String endTime;

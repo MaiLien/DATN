@@ -62,6 +62,14 @@ angular.module('appDATN.officer_wave')
             return $http.post('API/changeAssignment', request);
         };
 
+        getReportsOfWave = function(projectWaveId){
+            return $http.get('API/getReportsOfWave', {params : {projectWaveId: projectWaveId}});
+        };
+
+        getReportStatistic = function(reportId){
+            return $http.get('API/getReportStatistic', {params : {reportId: reportId}});
+        };
+
         return {
             addWave : addWave,
             getProjectWave : getProjectWave,
@@ -77,7 +85,9 @@ angular.module('appDATN.officer_wave')
             getAssignmentsDispalyedInStudents: getAssignmentsDispalyedInStudents,
             getAssignmentsDispalyedInTeachers: getAssignmentsDispalyedInTeachers,
             getTeachersToChangeAssignment: getTeachersToChangeAssignment,
-            changeAssignment: changeAssignment
+            changeAssignment: changeAssignment,
+            getReportsOfWave: getReportsOfWave,
+            getReportStatistic: getReportStatistic
         };
 
     });

@@ -88,7 +88,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="teacher in changingAssignment.teacherOptions" ng-init="teacher.checked = teacher.guideStudent">
-                            <td><input type="checkbox" data-ng-model="teacher.checked"></td>
+                            <td><input type="checkbox" ng-disabled="teacher.maxGuide == teacher.actualGuide && teacher.checked == false" data-ng-model="teacher.checked"></td>
                             <td>{{teacher.username}}</td>
                             <td>{{teacher.name}}</td>
                             <td>{{teacher.actualGuide}}/{{teacher.maxGuide}}</td>
