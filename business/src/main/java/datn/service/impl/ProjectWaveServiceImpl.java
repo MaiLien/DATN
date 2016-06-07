@@ -336,6 +336,28 @@ public class ProjectWaveServiceImpl implements IProjectWaveService{
         return new RestApiResponse<>();
     }
 
+    @Override
+    public RestApiResponse<ArrayList<ReportOfWaveRespone>> getReportsOfWave(String projectWaveId) {
+        ArrayList<ReportOfWaveRespone> respones = new ArrayList<>();
+
+        ProjectWave projectWave = projectWaveRepository.findOne(projectWaveId);
+        ArrayList<Report> reports = reportRepository.findByProjectWave(projectWave);
+        Report report;
+        ReportOfWaveRespone reportRespone;
+        for (int i = 0; i<reports.size(); i++){
+            report = reports.get(i);
+            reportRespone = new ReportOfWaveRespone();
+            reportRespone.setId(report.getId());
+            reportRespone.setStartTime(DateUtil.convertDateTimeToString(report.getStartTime()));
+            reportRespone.setEndTime(DateUtil.convertDateTimeToString(report.getEndTime()));
+            reportRespone.setOrdinal(report.getOrdinal());
+            reportRespone.setTimeToReport(DateUtil.isDateInPeriodTime(new Date(), report.getStartTime(), report.getEndTime()));
+
+            respones.add(reportRespone);
+        }
+        return new RestApiResponse<>(respones);
+    }
+
     private ArrayList<TeacherToChangeAssignmentResponse> getTeacherOptionsToChangeAssignment(Student student, ProjectWave projectWave) {
         ArrayList<TeacherToChangeAssignmentResponse> responses = new ArrayList<>();
 

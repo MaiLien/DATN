@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public interface ReportRepository extends JpaRepository<Report, String>{
 
-    @Query("select st from Report st where st.projectWave=:projectWave")
+    @Query("select st from Report st where st.projectWave=:projectWave order by st.ordinal")
     ArrayList<Report> findByProjectWave(@Param("projectWave") ProjectWave projectWave);
 
 }
